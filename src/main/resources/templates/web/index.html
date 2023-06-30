@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- header start-->
+<div th:include="common/web/header"></div>
+<!-- header end-->
+
+<!-- Hero Start -->
+<div class="hero">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-6">
+                <div class="hero-text">
+                    <h1>Chúng tôi là FYOGA</h1>
+                    <h2>Tập Yoga Để Có Sức Khỏe Tốt</h2>
+
+                    <p>
+                        Yoga là chiếc chìa khoá vàng để mở tung cánh cửa dẫn tới sự bình an, tĩnh lặng và niềm vui
+                        sướng. Ngôn từ không thể lột tả hết được các giá trị của
+                        yoga - để hiểu nó, bạn phải tự mình trải nghiệm
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="hero-image">
+                    <img src="/web/img/hero.png" alt="Hero Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Class Start -->
+<section class="ftco-section">
+    <div id="class" class="class">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Khóa học</h2>
+            </div>
+            <div class="row class-container">
+                <div th:each="COURSE : ${COURSES}" th:object="${COURSE}"
+                     class="col-lg-3 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                    <!--                    <div class="col-lg-3 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">-->
+                    <div class="class-wrap">
+                        <div class="class-img package-program ftco-animate">
+                            <a th:href="@{/FYoGa/Course(name=*{name})}"
+                               class="d-flex  justify-content-center  align-items-center"
+                               th:style="'background-image: url(/web/'+*{img}+'); background-size: cover;'">
+                                <!--                                   style="background-image: url(web/img/class-1.jpg); background-size: cover;">-->
+                                <div class="text p-5 text-center">
+                                    <h5 th:text="*{name}"></h5>
+                                    <p th:text="*{summary}"></p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="class-text">
+                            <a th:href="@{/FYoGa/Course(name=*{name})}" th:text="*{name}"></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Class End -->
+
+<!-- Schedule Start -->
+<div id="service" class="service">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Lịch học</h2>
+            </div>
+            <div class="row">
+                <div class=" ftco-animate">
+                    <div class="sched-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                            <tr class="text-center head-day">
+                                <th>&nbsp;</th>
+                                <th>26/6</th>
+                                <th>27/6</th>
+                                <th>28/6</th>
+                                <th>29/6</th>
+                                <th>30/6</th>
+                                <th>1/7</th>
+                            </tr>
+                            <tr class="text-center head-thu">
+                                <th>&nbsp;</th>
+                                <th>Thứ 2</th>
+                                <th>Thứ 3</th>
+                                <th>Thứ 4</th>
+                                <th>Thứ 5</th>
+                                <th>Thứ 6</th>
+                                <th>Thứ 7</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="text-center">
+                                <td class="color">
+                                    <p class="time">7:00 - 8:00</p>
+                                </td>
+
+                                <td class="color-1">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T2-S1</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-1">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T3-S1</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-1">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T4-S1</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+
+                                <td class="color-1">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T5-S1</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+
+                                <td class="color-1">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T6-S1</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-1">
+                                </td>
+                            </tr><!-- END TR-->
+
+                            <tr class="text-center">
+                                <td class="color">
+                                    <p class="time">8:30 - 9:30</p>
+                                </td>
+
+                                <td class="color-2">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T2-S2</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+
+                                <td class="color-2">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T3-S2</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+
+                                <td class="color-2">
+                                </td>
+
+                                <td class="color-2">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T5-S2</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+
+                                <td class="color-2">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T6-S2</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-2">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T7-S2</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+                            </tr><!-- END TR-->
+
+                            <tr class="text-center">
+                                <td class="color">
+                                    <p class="time">10:00 - 11:00</p>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T2-S3</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T3-S3</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T4-S3</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T5-S3</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T6-S3</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-3">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T7-S3</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+                            </tr><!-- END TR-->
+                            <tr class="text-center">
+                                <td class="color">
+                                    <p class="time">18:00 - 19:00</p>
+                                </td>
+
+                                <td class="color-4">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T2-S4</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-4">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T3-S4</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+
+                                <td class="color-4">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T4-S4</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+
+                                <td class="color-4">
+                                    <h6>HATHA YOGA</h6>
+                                    <p class="idcourse">Hatha-T5-S4</p>
+                                    <span class="trainer">Giáo viên A</span>
+                                </td>
+
+                                <td class="color-4">
+                                    <h6>YOGA NGHỆ THUẬT</h6>
+                                    <p class="idcourse">Hatha-T6-S4</p>
+                                    <span class="trainer">Giáo viên C</span>
+                                </td>
+
+                                <td class="color-4">
+                                </td>
+                            </tr><!-- END TR-->
+                            <tr class="text-center">
+                                <td class="color">
+                                    <p class="time">19:30 - 20:30</p>
+                                </td>
+
+                                <td class="color-5">
+                                </td>
+
+                                <td class="color-5">
+                                </td>
+
+                                <td class="color-5">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T4-S5</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-5">
+                                    <h6>ASANAS YOGA</h6>
+                                    <p class="idcourse">Hatha-T5-S5</p>
+                                    <span class="trainer">Giáo viên D</span>
+                                </td>
+
+                                <td class="color-5">
+                                    <h6>YOGA TRỊ LIỆU</h6>
+                                    <p class="idcourse">Hatha-T6-S5</p>
+                                    <span class="trainer">Giáo viên B</span>
+                                </td>
+
+                                <td class="color-5">
+                                </td>
+                            </tr><!-- END TR-->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Schedule End -->
+
+<!-- Teacher Start -->
+<div id="team" class="team">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <h2>Huấn luyện viên</h2>
+        </div>
+        <div class="row">
+            <div th:each="STAFF : ${STAFFS}" th:object="${STAFF}" class="col-lg-3 col-md-6 wow fadeInUp"
+                 data-wow-delay="0.0s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img th:src="'/web/' + *{avatar}" alt="Image">
+                    </div>
+                    <div class="team-text">
+                        <h2 th:text="*{fullName}"></h2>
+                        <p>Yoga Teacher</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+
+<!-- Blog Start -->
+<div id="blog" class="blog">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <h2>Bài viết mới nhất về Yoga</h2>
+        </div>
+        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-1.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-2.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-3.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-4.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-5.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="blog-img">
+                    <img src="/web/img/blog-6.jpg" alt="Blog">
+                </div>
+                <div class="blog-text">
+                    <h2>Lorem ipsum dolor</h2>
+                    <div class="blog-meta">
+                        <p><i class="far fa-list-alt"></i>Body Fitness</p>
+                        <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
+                        <p><i class="far fa-comments"></i>5</p>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
+                        liqum metus tortor
+                    </p>
+                    <a class="btn" href="">Read More <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+<!-- Footer Start -->
+<div th:include="common/web/footer"></div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/web/lib/easing/easing.min.js"></script>
+<script src="/web/lib/wow/wow.min.js"></script>
+<script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/web/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="/web/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="/web/mail/jqBootstrapValidation.min.js"></script>
+<script src="/web/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="/web/js/main.js"></script>
+<script src="/web/js/functions.js"></script>
+</body>
+
+</html>

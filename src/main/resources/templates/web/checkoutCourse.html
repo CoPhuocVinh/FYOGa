@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--    header start-->
+<div th:include="common/web/headerLogin"></div>
+<!--    header start-->
+
+<!-- Modal Login -->
+<div class="modal-checkout">
+    <div class="checkout-container">
+        <div class="room" style="background: url(https://images.squarespace-cdn.com/content/v1/5e682fcb02f49f1934c59c4c/1603514867287-KXQPZNAGAZXER303GAVN/2019-07+-+FIT+Lane+Cove+%282nd+Shoot%29-08587-Edit.jpg) no-repeat center center;">
+            <div class="text-cover">
+                <h1>Hatha Yoga</h1>
+                <p class="price"> 350.000₫ / tháng</p>
+            </div>
+        </div>
+        <div class="payment">
+            <div class="receipt-box">
+                <h3>Hoá đơn</h3>
+                <table class="table-checkout">
+                    <tr>
+                        <td>12 buổi / tháng</td>
+                        <td>350.000₫</td>
+                    </tr>
+                    <tr>
+                        <td>Khuyến mãi</td>
+                        <td>0₫</td>
+                    </tr>
+                    <tfoot>
+                    <tr class="total">
+                        <td>Tổng tiền</td>
+                        <td>350.000₫</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="payment-info">
+                <h3>Thông tin khách hàng</h3>
+                <form>
+                    <label>Tên học viên</label>
+                    <input type="text" name="firstname" value="Mickey" readonly>
+                    <label>Phương thức thanh toán</label>
+                    <input type="text" name="lastname" value="Thanh toán tại quầy" readonly>
+                    <br>
+                    <button class="btn" type="button" id="openModalButtonRegister">Xác nhận</button>
+                    <footer class="btn-cancle">
+                        <a href="priceHatha.html">Hủy</a>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- form xác nhận  -->
+<div class="modal-schedule" id="registerModal">
+    <div class="modal-container-schedule">
+        <span class="close" id="myButton"><a>&times;</a></span>
+        <header class="modal-header-register">
+            <img
+                    src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">
+        </header>
+
+        <form action="#">
+            <div class="modal-body-schedule">
+                <h3 class="mo">Bạn đã đăng kí khóa học thành công</h3>
+                <h5 class="mo">Vui lòng xem lịch học để đăng ký lớp</h5>
+            </div>
+        </form>
+
+        <a href="schedule-detail.html" id="modal-login-button-re-hatha" type="submit">
+            Đặt lịch
+        </a>
+
+        <footer class="modal-footer-schedule">
+            <a href="priceHatha.html">Hủy</a>
+        </footer>
+    </div>
+</div>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<script src="/web/js/functions.js"></script>
+<Script src="/web/js/main.js"></Script>
+</body>
+
+</html>

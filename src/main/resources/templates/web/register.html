@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--    header start-->
+<div th:include="common/web/headerRegister"></div>
+<!--    header start-->
+
+    <!-- Modal register  -->
+    <div class="modal-login" id="registerModal">
+        <div class="modal-container-register">
+            <span class="close" id="myButton"><a>&times;</a></span>
+            <header class="modal-header-register">
+                Đăng Ký
+            </header>
+
+            <form th:action="@{/registeredUser}" method="post">
+                <div class="modal-body-re">
+                    <input type="hidden" name="accountID" th:value="${ACCOUNT.accountID}">
+
+                    <div class="modal-box">
+                        <span class="details">Họ và tên</span>
+                        <input name="fullName" th:value="${ACCOUNT.fullName}" class="modal-input-name" type="text" placeholder="Nhập họ và tên của bạn" required>
+                    </div>
+                    <div class="modal-box">
+                        <span class="details">Mật khẩu</span>
+                        <input name="password" th:value="${ACCOUNT.password}" type="password" class="modal-input-name" id="passwordInput"
+                            placeholder="Nhập mật khẩu của bạn" required>
+                    </div>
+
+
+                    <div class="modal-box">
+                        <span class="details">Số điện thoại</span>
+                        <input name="phone" th:value="${ACCOUNT.phone}" class="modal-input-name" id="phoneInput" placeholder="Nhập số điện thoại của bạn"
+                            type="text" required>
+                        <span id="phoneError"
+                            style="display: none; color: red; justify-content: center; margin-bottom: 5px;">Vui lòng
+                            nhập số điện thoại bắt đầu từ 0 và có 9 đến 11 số.</span>
+                    </div>
+
+                    <div class="modal-box">
+                        <span class="details">Xác thực mật khẩu</span>
+                        <input type="password" class="modal-input-name" id="confirmPasswordInput"
+                            placeholder="Nhập lại mật khẩu của bạn" required>
+                        <span id="passwordMatchError"
+                            style="display: none; color: red; justify-content: center; margin-bottom: 5px;">Mật
+                            khẩu xác thực không đúng.</span>
+                    </div>
+                    <div class="modal-box">
+                        <span class="details">Email</span>
+                        <input name="email" th:value="${ACCOUNT.email}" type="email" class="modal-input-name" id="txtlogin" placeholder="Nhập email của bạn">
+
+                    </div>
+
+                    <div class="modal-gender" th:value="${ACCOUNT.gender}"><br>
+                        <span class="gender-title">Giới tính</span>
+                        <input value="M" type="radio" name="gender" id="genderNam">Nam
+                        <input value="F" type="radio" name="gender" id="genderNu">Nữ
+                    </div>
+                    <button id="modal-login-button-re" type="submit">
+                        Đăng Ký
+                    </button>
+                </div>
+
+            </form>
+
+            <footer class="modal-footer">
+                <p class="modal-register-but" id="login-link"><a href="/FYoGa/Login">Bạn đã có tài khoản?</a></p>
+            </footer>
+        </div>
+    </div>
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- xử lý check Email-->
+    <script>
+        var inputElement = document.getElementById("modal-login-button-re");
+        var errorElement = document.getElementById("error1");
+
+
+        inputElement.addEventListener("click", function (event) {
+            // Kiểm tra số điện thoại
+            var phoneInput = document.getElementById("phoneInput");
+            var phoneNumber = phoneInput.value;
+            var phoneError = document.getElementById("phoneError");
+            while (true) {
+                // Kiểm tra số điện thoại có bắt đầu bằng số 0 và tối đa 11 số
+                if (!phoneNumber.match(/^0[0-9]{9,10}$/)) {
+                    phoneError.style.display = "block";
+                    return false; // Ngăn form submit
+                } else {
+                    phoneError.style.display = "none";
+                    break;
+                }
+            }
+
+            // Kiểm tra xác thực mật khẩu
+            var passwordInput = document.getElementById("passwordInput");
+            var confirmPasswordInput = document.getElementById("confirmPasswordInput");
+            var passwordMatchError = document.getElementById("passwordMatchError");
+            while (true) {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    passwordMatchError.style.display = "block";
+                    return false; // Ngăn form submit
+                } else {
+                    passwordMatchError.style.display = "none";
+                    break;
+                }
+            }
+
+        });
+
+
+    </script>
+
+<!--    &lt;!&ndash; JavaScript Libraries &ndash;&gt;-->
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>-->
+<!--    <script src="/web/lib/easing/easing.min.js"></script>-->
+<!--    <script src="/web/lib/wow/wow.min.js"></script>-->
+<!--    <script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>-->
+<!--    <script src="/web/lib/isotope/isotope.pkgd.min.js"></script>-->
+<!--    <script src="/web/lib/lightbox/js/lightbox.min.js"></script>-->
+
+<!--    &lt;!&ndash; Contact Javascript File &ndash;&gt;-->
+<!--    <script src="/web/mail/jqBootstrapValidation.min.js"></script>-->
+<!--    <script src="/web/mail/contact.js"></script>-->
+
+    <!-- Template Javascript -->
+    <script src="/web/js/main.js"></script>
+    <script src="/web/js/functions.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- header start-->
+<div th:include="common/web/header"></div>
+<!-- header end-->
+
+    <div class="hero">
+        <div class="container-fluid">
+            <div class="row align-items-center" th:object="${COURSE}">
+                <div class="col-sm-12 col-md-6">
+                    <div class="hero-text">
+                        <h1 th:text="*{name}"></h1>
+                        <p  th:text="*{summary}"  >
+
+                        </p>
+                        <a href="#price" class="hero-button">Đăng Ký</a>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="hero-image">
+                        <img style="width: 430px; height: 270px;"  th:src="'/web/' + *{img}" alt="Hatha Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="text-align: center;">
+                <div class="col-12" style="top:65px;">
+                </div>
+                <div class="col-12" style="top:65px;">
+                    <a href="/">Trang chủ/</a>
+                    <a th:text="${COURSE.name}" ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div th:utext="${COURSE.description}" class="col-md-6">
+
+        </div>
+    </div>
+
+    <!-- Price Start -->
+    <div class="price" id="price">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Đăng ký học ngay với giá chỉ từ</h2>
+
+            </div>
+
+            <div class="row">
+                <p style="color: red" th:text="${MSG}"></p>
+                <div th:each="PACKAGE : ${PACKAGES}" th:object="${PACKAGE}" class="col-md-6 wow fadeInUp" data-wow-delay="0.0s">
+                    <div  class="price-item">
+                        <div class="price-header">
+                            <div class="price-prices">
+                                <h2 th:utext="*{priceDiscount}" ></h2>
+                                <h2>vnđ/tháng</h2>
+                            </div>
+                        </div>
+                        <div class="price-body">
+                            <div class="price-description">
+                                <ul>
+                                    <li th:text="*{name}"></li>
+                                    <li>Huấn luyện viên chuyên nghiệp</li>
+                                    <li>Đăng ký lớp bất cứ lúc nào</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="price-footer">
+                            <div class="price-action">
+                                <a class="btn" th:href="@{/FYoGa/Course/Package(courseID=${COURSE.courseID}, packageID=*{packageID})}">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Price End -->
+
+    <!-- schedule Start -->
+    <section class="ftco-section">
+        <div class="container schedule-detail">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Lịch tập</h2>
+                <!-- <h3>Từ 19/06 - 14/07/2023</h3> -->
+            </div>
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="sched-text-course">
+                        <!-- <h5>Nhấn vào từng lớp để xem thông tin chi tiết.</h5> -->
+                        <button id="openModalRequest">Đề Xuất Mở Lớp</button>
+                    </div>
+                    <div class="sched-list-course">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>Thứ 2</th>
+                                    <th>Thứ 3</th>
+                                    <th>Thứ 4</th>
+                                    <th>Thứ 5</th>
+                                    <th>Thứ 6</th>
+                                    <th>Thứ 7</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td class="color-sche">
+                                        <p class="time-sche">7:00 - 8:00</p>
+                                    </td>
+                                    <td class="color-2">
+                                        <h6 style="font-size: 18px;">Hatha-T2-S1</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-2">
+                                        
+                                    </td>
+                                    <td class="color-2">
+                                        
+                                    </td>
+                                    <td class="color-2">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T5-S1</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-2">
+                                        
+                                    </td>
+                                    <td class="color-2">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T7-S1</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                </tr><!-- END TR-->
+
+                                <tr class="text-center">
+                                    <td class="color-sche">
+                                        <p class="time-sche">8:30 - 9:30</p>
+                                    </td>
+                                    <td class="color-3">
+                                        
+                                    </td>
+                                    <td class="color-3">
+                                        
+                                    </td>
+                                    <td class="color-3">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T4-S2</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-3">
+                                        
+                                    </td>
+                                    <td class="color-3">
+                                        
+                                    </td>
+                                    <td class="color-3">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T7-S2</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                </tr><!-- END TR-->
+
+                                <tr class="text-center">
+                                    <td class="color-sche">
+                                        <p class="time-sche">10:00 - 11:00</p>
+                                    </td>
+                                    <td class="color-4">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T2-S3</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-4">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T3-S3</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-4">
+
+                                    </td>
+                                    <td class="color-4">
+                                        
+                                    </td>
+                                    <td class="color-4">
+
+                                    </td>
+                                    <td class="color-4">
+                                        
+                                    </td>
+
+                                </tr><!-- END TR-->
+                                <tr class="text-center">
+                                    <td class="color-sche">
+                                        <p class="time-sche">18:00 - 19:00</p>
+                                    </td>
+                                    <td class="color-5">
+                                        
+                                    </td>
+                                    <td class="color-5">
+                                        
+                                    </td>
+                                    <td class="color-5">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T4-S4</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-5">
+                                        
+                                    </td>
+                                    <td class="color-5">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T6-S4</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-5">
+                                        
+                                    </td>
+                                </tr><!-- END TR-->
+                                <tr class="text-center">
+                                    <td class="color-sche">
+                                        <p class="time-sche">19:30 - 20:30</p>
+                                    </td>
+                                    <td class="color-1">
+                                        
+                                    </td>
+
+                                    <td class="color-1">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T3-S5</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-1">
+                                        
+                                    </td>
+                                    <td class="color-1">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T5-S5</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-1">
+                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T6-S5</h6> 
+                                        <p class="trainer">Giáo viên A</p>
+                                    </td>
+                                    <td class="color-1">
+
+                                    </td>
+                                </tr><!-- END TR-->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <button href="" class="a pp" id="openModalButtonRegister">Đăng Ký</button> -->
+    </section>
+    <!-- schedule End -->
+
+    <!-- Form đề xuất mở lớp  -->
+    <div class="modal-request" id="requestModal">
+        <div class="modal-request-container">
+            <span class="close myButton"><a>&times;</a></span>
+            <header class="modal-header-register">
+                Yêu cầu mở lớp
+            </header>
+
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="modal-request-content">
+                        <div class="box-request">
+                            <label for="">Tên khoá học</label>
+                            <input class="modal-input" id="txtlogin" type="text" placeholder="Hatha Yoga"
+                                readonly>
+                        </div>
+
+                        <div class="box-request">
+                            <label for="">Tên học viên</label>
+                            <input type="text" class="modal-input" placeholder="Pon" readonly>
+                        </div>
+
+                        <div class="box-day">
+                            <label for="">Thời gian</label>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class A">Thứ 2
+                            </div>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class B">Thứ 3
+
+                            </div>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class C">Thứ 4
+
+                            </div>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class D">Thứ 5
+
+                            </div>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class F">Thứ 6
+                            </div>
+
+                            <div class="modal-boxsh">
+                                <input type="checkbox" name="class" value="Class G">Thứ 7
+
+                            </div>
+                        </div>
+                        <div class="box-slot">
+                            <label for="">Slot</label>
+                            <select name="" id="">
+                                <option value="">7:00 - 8:00</option>
+                                <option value="">8:30 - 9:30</option>
+                                <option value="">10:00 - 11:00</option>
+                                <option value="">18:00 - 19:00</option>
+                                <option value="">19:30 - 20:30</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="modal-login-button" onclick="showFormSuccess()" type="button">
+                        Gửi
+                    </button>
+                    <br> <br>
+                    <footer class="modal-footer-schedule">
+                        <a th:href="@{/FYoGa/Course(name=${COURSE.name})}">Hủy</a>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form thông báo đky thành công  -->
+    <div class="modal-schedule" id="successModal">
+        <div class="modal-container-success">
+            <span class="close myButton"><a>&times;</a></span>
+            <header class="modal-header-register">
+                <img
+                    src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">
+            </header>
+
+            <form action="#">
+                <div class="modal-body-schedule">
+                    <h3 class="mo">Bạn đã đề xuất lịch học thành công</h3>
+                    <!-- <h5 class="mo">Vui lòng xem lịch học để đăng ký lớp</h5> -->
+                </div>
+            </form>
+
+            <a id="modal-login-button-re-hatha" th:href="@{/FYoGa/Course(name=${COURSE.name})}" type="submit">
+                Đóng
+            </a>
+        </div>
+    </div>
+
+    <script>
+        var openModalRequest = document.getElementById("openModalRequest");
+        var requestModal = document.getElementById("requestModal");
+
+        // xử lý đề xuất
+        openModalRequest.onclick = function () {
+            requestModal.style.display = "flex";
+        }
+        // Xử lý sự kiện khi nhấp vào bất kỳ vị trí nào bên ngoài cửa sổ đăng nhập
+        window.onclick = function (event) {
+            if (event.target == requestModal) {
+                requestModal.style.display = "none";
+            }
+        }
+
+        function showFormSuccess(){
+            var successModal = document.getElementById("successModal");
+            successModal.style.display = "flex";
+        }
+    </script>
+
+    <!-- Footer Start -->
+    <div th:include="common/web/footer" ></div>
+    <!-- Footer End -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/functions.js"></script>
+</body>
+
+</html>

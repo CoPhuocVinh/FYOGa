@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- header start-->
+<div th:include="common/web/header"></div>
+<!-- header end-->
+
+    <!-- Page Header Start -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 th:text="'Gói' + ${COURSE.get().name}"></h2>
+                    <p>1 tháng = 4 tuần</p>
+                </div>
+                <div class="col-12">
+                    <a href="/">Trang chủ</a>
+                    <a th:href="@{/FYoGa/Course(name=${COURSE.get().name})}">Khoá học</a>
+                    <a href="">Gói học</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Price Start -->
+    <div class="price-course">
+        <div class="price-row">
+            <article class="price-header">
+                <div class="text-center-header ">
+                    <h4>Bạn đã chọn</h4>
+                    <a th:href="@{/FYoGa/Course(name=${COURSE.get().name})}">Thay đổi gói</a>
+                </div>
+                <div class="price-picked">
+                    <h5 >Gói tập</h5>
+                    <p th:text="${PACKE.get().name}"></p>
+                </div>
+            </article>
+            <article class="price-body">
+                <h4>Thanh toán một lần</h4>
+                <p>Đăng ký khi bạn muốn và không tự động gia hạn</p>
+
+                <div th:each="P : ${PACKAGES}" th:object="${P}" class="box-1month">
+                    <div class="payment-up">
+                        <div class="body-text">
+                            <span th:text="'Tiết kiệm '+*{percentDiscount}+'%'" class="packageName"></span>
+                            <h6 class="payments">Phương thức thanh toán</h6>
+                            <p th:text="''+*{priceDiscount}+' vnđ / '+*{slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'" class="pricePackage"></p>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+
+                    <div class="payments-down">
+                        <div class="box-pay" onclick="checkoutPage('/FYoGa/Course/PackageCheckOut')">
+                            <input type="hidden" name="packeID" th:value="*{packageID}">
+                            <h6 style="font-weight: 600;">Thanh toán tại quầy</h6>
+                        </div>
+                        <div class="box-pay">
+                            <h6 style="font-weight: 600;">Thanh toán VNPay</h6>
+                            <img style="height: 24px; width: 35px;"
+                                src="https://admin.money24h.vn/wp-content/uploads/2021/07/NCB-la-ngan-hang-gi.jpeg"
+                                alt="ncbbank">
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </div>
+
+
+    <!-- Footer Start -->
+<div th:include="common/web/footer"></div>
+    <!-- Footer End -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/web/lib/easing/easing.min.js"></script>
+    <script src="/web/lib/wow/wow.min.js"></script>
+    <script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/web/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="/web/lib/lightbox/js/lightbox.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="/web/js/main.js"></script>
+    <script src="/web/js/functions.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!--    header start-->
+    <div th:include="common/web/headerLogin"></div>
+<!--    header start-->
+
+    <!-- Modal Login -->
+    <div class="modal-login open" id="loginModal">
+        <div class="modal-container">
+            <span class="close" id="myButton">&times;</span>
+            <header class="modal-header">
+                Đăng Nhập
+            </header>
+
+            <div class="modal-body">
+                <form th:action="@{/FYoGa/Login/CheckLoginFYoGa}" method="post" id="myForm">
+                    <div class="modal-login-user">
+                        <input name="email" th:value="${EMAIL}" class="modal-input" id="txtlogin" type="email" placeholder="Email đăng nhập" required>
+                        <input type="password" name="password" class="modal-input" placeholder="Mật khẩu" required>
+                    </div>
+                    <p style="color: red" th:text="${ERROR}"></p>
+                    <button id="modal-login-button" type="submit">
+                        Đăng Nhập
+                    </button>
+                </form>
+            </div>
+            <footer class="modal-footer">
+                <p class="modal-register-but"><a href="/FYoGa/registerFYoGa" id="register-link">Bạn chưa có tài khoản?</a></p>
+                <p class="modal-register-but"><a href="forgotPass.html">Quên mật khẩu?</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!--    &lt;!&ndash; JavaScript Libraries &ndash;&gt;-->
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>-->
+<!--    <script src="/web/lib/easing/easing.min.js"></script>-->
+<!--    <script src="/web/lib/wow/wow.min.js"></script>-->
+<!--    <script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>-->
+<!--    <script src="/web/lib/isotope/isotope.pkgd.min.js"></script>-->
+<!--    <script src="/web/lib/lightbox/js/lightbox.min.js"></script>-->
+
+<!--    &lt;!&ndash; Contact Javascript File &ndash;&gt;-->
+<!--    <script src="/web/mail/jqBootstrapValidation.min.js"></script>-->
+<!--    <script src="/web/mail/contact.js"></script>-->
+
+    <script src="/web/js/functions.js"></script>
+    <Script src="/web/js/main.js"></Script>
+</body>
+
+</html>
