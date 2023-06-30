@@ -47,7 +47,7 @@ public class Register{
     Package packages;
 
     @ManyToOne
-    @JoinColumn(name = "adminID")
+    @JoinColumn(name = "customerID")
     Account customer;
 
 }
