@@ -11,6 +11,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Builder
@@ -47,6 +49,8 @@ public class Package {
     @JoinColumn(name = "courseID")
     Course course;
 
+    @OneToMany(mappedBy = "packages", cascade = CascadeType.ALL)
+    Set<Register> registers;
 
 
 }

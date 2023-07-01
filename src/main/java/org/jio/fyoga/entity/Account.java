@@ -62,4 +62,6 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
     private Set<Course> courses;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    Set<Register> registers;
 }
