@@ -43,4 +43,7 @@ public class Course {
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Package> packages;
+
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Class> classes;
 }

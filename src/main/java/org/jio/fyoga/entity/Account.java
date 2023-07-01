@@ -63,5 +63,18 @@ public class Account implements Serializable {
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    Set<Register> registers;
+    private Set<Register> registers;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Booking> bookings;
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    private Set<Slot> slots;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Attendance> attendances;
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    private Set<Attendance> attendancesByStaff;
+
 }
