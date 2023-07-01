@@ -35,10 +35,10 @@ public class Class {
 
 
     @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Set<Class> classes;
+    Set<ScheduleClass> scheduleClasses;
 
     @OneToMany(mappedBy = "aClassBooking",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Set<Class> classBooking;
+    Set<Booking> classBooking;
 
     @ManyToOne
     @JoinColumn(name = "teacherID")

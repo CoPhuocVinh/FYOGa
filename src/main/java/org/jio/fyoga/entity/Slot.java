@@ -30,7 +30,7 @@ public class Slot {
     Time endTime;
 
     @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Set<Slot> slots;
+    Set<ScheduleClass> scheduleClasses;
 
     @ManyToOne
     @JoinColumn(name = "staffID")
