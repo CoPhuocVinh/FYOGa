@@ -12,6 +12,7 @@ import java.sql.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Register")
 public class Register{
 
     @Id
