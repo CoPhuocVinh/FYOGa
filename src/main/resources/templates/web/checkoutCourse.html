@@ -36,27 +36,27 @@
     <div class="checkout-container">
         <div class="room"
              style="background: url(https://images.squarespace-cdn.com/content/v1/5e682fcb02f49f1934c59c4c/1603514867287-KXQPZNAGAZXER303GAVN/2019-07+-+FIT+Lane+Cove+%282nd+Shoot%29-08587-Edit.jpg) no-repeat center center;">
-            <div class="text-cover">
-                <h1>Hatha Yoga</h1>
-                <p class="price"> 350.000₫ / tháng</p>
+            <div class="text-cover" th:object="${PAYING.get()}">
+                <h1 th:text="*{course.name}"></h1>
+                <p class="price" th:text="''+*{price} +' vnđ / '+*{slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"> </p>
             </div>
         </div>
-        <div class="payment">
+        <div class="payment" th:object="${PAYING.get()}">
             <div class="receipt-box">
                 <h3>Hoá đơn</h3>
                 <table class="table-checkout">
                     <tr>
-                        <td>12 buổi / tháng</td>
-                        <td>350.000₫</td>
+                        <td th:text="'' + *{slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"></td>
+                        <td th:text="''+ *{price} + 'vnđ'"></td>
                     </tr>
                     <tr>
                         <td>Khuyến mãi</td>
-                        <td>0₫</td>
+                        <td th:text="'' +*{percentDiscount}+'%'"></td>
                     </tr>
                     <tfoot>
                     <tr class="total">
                         <td>Tổng tiền</td>
-                        <td>350.000₫</td>
+                        <td th:text="'' + *{price * (100 -percentDiscount)/100} +' vnđ'"></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -66,13 +66,13 @@
                 <h3>Thông tin khách hàng</h3>
                 <form>
                     <label>Tên học viên</label>
-                    <input type="text" name="firstname" value="Mickey" readonly>
+                    <input type="text" name="firstname" th:value="${session.USER.fullName}" readonly>
                     <label>Phương thức thanh toán</label>
                     <input type="text" name="lastname" value="Thanh toán tại quầy" readonly>
                     <br>
-                    <button class="btn" type="button" id="openModalButtonRegister">Xác nhận</button>
+                    <button class="btn" type="submit" id="openModalButtonRegister">Xác nhận</button>
                     <footer class="btn-cancle">
-                        <a href="priceHatha.html">Hủy</a>
+                        <a th:href="@{/FYoGa/Course(name=${PAYING.get().getCourse().getName()})}">Hủy</a>
                     </footer>
                 </form>
             </div>
