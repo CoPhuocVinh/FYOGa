@@ -28,6 +28,28 @@ public class LoginCotroller {
     @Autowired
     IAccountService accountService;
 
+    @RequestMapping("")
+    public String showLoginFYoGa(HttpSession session) {
+        Account account = (Account) session.getAttribute("USER");
+        if (account != null) {
+            //model.addAttribute("USER", account);
+            if (account.getRole().getRoleID() == 1) {
+                return "redirect:/FYoGa/Login/User";
+                //return "web/user";
+            } else if (account.getRole().getRoleID() == 2) {
+                return "redirect:/FYoGa/Login/HLV";
+                //return "web/hlv";
+            } else if (account.getRole().getRoleID() == 3) {
+                return "redirect:/FYoGa/Login/Staff";
+                //return "web/index";
+            } else if (account.getRole().getRoleID() == 4) {
+                return "redirect:/FYoGa/Login/ADMIN";
+                //return "admin/admin";
+            }
+        }
+        return "web/login";
+    }
+
     @PostMapping("/CheckLoginFYoGa")
     public String showLogin(@RequestParam Map<String, Object> params, ModelMap model, HttpSession session) {
         String email = (String) params.get("email");

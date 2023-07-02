@@ -22,7 +22,6 @@ public class Attendance {
     @Column(name = "attendanceID")
     int attendanceID;
 
-
     @Column(name = "attendance_date")
     Date attendanceDate;
 
