@@ -64,7 +64,9 @@
 
             <div class="payment-info">
                 <h3>Thông tin khách hàng</h3>
-                <form>
+                <form th:action="@{/FYoGa/Course/PackageCheckOut/Checkout}" method="post">
+                    <input type="hidden" name="packageID" th:value="${PAYING.get().getPackageID()}">
+
                     <label>Tên học viên</label>
                     <input type="text" name="firstname" th:value="${session.USER.fullName}" readonly>
                     <label>Phương thức thanh toán</label>
@@ -81,7 +83,7 @@
 </div>
 
 <!-- form xác nhận  -->
-<div class="modal-schedule" id="registerModal">
+<div th:if="${SUCCESS}" class="modal-schedule" id="registerModal" >
     <div class="modal-container-schedule">
         <span class="close" id="myButton"><a>&times;</a></span>
         <header class="modal-header-register">
