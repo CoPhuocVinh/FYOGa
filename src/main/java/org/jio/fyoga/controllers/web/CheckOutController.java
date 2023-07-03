@@ -19,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,11 @@ public class CheckOutController {
 //        float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
 //        packageDTO.setPriceDiscount(priceDiscount);
         model.addAttribute("PAYING",packageEntiry);
-
+        String SUCCESS = (String) session.getAttribute("SUCCESS");
+        if (SUCCESS != null){
+            model.addAttribute("SUCCESS","SUCCESS");
+            session.removeAttribute("SUCCESS");
+        }
         return url;
     }
 
@@ -83,7 +88,7 @@ public class CheckOutController {
 
         registerService.save(registerEntity);
         System.out.println("register thành công");
-        model.addAttribute("SUCCESS","success");
+        session.setAttribute("SUCCESS","SUCCESS");
         return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
     }
 

@@ -38,6 +38,7 @@
              style="background: url(https://images.squarespace-cdn.com/content/v1/5e682fcb02f49f1934c59c4c/1603514867287-KXQPZNAGAZXER303GAVN/2019-07+-+FIT+Lane+Cove+%282nd+Shoot%29-08587-Edit.jpg) no-repeat center center;">
             <div class="text-cover" th:object="${PAYING.get()}">
                 <h1 th:text="*{course.name}"></h1>
+
                 <p class="price" th:text="''+*{price} +' vnđ / '+*{slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"> </p>
             </div>
         </div>
@@ -64,6 +65,7 @@
 
             <div class="payment-info">
                 <h3>Thông tin khách hàng</h3>
+
                 <form th:action="@{/FYoGa/Course/PackageCheckOut/Checkout}" method="post">
                     <input type="hidden" name="packageID" th:value="${PAYING.get().getPackageID()}">
 
@@ -72,7 +74,9 @@
                     <label>Phương thức thanh toán</label>
                     <input type="text" name="lastname" value="Thanh toán tại quầy" readonly>
                     <br>
+
                     <button class="btn" type="submit" id="openModalButtonRegister">Xác nhận</button>
+
                     <footer class="btn-cancle">
                         <a th:href="@{/FYoGa/Course(name=${PAYING.get().getCourse().getName()})}">Hủy</a>
                     </footer>
@@ -82,8 +86,8 @@
     </div>
 </div>
 
-<!-- form xác nhận  -->
-<div th:if="${SUCCESS}" class="modal-schedule" id="registerModal" >
+<!-- form xác nhận id="registerModal" -->
+<div th:if="${SUCCESS}" class="modal-schedule"  >
     <div class="modal-container-schedule">
         <span class="close" id="myButton"><a>&times;</a></span>
         <header class="modal-header-register">
