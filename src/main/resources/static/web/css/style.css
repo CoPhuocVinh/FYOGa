@@ -1225,32 +1225,14 @@ a:focus {
 
 .box-1month {
     border: 1px solid grey;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     padding: 20px;
     cursor: pointer;
-    border-bottom: none;
 }
 
 .payment-up {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.box-3month {
-    border: 1px solid grey;
-    border-bottom: none;
-    padding: 20px;
-    cursor: pointer;
-}
-
-.box-6month {
-    border: 1px solid grey;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 20px;
-    cursor: pointer;
 }
 
 .packageName {
@@ -1288,6 +1270,7 @@ a:focus {
     width: 536px;
     height: 90px;
     padding: 15px;
+    display: block;
 }
 
 .payments-down.active {

@@ -81,11 +81,11 @@
                     </div>
 
                     <div class="payments-down">
-                        <div class="box-pay" >
+                        <a class="box-pay" th:href="    @{/FYoGa/Course/PackageCheckOut(packageID=*{packageID})}">
 <!--                        onclick="checkoutPage('/FYoGa/Course/PackageCheckOut')"-->
 <!--                            <input type="hidden" name="packID" th:value="*{packageID}">-->
-                            <a th:href="    @{/FYoGa/Course/PackageCheckOut(packageID=*{packageID})}"><h6 style="font-weight: 600;">Thanh toán tại quầy</h6></a>
-                        </div>
+                             <h6 style="font-weight: 600;">Thanh toán tại quầy</h6>
+                        </a>
                         <div class="box-pay">
                             <h6 style="font-weight: 600;">Thanh toán VNPay</h6>
                             <img style="height: 24px; width: 35px;"
