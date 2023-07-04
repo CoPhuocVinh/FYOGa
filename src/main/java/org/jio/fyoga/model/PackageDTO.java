@@ -23,7 +23,7 @@ public class PackageDTO {
     int status;
     float price;
     float percentDiscount;
-    Course course;
+    int courseID;
 
     float priceDiscount;
 

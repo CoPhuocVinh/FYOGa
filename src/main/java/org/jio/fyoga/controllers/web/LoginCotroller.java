@@ -31,6 +31,7 @@ public class LoginCotroller {
     @RequestMapping("")
     public String showLoginFYoGa(HttpSession session) {
         Account account = (Account) session.getAttribute("USER");
+
         if (account != null) {
             //model.addAttribute("USER", account);
             if (account.getRole().getRoleID() == 1) {
@@ -55,6 +56,7 @@ public class LoginCotroller {
         String email = (String) params.get("email");
         String password = (String) params.get("password");
         Account account = accountService.checkLogin(email, password);
+
         if (account != null) {
             System.out.println("login thành công");
             session.setAttribute("USER", account);

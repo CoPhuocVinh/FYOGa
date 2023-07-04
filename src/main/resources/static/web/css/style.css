@@ -2547,6 +2547,17 @@ p.time-sche {
     align-items: center;
     justify-content: center;
 }
+.modal-schedule-Checkout{
+    position: fixed;
+    top: 35px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .modal-container-register {
     margin-top: 100px;

@@ -16,7 +16,7 @@ closeButton.onclick = function () {
 
 
 
-// Xử lý sự kiện khi nhấp vào bất kỳ vị trí nào bên ngoài cửa sổ đăng nhập
+//Xử lý sự kiện khi nhấp vào bất kỳ vị trí nào bên ngoài cửa sổ đăng nhập
 window.onclick = function (event) {
     if (event.target == registerModal || event.target == requestModal || event.target == settingModal) {
       registerModal.style.display = "none";
