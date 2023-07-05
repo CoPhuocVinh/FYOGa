@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Package;
 import org.jio.fyoga.entity.Register;
-import org.jio.fyoga.model.PackageDTO;
 import org.jio.fyoga.model.RegisterDTO;
 import org.jio.fyoga.service.IPackageService;
 import org.jio.fyoga.service.IRegisterService;
@@ -19,14 +18,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.sql.Date;
-import java.util.Optional;
+import java.util.*;
+
 @RequestMapping("/FYoGa/Course/PackageCheckOut")
 @Controller
 public class CheckOutController {
@@ -91,6 +89,7 @@ public class CheckOutController {
         session.setAttribute("SUCCESS","SUCCESS");
         return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
     }
+
 
 
 }
