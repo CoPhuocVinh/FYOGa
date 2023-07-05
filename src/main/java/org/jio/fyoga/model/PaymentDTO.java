@@ -17,8 +17,8 @@ import java.io.Serializable;
 @Setter
 @Builder
 public class PaymentDTO implements Serializable {
-
+    private String status;
     private String message;
     private String URL;
-    private String status;
+
 }
