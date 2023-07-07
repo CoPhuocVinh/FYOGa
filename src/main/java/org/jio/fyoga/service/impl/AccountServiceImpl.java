@@ -39,6 +39,12 @@ public class AccountServiceImpl implements IAccountService {
         else
             return null;
     }
+
+    @Override
+    public Account findAccountByEmail(String email) {
+        return accountRepository.findAccountByEmail(email);
+    }
+
     @Override
     public <S extends Account> S save(S entity) {
         return accountRepository.save(entity);

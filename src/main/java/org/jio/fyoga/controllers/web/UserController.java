@@ -21,6 +21,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
 import java.util.List;
@@ -34,14 +36,30 @@ public class UserController {
     @Autowired
     IRoleService roleService;
 
+    @RequestMapping("/FYoGa/registerFYoGa")
+    public String ShowRegister(ModelMap model) {
+        AccountDTO account = new AccountDTO();
+        account.setIsEdit(false);
+        model.addAttribute("ACCOUNT", account);
+        return "web/register";
+    }
     @PostMapping("/registeredUser")
     //@RequestParam Map<String, Object> params,
     public String Register(ModelMap model,
-                           @Valid @ModelAttribute("ACCOUNT")AccountDTO account, BindingResult result){
+                           @Valid @ModelAttribute("ACCOUNT")AccountDTO account, BindingResult result,  RedirectAttributes ra){
         if(result.hasErrors()){
             return "web/register";
         }
+
+
+
         Account entity = new Account();
+        entity = accountService.findAccountByEmail(account.getEmail());
+        if (entity != null){
+            ra.addFlashAttribute("MSG","Email is exist!!!");
+            return "redirect:/FYoGa/registerFYoGa";
+        }
+
         // copy tu model sang entity
         BeanUtils.copyProperties(account, entity);
         Role roleEntity = roleService.findRoleByRoleID(1);

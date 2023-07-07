@@ -18,6 +18,8 @@ public interface IAccountService {
     Account checkLogin(String email, String password);
 
 
+    Account findAccountByEmail(String email);
+
     <S extends Account> S save(S entity);
 
 

@@ -60,6 +60,18 @@ public class LoginCotroller {
         if (account != null) {
             System.out.println("login thành công");
             session.setAttribute("USER", account);
+
+            //xử lý checkouting
+
+            try {
+                int packageID = (int) session.getAttribute("CHECKOUTING");
+                session.removeAttribute("CHECKOUTING");
+                return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
+
+            }catch (Exception ex){
+
+            }
+
             //model.addAttribute("USER", account);
             if (account.getRole().getRoleID() == 1) {
                 return "redirect:/FYoGa/Login/User";

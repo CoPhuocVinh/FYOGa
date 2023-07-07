@@ -41,6 +41,7 @@ public class CheckOutController {
 
         if(account == null){
             //System.out.println(packageID);
+            session.setAttribute("CHECKOUTING", packageID);
             url = "redirect:/FYoGa/Login";
         }
         Optional<Package> packageEntiry = packageService.findById(packageID);
@@ -49,6 +50,8 @@ public class CheckOutController {
 //        float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
 //        packageDTO.setPriceDiscount(priceDiscount);
         model.addAttribute("PAYING",packageEntiry);
+
+        // xu ly register thanh cong
         String SUCCESS = (String) session.getAttribute("SUCCESS");
         if (SUCCESS != null){
             model.addAttribute("SUCCESS","SUCCESS");
