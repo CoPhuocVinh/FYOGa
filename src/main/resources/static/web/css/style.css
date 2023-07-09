@@ -2787,6 +2787,19 @@ p.time-sche {
     justify-content: center;
 }
 
+.user-btn .history-btn{
+    border: 1px solid #F7CAC9;
+    padding: 13px;
+    margin: 0 30px;
+    border-radius: 10px;
+    color: #343148;
+}
+
+.user-btn .history-btn:hover{
+    color: #F7CAC9;
+    background: #343148;
+}
+
 .modal-content{
     background: #fff;
     border-radius: 10px;

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--    header start-->
+<div th:include="common/web/headerLogin"></div>
+<!--    header start-->
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Học viên</h2>
+            </div>
+            <div class="col-12">
+                <a href="/">Trang chủ</a>
+                <a href="/FYoGa/Login">Học viên</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- User-detail  -->
+<div class="user-detail">
+    <div class="row user-display">
+
+        <img class="user-img" src="/web/img/avatar-ga76e04ee0_1280.png" alt="">
+        <button onclick="showFormSetting()" type="button"><i
+                class="fas fa-user-edit"></i></button>
+        <div class="info">
+            <h2 th:text="'Học viên: ' + ${session.USER.fullName}">
+            </h2>
+
+            Tên: <input type="text" placeholder="Họ và tên" th:value="${session.USER.fullName}" readonly>
+            Số điện thoại: <input type="text" placeholder="Số điện thoại" th:value="${session.USER.phone}" readonly>
+            <!--                //<input type="text" placeholder="Giới tính">-->
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Class Start -->
+<section class="ftco-section">
+    <div id="class" class="class">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <h2>Khóa học đã đăng ký</h2>
+            </div>
+            <div class="row class-container">
+                <div th:each="COUSE: ${COURSES}" th:object="${COUSE}"class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
+                    <div class="class-wrap">
+                        <div class="class-img">
+                            <img th:src="'/web/'+*{img}" alt="Image">
+                        </div>
+                        <div class="class-text class-history">
+                            <h2 th:text="*{name}"></h2>
+                            <a href="schedule-detail.html">Xem lịch học</a>
+                            <a class="history-btn" href="historyPay.html">Lịch sử đăng ký</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Class End -->
+
+
+<!-- Form User setting  -->
+<div id="modal-user-settings" class="modal">
+    <div class="modal-content">
+        <span class="close" id="myButton"><a>&times;</a></span>
+        <div class="modal-header">
+            <h4>Cài đặt thông tin</h4>
+        </div>
+        <div class="modal-body">
+            <ul id="example-user-tabs" class="nav nav-tabs" data-toggle="tabs">
+                <li class="active"><a href="#account-form-tab"><i class="fa fa-cogs"></i> Tài khoản</a>
+                </li>
+                <li><a href="#profile-form-tab"><i class="fa fa-user"></i> Hồ sơ</a></li>
+            </ul>
+            <div class="tab-content">
+                <!-- First Tab -->
+                <div class="accountForm active tab-pane" id="account-form-tab" style="display: block;">
+                    <div class="alert alert-success" id="account-success-alert" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Thành công!</strong> Mật khẩu đã thay đổi!
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input class="form-control-static" type="text" value="ponn@123" readonly></input>
+                            <span class="help-block">Bạn không thể thay đổi email!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="example-user-pass">Mật khẩu</label>
+                            <input type="password" id="example-user-pass" name="example-user-pass"
+                                   class="form-control">
+                            <span class="help-block">Vui lòng nhập mật khẩu cũ!</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="example-user-newpass">Mật khẩu mới</label>
+                            <input type="password" id="example-user-newpass" name="example-user-newpass"
+                                   class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <!-- END First Tab -->
+
+                <!-- Second Tab -->
+                <div class="tab-pane profileForm" id="profile-form-tab" style="display: none;">
+                    <label class="control-label">Ảnh</label>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="">
+                                <form action="index.html" class="dropzone">
+                                    <div class="fallback">
+                                        <input name="file" type="file">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label" for="example-user-firstname">Tên</label>
+                            <input type="text" id="example-user-firstname" name="example-user-firstname"
+                                   class="form-control" value="John">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="example-user-lastname">Số điện thoại</label>
+                            <input type="text" id="example-user-lastname" name="example-user-lastname"
+                                   class="form-control" value="0123456789">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="example-user-gender">Giới tính</label>
+                            <select id="example-user-gender" name="example-user-gender" class="form-control">
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <!-- END Second Tab -->
+            </div>
+            <!-- END Tab Content -->
+        </div>
+        <!-- END Modal Content -->
+
+        <!-- Modal footer -->
+        <div class="modal-footer remove-margin">
+            <button class="btn btn-danger" data-dismiss="modal" onclick="hideFormSetting()"> Đóng</button>
+            <button class="btn btn-success" id="save-account-btn" onclick="showMessage()">Lưu</button>
+        </div>
+        <!-- END Modal footer -->
+    </div>
+</div>
+
+
+<!-- Footer Start -->
+<div th:include="common/web/footer"></div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/web/lib/easing/easing.min.js"></script>
+<script src="/web/lib/wow/wow.min.js"></script>
+<script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/web/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="/web/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Contact Javascript File -->
+<!-- <script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script> -->
+
+<!-- Template Javascript -->
+<script src="/web/js/main.js"></script>
+<script src="/web/js/functions.js"></script>

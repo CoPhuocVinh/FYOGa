@@ -19,24 +19,26 @@ import java.sql.Date;
 @Builder
 public class AccountDTO {
 
-    private int AccountID;
+    private int accountID;
 
-    private String Email;
-    private String Password;
-    private int Status;
+    private String email;
+    private String password;
+    private int status;
 
-    private String FullName;
+    private String fullName;
 
-    private String Phone;
+    private String phone;
 
-    private String Avatar;
+    private String avatar;
     private MultipartFile AvatarFile; // lưu hình
 
-    private String Gender;
+    private String gender;
 
-    private Date AcceptedDate;
+    private Date acceptedDate;
 
-    private int RoleID;
+    private int roleID;
 
     private Boolean isEdit = false;
+    private String newPassword;
+
 }
