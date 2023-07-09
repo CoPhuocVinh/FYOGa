@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -27,13 +28,14 @@ import java.util.*;
 public class PaymentController {
 
     @GetMapping("/create_payment")
-    public ResponseEntity<?> payment() throws UnsupportedEncodingException {
-
-//        String orderType = req.getParameter("ordertype");
+    public String payment() throws UnsupportedEncodingException {
+        //ResponseEntity<?>
+        String orderType = "billpayment";
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
 
         long amount =100000;
+
 
         String vnp_TxnRef = Config.getRandomNumber(8);
         //String vnp_IpAddr = Config.getIpAddress(req);
@@ -53,7 +55,7 @@ public class PaymentController {
 
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
-        //vnp_Params.put("vnp_OrderType", orderType);
+        vnp_Params.put("vnp_OrderType", orderType);
 
         //String locate = req.getParameter("language");
 //        if (locate != null && !locate.isEmpty()) {
@@ -62,8 +64,8 @@ public class PaymentController {
 //            vnp_Params.put("vnp_Locale", "vn");
 //        }
 
-//        vnp_Params.put("vnp_ReturnUrl", Config.vnp_Returnurl);
-//        vnp_Params.put("vnp_IpAddr", Config.vnp_IpAddr);
+        vnp_Params.put("vnp_ReturnUrl", Config.vnp_Returnurl);
+        vnp_Params.put("vnp_IpAddr", Config.vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -108,7 +110,9 @@ public class PaymentController {
                 .message("success")
                 .URL(paymentUrl)
                 .build();
-        return ResponseEntity.status(HttpStatus.OK).body(paymentDTO);
+
+        return "redirect:" + paymentUrl;
+        //return ResponseEntity.status(HttpStatus.OK).body(paymentDTO);
     }
 
 }
