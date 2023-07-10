@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--    header start-->
+<div th:include="common/web/headerLogin"></div>
+<!--    header start-->
+
+    <!-- Modal Login -->
+    <div class="modal-edit">
+        <div class="modal-container-edit">
+            <span class="close" id="myButton">&times;</span>
+            <header class="modal-header">
+                Chỉnh sửa thông tin
+            </header>
+            <p style="color: red" th:text="${MSG}"></p>
+
+            <div class="modal-body">
+                <form th:action="@{/FYoGa/Login/User/EditInfor}" method="post" id="myForm">
+                    <div class="modal-edit-user" th:object="${USER}">
+                        <input type="hidden" th:field="*{accountID}">
+
+                        <label class="edit-content" >Ảnh</label>
+                        <input type="file">
+
+                        <label class="edit-content" >Tên học viên</label>
+                        <input class="form-control" type="text" th:field="*{fullName}">
+<!--                        <textarea th:field="*{fullName}" class="form-control" name="content" id="content"></textarea>-->
+
+                        <label class="edit-content" >Số điện thoại</label>
+                        <input class="form-control" type="text" th:field="*{phone}">
+
+                        <label class="edit-content" >Giới tính</label>
+                        <select class="form-control" th:field="*{gender}">
+                            <option value="M" th:selected="${gender == 'M'}">Nam</option>
+                            <option value="F" th:selected="${gender == 'F'}">Nữ</option>
+                        </select>
+                    </div>
+                    <button id="modal-login-button" type="submit">Lưu</button>
+                </form>
+            </div>
+            <footer class="modal-footer">
+                <p class="modal-register-but"><a href="/FYoGa/Login">Huỷ</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="/web/js/functions.js"></script>
+    <Script src="/web/js/main.js"></Script>
+    <script src="/web/js/tinymce/tinymce.min.js"></script>
+<!--    <script type="text/javascript">-->
+<!--        tinymce.init({-->
+<!--            selector: '#content'-->
+<!--        });-->
+<!--    </script>-->
+</body>
+
+</html>

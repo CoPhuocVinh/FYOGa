@@ -40,7 +40,7 @@
                 Đăng Ký
             </header>
 
-            <form th:action="@{/registeredUser}" method="post">
+            <form th:action="@{/FYoGa/registerFYoGa}" method="post">
                 <div class="modal-body-re">
                     <input type="hidden" name="accountID" th:value="${ACCOUNT.accountID}">
 
@@ -87,6 +87,7 @@
                         Đăng Ký
                     </button>
                 </div>
+                <p style="color: red" th:text="${MSG}"></p>
 
             </form>
 

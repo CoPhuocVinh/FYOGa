@@ -28,7 +28,7 @@ public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accountID")
-    private int AccountID;
+    private int accountID;
 
     @Column(name = "email", columnDefinition = "nvarchar(MAX) not null")
     private String email;

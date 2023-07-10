@@ -13,6 +13,8 @@ import org.jio.fyoga.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RegisterServiceImpl implements IRegisterService {
     @Autowired
@@ -26,5 +28,18 @@ public class RegisterServiceImpl implements IRegisterService {
     public <S extends Register> S save(S entity) {
         return registerRepository.save(entity);
     }
+
+    @Override
+    public List<Register> findAllByByCustomer_AccountID(int AccountID) {
+        return registerRepository.findByCustomer_AccountID(AccountID);
+    }
+
+    @Override
+    public List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status) {
+        return registerRepository.findByCustomer_AccountIDAndStatus(AccountID, status);
+    }
+
+
+
 
 }

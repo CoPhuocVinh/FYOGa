@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<!--    header start-->
+<div th:include="common/web/headerLogin"></div>
+<!--    header start-->
+
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Lịch sử thanh toán</h2>
+
+
+            </div>
+            <div class="col-12">
+                <a href="/">Trang chủ</a>
+                <a href="/FYoGa/Login">Học viên</a>
+                <a href="">Lịch sử thanh toán</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<div class="history-body">
+    <!-- Nút nhấn  -->
+    <div class="card-tools">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="" id="notpay-btn" data-toggle="tab">Chưa thanh toán</a>
+            </li>
+            <li class="nav-item">
+                <a href="" id="pay-btn" data-toggle="tab">Đã thanh toán</a>
+            </li>
+        </ul>
+    </div>
+    <!-- list not pay-->
+    <table class="table active-list" id="notpay-list">
+        <thead>
+        <tr class="list-teacherHeader" style="background-color: #4CAF50;">
+            <th>#</th>
+            <th class="hidden-xs hidden-sm"><i class="fa "></i>Tên khoá học</th>
+            <th class="hidden-xs hidden-sm">Mô tả</th>
+            <th class="hidden-xs hidden-sm">Giá</th>
+        </tr>
+        </thead>
+        <tbody class="list-teacherBody">
+        <tr th:each="R_PAYING, iterStat : ${REGISTER_PAYING}" th:object="${R_PAYING}">
+            <td><a href="javascript:void(0)" th:text="${iterStat.count}"></a></td>
+            <td class="hidden-xs hidden-sm" th:text="${R_PAYING.getPackages().getCourse().getName()}"></td>
+            <td class="hidden-xs hidden-sm" th:text="'' + *{slotAvailable}+' Buổi / '+*{timeAvailable}+' Tháng'"></td>
+            <td class="hidden-xs hidden-sm" th:text="''+ *{priceDiscount} + 'vnđ'">350.000₫</td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- END List not pay-->
+
+    <!-- list pay-->
+    <table class="table inactive-list" id="pay-list" style="display: none;">
+        <thead style="background-color: aqua">
+        <tr class="list-teacherHeader">
+            <th>#</th>
+            <th class="hidden-xs hidden-sm"><i class="fa "></i>Tên khoá học</th>
+            <th class="hidden-xs hidden-sm">Mô tả</th>
+            <th class="hidden-xs hidden-sm">Giá</th>
+        </tr>
+        </thead>
+        <tbody class="list-teacherBody">
+        <tr th:each="R_PAYED, iterStatED : ${REGISTER_PAYED}" th:object="${R_PAYED}">
+            <td><a href="javascript:void(0)" th:text="${iterStatED.count}"></a></td>
+            <td class="hidden-xs hidden-sm" th:text="${R_PAYED.getPackages().getCourse().getName()}"></td>
+            <td class="hidden-xs hidden-sm" th:text="'' + *{slotAvailable}+' Buổi / '+*{timeAvailable}+' Tháng'"></td>
+            <td class="hidden-xs hidden-sm" th:text="''+ *{priceDiscount} + 'vnđ'">350.000₫</td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- END List pay-->
+</div>
+
+
+<script>
+    //xử lý nút bấm active và inactive
+    var notPayBtn = document.getElementById('notpay-btn');
+    var payBtn = document.getElementById('pay-btn');
+    var notpayList = document.getElementById('notpay-list');
+    var payList = document.getElementById('pay-list');
+
+    notPayBtn.addEventListener('click', function () {
+        notpayList.style.display = 'table';
+        payList.style.display = 'none';
+    });
+
+    payBtn.addEventListener('click', function () {
+        notpayList.style.display = 'none';
+        payList.style.display = 'table';
+    });
+</script>
+
+<!-- Footer Start -->
+<div th:include="common/web/footer"></div>
+<!-- Footer End -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/web/lib/easing/easing.min.js"></script>
+<script src="/web/lib/wow/wow.min.js"></script>
+<script src="/web/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/web/lib/isotope/isotope.pkgd.min.js"></script>
+<script src="/web/lib/lightbox/js/lightbox.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="/web/mail/jqBootstrapValidation.min.js"></script>
+<script src="/web/mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="/web/js/main.js"></script>
+<script src="/web/js/functions.js"></script>

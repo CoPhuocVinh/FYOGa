@@ -9,6 +9,12 @@ package org.jio.fyoga.service;/*  Welcome to Jio word
 
 import org.jio.fyoga.entity.Register;
 
+import java.util.List;
+
 public interface IRegisterService {
     <S extends Register> S save(S entity);
+
+    List<Register> findAllByByCustomer_AccountID(int AccountID);
+
+    List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status);
 }

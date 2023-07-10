@@ -18,10 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomepageController {
@@ -47,13 +49,7 @@ public class HomepageController {
 
 
 
-    @RequestMapping("/FYoGa/registerFYoGa")
-    public String ShowRegister(ModelMap model) {
-        AccountDTO account = new AccountDTO();
-        account.setIsEdit(false);
-        model.addAttribute("ACCOUNT", account);
-        return "web/register";
-    }
+
 
     //xu ly COURSE
 
@@ -63,5 +59,20 @@ public class HomepageController {
         session.removeAttribute("USER");
         return "redirect:/";
     }
+
+    @GetMapping("/FYoGa/forgotPass")
+    public String ForgotPass(){
+        return "web/forgotPass";
+    }
+
+    @PostMapping("/FYoGa/forgotPass")
+    public String ForgotPass(@RequestParam Map<String, Object> params){
+        String password = (String) params.get("password");
+        return "web/forgotPass";
+    }
+
+
+
+
 
 }

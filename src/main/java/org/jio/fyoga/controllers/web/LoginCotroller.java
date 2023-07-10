@@ -9,7 +9,11 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.repository.CourseRepository;
+import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IAccountService;
+import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,25 +34,8 @@ public class LoginCotroller {
 
     @RequestMapping("")
     public String showLoginFYoGa(HttpSession session) {
-        Account account = (Account) session.getAttribute("USER");
 
-        if (account != null) {
-            //model.addAttribute("USER", account);
-            if (account.getRole().getRoleID() == 1) {
-                return "redirect:/FYoGa/Login/User";
-                //return "web/user";
-            } else if (account.getRole().getRoleID() == 2) {
-                return "redirect:/FYoGa/Login/HLV";
-                //return "web/hlv";
-            } else if (account.getRole().getRoleID() == 3) {
-                return "redirect:/FYoGa/Login/Staff";
-                //return "web/index";
-            } else if (account.getRole().getRoleID() == 4) {
-                return "redirect:/FYoGa/Login/ADMIN";
-                //return "admin/admin";
-            }
-        }
-        return "web/login";
+        return MyUtil.Authen(session);
     }
 
     @PostMapping("/CheckLoginFYoGa")
@@ -60,6 +47,18 @@ public class LoginCotroller {
         if (account != null) {
             System.out.println("login thành công");
             session.setAttribute("USER", account);
+
+            //xử lý checkouting
+
+            try {
+                int packageID = (int) session.getAttribute("CHECKOUTING");
+                session.removeAttribute("CHECKOUTING");
+                return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
+
+            }catch (Exception ex){
+
+            }
+
             //model.addAttribute("USER", account);
             if (account.getRole().getRoleID() == 1) {
                 return "redirect:/FYoGa/Login/User";
@@ -84,13 +83,23 @@ public class LoginCotroller {
     }
 
     //
-    @GetMapping("/User")
+    @Autowired
+    RegisterRepository registerRepository;
+
+    //@RequestMapping(value = { "/FYoGa", "/FYoGa/"})
+
+    @GetMapping(value = {"/User","/User/"})
     public String showUser(HttpSession session, Model model) {
         Account account = (Account) session.getAttribute("USER");
 
-        if (account != null && account.getRole().getRoleID() == 1)
-
+        if (account != null && account.getRole().getRoleID() == 1){
+            List<Course> courses = registerRepository.findCoursesByUserRegister(account.getAccountID());
+            for (Course course : courses){
+                System.out.println(course.getCourseID());
+            }
+            model.addAttribute("COURSES",courses);
             return "web/user";
+        }
         else
             return "redirect:/";
     }
@@ -121,6 +130,9 @@ public class LoginCotroller {
         else
             return "redirect:/";
     }
+
+
+
 
 
 }
