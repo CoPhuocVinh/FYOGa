@@ -29,7 +29,7 @@ public class AccountDTO {
 
     private String phone;
 
-    private String avatar;
+    private byte[] avatar;
     private MultipartFile AvatarFile; // lưu hình
 
     private String gender;

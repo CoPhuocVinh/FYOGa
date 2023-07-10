@@ -12,7 +12,9 @@ import org.jio.fyoga.repository.AccountRepository;
 import org.jio.fyoga.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -53,5 +55,40 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public List<Account> findAccountByRole(int roleID) {
         return accountRepository.findAccountByRole_RoleID(roleID);
+    }
+
+    // lưu ảnh
+    @Override
+    public void saveIMGAccount(MultipartFile file, Account account) throws IOException {
+        // Kiểm tra xem tệp có tồn tại không
+        if (!file.isEmpty()) {
+            // Lưu tệp vào trường data của đối tượng Content
+            account.setAvatar(file.getBytes());
+
+            // Cập nhật các thông tin khác của đối tượng Content
+
+            // Lưu đối tượng Content vào cơ sở dữ liệu
+            accountRepository.save(account);
+        }
+    }
+
+    // lấy ảnh ra
+    @Override
+    public byte[] getIMGById(int accountID) {
+        // Truy vấn cơ sở dữ liệu để lấy đối tượng Content dựa trên contentId
+        Account account = accountRepository.findById(accountID).orElse(null);
+
+        if (account != null) {
+            // Kiểm tra xem đối tượng Content có dữ liệu hình PNG không
+            if (account.getAvatar() != null) {
+                return account.getAvatar();
+            } else {
+                // Xử lý trường hợp không có dữ liệu hình PNG
+                throw new RuntimeException("No PNG data found for course: " + accountID);
+            }
+        } else {
+            // Xử lý trường hợp không tìm thấy đối tượng Content với contentId tương ứng
+            throw new RuntimeException("User not found for course: " + accountID);
+        }
     }
 }
