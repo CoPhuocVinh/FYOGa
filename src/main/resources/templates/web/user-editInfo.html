@@ -31,7 +31,7 @@
 <div th:include="common/web/headerLogin"></div>
 <!--    header start-->
 
-    <!-- Modal Login -->
+    <!-- Modal Edit -->
     <div class="modal-edit">
         <div class="modal-container-edit">
             <span class="close" id="myButton">&times;</span>
@@ -40,7 +40,7 @@
             </header>
             <p style="color: red" th:text="${MSG}"></p>
 
-            <div class="modal-body">
+            <div class="modal-body-edit">
                 <form th:action="@{/FYoGa/Login/User/EditInfor}" method="post" id="myForm">
                     <div class="modal-edit-user" th:object="${USER}">
                         <input type="hidden" th:field="*{accountID}">
