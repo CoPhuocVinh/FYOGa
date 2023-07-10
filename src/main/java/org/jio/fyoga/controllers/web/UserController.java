@@ -139,7 +139,15 @@ public class UserController {
         }
         return "web/login";
     }
+    ///FYoGa/Login/User/ScheduleClass
+    @GetMapping("/ScheduleClass")
+    public String ScheduleClass(HttpSession session,Model model) {
+        if (MyUtil.checkAuthen(session)) {
+            // xủ lý code trong đây
 
-
+            return "web/scheduleDetail";
+        }
+        return "web/login";
+    }
 }
 

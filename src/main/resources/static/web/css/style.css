@@ -2721,7 +2721,7 @@ p.time-sche {
     cursor: pointer;
 }
 
-#modal-login-button-re-hatha {
+.modal-login-button-re-hatha {
     background: #62BEC8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
     border-radius: 50px;
@@ -2737,7 +2737,7 @@ p.time-sche {
     margin-bottom: 30px;
 }
 
-#modal-login-button-re-hatha:hover {
+.modal-login-button-re-hatha:hover {
     background-color: #3cb5c3;
     cursor: pointer;
 }
@@ -2754,8 +2754,8 @@ p.time-sche {
 
 .user-detail .info input {
     display: block;
-    margin-top: 30px;
-    width: 60%;
+    margin-top: 12px;
+    width: 70%;
     padding: 8px;
     border-radius: 15px;
 }
