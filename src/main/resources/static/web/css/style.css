@@ -2787,6 +2787,13 @@ p.time-sche {
     justify-content: center;
 }
 
+.user-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
 .user-btn .history-btn{
     border: 1px solid #F7CAC9;
     padding: 13px;
