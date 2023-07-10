@@ -34,7 +34,7 @@ public class PaymentController {
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
 
-        long amount =100000;
+        long amount =1000000;
 
 
         String vnp_TxnRef = Config.getRandomNumber(8);
