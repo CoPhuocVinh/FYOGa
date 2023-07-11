@@ -75,7 +75,7 @@
         <tbody class="list-teacherBody">
         <tr th:each="R_PAYING, iterStat : ${REGISTER_PAYING}" th:object="${R_PAYING}">
             <td><a href="javascript:void(0)" th:text="${iterStat.count}"></a></td>
-            <td class="hidden-xs hidden-sm" th:text="${R_PAYING.getPackages().getCourse().getName()}"></td>
+            <td class="hidden-xs hidden-sm" th:text="${R_PAYING.getADiscount().getAPackage().getCourse().getName()}"></td>
             <td class="hidden-xs hidden-sm" th:text="'' + *{slotAvailable}+' Buổi / '+*{timeAvailable}+' Tháng'"></td>
             <td class="hidden-xs hidden-sm" th:text="''+ *{priceDiscount} + 'vnđ'">350.000₫</td>
         </tr>
@@ -96,7 +96,7 @@
         <tbody class="list-teacherBody">
         <tr th:each="R_PAYED, iterStatED : ${REGISTER_PAYED}" th:object="${R_PAYED}">
             <td><a href="javascript:void(0)" th:text="${iterStatED.count}"></a></td>
-            <td class="hidden-xs hidden-sm" th:text="${R_PAYED.getPackages().getCourse().getName()}"></td>
+            <td class="hidden-xs hidden-sm" th:text="${R_PAYED.getADiscount().getAPackage().getCourse().getName()}"></td>
             <td class="hidden-xs hidden-sm" th:text="'' + *{slotAvailable}+' Buổi / '+*{timeAvailable}+' Tháng'"></td>
             <td class="hidden-xs hidden-sm" th:text="''+ *{priceDiscount} + 'vnđ'">350.000₫</td>
         </tr>
