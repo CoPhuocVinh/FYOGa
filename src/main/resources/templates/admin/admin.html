@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -128,7 +126,7 @@
                     <h3 class="admin-title">Admin</h3>
                     <ul>
                         <li>
-                            <a href="index.html" class="active"><i class="fa fa-fire"></i>Bảng điều khiển</a>
+                            <a href="admin.html" class="active"><i class="fa fa-fire"></i>Bảng điều khiển</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-th-list"></i>Quản lý hệ thống</a>
@@ -146,7 +144,7 @@
                                     <a href="page_form_validation.html"><i class="fa fa-certificate"></i>Khóa học</a>
                                 </li>
                                 <li>
-                                    <a href="page_list_class.html"><i class="fa fa-file"></i>Lớp học</a>
+                                    <a th:href="@{/FYoGa/Login/ADMIN/class}"><i class="fa fa-file"></i>Lớp học</a>
                                 </li>
                             </ul>
                         </li>
@@ -196,7 +194,7 @@
             <div id="page-content">
                 <!-- Navigation info -->
                 <ul id="nav-info" class="clearfix">
-                    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+                    <li><a href="admin.html"><i class="fa fa-home"></i></a></li>
                     <li class="active"><a href="">Bảng điều khiển</a></li>
                 </ul>
                 <!-- END Navigation info -->
@@ -467,11 +465,11 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <div class="col-md-3">
-                                        <img src="/admin/ aimg/placeholders/image_dark_120x120.png" alt="image"
+                                        <img src="/admin/img/placeholders/image_dark_120x120.png" alt="image"
                                             class="img-responsive push">
                                     </div>
                                     <div class="col-md-9">
-                                        <form action="index.html" class="dropzone">
+                                        <form action="admin.html" class="dropzone">
                                             <div class="fallback">
                                                 <input name="file" type="file">
                                             </div>
