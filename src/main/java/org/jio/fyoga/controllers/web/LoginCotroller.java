@@ -51,9 +51,9 @@ public class LoginCotroller {
             //xử lý checkouting
 
             try {
-                int packageID = (int) session.getAttribute("CHECKOUTING");
+                int discountID = (int) session.getAttribute("CHECKOUTING");
                 session.removeAttribute("CHECKOUTING");
-                return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
+                return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID;
 
             }catch (Exception ex){
 

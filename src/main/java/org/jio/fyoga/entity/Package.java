@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,25 +33,25 @@ public class Package {
     @Column(name = "slot_on_month")
     int slotOnMonth;
 
-    @Column(name = "time_on_month")
-    int TimeOnMonth;
+//    @Column(name = "time_on_month")
+//    int timeOnMonth;
 
-    int defaultID;
+//    int defaultID;
 
     int status;
 
     @Column(name = "price")
     float price;
-
-    @Column(name = "percent_discount")
-    float percentDiscount;
+//
+//    @Column(name = "percent_discount")
+//    float percentDiscount;
 
     @ManyToOne
     @JoinColumn(name = "courseID")
     Course course;
 
-    @OneToMany(mappedBy = "packages", cascade = CascadeType.ALL)
-    Set<Register> registers;
+    @OneToMany(mappedBy = "aPackage", cascade = CascadeType.ALL)
+    List<Discount> discounts;
 
 
 

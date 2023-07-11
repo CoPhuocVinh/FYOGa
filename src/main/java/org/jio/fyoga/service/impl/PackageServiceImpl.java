@@ -27,8 +27,8 @@ public class PackageServiceImpl implements IPackageService {
     }
 
     @Override
-    public List<Package> findAllByDefaultIDaAndAndCourse_CourseID(int DefaultID, int CourseID) {
-        return packageRepository.findAllByDefaultIDAndAndCourse_CourseID(DefaultID, CourseID);
+    public List<Package> findAllByCourse_CourseID( int CourseID) {
+        return packageRepository.findAllByCourse_CourseID(CourseID);
     }
 
     @Override

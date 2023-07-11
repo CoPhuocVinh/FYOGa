@@ -70,7 +70,7 @@
                 <h4>Thanh toán một lần</h4>
                 <p>Đăng ký khi bạn muốn và không tự động gia hạn</p>
 
-                <div th:each="P : ${PACKAGES}" th:object="${P}" class="box-1month">
+                <div th:each="D : ${DISCOUNTS}" th:object="${D}" class="box-1month">
                     <div class="payment-up">
                         <div class="body-text">
                             <span th:text="'Tiết kiệm '+*{percentDiscount}+'%'" class="packageName"></span>
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="payments-down">
-                        <a class="box-pay" th:href="    @{/FYoGa/Course/PackageCheckOut(packageID=*{packageID})}">
+                        <a class="box-pay" th:href="    @{/FYoGa/Course/PackageCheckOut(discountID=*{discountID})}">
 <!--                        onclick="checkoutPage('/FYoGa/Course/PackageCheckOut')"-->
 <!--                            <input type="hidden" name="packID" th:value="*{packageID}">-->
                              <h6 style="font-weight: 600;">Thanh toán tại quầy</h6>

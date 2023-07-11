@@ -29,8 +29,8 @@ public class Slot {
     @Column(name = "end_time")
     Time endTime;
 
-    @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Set<ScheduleClass> scheduleClasses;
+//    @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    Set<ScheduleClass> scheduleClasses;
 
     @ManyToOne
     @JoinColumn(name = "staffID")

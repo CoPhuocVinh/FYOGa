@@ -18,11 +18,11 @@ import java.util.List;
 @Repository
 public interface RegisterRepository  extends JpaRepository<Register, Integer> {
 
-    @Query("SELECT DISTINCT r.packages.course FROM Register r WHERE r.customer.accountID = ?1")
+    @Query("SELECT DISTINCT r.aDiscount.aPackage.course FROM Register r WHERE r.customer.accountID = ?1")
     List<Course> findCoursesByUserRegister(int AccountID);
 
     List<Register> findByCustomer_AccountID(int AccountID);
-    List<Register> findByCustomer_AccountIDAndStatusAndPackages_Course_CourseID(int AccountID, int status,int CourseID);
+    //List<Register> findByCustomer_AccountIDAndStatusAndPackages_Course_CourseID(int AccountID, int status,int CourseID);
 
     List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status);
 

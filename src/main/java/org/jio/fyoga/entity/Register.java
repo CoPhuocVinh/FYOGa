@@ -44,8 +44,8 @@ public class Register{
     int weekUsed;
 
     @ManyToOne
-    @JoinColumn(name = "packageID")
-    Package packages;
+    @JoinColumn(name = "discountID")
+    Discount aDiscount;
 
     @ManyToOne
     @JoinColumn(name = "customerID")

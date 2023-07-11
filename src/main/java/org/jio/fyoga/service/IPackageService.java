@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface IPackageService {
 
-    List<Package> findAllByDefaultIDaAndAndCourse_CourseID(int DefaultID, int CourseID);
+    List<Package> findAllByCourse_CourseID( int CourseID);
 
     Optional<Package> findById(Integer integer);
 }

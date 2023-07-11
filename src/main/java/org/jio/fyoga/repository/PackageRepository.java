@@ -11,6 +11,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PackageRepository extends JpaRepository<Package, Integer> {
-    List<Package> findAllByDefaultIDAndAndCourse_CourseID(int DefaultId, int CourseId);
+    List<Package> findAllByCourse_CourseID( int CourseId);
 
 }

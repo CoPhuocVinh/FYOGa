@@ -9,9 +9,11 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.Discount;
 import org.jio.fyoga.entity.Package;
 import org.jio.fyoga.entity.Register;
 import org.jio.fyoga.model.RegisterDTO;
+import org.jio.fyoga.service.IDiscountService;
 import org.jio.fyoga.service.IPackageService;
 import org.jio.fyoga.service.IRegisterService;
 import org.springframework.beans.BeanUtils;
@@ -34,22 +36,25 @@ public class CheckOutController {
     @Autowired
     IRegisterService registerService;
 
+    @Autowired
+    IDiscountService discountService;
+
     @GetMapping("")
-    public String ShowCheckOut(HttpSession session, @RequestParam int packageID, Model model){
+    public String ShowCheckOut(HttpSession session, @RequestParam int discountID, Model model){
         String url = "web/checkoutCourse";
         Account account = (Account) session.getAttribute("USER");
 
         if(account == null){
             //System.out.println(packageID);
-            session.setAttribute("CHECKOUTING", packageID);
+            session.setAttribute("CHECKOUTING", discountID);
             url = "redirect:/FYoGa/Login";
         }
-        Optional<Package> packageEntiry = packageService.findById(packageID);
+        Optional<Discount> discountEntity = discountService.findById(discountID);
 //        PackageDTO packageDTO = new PackageDTO();
 //        BeanUtils.copyProperties(packageEntiry, packageDTO);
 //        float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
 //        packageDTO.setPriceDiscount(priceDiscount);
-        model.addAttribute("PAYING",packageEntiry);
+        model.addAttribute("PAYING",discountEntity);
 
         // xu ly register thanh cong
         String SUCCESS = (String) session.getAttribute("SUCCESS");
@@ -61,19 +66,21 @@ public class CheckOutController {
     }
 
     @PostMapping("/Checkout")
-    public String Checkout(HttpSession session, @RequestParam int packageID, Model model){
+    public String Checkout(HttpSession session, @RequestParam int discountID, Model model){
         Account account = (Account) session.getAttribute("USER");
-        Optional<Package> packageEntiry = packageService.findById(packageID);
-        float price_discount = packageEntiry.get().getPrice() * (100 - packageEntiry.get().getPercentDiscount())/100;
-        int slotAvailable = packageEntiry.get().getSlotOnMonth()*packageEntiry.get().getTimeOnMonth();
-        int timeAvailable = packageEntiry.get().getTimeOnMonth();
+        //Optional<Package> packageEntiry = packageService.findById(packageID);
+        Optional<Discount> discountEntiry = discountService.findById(discountID);
+
+        float price_discount = discountEntiry.get().getAPackage().getPrice() * (100 - discountEntiry.get().getPercentDiscount())/100;
+        int slotAvailable = discountEntiry.get().getAPackage().getSlotOnMonth()*discountEntiry.get().getTimeOnMonth();
+        int timeAvailable = discountEntiry.get().getTimeOnMonth();
 
         Date date = new Date(System.currentTimeMillis());
         RegisterDTO registerDTO = RegisterDTO.builder()
                 .customerID(account.getAccountID())
-                .packageID(packageID)
+                .packageID(discountID)
                 .status(2)
-                .priceOriginal(packageEntiry.get().getPrice())
+                .priceOriginal(discountEntiry.get().getAPackage().getPrice())
                 .priceDiscount(price_discount)
                 .slotAvailable(slotAvailable)
                 .timeAvailable(timeAvailable)
@@ -85,12 +92,13 @@ public class CheckOutController {
         Register registerEntity = new Register();
         BeanUtils.copyProperties(registerDTO,registerEntity);
         registerEntity.setCustomer(account);
-        registerEntity.setPackages(packageEntiry.orElseThrow());
+        //registerEntity.setPackages(packageEntiry.orElseThrow());
+        registerEntity.setADiscount(discountEntiry.orElseThrow());
 
         registerService.save(registerEntity);
         System.out.println("register thành công");
         session.setAttribute("SUCCESS","SUCCESS");
-        return "redirect:/FYoGa/Course/PackageCheckOut?packageID=" + packageID;
+        return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID;
     }
 
 

@@ -9,9 +9,12 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.entity.Discount;
 import org.jio.fyoga.entity.Package;
+import org.jio.fyoga.model.DiscountDTO;
 import org.jio.fyoga.model.PackageDTO;
 import org.jio.fyoga.service.ICourseService;
+import org.jio.fyoga.service.IDiscountService;
 import org.jio.fyoga.service.IPackageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,8 @@ public class CourseController {
     ICourseService courseService;
     @Autowired
     IPackageService packageService;
+    @Autowired
+    IDiscountService discountService;
 
     // xu ly course trong
     @GetMapping("")
@@ -44,11 +49,11 @@ public class CourseController {
         if( course != null){
             model.addAttribute("COURSE",course);
 
-            List<Package> packages = packageService.findAllByDefaultIDaAndAndCourse_CourseID(0, course.getCourseID());
-            List<PackageDTO> packageDTOs = tranferDTO2Entity(packages);
+            List<Package> packages = packageService.findAllByCourse_CourseID(course.getCourseID());
+            //List<PackageDTO> packageDTOs = tranferDTO2Entity(packages);
 
             if (packages != null && packages.size() != 0){
-                model.addAttribute("PACKAGES", packageDTOs);
+                model.addAttribute("PACKAGES", packages);
             }
             else {
                 model.addAttribute("MSG", "Chưa có gói nào cho khóa này. Xin vui lòng quay lại sau");
@@ -60,51 +65,65 @@ public class CourseController {
 
     @GetMapping("/Package")
     public String showPackage(@RequestParam int courseID, @RequestParam int packageID, Model model){
-        List<Package> packageEntitys = new ArrayList<>();
+
         Optional<Package> pkg = packageService.findById(packageID);
+        List<Discount> discounts = new ArrayList<>();
 
-
-        model.addAttribute("PACKE",pkg );
 
         if (pkg.isPresent()){
             Package pack = pkg.orElseThrow();
-            packageEntitys.add(pack);
-            
-        }
-        for (Package apack:packageService.findAllByDefaultIDaAndAndCourse_CourseID(packageID, courseID)) {
-            packageEntitys.add(apack);
-            
+
+            model.addAttribute("PACKE",pkg );
         }
 
-        List<PackageDTO> packageDTOs = tranferDTO2Entity(packageEntitys);
 
+
+        for (Discount discount:discountService.findAllByAPackage_PackageID(packageID)) {
+            discounts.add(discount);
+        }
+
+
+        List<DiscountDTO> discountDTOs = tranferDTO2Entity(discounts, pkg);
         Optional<Course> course =  courseService.findById(courseID);
         if ((course.isPresent())) {
             model.addAttribute("COURSE", course);
         }
-
-
-
-        model.addAttribute("PACKAGES", packageDTOs);
-
+        model.addAttribute("DISCOUNTS", discountDTOs);
 
         return "web/pakageCourse";
     }
 
+    // qua han ko con su dung
 
-    public List<PackageDTO> tranferDTO2Entity(List<Package> packagesEntitys){
-        List<PackageDTO> packageDTOs = new ArrayList<>();
+//    public List<PackageDTO> tranferDTO2Entity(List<Package> packagesEntitys){
+//        List<PackageDTO> packageDTOs = new ArrayList<>();
+//
+//        for (Package packageEntiry : packagesEntitys){
+//            PackageDTO packageDTO = new PackageDTO();
+//            BeanUtils.copyProperties(packageEntiry, packageDTO);
+//            float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
+//            packageDTO.setPriceDiscount(priceDiscount);
+//            packageDTOs.add(packageDTO);
+//
+//        }
+//
+//        return packageDTOs;
+//    }
 
-        for (Package packageEntiry : packagesEntitys){
-            PackageDTO packageDTO = new PackageDTO();
-            BeanUtils.copyProperties(packageEntiry, packageDTO);
-            float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
-            packageDTO.setPriceDiscount(priceDiscount);
-            packageDTOs.add(packageDTO);
+    public List<DiscountDTO> tranferDTO2Entity(List<Discount> discountEntitys, Optional<Package> pkg ){
+        List<DiscountDTO> DiscountDTOs = new ArrayList<>();
+
+        for (Discount discountEntiry : discountEntitys){
+            DiscountDTO discountDTO = new DiscountDTO();
+            BeanUtils.copyProperties(discountEntiry, discountDTO);
+            float priceDiscount = discountEntiry.getAPackage().getPrice() * (100 - discountDTO.getPercentDiscount())/100 ;
+            discountDTO.setPriceDiscount(priceDiscount);
+            discountDTO.setSlotOnMonth(pkg.get().getSlotOnMonth());
+            DiscountDTOs.add(discountDTO);
 
         }
 
-        return packageDTOs;
+        return DiscountDTOs;
     }
 
 

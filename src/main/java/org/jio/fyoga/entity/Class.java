@@ -34,8 +34,8 @@ public class Class {
     String className;
 
 
-    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Set<ScheduleClass> scheduleClasses;
+//    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    Set<ScheduleClass> scheduleClasses;
 
     @OneToMany(mappedBy = "aClassBooking",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Booking> classBooking;
