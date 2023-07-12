@@ -14,6 +14,17 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
+    <!-- END Icons -->
 
     <!-- Stylesheets -->
     <!-- Bootstrap is included in its original form, unaltered -->
@@ -39,210 +50,225 @@
 <!-- <body class="fixed"> -->
 
 <body>
-    <!-- Page Container -->
-    <div id="page-container">
-        <!-- Header -->
-        <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
-        <!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
-        <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
-        <header class="navbar navbar-inverse">
-            <!-- Mobile Navigation, Shows up  on smaller screens -->
-            <ul class="navbar-nav-custom pull-right hidden-md hidden-lg">
-                <li class="divider-vertical"></li>
-                <li>
-                    <!-- It is set to open and close the main navigation on smaller screens. The class .navbar-main-collapse was added to aside#page-sidebar -->
-                    <a href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-main-collapse">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- END Mobile Navigation -->
+<!-- Page Container -->
+<div id="page-container">
+    <!-- Header -->
+    <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+    <!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
+    <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
+    <header class="navbar navbar-inverse">
+        <!-- Mobile Navigation, Shows up  on smaller screens -->
+        <ul class="navbar-nav-custom pull-right hidden-md hidden-lg">
+            <li class="divider-vertical"></li>
+            <li>
+                <!-- It is set to open and close the main navigation on smaller screens. The class .navbar-main-collapse was added to aside#page-sidebar -->
+                <a href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END Mobile Navigation -->
 
-            <!-- Logo -->
-            <a href="index.html" class="navbar-brand">FY<span>o</span>ga</a>
+        <!-- Logo -->
+        <a href="index.html" class="navbar-brand">FY<span>o</span>ga</a>
 
-            <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
-            <div id="loading" class="pull-left"><i class="fa fa-certificate fa-spin"></i></div>
+        <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
+        <div id="loading" class="pull-left"><i class="fa fa-certificate fa-spin"></i></div>
 
-            <!-- Header Widgets -->
-            <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->
-            <ul id="widgets" class="navbar-nav-custom pull-right">
-                <!-- Just a divider -->
-                <li class="divider-vertical"></li>
-
-
-
-                <li class="divider-vertical"></li>
-
-
-                <li class="divider-vertical"></li>
-
-                <!-- Notifications Widget -->
-                <li class="divider-vertical"></li>
-
-                <!-- User Menu -->
-                <li class="dropdown pull-right dropdown-user">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><img
-                            src="img/template/avatar.png" alt="avatar"> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <!-- Just a button demostrating how loading of widgets could happen, check main.js- - uiDemo() -->
-                        <li>
-                            <a href="javascript:void(0)" class="loading-on"><i class="fa fa-refresh"></i> Đặt lại</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <!-- Modal div is at the bottom of the page before including javascript code -->
-                            <a href="#modal-user-settings" role="button" data-toggle="modal"><i class="fa fa-user"></i>
-                                Thông tin người dùng</a>
-                        </li>
-
-                        <li class="divider"></li>
-                        <li>
-                            <a href="page_login.html"><i class="fa fa-lock"></i> Đăng xuất</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- END User Menu -->
-            </ul>
-            <!-- END Header Widgets -->
-        </header>
-        <!-- END Header -->
-
-        <!-- Inner Container -->
-        <div id="inner-container">
-            <!-- Sidebar -->
-            <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
-
-
-                <!-- Primary Navigation -->
-                <nav id="primary-nav">
-                    <h3 class="admin-title">Admin</h3>
-                    <ul>
-                        <li>
-                            <a href="index.html" class="active"><i class="fa fa-fire"></i>Bảng điều khiển</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-th-list"></i>Quản lý hệ thống</a>
-                            <ul>
-                                <li>
-                                    <a href="page_list_staff.html"><i class="fa fa-clipboard"></i>Nhân viên</a>
-                                </li>
-                                <li>
-                                    <a href="page_list_teacher.html"><i class="fa fa-file-o"></i>Huấn luyện viên</a>
-                                </li>
-                                <li>
-                                    <a href="page_list_customer.html"><i class="fa fa-users"></i>Khách hàng</a>
-                                </li>
-                                <li>
-                                    <a href="page_form_validation.html"><i class="fa fa-certificate"></i>Khóa học</a>
-                                </li>
-                                <li>
-                                    <a href="page_list_class.html"><i class="fa fa-file"></i>Lớp học</a>
-                                </li>
+        <!-- Header Widgets -->
+        <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->
+        <ul id="widgets" class="navbar-nav-custom pull-right">
+            <!-- Just a divider -->
+            <li class="divider-vertical"></li>
 
 
 
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="setup-calender.html"><i class="fa fa-th-list"></i>Lịch học</a>
-                        </li>
-                        <li>
-                            <a href="page_slots.html"><i class="gi gi-unchecked"></i>Slot</a>
-                        </li>
-                        <li>
-                            <a href="page_discount.html"><i class="hi hi-usd"></i>Gói học</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="gi gi-earphone"></i>Liên hệ</a>
-                            <ul>
-                                <li>
-                                    <a href="page_inbox.html"><i class="fa fa-envelope"></i>Hộp thư đến</a>
-                                </li>
-                                <li>
-                                    <a href="page_feedback.html"><i class="gi gi-conversation"></i>Phản hồi</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="page_list_blog.html"><i class="fa fa-pencil"></i>Blog</a>
-                        </li>
-                        <li>
-                            <a href="page_list_confirm_register.html"><i class="fa fa-pencil"></i>Xác nhận đăng ký</a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- END Primary Navigation -->
+            <li class="divider-vertical"></li>
 
 
-            </aside>
+            <li class="divider-vertical"></li>
 
+            <!-- Notifications Widget -->
+            <li class="divider-vertical"></li>
 
-            <!-- END Sidebar -->
+            <!-- User Menu -->
+            <li class="dropdown pull-right dropdown-user">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><img
+                        src="img/template/avatar.png" alt="avatar"> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <!-- Just a button demostrating how loading of widgets could happen, check main.js- - uiDemo() -->
+                    <li>
+                        <a href="javascript:void(0)" class="loading-on"><i class="fa fa-refresh"></i> Đặt lại</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <!-- Modal div is at the bottom of the page before including javascript code -->
+                        <a href="#modal-user-settings" role="button" data-toggle="modal"><i class="fa fa-user"></i>
+                            Thông tin người dùng</a>
+                    </li>
 
-            <!-- Page Content -->
-            <div id="page-content">
-                <!-- Navigation info -->
-                <ul id="nav-info" class="clearfix">
-                    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-                    <li><a href="page_list_teacher.html">Danh sách giáo viên</a></li>
-                    <li><a href="createnewTeacher.html">Thêm mới giáo viên</a></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="page_login.html"><i class="fa fa-lock"></i> Đăng xuất</a>
+                    </li>
                 </ul>
-                <!-- END Navigation info -->
+            </li>
+            <!-- END User Menu -->
+        </ul>
+        <!-- END Header Widgets -->
+    </header>
+    <!-- END Header -->
 
-                <!-- List Staff -->
-                <div class="form-create-class">
-                    <h2 class="create-header">Thêm mới giáo viên</h2>
-
-                    <div class="createClass-container">
-
-                        <label for="Email">Địa chỉ email</label>
-                        <input type="email" name="Email"><br>
-
-                        <label for="Name">Họ và tên</label>
-                        <input type="text" name="Name"><br>
-
-                        <label for="Number">Số điện thoại</label>
-                        <input type="tel" name="Number" required><br>
-
-                        <label for="image"></label>
-                        <div id="preview" class="circle-frame">
-                            <i class="fa fa-user input-user-file"></i>
-                        </div>
-                        <input type="file" name="image" required><br>
-
-                        <label for="gender">Giới tính:</label>
-                        <input type="radio" value="Nam" name="gender">Nam</input>
-                        <input type="radio" value="Nữ" name="gender">Nữ</input><br>
+    <!-- Inner Container -->
+    <div id="inner-container">
+        <!-- Sidebar -->
+        <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
 
 
-                        <button class="btn-footer" type="reset"
+            <!-- Primary Navigation -->
+            <nav id="primary-nav">
+                <h3 class="admin-title">Admin</h3>
+                <ul>
+                    <li>
+                        <a href="index.html" class="active"><i class="fa fa-fire"></i>Bảng điều khiển</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-th-list"></i>Quản lý hệ thống</a>
+                        <ul>
+                            <li>
+                                <a href="page_list_staff.html"><i class="fa fa-clipboard"></i>Nhân viên</a>
+                            </li>
+                            <li>
+                                <a href="page_list_teacher.html"><i class="fa fa-file-o"></i>Huấn luyện viên</a>
+                            </li>
+                            <li>
+                                <a href="page_list_customer.html"><i class="fa fa-users"></i>Khách hàng</a>
+                            </li>
+                            <li>
+                                <a href="page_form_validation.html"><i class="fa fa-certificate"></i>Khóa học</a>
+                            </li>
+                            <li>
+                                <a href="page_list_class.html"><i class="fa fa-file"></i>Lớp học</a>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-th-list"></i>Lịch</a>
+                        <ul>
+                            <li>
+                                <a href="page_calendar.html"><i class="fa fa-clipboard"></i>Lịch học</a>
+                            </li>
+                            <li>
+                                <a href="setup-calender.html"><i class="fa fa-file-o"></i>Lịch đang xếp</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="page_slots.html"><i class="gi gi-unchecked"></i>Slot</a>
+                    </li>
+                    <li>
+                        <a href="page_discount.html"><i class="hi hi-usd"></i>Gói học</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="gi gi-earphone"></i>Liên hệ</a>
+                        <ul>
+                            <li>
+                                <a href="page_inbox.html"><i class="fa fa-envelope"></i>Hộp thư đến</a>
+                            </li>
+                            <li>
+                                <a href="page_feedback.html"><i class="gi gi-conversation"></i>Phản hồi</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="page_form_wizard.html"><i class="fa fa-pencil"></i>Blog</a>
+                    </li>
+                    <li>
+                        <a href="page_list_confirm_register.html"><i class="fa fa-pencil"></i>Xác nhận đăng ký</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- END Primary Navigation -->
+
+
+        </aside>
+
+
+        <!-- END Sidebar -->
+
+        <!-- Page Content -->
+        <div id="page-content">
+            <!-- Navigation info -->
+            <ul id="nav-info" class="clearfix">
+                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+                <li><a href="page_list_customer.html">Danh sách khách hàng</a></li>
+                <li><a href="createnewCustomer.html">Thêm mới khách hàng</a></li>
+            </ul>
+            <!-- END Navigation info -->
+
+            <!-- List Staff -->
+            <div class="form-create-class">
+                <h2 class="create-header">Thêm mới khách hàng</h2>
+
+                <div class="createClass-container">
+
+                    <label for="Email">Địa chỉ email</label>
+                    <input type="email" name="Email"><br>
+
+                    <label for="Name">Họ và tên</label>
+                    <input type="text" name="Name"><br>
+
+                    <label for="Number">Số điện thoại</label>
+                    <input type="tel" name="Number" required><br>
+
+                    <label for="image"></label>
+                    <input type="file" name="image" required><br>
+
+                    <label for="gender">Giới tính:</label>
+                    <input type="radio" value="Nam" name="gender">Nam</input>
+                    <input type="radio" value="Nữ" name="gender">Nữ</input><br>
+
+                    <button class="btn-footer" type="reset"
                             style="transform: translate(315px, 0px) !important; ">Đặt lại</button>
-                        <button class="btn-footer" type="submit"
+                    <button class="btn-footer" type="submit"
                             style="transform: translate(315px, 0px) !important; ">Tạo</button>
-                    </div>
                 </div>
-                <style>
-                    input[type="radio"] {
-                        margin: 0;
-                        width: 40px;
-                    }
-                </style>
-                <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
-
-                <!-- Bootstrap.js -->
-                <script src="js/vendor/bootstrap.min.js"></script>
-
-                <!-- Jquery plugins and custom javascript code -->
-                <script src="js/plugins.js"></script>
-                <script src="js/main.js"></script>
-
-                <!-- Javascript code only for this page -->
             </div>
+            <style>
+                input[type="radio"] {
+                    margin: 0;
+                    width: 40px;
+                }
+
+                #save {
+                    display: flex;
+                    justify-content: center;
+
+                    align-items: center;
+                }
+
+                #closeButton {
+                    margin-left: 280px;
+                }
+            </style>
+            <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+            <!-- Bootstrap.js -->
+            <script src="js/vendor/bootstrap.min.js"></script>
+
+            <!-- Jquery plugins and custom javascript code -->
+            <script src="js/plugins.js"></script>
+            <script src="js/main.js"></script>
+
+            <!-- Javascript code only for this page -->
         </div>
     </div>
+</div>
 
 </body>
 
