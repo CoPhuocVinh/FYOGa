@@ -1,4 +1,4 @@
-package org.jio.fyoga.controllers.web;
+package org.jio.fyoga.controllers.admin;
 
 import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.service.IClassService;
