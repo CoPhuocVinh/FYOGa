@@ -115,11 +115,13 @@
                                class="btn btn-xs btn-check"><i class="gi gi-check"></i></a>
                             <a href="editClass.html" data-toggle="tooltip" title="Chỉnh sửa"
                                class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
-                            <a href="javascript:void(0)" data-toggle="tooltip" title="Xóa"
+                             <a th:href="@{/FYoGa/Login/ADMIN/class/remove(classID=*{classID})}" data-toggle="tooltip" title="Xóa"
                                class="btn btn-xs btn-danger" onclick="showCreateClass()"><i
                                     class="fa fa-times"></i></a>
                         </div>
                     </td>
+
+
                 </tr>
 
             </tbody>
@@ -156,7 +158,7 @@
                 <td class="text-center">
                     <div class="btn-group">
                         <!--nút sửa-->
-                        <a href="javascript:void(0)" data-toggle="tooltip" title="Hoàn tác"
+                        <a th:href="@{/FYoGa/Login/ADMIN/class/remove(classID=*{classID})}"  data-toggle="tooltip" title="Hoàn tác"
                            class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                     </div>
                 </td>
@@ -169,7 +171,7 @@
     <!-- END Page Content -->
 
 
-    <div id="formCreateContainer">
+    <div th:if="${DELETE}" id="formCreateContainer">
         <!-- <button id="closeButton2" onclick="hideFormCreateAndEdit()">X</button> -->
         <form id="registrationForm2">
             <header class="modal-header-register">
@@ -181,91 +183,17 @@
                     <h3 class="mo">Bạn có chắc muốn xóa không ?</h3>
                 </div>
             </form>
-            <footer class="modal-footer-schedule">
-                <button class="btn-footer" type="reset"> <a href="page_list_class.html">Xóa</a></button>
-                <button class="btn-footer" type="submit"><a href="page_list_class.html">Hủy</a></button>
+            <footer  class="modal-footer-schedule">
+                <button class="btn-footer" type="reset"> <a th:href="@{/FYoGa/Login/ADMIN/class/remove/{classID}(classID=${DELETE})}" >Xóa</a></button>
+                <button class="btn-footer" type="submit"><a th:href="@{/FYoGa/Login/ADMIN/class}">Hủy</a></button>
 
             </footer>
         </form>
     </div>
 
-    <style>
-        #formContainer,
-        #formCreateContainer {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #f1f1f1;
-            padding: 20px;
-            box-shadow: rgb(152, 152, 152, 0.6);
-            border: rgba(0, 0, 0, 0.6) solid 1px;
-        }
-
-        #registrationForm,
-        #registrationForm2 {
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        #registrationForm label,
-        #registrationForm input[type="text"],
-        #registrationForm input[type="number"],
-        #registrationForm input[type="submit"],
-        #registrationForm2 label,
-        #registrationForm2 input[type="text"],
-        #registrationForm2 input[type="number"],
-        #registrationForm2 input[type="submit"],
-        #registrationForm2 input[type="tel"],
-        #registrationForm2 input[type="email"] {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        #class,
-        #course,
-        #teacher,
-        #quantity,
-        #email,
-        #fullname,
-        #teacher2,
-        #quantity2,
-        #idname,
-        #numberphone {
-            border: rgba(0, 0, 0, 0.6) solid 1px;
-        }
-
-        #save,
-        #save2 {
-            display: flex;
-            justify-content: center;
-
-            align-items: center;
-        }
-
-        #registrationForm input[type="submit"],
-        #registrationForm2 input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        #closeButton,
-        #closeButton2 {
-            transform: translateX(00%);
-        }
-    </style>
-
 
     <script>
-        function showCreateClass() {
-            var formCreateContainer = document.getElementById("formCreateContainer");
-            formCreateContainer.style.display = "block";
-        }
+
         //xử lý nút bấm active và inactive
         var activeBtn = document.getElementById('active-bnt');
         var inactiveBtn = document.getElementById('inactive-btn');
@@ -279,43 +207,6 @@
         inactiveBtn.addEventListener('click', function () {
             activeList.style.display = 'none';
             inactiveList.style.display = 'inline-table';
-        });
-
-        // xử lý fill tên giáo viên và nút sửa
-        var tableRows = document.querySelectorAll(".list-teacherBody tr");
-
-        // Lặp qua từng hàng và gán sự kiện click cho nút "sửa"
-        tableRows.forEach(function (row) {
-            var editButton = row.querySelector(".btn-success");
-            editButton.addEventListener("click", function () {
-                // Lấy thông tin từ trường giáo viên của hàng
-                var teacherName = row.querySelector(".hidden-xs.hidden-sm:nth-child(4)").textContent;
-
-                // Điền thông tin vào trường nhập liệu trong form
-                var teacherField = document.getElementById("teacher");
-                teacherField.value = teacherName;
-
-                // Hiển thị form
-                var formContainer = document.getElementById("formContainer");
-                formContainer.style.display = "block";
-            });
-        });
-
-        // Gán sự kiện submit cho form
-        var registrationForm = document.getElementById("registrationForm");
-        registrationForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
-
-            // Lấy giá trị từ trường nhập liệu trong form
-            var teacherField = document.getElementById("teacher");
-            var teacherValue = teacherField.value;
-
-            // Cập nhật nội dung trong trường giáo viên của hàng đang được chỉnh sửa
-            var currentRow = document.querySelector(".list-teacherBody tr.editing");
-            currentRow.querySelector(".hidden-xs.hidden-sm:nth-child(4)").textContent = teacherValue;
-
-            // Ẩn form
-            hideFormCreateAndEdit();
         });
 
     </script>

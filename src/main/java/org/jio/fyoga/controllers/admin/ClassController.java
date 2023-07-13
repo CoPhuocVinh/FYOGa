@@ -100,4 +100,30 @@ public class ClassController {
         return "redirect:/FYoGa/Login/ADMIN/class";
     }
 
+    @GetMapping("/isremove")
+    public String showdelete(RedirectAttributes ra, @RequestParam int classID){
+        ra.addAttribute("DELETE",classID);
+
+        return "redirect:/FYoGa/Login/ADMIN/class";
+    }
+//@PathVariable int classID
+//    @GetMapping("/remove/{classID}")
+    @GetMapping("/remove")
+    public String removeClass(@RequestParam int classID) {
+        //classService.deleteById(classID);
+        Class aClass = classService.findById(classID);
+        aClass.setStatus(0);
+        classService.save(aClass);
+        return "redirect:/FYoGa/Login/ADMIN/class";
+    }
+
+    @GetMapping("/reStatus")
+    public String hoantac(@RequestParam int classID) {
+        //classService.deleteById(classID);
+        Class aClass = classService.findById(classID);
+        aClass.setStatus(1);
+        classService.save(aClass);
+        return "redirect:/FYoGa/Login/ADMIN/class";
+    }
+
 }

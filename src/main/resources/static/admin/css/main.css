@@ -438,7 +438,7 @@ header
 
 
 
-@media ((min-width: 992px)) {
+@media (min-width: 992px) {
     .ftco-section {
         flex: 100%;
         max-width: 100%;
@@ -3383,7 +3383,7 @@ a:focus {
 
 /* Put your high resolution backgrounds here */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
-only screen and (-moz-min-device-pixel-ratio: 1.5),
+/*only screen and (-moz-min-device-pixel-ratio: 1.5),*/
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
 
@@ -3618,3 +3618,4 @@ only screen and (min-device-pixel-ratio: 1.5) {
     align-items: center;
     height: 100px;
 }
+
