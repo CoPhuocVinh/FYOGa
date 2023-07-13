@@ -59,4 +59,10 @@ public class AccountServiceImpl implements IAccountService {
     public List<Account> findAccountByRole_RoleIDAndStatus(int roleID, int status) {
         return accountRepository.findAccountByRole_RoleIDAndStatus(roleID, status);
     }
+
+    @Override
+    public Account findById(Integer integer) {
+        Account account = accountRepository.findById(integer).orElseThrow();
+        return account;
+    }
 }

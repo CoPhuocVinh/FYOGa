@@ -96,7 +96,7 @@ public class UserController {
             accountEntity.setGender(accountDTO.getGender());
             accountEntity.setPhone(accountDTO.getPhone());
             accountEntity.setFullName(accountDTO.getFullName());
-
+            //BeanUtils.copyProperties(accountDTO, accountEntity);
             accountService.save(accountEntity);
             ra.addFlashAttribute("MSG", "The user has been update successfully.");
 

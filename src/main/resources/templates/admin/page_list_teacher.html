@@ -63,9 +63,9 @@
     <!-- Navigation info -->
     <ul id="nav-info" class="clearfix">
         <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
-        <a href="javascript:void(0)" th:if="${ROLEID == 1}">Khách hàng</a>
-        <a href="javascript:void(0)" th:if="${ROLEID == 2}">Huấn luyện viên</a>
-        <a href="javascript:void(0)" th:if="${ROLEID == 3}">Nhân viên</a>
+        <li th:if="${ROLEID == 1}"><a href="javascript:void(0)" >Khách hàng</a></li>
+        <li th:if="${ROLEID == 2}"><a href="javascript:void(0)" >Huấn luyện viên</a></li>
+        <li th:if="${ROLEID == 3}"><a href="javascript:void(0)" >Nhân viên</a></li>
     </ul>
     <!-- END Navigation info -->
 
@@ -119,7 +119,7 @@
                 <td class="text-center">
                     <div class="btn-group">
                         <!--nút sửa-->
-                        <a href="editTeacher.html" data-toggle="tooltip" title="sửa"
+                        <a th:href="@{/FYoGa/Login/ADMIN/User/CreateOrUpdate(roleID = ${ROLEID}, isEdit = 1,AccountID = *{accountID})}" data-toggle="tooltip" title="sửa"
                            class="btn btn-xs btn-success" onclick="showForm()">
                             <i class="fa fa-pencil"></i></a>
 

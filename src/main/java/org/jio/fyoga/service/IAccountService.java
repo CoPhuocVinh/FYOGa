@@ -26,4 +26,6 @@ public interface IAccountService {
     List<Account> findAccountByRole(int roleID);
 
     List<Account> findAccountByRole_RoleIDAndStatus(int roleID, int status);
+
+    Account findById(Integer integer);
 }
