@@ -86,11 +86,15 @@ public class ClassController {
             aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
             aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
             aClassEntity.setStatus(1);
-            //aClassEntity.setClassName("yoga"+);
+            aClassEntity.setClassName("yoga");
+            classService.save(aClassEntity);
+            String name = "yoga " + classService.findFirstByOrderByClassIDDesc().getClassID();
+            aClassEntity.setClassName(name);
 
         }
 
         classService.save(aClassEntity);
+
         ra.addFlashAttribute("MSG","Save successfully!!!");
 
         return "redirect:/FYoGa/Login/ADMIN/class";

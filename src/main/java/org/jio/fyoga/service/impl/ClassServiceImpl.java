@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClassServiceImpl implements IClassService {
@@ -44,4 +43,15 @@ public class ClassServiceImpl implements IClassService {
 
         return classRepository.findByStatus(status);
     }
+
+    @Override
+    public Class findFirstByOrderByCreateDayDesc() {
+        return classRepository.findFirstByOrderByCreateDayDesc();
+    }
+
+    @Override
+    public Class findFirstByOrderByClassIDDesc() {
+        return classRepository.findFirstByOrderByClassIDDesc();
+    }
+
 }
