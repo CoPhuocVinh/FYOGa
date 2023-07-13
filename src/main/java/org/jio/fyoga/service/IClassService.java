@@ -21,4 +21,6 @@ public interface IClassService {
     Class findFirstByOrderByCreateDayDesc();
 
     Class findFirstByOrderByClassIDDesc();
+
+    void deleteById(Integer integer);
 }

@@ -3401,3 +3401,19 @@ input[type=text] {
 .modal-container-edit input[type="file"] {
     margin: 5px 0;
 }
+
+#modal-login-button-re-hatha {
+    background: #62BEC8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    width: 150px;
+    height: 40px;
+    color: #fff;
+    font-size: 20px;
+    margin-left: calc(50% - 150px/2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

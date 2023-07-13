@@ -54,4 +54,8 @@ public class ClassServiceImpl implements IClassService {
         return classRepository.findFirstByOrderByClassIDDesc();
     }
 
+    @Override
+    public void deleteById(Integer integer) {
+        classRepository.deleteById(integer);
+    }
 }
