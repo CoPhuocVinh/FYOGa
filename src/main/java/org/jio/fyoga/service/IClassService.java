@@ -17,4 +17,8 @@ public interface IClassService {
 
 
     List<Class> findByStatus(int status);
+
+    Class findFirstByOrderByCreateDayDesc();
+
+    Class findFirstByOrderByClassIDDesc();
 }

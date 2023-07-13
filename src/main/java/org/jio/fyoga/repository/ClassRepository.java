@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface ClassRepository extends JpaRepository<Class, Integer> {
     List<Class> findByStatus(int status);
+
+    Class findFirstByOrderByCreateDayDesc();
+
+    Class findFirstByOrderByClassIDDesc();
 }
