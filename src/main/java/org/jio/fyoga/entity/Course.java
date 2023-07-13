@@ -41,9 +41,9 @@ public class Course {
     @JoinColumn(name = "adminID")
     private Account admin;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private Set<Package> packages;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private Set<Class> classes;
 }

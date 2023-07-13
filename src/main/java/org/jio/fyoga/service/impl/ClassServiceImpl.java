@@ -24,8 +24,9 @@ public class ClassServiceImpl implements IClassService {
     }
 
     @Override
-    public Optional<Class> findById(Integer integer) {
-        return classRepository.findById(integer);
+    public Class findById(Integer integer) {
+
+        return classRepository.findById(integer).orElseThrow();
     }
 
     @Override
@@ -36,5 +37,11 @@ public class ClassServiceImpl implements IClassService {
     @Override
     public void deleteAll() {
         classRepository.deleteAll();
+    }
+
+    @Override
+    public List<Class> findByStatus(int status) {
+
+        return classRepository.findByStatus(status);
     }
 }

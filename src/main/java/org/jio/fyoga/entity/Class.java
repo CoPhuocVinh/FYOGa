@@ -37,7 +37,7 @@ public class Class {
 //    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
 
-    @OneToMany(mappedBy = "aClassBooking",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "aClassBooking",cascade = CascadeType.ALL)
     Set<Booking> classBooking;
 
     @ManyToOne
@@ -52,7 +52,7 @@ public class Class {
     @JoinColumn(name = "courseID")
     Course course;
 
-    @OneToMany(mappedBy = "aClassAttend",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "aClassAttend",cascade = CascadeType.ALL)
     Set<Attendance> attendancesClass;
 
 }

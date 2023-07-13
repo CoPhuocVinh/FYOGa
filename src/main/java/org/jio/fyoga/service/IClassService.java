@@ -9,9 +9,12 @@ import java.util.Optional;
 public interface IClassService {
     <S extends Class> S save(S entity);
 
-    Optional<Class> findById(Integer integer);
+    Class findById(Integer integer);
 
     List<Class> findAll();
 
     void deleteAll();
+
+
+    List<Class> findByStatus(int status);
 }

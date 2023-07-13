@@ -28,4 +28,6 @@ public interface IAccountService {
     List<Account> findAccountByRole_RoleIDAndStatus(int roleID, int status);
 
     Account findById(Integer integer);
+
+    List<Account> findAll();
 }
