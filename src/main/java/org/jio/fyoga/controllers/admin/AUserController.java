@@ -8,6 +8,7 @@ package org.jio.fyoga.controllers.admin;/*  Welcome to Jio word
 */
 
 import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Role;
 import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.service.IAccountService;
@@ -102,12 +103,6 @@ public class AUserController {
             entity.setStatus(1);
         }
 
-//        Account entity = accountService.findAccountByEmail(account.getEmail());
-//        if (entity != null){
-//            ra.addFlashAttribute("MSG","Email is exist!!!");
-//            return "redirect:/FYoGa/Login/ADMIN/User/CreateOrUpdate";
-//        }
-
 
         // save
         accountService.save(entity);
@@ -116,5 +111,28 @@ public class AUserController {
 
         //return "redirect:/FYoGa/Login/ADMIN/User/CreateOrUpdate?roleID="+entity.getRole().getRoleID();
         return "redirect:/FYoGa/Login/ADMIN/User?roleID="+account.getRoleID();
+    }
+
+    @GetMapping("/isremove")
+    public String showDelete(@RequestParam int accountID,
+                             RedirectAttributes ra){
+        ra.addAttribute("Delete", accountID);
+        return "redirect:/FYoGa/Login/ADMIN/User?roleID";
+    }
+
+    @GetMapping("/remove")
+    public String removeClass(@RequestParam int accountID) {
+        Account account = accountService.findById(accountID);
+        account.setStatus(0);
+        accountService.save(account);
+        return "redirect:/FYoGa/Login/ADMIN/User?roleID="+account.getRole().getRoleID();
+    }
+
+    @GetMapping("/reStatus")
+    public String hoantac(@RequestParam int accountID) {
+        Account account = accountService.findById(accountID);
+        account.setStatus(1);
+        accountService.save(account);
+        return "redirect:/FYoGa/Login/ADMIN/User?roleID="+account.getRole().getRoleID();
     }
 }
