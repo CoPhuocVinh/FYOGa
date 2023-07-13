@@ -69,6 +69,8 @@
         <h2 class="create-header">Thêm mới lớp học</h2>
 
         <form th:action="@{/FYoGa/Login/ADMIN/class/CreateOrUpdate}" method="post" class="createClass-container" th:object="${CLASSDTO}">
+            <input type="hidden" th:field="*{isEdit}">
+            <input type="hidden" th:field="*{classID}">
             <label>Khóa học</label>
             <select name="lang" th:field="*{courseID}">
 <!--                <option value="">&#45;&#45;Hãy chọn một khóa học&#45;&#45;</option>-->
@@ -84,9 +86,9 @@
             <label>Huấn luyện viên</label>
             <select name="lang" th:field="*{teacherID}">
                 <option th:each="teach : ${ACCOUNTS}" th:value="${teach.accountID}"
-                        th:text="${teach.fullName}" th:selected="${CLASSDTO.teacherID == teach.accountID}"></option>
-
+                        th:text="${teach.fullName}" th:selected="${teach.accountID == CLASSDTO.teacherID}" ></option>
             </select><br>
+
             <label>Số lượng</label>
             <input th:field="*{quantityClass}" type="number" placeholder="Thêm số lượng học viên" required> <br>
 
