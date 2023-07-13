@@ -1,4 +1,4 @@
-package org.jio.fyoga.controllers.web;
+package org.jio.fyoga.controllers.admin;
 
 import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.service.IClassService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("/FYoGa/Login/ADMIN")
+@RequestMapping("/FYoGa/Login/ADMIN/class")
 @Controller
 public class ClassController {
     private final IClassService classService;
@@ -20,7 +20,7 @@ public class ClassController {
         this.classService = classService;
     }
 
-    @GetMapping("/class")
+    @GetMapping("")
     public String getClass(Model model) {
         List<Class> classList = classService.findAll();
         model.addAttribute("CLASSLIST", classList);

@@ -44,6 +44,8 @@
                 <form th:action="@{/FYoGa/Login/User/EditInfor}" method="post" id="myForm">
                     <div class="modal-edit-user" th:object="${USER}">
                         <input type="hidden" th:field="*{accountID}">
+                        <input type="hidden" th:field="*{roleID}">
+                        <input type="hidden" th:field="*{status}">
 
                         <label class="edit-content" >Ảnh</label>
                         <input type="file">
