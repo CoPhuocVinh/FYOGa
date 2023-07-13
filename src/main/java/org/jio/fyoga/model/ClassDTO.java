@@ -18,7 +18,9 @@ public class ClassDTO {
     int quantityClass;
     Date createDay;
     String className;
-    String teacher;
-    String staff;
-    String course;
+    int teacherID;
+    int staffID;
+    int courseID;
+
+    Boolean isEdit = false;
 }

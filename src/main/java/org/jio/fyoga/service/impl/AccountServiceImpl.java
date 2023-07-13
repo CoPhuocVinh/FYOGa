@@ -65,4 +65,9 @@ public class AccountServiceImpl implements IAccountService {
         Account account = accountRepository.findById(integer).orElseThrow();
         return account;
     }
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
 }

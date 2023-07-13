@@ -1,29 +1,99 @@
 package org.jio.fyoga.controllers.admin;
 
+import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Class;
+import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.model.AccountDTO;
+import org.jio.fyoga.model.ClassDTO;
+import org.jio.fyoga.service.IAccountService;
 import org.jio.fyoga.service.IClassService;
+import org.jio.fyoga.service.ICourseService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.Date;
 import java.util.List;
 
 @RequestMapping("/FYoGa/Login/ADMIN/class")
 @Controller
 public class ClassController {
-    private final IClassService classService;
+    @Autowired
+    private IClassService classService;
 
     @Autowired
-    public ClassController(IClassService classService) {
-        this.classService = classService;
-    }
+    private ICourseService courseService;
+    @Autowired
+    private IAccountService accountService;
 
+
+
+// /FYoGa/Login/ADMIN/class
     @GetMapping("")
     public String getClass(Model model) {
-        List<Class> classList = classService.findAll();
-        model.addAttribute("CLASSLIST", classList);
+        List<Class> classListON = classService.findByStatus(1);
+        model.addAttribute("CLASS_ON", classListON);
+
+        List<Class> classListOff = classService.findByStatus(0);
+        model.addAttribute("CLASS_OFF", classListOff);
+
         return "admin/page_list_class";
     }
+// /FYoGa/Login/ADMIN/class/CreateOrUpdate
+    @GetMapping("/CreateOrUpdate")
+    public String ShowCreateOrUpdate(@RequestParam int isEdit,
+                                     @RequestParam(name = "ClassID",required = false, defaultValue = "-1") String R_ClassID,
+                                     Model model){
+        int ClassID = Integer.parseInt(R_ClassID);
+
+        List<Course> courses = courseService.findAll();
+        List<Account> accounts = accountService.findAccountByRole(2);
+        ClassDTO classDTO = ClassDTO.builder().build();
+        // xu ly edit
+        if(isEdit == 1 && ClassID >= 0){
+            Class classEntity = classService.findById(ClassID);
+            BeanUtils.copyProperties(classEntity, classDTO);
+            classDTO.setIsEdit(true);
+        }
+
+        //xu ly CREATE
+        if(isEdit == 0){
+            classDTO.setIsEdit(false);
+        }
+        model.addAttribute("CLASSDTO", classDTO);
+        model.addAttribute("COURSES", courses);
+        model.addAttribute("ACCOUNTS", accounts);
+
+        return "admin/createnewclass";
+    }
+
+    @PostMapping("/CreateOrUpdate")
+    public String CreateOrUpdate(@ModelAttribute("CLASSDTO")ClassDTO classDTO
+            , RedirectAttributes ra){
+
+        Class aClassEntity = new Class();
+        if (classDTO.getIsEdit()){
+
+        }else {
+            //        xử lý tạo mới
+            // copy tu model sang entity
+            BeanUtils.copyProperties(classDTO, aClassEntity);
+            Date date = new Date(System.currentTimeMillis());
+            aClassEntity.setCreateDay(date);
+            aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
+            aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
+            aClassEntity.setStatus(1);
+            //aClassEntity.setClassName("yoga"+);
+
+        }
+
+        classService.save(aClassEntity);
+        ra.addFlashAttribute("MSG","Save successfully!!!");
+
+        return "redirect:/FYoGa/Login/ADMIN/class";
+    }
+
 }
