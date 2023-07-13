@@ -57,6 +57,8 @@ public class ClassController {
             Class classEntity = classService.findById(ClassID);
             BeanUtils.copyProperties(classEntity, classDTO);
             classDTO.setIsEdit(true);
+            classDTO.setTeacherID(classEntity.getTeacher().getAccountID());
+            classDTO.setCourseID(classEntity.getCourse().getCourseID());
         }
 
         //xu ly CREATE
@@ -76,7 +78,10 @@ public class ClassController {
 
         Class aClassEntity = new Class();
         if (classDTO.getIsEdit()){
-
+            aClassEntity = classService.findById(classDTO.getClassID());
+            aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
+            aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
+            aClassEntity.setQuantityClass(classDTO.getQuantityClass());
         }else {
             //        xử lý tạo mới
             // copy tu model sang entity
