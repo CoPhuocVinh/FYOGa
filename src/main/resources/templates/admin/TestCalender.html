@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <p style="color: red" th:text="${MSG}"></p>
+  <form th:action="@{/calender}" method="post">
+    <button type="submit" > Tao lich</button>
+
+  </form>
+</body>
+</html>
