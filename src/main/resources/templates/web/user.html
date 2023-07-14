@@ -89,7 +89,7 @@
                             </div>
                             <div class="class-text class-history">
                                 <h2 th:text="*{name}"></h2>
-                                <a href="/FYoGa/Login/User/ScheduleClass">Xem lịch học</a>
+                                <a th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = *{courseID})}">Xem lịch học</a>
 
                             </div>
                         </div>

@@ -9,13 +9,12 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.jio.fyoga.entity.Account;
-import org.jio.fyoga.entity.Register;
-import org.jio.fyoga.entity.Role;
+import org.jio.fyoga.entity.*;
+import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.model.AccountDTO;
-import org.jio.fyoga.service.IAccountService;
-import org.jio.fyoga.service.IRegisterService;
-import org.jio.fyoga.service.IRoleService;
+import org.jio.fyoga.model.BookingDTO;
+import org.jio.fyoga.model.ClassDTO;
+import org.jio.fyoga.service.*;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
@@ -46,6 +42,14 @@ public class UserController {
     @Autowired
     IRegisterService registerService;
 
+    @Autowired
+    ICourseService courseService;
+
+    @Autowired
+    IClassService classService;
+
+    @Autowired
+    IBookingService bookingService;
 
     public String GetStaff(Model model) {
         List<Account> accounts = accountService.findAccountByRole(3);
@@ -139,15 +143,46 @@ public class UserController {
         }
         return "web/login";
     }
-    ///FYoGa/Login/User/ScheduleClass
+    // /FYoGa/Login/User/ScheduleClass
     @GetMapping("/ScheduleClass")
-    public String ScheduleClass(HttpSession session,Model model) {
+    public String ScheduleClass(HttpSession session, Model model, @RequestParam int courseID) {
         if (MyUtil.checkAuthen(session)) {
             // xủ lý code trong đây
+            Course course = courseService.findById(courseID).orElseThrow();
+            model.addAttribute("COURSE",course);
+            List<Class> classList = classService.findClassByCourse_CourseID(courseID);
+            model.addAttribute("LISTCLASS", classList);
 
+            BookingDTO bookingDTO = BookingDTO.builder().build();
+            model.addAttribute("BOOKING",bookingDTO);
             return "web/scheduleDetail";
         }
         return "web/login";
+    }
+    // /FYoGa/Login/User/ScheduleClass/Booking
+    @PostMapping("/Booking")
+    public String booking (HttpSession session, @ModelAttribute("BOOKING") BookingDTO bookingDTO, RedirectAttributes ra){
+        Account accountEntity = (Account) session.getAttribute("USER");
+        Class classEntity = classService.findById(bookingDTO.getClassID());
+        Booking bookingEntity = new Booking();
+        if(bookingService.findByaClassBooking_ClassIDAndCustomer_AccountID(
+                bookingDTO.getClassID(),accountEntity.getAccountID())!= null){
+
+            ra.addFlashAttribute("MSG", "Bạn đăng ký không thành công vì bạn đã đăng ký lớp này");
+
+
+        }else {
+            Date date = new Date(System.currentTimeMillis());
+            bookingEntity.setBookingDate(date);
+            bookingEntity.setStatus(1);
+            bookingEntity.setCustomer(accountEntity);
+            bookingEntity.setAClassBooking(classEntity);
+            bookingService.save(bookingEntity);
+            ra.addFlashAttribute("MSG", "Bạn đã đăng ký lớp thành công !!!");
+        }
+
+
+        return "redirect:/FYoGa/Login/User/ScheduleClass?courseID="+ classEntity.getCourse().getCourseID();
     }
 }
 

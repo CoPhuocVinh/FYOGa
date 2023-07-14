@@ -58,4 +58,9 @@ public class ClassServiceImpl implements IClassService {
     public void deleteById(Integer integer) {
         classRepository.deleteById(integer);
     }
+
+    @Override
+    public List<Class> findClassByCourse_CourseID(int courseID) {
+        return classRepository.findClassByCourse_CourseID(courseID);
+    }
 }
