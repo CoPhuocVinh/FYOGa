@@ -1552,25 +1552,6 @@ a:focus {
     color: #F7CAC9;
 }
 
-.blog .blog-meta {
-    position: relative;
-    display: flex;
-    margin-bottom: 15px;
-}
-
-.blog .blog-meta p {
-    margin: 0 10px 0 0;
-    font-size: 13px;
-}
-
-.blog .blog-meta i {
-    margin-right: 5px;
-}
-
-.blog .blog-meta p:last-child {
-    margin: 0;
-}
-
 .blog .owl-nav {
     width: 150px;
     margin: 32px auto 0 auto;
