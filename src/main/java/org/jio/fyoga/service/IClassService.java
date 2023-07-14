@@ -23,4 +23,6 @@ public interface IClassService {
     Class findFirstByOrderByClassIDDesc();
 
     void deleteById(Integer integer);
+
+    List<Class> findClassByCourse_CourseID(int courseID);
 }

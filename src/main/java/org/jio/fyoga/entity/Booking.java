@@ -23,7 +23,7 @@ public class Booking {
     int bookingID;
 
     @Column(name = "booking_date")
-    Timestamp bookingDate;
+    Date bookingDate;
 
     @Column(name = "status")
     int status;
