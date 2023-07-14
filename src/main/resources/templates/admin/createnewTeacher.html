@@ -90,7 +90,7 @@
                 <div id="preview" class="circle-frame">
                     <i class="fa fa-user input-user-file"></i>
                 </div>
-                <input type="file" name="image" ><br>
+                <input type="file"  id="fileInputAvatar"><br>
 
                 <select class="form-control" th:field="*{gender}">
                     <option value="M" th:selected="${gender == 'M'}">Nam</option>
@@ -106,6 +106,23 @@
 
     </div>
 
+    <script>
+        //thay đổi avt khi mà load được hình từ máy .
+        var fileInput = document.getElementById("fileInputAvatar");
+        var preview = document.getElementById("preview");
+        fileInput.addEventListener("change", function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                preview.innerHTML = "";
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
     <style>
         input[type="radio"] {
             margin: 0;

@@ -3605,7 +3605,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .fa-circle {
     color: #00ff00;
 }
-
+.input-user-file{
+    font-size: 50px;
+}
 .date-blog-disable {
     border: 0;
     text-align: center;
@@ -3619,3 +3621,29 @@ only screen and (min-device-pixel-ratio: 1.5) {
     height: 100px;
 }
 
+.circle-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* giữ cho hình luôn ở giữa khung  */
+    width: 80px;
+    /* Điều chỉnh kích thước khung theo ý muốn */
+    height: 80px;
+    border-radius: 50%;
+    /* Tạo hình tròn */
+    border: 2px solid black;
+    /* Màu và độ dày của khung */
+    overflow: hidden;
+    /* Ẩn phần hình ảnh vượt quá khung */
+}
+.circle-frame img {
+    width: 100%;
+    /* Đảm bảo hình ảnh lấp đầy khung */
+    height: 100%;
+    object-fit: cover;
+    /* Đảm bảo hình ảnh không bị méo khi thu nhỏ */
+}
+#preview {
+    max-width: 100px;
+    max-height: 100px;
+}
