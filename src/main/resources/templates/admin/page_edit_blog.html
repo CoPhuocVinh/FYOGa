@@ -14,17 +14,7 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
-    <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
-    <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
-    <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
-    <!-- END Icons -->
+
 
     <!-- Stylesheets -->
     <!-- Bootstrap is included in its original form, unaltered -->
@@ -153,8 +143,6 @@
                                     <a href="page_list_class.html"><i class="fa fa-file"></i>Lớp học</a>
                                 </li>
 
-
-
                             </ul>
                         </li>
                         <li>
@@ -216,10 +204,7 @@
                                 <div class="col-md-12">Nội dung
 
                                     <textarea cols="20" rows="40" id="editor" name="content"></textarea>
-                                    <script>
-                                        var editor = CKEDITOR.replace('editor');
-                                        CKFinder.setupCKEditor(editor, '/ckfinder/');
-                                    </script>
+
                                 </div>
                             </div>
                         </div>
@@ -453,6 +438,10 @@
 
     <!-- Javascript code only for this page -->
     <script>
+
+            var editor = CKEDITOR.replace('editor');
+            CKFinder.setupCKEditor(editor, '/ckfinder/');
+
         $(function () {
             /* For advanced usage and examples please check out
              *  Jquery Wizard       -> http://www.thecodemine.org
