@@ -220,8 +220,8 @@
                 <div class="containerSchedule">
                     <div class="section-header-lich text-center wow zoomIn" data-wow-delay="0.1s">
                         <h2>Lịch học</h2><br>
-                        <label for="">Năm</label>
-                        <select class="calendar-day" id="option">
+                        <label >Năm</label>
+                        <select class="calendar-day" >
                             <option value="ngay">-- Chọn năm --</option>
                             <option value="ngay">2020</option>
                             <option value="ngay">2021</option>
@@ -229,8 +229,8 @@
                             <option value="ngay">2023</option>
                         </select>  
                         <br><br>
-                        <label for="">Tuần</label>
-                        <select class="calendar-day" id="option">
+                        <label >Tuần</label>
+                        <select class="calendar-day" >
                             <option value="ngay">-- Chọn tuần --</option>
                             <option value="ngay">26/06/2023 - 01/07/2023</option>
                             <option value="ngay">03/07/2023 - 08/07/2023</option>
@@ -465,7 +465,7 @@
         </div>
     </div>
     <div class="col-md-10">
-        <div id="example-fullcalendar2"></div>
+<!--        <div id="example-fullcalendar2"></div>-->
     </div>
     </div>
     <!-- END FullCalendar (Drop Events) -->
@@ -474,7 +474,7 @@
     </div>
     </div>
     <div class="col-md-10">
-        <div id="example-fullcalendar2"></div>
+<!--        <div id="example-fullcalendar2"></div>-->
     </div>
     </div>
     <!-- END FullCalendar (Drop Events) -->
@@ -664,78 +664,57 @@
 
     <!-- Excanvas for canvas support on IE8 -->
     <!--[if lte IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
-    <style>
-        #formCalendarContainer {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #f1f1f1;
-            padding: 20px;
-            box-shadow: rgb(152, 152, 152, 0.6);
-            border: rgba(0, 0, 0, 0.6) solid 1px;
-        }
 
-        #registrationForm2 {
-            width: 300px;
-            margin: 0 auto;
-        }
+<!--    bị đóng băng rồi nen đóng băng lại luôn  -->
+<!--    <style>-->
+<!--        #formCalendarContainer {-->
+<!--            display: none;-->
+<!--            position: fixed;-->
+<!--            top: 50%;-->
+<!--            left: 50%;-->
+<!--            transform: translate(-50%, -50%);-->
+<!--            background-color: #f1f1f1;-->
+<!--            padding: 20px;-->
+<!--            box-shadow: rgb(152, 152, 152, 0.6);-->
+<!--            border: rgba(0, 0, 0, 0.6) solid 1px;-->
+<!--        }-->
 
-        #registrationForm label,
-        #registrationForm input[type="text"],
-        #registrationForm input[type="number"],
-        #registrationForm input[type="submit"],
-        #registrationForm2 label,
-        #registrationForm2 input[type="text"],
-        #registrationForm2 input[type="number"],
-        #registrationForm2 input[type="submit"],
-        #registrationForm2 input[type="date"],
-        #registrationForm2 input[type="email"] {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-        }
+<!--        #registrationForm2 {-->
+<!--            width: 300px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        #registrationForm label,-->
+<!--        #registrationForm input[type="text"],-->
+<!--        #registrationForm input[type="number"],-->
+<!--        #registrationForm input[type="submit"],-->
+<!--        #registrationForm2 label,-->
+<!--        #registrationForm2 input[type="text"],-->
+<!--        #registrationForm2 input[type="number"],-->
+<!--        #registrationForm2 input[type="submit"],-->
+<!--        #registrationForm2 input[type="date"],-->
+<!--        #registrationForm2 input[type="email"] {-->
+<!--            display: block;-->
+<!--            margin-bottom: 10px;-->
+<!--            width: 100%;-->
+<!--        }-->
 
 
 
 
 
-        #class,
-        #course,
-        #teacher,
-        #quantity,
-        #email,
-        #fullname,
-        #teacher2,
-        #quantity2,
-        #idname,
-        #numberphone {
-            border: rgba(0, 0, 0, 0.6) solid 1px;
-        }
+<!--        #registrationForm input[type="submit"],-->
+<!--        #registrationForm2 input[type="submit"] {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
 
-        #save,
-        #save2 {
-            display: flex;
-            justify-content: center;
+<!--    </style>-->
 
-            align-items: center;
-        }
 
-        #registrationForm input[type="submit"],
-        #registrationForm2 input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        #closeButton,
-        #closeButton2 {
-            transform: translateX(00%);
-        }
-    </style>
     <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
