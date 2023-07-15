@@ -18,13 +18,19 @@ import org.jio.fyoga.service.*;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,13 +99,21 @@ public class UserController {
     }
 
     @PostMapping("/EditInfor")
-    public String EditUser(HttpSession session, RedirectAttributes ra,@ModelAttribute AccountDTO accountDTO) {
+    public String EditUser(HttpSession session, RedirectAttributes ra,@ModelAttribute AccountDTO accountDTO
+            , @RequestParam("file") MultipartFile file) {
         if (MyUtil.checkAuthen(session)) {
             // xủ lý code trong đây
             Account accountEntity = (Account) session.getAttribute("USER");
             accountEntity.setGender(accountDTO.getGender());
             accountEntity.setPhone(accountDTO.getPhone());
             accountEntity.setFullName(accountDTO.getFullName());
+
+            try {
+                accountService.saveIMGAccount(file, accountEntity);
+            } catch (IOException e) {
+                // Xử lý lỗi nếu cần
+            }
+
             //BeanUtils.copyProperties(accountDTO, accountEntity);
             accountService.save(accountEntity);
             ra.addFlashAttribute("MSG", "The user has been update successfully.");
@@ -183,6 +197,20 @@ public class UserController {
 
 
         return "redirect:/FYoGa/Login/User/ScheduleClass?courseID="+ classEntity.getCourse().getCourseID();
+    }
+
+    public ResponseEntity<?> downloadPngCourse(@RequestParam(defaultValue = "") int accountID) {
+        byte[] pngData = accountService.getIMGById(accountID);
+        if (pngData != null) {
+            ByteArrayResource resource = new ByteArrayResource(pngData);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=image.png")
+                    .contentType(MediaType.IMAGE_PNG)
+                    .body( resource);
+        }
+        // Xử lý trường hợp tệp tin không tồn tại
+        return ResponseEntity.notFound().build();
     }
 }
 
