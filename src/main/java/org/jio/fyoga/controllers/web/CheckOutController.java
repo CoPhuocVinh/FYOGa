@@ -65,8 +65,8 @@ public class CheckOutController {
         Account account = (Account) session.getAttribute("USER");
         Optional<Package> packageEntiry = packageService.findById(packageID);
         float price_discount = packageEntiry.get().getPrice() * (100 - packageEntiry.get().getPercentDiscount())/100;
-        int slotAvailable = packageEntiry.get().getSlotOnMonth()*packageEntiry.get().getTimeOnMonth();
-        int timeAvailable = packageEntiry.get().getTimeOnMonth();
+        // int slotAvailable = packageEntiry.get().getSlotOnMonth()*packageEntiry.get().getTimeOnMonth();
+        //int timeAvailable = packageEntiry.get().getTimeOnMonth();
 
         Date date = new Date(System.currentTimeMillis());
         RegisterDTO registerDTO = RegisterDTO.builder()
@@ -75,11 +75,11 @@ public class CheckOutController {
                 .status(2)
                 .priceOriginal(packageEntiry.get().getPrice())
                 .priceDiscount(price_discount)
-                .slotAvailable(slotAvailable)
-                .timeAvailable(timeAvailable)
-                .slotUsed(slotAvailable)
-                .registeredDate(date)
-                .weekUsed(timeAvailable*4)
+//                .slotAvailable(slotAvailable)
+//                .timeAvailable(timeAvailable)
+//                .slotUsed(slotAvailable)
+//                .registeredDate(date)
+//                .weekUsed(timeAvailable*4)
                 .build();
 
         Register registerEntity = new Register();

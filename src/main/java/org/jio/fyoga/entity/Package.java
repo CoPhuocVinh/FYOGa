@@ -32,8 +32,8 @@ public class Package {
     @Column(name = "slot_on_month")
     int slotOnMonth;
 
-    @Column(name = "time_on_month")
-    int TimeOnMonth;
+//    @Column(name = "time_on_month")
+//    int TimeOnMonth;
 
     int defaultID;
 
