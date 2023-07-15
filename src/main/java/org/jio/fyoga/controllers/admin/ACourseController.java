@@ -132,4 +132,12 @@ public class ACourseController {
         // Xử lý trường hợp tệp tin không tồn tại
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/delete")
+    public String deleteCourse(@RequestParam int courseID) {
+        courseService.deleteById(courseID);
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
+
 }
