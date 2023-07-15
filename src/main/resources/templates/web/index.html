@@ -71,8 +71,7 @@
                         <div class="class-img package-program ftco-animate">
                             <a th:href="@{/FYoGa/Course(name=*{name})}"
                                class="d-flex  justify-content-center  align-items-center"
-                               th:style="'background-image: url(/web/'+*{img}+'); background-size: cover;'">
-                                <!--                                   style="background-image: url(web/img/class-1.jpg); background-size: cover;">-->
+                               th:style="'background-image: url(http://localhost:8084/FYoGa/Login/ADMIN/Course/downloads-png?courseID=' + *{courseID}+'); background-size: cover;'">                                <!--                                   style="background-image: url(web/img/class-1.jpg); background-size: cover;">-->
                                 <div class="text p-5 text-center">
                                     <h5 th:text="*{name}"></h5>
                                     <p th:text="*{summary}"></p>

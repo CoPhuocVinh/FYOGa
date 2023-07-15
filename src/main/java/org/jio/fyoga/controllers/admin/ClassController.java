@@ -1,5 +1,6 @@
 package org.jio.fyoga.controllers.admin;
 
+import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Course;
@@ -73,7 +74,7 @@ public class ClassController {
     }
 
     @PostMapping("/CreateOrUpdate")
-    public String CreateOrUpdate(@ModelAttribute("CLASSDTO")ClassDTO classDTO
+    public String CreateOrUpdate(HttpSession session, @ModelAttribute("CLASSDTO")ClassDTO classDTO
             , RedirectAttributes ra){
 
         Class aClassEntity = new Class();
@@ -95,6 +96,8 @@ public class ClassController {
             classService.save(aClassEntity);
             String name = "yoga " + classService.findFirstByOrderByClassIDDesc().getClassID();
             aClassEntity.setClassName(name);
+            Account account = (Account) session.getAttribute("USER");
+            aClassEntity.setStaff(account);
 
         }
 
@@ -130,5 +133,7 @@ public class ClassController {
         classService.save(aClass);
         return "redirect:/FYoGa/Login/ADMIN/class";
     }
+
+
 
 }
