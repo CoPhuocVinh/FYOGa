@@ -70,8 +70,8 @@
                         <div class="dash-tile-options">
                             <div class="btn-group">
 
-                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
-                                   title="Đóng"><i class="fa fa-close"></i></a>
+                                <a th:href="@{/FYoGa/Login/ADMIN/Course/delete(courseID=${COURSE.courseID})}" class="btn btn-default" data-toggle="tooltip" title="Đóng"><i class="fa fa-close"></i></a>
+
 
                                 <a th:href="@{/FYoGa/Login/ADMIN/Course/CreateOrEdit(isEdit = 1, CourseID = *{courseID})}" class="btn btn-default" data-toggle="tooltip"
                                    title="Chỉnh sửa"><i class="fa fa-cog"></i></a>

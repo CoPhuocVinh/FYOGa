@@ -23,6 +23,11 @@ public class CourseServiceImpl implements ICourseService {
     @Autowired
     CourseRepository courseRepository;
 
+    @Override
+    public void deleteById(Integer integer) {
+        courseRepository.deleteById(integer);
+    }
+
     public CourseServiceImpl(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
