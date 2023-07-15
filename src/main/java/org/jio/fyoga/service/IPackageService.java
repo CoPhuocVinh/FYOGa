@@ -17,4 +17,6 @@ public interface IPackageService {
     List<Package> findAllByCourse_CourseID( int CourseID);
 
     Optional<Package> findById(Integer integer);
+
+    List<Package> findAll();
 }

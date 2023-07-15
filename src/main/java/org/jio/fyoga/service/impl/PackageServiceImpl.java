@@ -35,4 +35,9 @@ public class PackageServiceImpl implements IPackageService {
     public Optional<Package> findById(Integer integer) {
         return packageRepository.findById(integer);
     }
+
+    @Override
+    public List<Package> findAll() {
+        return packageRepository.findAll();
+    }
 }
