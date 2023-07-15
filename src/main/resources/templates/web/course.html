@@ -44,7 +44,8 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="hero-image">
-                        <img th:src="'/web/' + *{img}" alt="Hatha Image">
+                        <img class="input-user-file" th:src="@{/FYoGa/Login/ADMIN/Course/downloads-png(courseID=*{courseID})}" alt="">
+
                     </div>
                 </div>
             </div>

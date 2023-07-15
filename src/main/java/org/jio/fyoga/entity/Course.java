@@ -34,8 +34,9 @@ public class Course {
     @Column(name = "course_name", columnDefinition = "nvarchar(50) not null")
     private String name;
 
-    @Column(name = "img", columnDefinition = "nvarchar(MAX)")
-    private String img;
+    @Column(name = "img")
+    @Lob
+    private byte[] img;
 
     @ManyToOne
     @JoinColumn(name = "adminID")

@@ -23,7 +23,9 @@ public class CourseDTO {
 
     private String name;
 
-    private String img;
+    private byte[] img;
     private int AdminID;
+
+    private Boolean isEdit = false;
 
 }

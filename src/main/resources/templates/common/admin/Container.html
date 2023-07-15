@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
   <div th:fragment="page-container" id="page-container">
     <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
     <header th:fragment="navbar_navbar_inverse" class="navbar navbar-inverse">
@@ -265,7 +266,7 @@
                   <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}"><i class="fa fa-users"></i>Khách hàng</a>
                 </li>
                 <li>
-                  <a href="page_form_validation.html"><i class="fa fa-certificate"></i>Khóa học</a>
+                  <a href="/FYoGa/Login/ADMIN/Course"><i class="fa fa-certificate"></i>Khóa học</a>
                 </li>
                 <li>
                   <a th:href="@{/FYoGa/Login/ADMIN/class}"><i class="fa fa-file"></i>Lớp học</a>
