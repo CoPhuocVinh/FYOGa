@@ -15,5 +15,6 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
 
     Class findFirstByOrderByClassIDDesc();
 
+    List<Class> findClassByCourse_CourseID(int courseID);
 
 }

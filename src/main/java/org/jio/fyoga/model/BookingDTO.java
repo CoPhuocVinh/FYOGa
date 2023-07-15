@@ -3,6 +3,7 @@ package org.jio.fyoga.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @AllArgsConstructor
@@ -14,8 +15,9 @@ import java.sql.Timestamp;
 
 public class BookingDTO {
     int bookingID;
-    Timestamp bookingDate;
+    Date bookingDate;
     int status;
-    String customer;
-    String aClassBooking;
+    int customerID;
+    int classID;
+
 }

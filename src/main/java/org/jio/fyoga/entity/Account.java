@@ -45,8 +45,9 @@ public class Account implements Serializable {
     @Column(name = "phone", columnDefinition = "char(15)")
     private String phone;
 
-    @Column(name = "avatar", columnDefinition = "nvarchar(MAX)")
-    private String avatar;
+    @Column(name = "avatar")
+    @Lob
+    private byte[] avatar;
 
     @Column(name = "gender", columnDefinition = "char(5)")
     private String gender;
