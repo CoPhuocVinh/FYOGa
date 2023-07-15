@@ -351,7 +351,7 @@
                  data-wow-delay="0.0s">
                 <div class="team-item">
                     <div class="team-img">
-                        <img th:src="'/web/' + *{avatar}" alt="Image">
+                        <img th:src="@{/FYoGa/Login/User/downloads-png(accountID=*{accountID})}" alt="ImageHLV">
                     </div>
                     <div class="team-text">
                         <h2 th:text="*{fullName}"></h2>

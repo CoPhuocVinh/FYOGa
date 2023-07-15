@@ -41,7 +41,7 @@
             <p style="color: red" th:text="${MSG}"></p>
 
             <div class="modal-body-edit">
-                <form th:action="@{/FYoGa/Login/User/EditInfor}" method="post" id="myForm">
+                <form th:action="@{/FYoGa/Login/User/EditInfor}" method="post" id="myForm" enctype="multipart/form-data">
                     <div class="modal-edit-user" th:object="${USER}">
                         <input type="hidden" th:field="*{accountID}">
                         <input type="hidden" th:field="*{roleID}">

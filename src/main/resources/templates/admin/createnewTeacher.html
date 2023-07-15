@@ -68,7 +68,7 @@
             <h2 class="create-header" th:if="${ROLEID == 3}">Thêm mới Nhân viên</h2>
 
 
-            <form th:action="@{/FYoGa/Login/ADMIN/User/CreateOrUpdate}" method="post" class="createClass-container" th:object="${ACCOUNT}">
+            <form th:action="@{/FYoGa/Login/ADMIN/User/CreateOrUpdate}" method="post" class="createClass-container" th:object="${ACCOUNT}" enctype="multipart/form-data">
                 <p style="color: red" th:text="${MSG}"></p>
                 <input  th:field="*{accountID}" type="hidden">
                 <input  th:field="*{roleID}" type="hidden">
@@ -88,9 +88,9 @@
 
                 <label ></label>
                 <div id="preview" class="circle-frame">
-                    <i class="fa fa-user input-user-file"></i>
+                    <img class="input-user-file" th:src="@{/FYoGa/Login/User/downloads-png(accountID=*{accountID})}" alt="">
                 </div>
-                <input type="file" name="image" id="fileInputAvatar" ><br>
+                <input type="file" name="file" id="fileInputAvatar" ><br>
 
                 <select class="form-control" th:field="*{gender}">
                     <option value="M" th:selected="${gender == 'M'}">Nam</option>

@@ -18,8 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -47,13 +49,16 @@ public class AUserController {
 
     // /FYoGa/Login/ADMIN/User/CreateOrUpdate
     @GetMapping("/CreateOrUpdate")
-    public String ShowUserOrUpdate(@RequestParam int roleID,
-                               @RequestParam int isEdit,
-                               @RequestParam(name = "AccountID",required = false, defaultValue = "-1") String R_AccountID,
-                               Model model) {
+    public String ShowUserOrUpdate(@RequestParam int roleID
+            , @RequestParam int isEdit
+            , @RequestParam(name = "AccountID",required = false,
+            defaultValue = "-1") String R_AccountID, Model model) {
+
         int AccountID = Integer.parseInt(R_AccountID);
         System.out.println(AccountID);
         AccountDTO account = AccountDTO.builder().build();
+
+
 
         //xu ly update
         if(isEdit == 1 && AccountID >= 0){
@@ -61,6 +66,7 @@ public class AUserController {
             BeanUtils.copyProperties(accountEntity, account);
             account.setIsEdit(true);
             account.setRoleID(roleID);
+
 
         }
         //xu ly CREATE
@@ -82,7 +88,8 @@ public class AUserController {
 
     // /FYoGa/Login/ADMIN/User/CreateOrUpdate
     @PostMapping("/CreateOrUpdate")
-    public String UserOrUpdate (@ModelAttribute("ACCOUNT")AccountDTO account, RedirectAttributes ra){
+    public String UserOrUpdate (@ModelAttribute("ACCOUNT")AccountDTO account, RedirectAttributes ra
+            , @RequestParam("file") MultipartFile file){
         Account entity = new Account();
         if(account.getIsEdit()){
             entity = accountService.findById(account.getAccountID());
@@ -101,6 +108,12 @@ public class AUserController {
             Role roleEntity = roleService.findRoleByRoleID(account.getRoleID());
             entity.setRole(roleEntity);
             entity.setStatus(1);
+        }
+
+        try {
+            accountService.saveIMGAccount(file, entity);
+        } catch (IOException e) {
+            // Xử lý lỗi nếu cần
         }
 
 

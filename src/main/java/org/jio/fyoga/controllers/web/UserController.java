@@ -199,6 +199,7 @@ public class UserController {
         return "redirect:/FYoGa/Login/User/ScheduleClass?courseID="+ classEntity.getCourse().getCourseID();
     }
 
+    @RequestMapping("/downloads-png")
     public ResponseEntity<?> downloadPngCourse(@RequestParam(defaultValue = "") int accountID) {
         byte[] pngData = accountService.getIMGById(accountID);
         if (pngData != null) {
