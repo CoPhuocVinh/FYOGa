@@ -72,7 +72,7 @@
                     <label>Tên học viên</label>
                     <input type="text" name="firstname" th:value="${session.USER.fullName}" readonly>
                     <label>Phương thức thanh toán</label>
-                    <input type="text" name="lastname" value="Thanh toán tại quầy" readonly>
+                    <input type="text" name="lastname" th:value="${TYPEPAYING}" readonly>
                     <br>
 
                     <button class="btn" type="submit" id="openModalButtonRegister">Xác nhận</button>

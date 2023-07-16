@@ -40,7 +40,10 @@ public class CheckOutController {
     IDiscountService discountService;
 
     @GetMapping("")
-    public String ShowCheckOut(HttpSession session, @RequestParam int discountID, Model model){
+    public String ShowCheckOut(HttpSession session
+            , @RequestParam int discountID, Model model
+            , @RequestParam int typePaying){
+
         String url = "web/checkoutCourse";
         Account account = (Account) session.getAttribute("USER");
 
@@ -49,12 +52,13 @@ public class CheckOutController {
             session.setAttribute("CHECKOUTING", discountID);
             url = "redirect:/FYoGa/Login";
         }
-        Optional<Discount> discountEntity = discountService.findById(discountID);
-//        PackageDTO packageDTO = new PackageDTO();
-//        BeanUtils.copyProperties(packageEntiry, packageDTO);
-//        float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
-//        packageDTO.setPriceDiscount(priceDiscount);
-        model.addAttribute("PAYING",discountEntity);
+        if(typePaying == 0 ){
+            Optional<Discount> discountEntity = discountService.findById(discountID);
+            model.addAttribute("PAYING",discountEntity);
+            model.addAttribute("TYPEPAYING", "Thanh toán tại quầy");
+        }else {
+
+        }
 
         // xu ly register thanh cong
         String SUCCESS = (String) session.getAttribute("SUCCESS");
@@ -98,7 +102,7 @@ public class CheckOutController {
         registerService.save(registerEntity);
         System.out.println("register thành công");
         session.setAttribute("SUCCESS","SUCCESS");
-        return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID;
+        return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID+"&typePaying=0";
     }
 
 
