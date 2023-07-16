@@ -101,7 +101,7 @@
             </div>
         </form>
 
-        <a href="/FYoGa/Login/User/ScheduleClass" id="modal-login-button-re-hatha" type="submit">
+        <a th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = ${PAYING.get().getAPackage().getCourse().getCourseID()})}" id="modal-login-button-re-hatha" type="submit">
             Đặt lịch
         </a>
 
