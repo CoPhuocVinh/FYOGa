@@ -72,9 +72,15 @@ public class CheckOutController {
 
         // xu ly register thanh cong
         String SUCCESS = (String) session.getAttribute("SUCCESS");
+        String FAIL = (String) session.getAttribute("FAIL");
+
         if (SUCCESS != null){
             model.addAttribute("SUCCESS",SUCCESS);
             session.removeAttribute("SUCCESS");
+        }
+        if (FAIL != null){
+            model.addAttribute("FAIL",FAIL);
+            session.removeAttribute("FAIL");
         }
         return url;
     }
@@ -257,15 +263,13 @@ public class CheckOutController {
             return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID()+"&typePaying=1";
 
         }else {
-            model.addAttribute("SUCCESS","Bạn đã đăng kí và thanh toán khóa học thất bại");
-            session.removeAttribute("SUCCESS");
+            session.setAttribute("SUCCESS","Bạn đã đăng kí và thanh toán khóa học thất bại");
+            session.setAttribute("FAIL","Bạn đã đăng kí và thanh toán khóa học thất bại");
+            return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID()+"&typePaying=1";
 
         }
 
 
-
-
-        return  "";
     }
 
 
