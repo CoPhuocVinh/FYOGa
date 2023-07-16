@@ -66,9 +66,9 @@
             <div class="payment-info">
                 <h3>Thông tin khách hàng</h3>
 
-                <form th:action="@{/FYoGa/Course/PackageCheckOut/Checkout}" method="post">
+                <form th:action="@{/FYoGa/Course/PackageCheckOut/Checkout}" th:object="${REGISTER}" method="post">
                     <input type="hidden" name="discountID" th:value="${PAYING.get().getDiscountID()}">
-
+                    <input type="hidden" th:field="*{typePaying}">
                     <label>Tên học viên</label>
                     <input type="text" name="firstname" th:value="${session.USER.fullName}" readonly>
                     <label>Phương thức thanh toán</label>
@@ -91,12 +91,12 @@
     <div class="modal-container-schedule">
         <span class="close" id="myButton"><a>&times;</a></span>
         <header class="modal-header-register">
-            <img src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">
+<!--            <img src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">-->
         </header>
 
         <form action="#">
             <div class="modal-body-schedule">
-                <h3 class="mo">Bạn đã đăng kí khóa học thành công</h3>
+                <h3 th:text="${SUCCESS}" class="mo">Bạn đã đăng kí khóa học thành công</h3>
                 <h5 class="mo">Vui lòng xem lịch học để đăng ký lớp</h5>
             </div>
         </form>

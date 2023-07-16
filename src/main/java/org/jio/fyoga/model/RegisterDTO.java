@@ -22,5 +22,6 @@ public class RegisterDTO {
     int slotUsed;
     int weekUsed;
     int customerID;
-    int packageID;
+    int aDiscountID;
+    int typePaying;
 }
