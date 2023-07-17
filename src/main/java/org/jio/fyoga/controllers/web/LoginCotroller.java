@@ -10,9 +10,11 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.model.MonthlyTotal;
 import org.jio.fyoga.repository.CourseRepository;
 import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IAccountService;
+import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ import java.util.Map;
 public class LoginCotroller {
     @Autowired
     IAccountService accountService;
+    @Autowired
+    IRegisterService registerService;
 
     @RequestMapping("")
     public String showLoginFYoGa(HttpSession session) {
@@ -114,10 +118,15 @@ public class LoginCotroller {
     }
 
     @GetMapping("/ADMIN")
-    public String showADMIN(HttpSession session) {
+    public String showADMIN(HttpSession session , Model model) {
         Account account = (Account) session.getAttribute("USER");
-        if (account != null && account.getRole().getRoleID() == 4)
+        if (account != null && account.getRole().getRoleID() == 4){
+            List<MonthlyTotal> monthlyTotalList = registerService.getMonthlyRegisterAmount();
+            model.addAttribute("monthlyTotals", monthlyTotalList);
             return "admin/admin";
+        }
+
+
         else
             return "redirect:/";
     }

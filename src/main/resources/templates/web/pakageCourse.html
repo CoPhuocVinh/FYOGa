@@ -81,17 +81,17 @@
                     </div>
 
                     <div class="payments-down">
-                        <a class="box-pay" th:href="    @{/FYoGa/Course/PackageCheckOut(discountID=*{discountID})}">
+                        <a class="box-pay" th:href="@{/FYoGa/Course/PackageCheckOut(discountID=*{discountID},typePaying = 0)}">
 <!--                        onclick="checkoutPage('/FYoGa/Course/PackageCheckOut')"-->
 <!--                            <input type="hidden" name="packID" th:value="*{packageID}">-->
                              <h6 style="font-weight: 600;">Thanh toán tại quầy</h6>
                         </a>
-                        <div class="box-pay">
+                        <a th:href="@{/FYoGa/Course/PackageCheckOut(discountID=*{discountID},typePaying = 1)}" class="box-pay">
                             <h6 style="font-weight: 600;">Thanh toán VNPay</h6>
                             <img style="height: 24px; width: 35px;"
                                 src="https://admin.money24h.vn/wp-content/uploads/2021/07/NCB-la-ngan-hang-gi.jpeg"
                                 alt="ncbbank">
-                        </div>
+                        </a>
                     </div>
                 </div>
 
