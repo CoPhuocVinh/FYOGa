@@ -225,29 +225,50 @@
         </div>
         <!-- END Row 1 -->
 
-        <!-- Row 2 -->
+<!--        &lt;!&ndash; Row 2 &ndash;&gt;-->
+<!--        <div class="row">-->
+<!--            &lt;!&ndash; Column 1 of Row 2 &ndash;&gt;-->
+<!--            <div class="col-sm-12">-->
+<!--                &lt;!&ndash; Statistics Tile &ndash;&gt;-->
+<!--                <div class="dash-tile dash-tile-2x">-->
+<!--                    <div class="dash-tile-header">-->
+<!--                        <div class="dash-tile-options">-->
+<!--                            <div id="example-advanced-daterangepicker" class="btn btn-default">-->
+<!--                                <i class="fa fa-calendar"></i>-->
+<!--                                <span></span>-->
+<!--                                <b class="caret"></b>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <i class="fa fa-bar-chart-o"></i>-->
+<!--                    </div>-->
+<!--                    <div class="dash-tile-content">-->
+<!--                        <div id="dash-example-stats" class="dash-tile-content-inner"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; END Statistics Tile &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; END Column 1 of Row 2 &ndash;&gt;-->
+<!--        </div>-->
+
         <div class="row">
-            <!-- Column 1 of Row 2 -->
-            <div class="col-sm-12">
-                <!-- Statistics Tile -->
-                <div class="dash-tile dash-tile-2x">
-                    <div class="dash-tile-header">
-                        <div class="dash-tile-options">
-                            <div id="example-advanced-daterangepicker" class="btn btn-default">
-                                <i class="fa fa-calendar"></i>
-                                <span></span>
-                                <b class="caret"></b>
-                            </div>
-                        </div>
-                        <i class="fa fa-bar-chart-o"></i>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        Đăng ký hàng tháng
                     </div>
-                    <div class="dash-tile-content">
-                        <div id="dash-example-stats" class="dash-tile-content-inner"></div>
-                    </div>
+                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                 </div>
-                <!-- END Statistics Tile -->
             </div>
-            <!-- END Column 1 of Row 2 -->
+<!--            <div class="col-xl-6">-->
+<!--                <div class="card mb-4">-->
+<!--                    <div class="card-header">-->
+<!--                        <i class="fas fa-chart-bar me-1"></i>-->
+<!--                        Bar Chart Example-->
+<!--                    </div>-->
+<!--                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <!-- END Row 2 -->
         <!-- END Tiles -->
@@ -273,6 +294,25 @@
     <script src="/admin/js/main.js"></script>
     <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
     <script src="/admin/js/vendor/modernizr-respond.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <script th:inline="javascript">
+        var chart = /*[[${monthlyTotals}]]*/ "";
+    </script>
+    <script src="/admin/assets/demo/chart-area-demo.js"></script>
+    <th:block>
+        <script th:inline="javascript">
+            var chart = /*[[${monthlyTotalsUser}]]*/ "";
+        </script>
+        <script src="/admin/assets/demo/chart-bar-demo.js"></script>
+    </th:block>
+<!--    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->
+
 </body>
 
 </html>

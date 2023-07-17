@@ -8,11 +8,13 @@ package org.jio.fyoga.service.impl;/*  Welcome to Jio word
 */
 
 import org.jio.fyoga.entity.Register;
+import org.jio.fyoga.model.MonthlyTotal;
 import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,7 +41,17 @@ public class RegisterServiceImpl implements IRegisterService {
         return registerRepository.findByCustomer_AccountIDAndStatus(AccountID, status);
     }
 
-
-
-
+    @Override
+    public List<MonthlyTotal> getMonthlyRegisterAmount() {
+        List<Object[]> results = registerRepository.getMonthlyRegisterAmount();
+        List<MonthlyTotal> monthlyTotalList = new ArrayList<>();
+        for (Object[] result : results) {
+            Integer month = (Integer) result[0];
+            System.out.println(month);
+            double totalAmount = (double) result[1];
+            System.out.println(totalAmount);
+            monthlyTotalList.add(new MonthlyTotal(month, totalAmount));
+        }
+        return monthlyTotalList;
+    }
 }
