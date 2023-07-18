@@ -15,6 +15,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -54,15 +59,21 @@ public class WebSecurityConfig {
                 ) .oauth2Login((oauth2) -> oauth2 // Cấu hình xác thực OAuth2
                         //.loginPage("/login")
                         .permitAll()
+
                 )
 
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
+
                 )
-                .logout((logout) -> logout.permitAll());
-
-
+                .logout((logout) -> logout.permitAll()
+                        .logoutUrl("/FYoGa/Logout") // Đường dẫn logout
+                        .logoutSuccessUrl("/") // Đường dẫn sau khi đăng xuất thành công
+                        .clearAuthentication(true) // Xóa thông tin xác thực
+                        .invalidateHttpSession(true) // Vô hiệu hóa phiên làm việc);
+                );
         return httpSecurity.build();
     }
+
 }

@@ -7,6 +7,8 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
     Jio: I wish you always happy with coding <3
 */
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Course;
@@ -14,6 +16,8 @@ import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.service.IAccountService;
 import org.jio.fyoga.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,9 +58,20 @@ public class HomepageController {
     //xu ly COURSE
 
     @RequestMapping("/FYoGa/Logout")
-    public String Logout(HttpSession session) {
-
-        session.removeAttribute("USER");
+    public String Logout(HttpSession session,
+    HttpServletRequest request, Authentication authentication) {
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, null, authentication);
+        }
+        try {
+            if (session != null && !session.isNew()) {
+                session.removeAttribute("USER");
+            }
+        } catch (IllegalStateException e) {
+            // Session already invalidated
+            // Handle the exception as needed
+            // For example, you can log the exception or perform any other desired action
+        }
         return "redirect:/";
     }
 

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -153,12 +154,21 @@ public class LoginCotroller {
         String email = user.getAttribute("email");
         Role roleEntity = roleService.findRoleByRoleID(1);
 
-        Account account = Account.builder()
-                .fullName(name)
-                .email(email)
-                .role(roleEntity)
-                .build();
-        session.setAttribute("USER", account);
+        Account accountGoogle = accountService.findAccountByEmail(email);
+        if (accountGoogle == null){
+            Date date = new Date(System.currentTimeMillis());
+            accountGoogle = Account.builder()
+                    .fullName(name)
+                    .email(email)
+                    .role(roleEntity)
+                    .acceptedDate(date)
+                    .status(1)
+                    .build();
+
+            accountService.save(accountGoogle);
+        }
+
+        session.setAttribute("USER", accountGoogle);
         return "redirect:/FYoGa/Login/User";
     }
 
