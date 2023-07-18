@@ -21,6 +21,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "Account")
+@Builder
 public class Account implements Serializable {
 
 
