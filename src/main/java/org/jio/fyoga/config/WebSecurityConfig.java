@@ -47,13 +47,21 @@ public class WebSecurityConfig {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
                         //.requestMatchers("/", "/home").permitAll()
+                        .requestMatchers("/FYoGa/Login/LoginGoogle").authenticated()
                         .anyRequest().permitAll()
+
+
+                ) .oauth2Login((oauth2) -> oauth2 // Cấu hình xác thực OAuth2
+                        //.loginPage("/login")
+                        .permitAll()
                 )
+
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
+
 
         return httpSecurity.build();
     }

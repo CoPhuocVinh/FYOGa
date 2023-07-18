@@ -10,13 +10,17 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.entity.Role;
 import org.jio.fyoga.model.MonthlyTotal;
 import org.jio.fyoga.repository.CourseRepository;
 import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IAccountService;
 import org.jio.fyoga.service.IRegisterService;
+import org.jio.fyoga.service.IRoleService;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -35,6 +39,9 @@ public class LoginCotroller {
     IAccountService accountService;
     @Autowired
     IRegisterService registerService;
+    @Autowired
+    IRoleService roleService;
+
 
     @RequestMapping("")
     public String showLoginFYoGa(HttpSession session) {
@@ -140,7 +147,20 @@ public class LoginCotroller {
             return "redirect:/";
     }
 
+    @GetMapping("/LoginGoogle")
+    public String loginG(Model model, @AuthenticationPrincipal OAuth2User user, HttpSession session){
+        String name = user.getAttribute("name");
+        String email = user.getAttribute("email");
+        Role roleEntity = roleService.findRoleByRoleID(1);
 
+        Account account = Account.builder()
+                .fullName(name)
+                .email(email)
+                .role(roleEntity)
+                .build();
+        session.setAttribute("USER", account);
+        return "redirect:/FYoGa/Login/User";
+    }
 
 
 
