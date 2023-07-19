@@ -2439,7 +2439,7 @@ p.time-sche {
     border-radius: 50px;
     width: 150px;
     height: 40px;
-    margin-top: 25px;
+    margin-top: 10px;
     color: #fff;
     font-size: 20px;
     margin-left: calc(50% - 150px/2);
@@ -2462,7 +2462,11 @@ p.time-sche {
     justify-content: center;
 }
 
-
+.modal-loginG-but{
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 0 0;
+}
 
 .modal-register-but {
     display: flex;
