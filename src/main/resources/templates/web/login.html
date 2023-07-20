@@ -40,6 +40,8 @@
             </header>
 
             <div class="modal-body">
+                <p style="color: red" th:text="${MSG}"></p>
+
                 <form th:action="@{/FYoGa/Login/CheckLoginFYoGa}" method="post" id="myForm">
                     <div class="modal-login-user">
                         <input name="email" th:value="${EMAIL}" class="modal-input" id="txtlogin" type="email" placeholder="Email đăng nhập" required>

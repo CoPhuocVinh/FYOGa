@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>FYOGA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div th:replace="common/web/header">
+
+</div>
+
+<div class="modal-login">
+    <div class="modal-container">
+        <header class="modal-header">
+            Xác thực
+        </header>
+
+        <div class="modal-body">
+            <form th:action="@{/verify}" method="post" id="myForm">
+                <div class="modal-login-user">
+                    <p>Nhập mã xác thực vừa gửi vào email của bạn để khôi phục mật khẩu</p>
+                    <br>
+                    <input class="modal-input"  name="verifyCode" type="text" placeholder="Enter verify code" required>
+                </div>
+                <p style="color: red" th:text="${MSG}"></p>
+
+                <span id="countdown"></span>
+                <a href="/FYoGa/send-verify" id="sendVerifyLink">Gửi mã xác thực</a>
+                <button type="submit" id="openModalButtonRegister" class="btn-checkout" >
+                    Xác thực
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!--<script src="/web/js/functions.js"></script>-->
+<!--<Script src="/web/js/main.js"></Script>-->
+<script>
+    // Hàm ẩn thẻ a và hiển thị đồng hồ đếm ngược
+    function hideAnchorAndCountdown() {
+        const anchor = document.getElementById('sendVerifyLink');
+        if (anchor) {
+            anchor.style.display = 'none';
+        }
+
+        const countdownElement = document.getElementById('countdown');
+        let secondsRemaining = 60;
+
+        function updateCountdown() {
+            countdownElement.innerText = `Đếm ngược: ${secondsRemaining} giây`;
+            secondsRemaining--;
+
+            if (secondsRemaining < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.style.display = 'none';
+            }
+        }
+
+        updateCountdown(); // Hiển thị lần đầu tiên ngay khi gọi hàm
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    // Gọi hàm ẩn thẻ a và hiển thị đồng hồ đếm ngược sau khi trang được tải
+    window.addEventListener("load", hideAnchorAndCountdown);
+</script>
+
+</body>
+
+</html>
