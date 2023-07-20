@@ -117,23 +117,25 @@
                                             <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
                                         </td>
                                         <!-- t2 -->
-                                        <div th:if="*{t2}">
+                                        <div th:if="*{t2.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
+                                                <h6 th:text="*{t2.AClass.course.name}"></h6>
                                                 <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
+                                                <a th:href="@{/eventEdit(activityID=*{t2.activityID})}">edit</a>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t2}">
+                                        <div th:unless="*{t2.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
+                                                <a th:href="@{/eventEdit(activityID=*{t2.activityID})}">Create</a>
                                             </td>
                                         </div>
 
                                         <!-- t3 -->
 
-                                        <div th:if="*{t3}">
+                                        <div th:if="*{t3.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
                                                 <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
@@ -141,7 +143,7 @@
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t3}">
+                                        <div th:unless="*{t3.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
                                             </td>
@@ -149,7 +151,7 @@
 
                                         <!-- t4 -->
 
-                                        <div th:if="*{t4}">
+                                        <div th:if="*{t4.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
                                                 <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
@@ -157,7 +159,7 @@
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t4}">
+                                        <div th:unless="*{t4.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
                                             </td>
@@ -165,7 +167,7 @@
 
                                         <!-- t5 -->
 
-                                        <div th:if="*{t5}">
+                                        <div th:if="*{t5.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
                                                 <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
@@ -173,7 +175,7 @@
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t5}">
+                                        <div th:unless="*{t5.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
                                             </td>
@@ -181,7 +183,7 @@
 
                                         <!-- t6 -->
 
-                                        <div th:if="*{t6}">
+                                        <div th:if="*{t6.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
                                                 <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
@@ -189,7 +191,7 @@
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t6}">
+                                        <div th:unless="*{t6.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
                                             </td>
@@ -197,7 +199,7 @@
 
                                         <!-- t7 -->
 
-                                        <div th:if="*{t7}">
+                                        <div th:if="*{t7.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                             <td  class="color-1">
                                                 <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
@@ -205,7 +207,7 @@
                                                 <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
                                             </td>
                                         </div>
-                                        <div th:unless="*{t7}">
+                                        <div th:unless="*{t7.AClass}">
                                             <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
                                             <td class="color-1">
                                             </td>

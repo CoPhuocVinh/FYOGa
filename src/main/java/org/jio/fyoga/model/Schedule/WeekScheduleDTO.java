@@ -19,11 +19,11 @@ import org.jio.fyoga.entity.Slot;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WeekScheduleDTO {
-    ActivityClass t2;
-    ActivityClass t3;
-    ActivityClass t4;
-    ActivityClass t5;
-    ActivityClass t6;
-    ActivityClass t7;
+    ActivityClassDTO t2;
+    ActivityClassDTO t3;
+    ActivityClassDTO t4;
+    ActivityClassDTO t5;
+    ActivityClassDTO t6;
+    ActivityClassDTO t7;
     Slot slotID;
 }
