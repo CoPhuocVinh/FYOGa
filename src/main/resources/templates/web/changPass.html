@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>FYOGA</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free Website Template" name="keywords">
+  <meta content="Free Website Template" name="description">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS Libraries -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="/web/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="/web/lib/flaticon/font/flaticon.css" rel="stylesheet">
+  <link href="/web/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/web/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/web/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div th:replace="common/web/header">
+
+</div>
+
+<div class="modal-login">
+  <div class="modal-container">
+    <header class="modal-header">
+      Quên mật khẩu
+    </header>
+    <p style="color: red" th:text="${MSG}"></p>
+
+    <form th:action="@{/FYoGa/Confirmpassword}" method="post">
+      <div class="modal-body-forgot">
+        <input class="modal-input" name="password" type="password" placeholder="Nhập mật khẩu mới" required>
+        <input class="modal-input" type="password" placeholder="Xác nhận mật khẩu" required>
+      </div>
+
+      <button type="submit" class="btn-checkout" >
+        Thay đổi
+      </button>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<script src="/web/js/functions.js"></script>
+<Script src="/web/js/main.js"></Script>
+</body>
+
+</html>

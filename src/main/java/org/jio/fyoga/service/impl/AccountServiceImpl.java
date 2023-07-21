@@ -105,4 +105,9 @@ public class AccountServiceImpl implements IAccountService {
             throw new RuntimeException("User not found for course: " + accountID);
         }
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return accountRepository.existsByEmail(email);
+    }
 }
