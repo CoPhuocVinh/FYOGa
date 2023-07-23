@@ -4,7 +4,6 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
 
@@ -16,16 +15,7 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="/admin/img/favicon.ico">
-    <link rel="apple-touch-icon" href="/admin/img/icon57.png" sizes="57x57">
-    <link rel="apple-touch-icon" href="/admin/img/icon72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="/admin/img/icon76.png" sizes="76x76">
-    <link rel="apple-touch-icon" href="/admin/img/icon114.png" sizes="114x114">
-    <link rel="apple-touch-icon" href="/admin/img/icon120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="/admin/img/icon144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="/admin/img/icon152.png" sizes="152x152">
+
     <!-- END Icons -->
 
     <!-- Stylesheets -->
@@ -44,10 +34,10 @@
     <link rel="stylesheet" href="/admin/css/themes.css">
     <!-- END Stylesheets -->
 
-</head>
+    <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="/admin/js/vendor/modernizr-respond.min.js"></script>
 
-<!-- Add the class .fixed to <body> for a fixed layout on large resolutions (min: 1200px) -->
-<!-- <body class="fixed"> -->
+</head>
 
 <body>
 <!-- Page Container -->
@@ -59,112 +49,54 @@
     <!-- Navigation info -->
     <ul id="nav-info" class="clearfix">
         <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
-        <li><a href="/FYoGa/Login/ADMIN/class">Danh sách lớp</a></li>
-        <li><a href="javascript:void(0)">Thêm mới lớp học</a></li>
+        <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
+        <li><a href="javascript:void(0)">Thêm mới gói học</a></li>
     </ul>
     <!-- END Navigation info -->
 
     <!-- List Staff -->
     <div class="form-create-class">
-        <h2 class="create-header">Thêm mới lớp học</h2>
 
-        <form th:action="@{/FYoGa/Login/ADMIN/class/CreateOrUpdate}" method="post" class="createClass-container" th:object="${CLASSDTO}">
+        <h2 class="create-header">Thêm mới gói học</h2>
+
+
+        <form th:action="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit}" method="post" class="createClass-container" th:object="${PACKAGEDTO}">
             <input type="hidden" th:field="*{isEdit}">
-            <input type="hidden" th:field="*{classID}">
-            <label>Khóa học</label>
-            <select name="lang" th:field="*{courseID}">
-<!--                <option value="">&#45;&#45;Hãy chọn một khóa học&#45;&#45;</option>-->
-                <option th:each="course : ${COURSES}" th:value="${course.courseID}"
-                        th:text="${course.name}" th:selected="${CLASSDTO.courseID == course.courseID}">
-                </option>
-<!--                <option value="asanasyoga">Asanas Yoga</option>-->
-<!--                <option value="yogatl">Yoga Trị Liệu</option>-->
-<!--                <option value="yogant">Yoga Nghệ Thuật</option>-->
-            </select>
-            <button type="submit" name="hienthi">Hiển Thị</button>
-            <br>
-            <label>Huấn luyện viên</label>
-            <select name="lang" th:field="*{teacherID}">
-                <option th:each="teach : ${ACCOUNTS}" th:value="${teach.accountID}"
-                        th:text="${teach.fullName}" th:selected="${teach.accountID == CLASSDTO.teacherID}" ></option>
-            </select><br>
+            <input type="hidden" th:field="*{packageID}">
 
-            <label>Số lượng</label>
-            <input th:field="*{quantityClass}" type="number" placeholder="Thêm số lượng học viên" required> <br>
+            <label>Khoá học</label>
+            <select th:field="*{courseID}" name="courseName" id="courseName">
+<!--                <option value="">&#45;&#45; Chọn khoá học &#45;&#45;</option>-->
+                <option th:each="course : ${COURSES}" th:value="${course.courseID}"
+                        th:text="${course.name}" th:selected="${PACKAGEDTO.courseID == course.courseID}">
+                </option>
+            </select>
+
+            <label for="slotOnMonth">Số buổi</label>
+            <input type="number" id="slotOnMonth" name="slotOnMonth" th:field="*{slotOnMonth}" required><br>
+
+            <label for="price">Giá gói</label>
+            <input type="number" id="price" name="price" step="0.01" th:field="*{price}" required><br>
 
             <button class="btn-footer" type="reset">Đặt lại</button>
-            <button class="btn-footer" type="submit">Lưu</button>
+            <button class="btn-footer" type="submit">Tạo</button>
         </form>
+        <p style="color: red" th:text="${MSG}"></p>
+
     </div>
-
 </div>
-<style>
-    #formCourse {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #f1f1f1;
-        padding: 20px;
-        box-shadow: rgb(152, 152, 152, 0.6);
-        border: rgba(0, 0, 0, 0.6) solid 1px;
-    }
 
-    #registrationForm {
-        width: 300px;
-        margin: 0 auto;
-    }
 
-    #registrationForm label,
-    #registrationForm input[type="text"],
-    #registrationForm input[type="file"],
-    #registrationForm input[type="number"],
-    #registrationForm input[type="submit"],
-    #registrationForm input[type="datetime-local"] {
-        display: block;
-        margin-bottom: 10px;
-        width: 100%;
-
-    }
-
-    #name,
-    #roleID,
-    #fullName,
-    #datet,
-    #Sdt {
-        border: rgba(0, 0, 0, 0.6) solid 1px;
-    }
-
-    #save {
-        display: flex;
-        justify-content: center;
-
-        align-items: center;
-    }
-
-    #registrationForm input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-    }
-
-    #closeButton {
-        margin-left: 280px;
-    }
-</style>
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
 <!-- Bootstrap.js -->
-<script src="js/vendor/bootstrap.min.js"></script>
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
 
 <!-- Jquery plugins and custom javascript code -->
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
 
 <!-- Javascript code only for this page -->
 <script>
@@ -278,8 +210,8 @@
     });
 </script>
 
-<!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
 <script src="/admin/js/vendor/modernizr-respond.min.js"></script>
+
 </body>
 
 </html>

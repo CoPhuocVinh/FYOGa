@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PackageRepository extends JpaRepository<Package, Integer> {
     List<Package> findAllByCourse_CourseID( int CourseId);
 
+    Package findPackageBySlotOnMonthAndCourse_CourseID(int slotOnMonth, int courseID);
+
 }

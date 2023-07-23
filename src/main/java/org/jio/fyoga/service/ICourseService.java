@@ -22,6 +22,8 @@ public interface ICourseService {
 
     Course findCourseByCourse_name(String name);
 
+    Course findCourseByName(String course_name);
+
     Optional<Course> findById(Integer integer);
 
     // xu lu img
