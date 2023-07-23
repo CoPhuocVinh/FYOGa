@@ -33,18 +33,10 @@ public class Package {
     @Column(name = "slot_on_month")
     int slotOnMonth;
 
-//    @Column(name = "time_on_month")
-//    int timeOnMonth;
-
-//    int defaultID;
-
     int status;
 
     @Column(name = "price")
     float price;
-//
-//    @Column(name = "percent_discount")
-//    float percentDiscount;
 
     @ManyToOne
     @JoinColumn(name = "courseID")

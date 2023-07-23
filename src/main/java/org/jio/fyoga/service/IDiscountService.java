@@ -16,4 +16,7 @@ public interface IDiscountService {
     List<Discount> findAllByAPackage_PackageID(int PackageID);
 
     Optional<Discount> findById(Integer integer);
+
+
+    List<Discount> findAll();
 }

@@ -42,6 +42,12 @@ public class CourseServiceImpl implements ICourseService {
         return courseRepository.findCourseByName(name);
     }
 
+
+    @Override
+    public Course findCourseByName(String course_name) {
+        return courseRepository.findCourseByName(course_name);
+    }
+
     @Override
     public Optional<Course> findById(Integer integer) {
         return courseRepository.findById(integer);
