@@ -29,6 +29,9 @@ public class ActivityClass {
     @Column(name = "status")
     int status;
 
+    @Column(name = "note")
+    String note;
+
     @Column(name = "day_of_month")
     Date dayOfMonth;
 
