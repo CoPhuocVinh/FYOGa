@@ -10,6 +10,9 @@ package org.jio.fyoga.util;/*  Welcome to Jio word
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class MyUtil {
     public static String Authen(HttpSession session) {
         Account account = (Account) session.getAttribute("USER");
@@ -41,6 +44,22 @@ public class MyUtil {
            checkAuthen = true;
         }
         return checkAuthen;
+    }
+
+    public static Date getDateFromDayWeekYear(int dayOfWeek, int weekNumber, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.WEEK_OF_YEAR, weekNumber);
+        calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+
+        // Vì ngày bắt đầu của tuần trong Calendar là Chủ nhật (1) và yêu cầu là Thứ 2 (2)
+        // Nếu là Chủ nhật thì trả về ngày đầu tiên trong tuần là Thứ 2 của tuần đó
+        if (dayOfWeek == Calendar.SUNDAY) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        return calendar.getTime();
     }
 
 

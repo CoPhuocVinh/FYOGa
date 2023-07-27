@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActivityClassServiceImpl implements IActivityClassService {
@@ -33,6 +34,7 @@ public class ActivityClassServiceImpl implements IActivityClassService {
 
     public List<WeekScheduleDTO> getActivityClassesFromMondayToSaturday( int scheduleID) {
         List<WeekScheduleDTO> weekScheduleDTOS = new ArrayList<>();
+
         for (int i = 1; i <= 5; i++) {
             List<Object[]> results = activityClassReponsitory.findActivityClassesFromMondayToSaturday(i, scheduleID);
             ActivityClassDTO t2 = ActivityClassDTO.builder().dayOfWeek(2).build();
@@ -47,39 +49,60 @@ public class ActivityClassServiceImpl implements IActivityClassService {
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t2);
 
+
                 }
                 if ((Integer)result[0] == 3) {
                     ActivityClass activityClassEntity = activityClassReponsitory.findById((Integer) result[1]).orElse(null);
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t3);
+
                 }
                 if ((Integer)result[0] == 4) {
                     ActivityClass activityClassEntity = activityClassReponsitory.findById((Integer) result[1]).orElse(null);
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t4);
+                 //   activityClassDTOS.add(t4);
                 }
                 if ((Integer)result[0] == 5) {
                     ActivityClass activityClassEntity = activityClassReponsitory.findById((Integer) result[1]).orElse(null);
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t5);
+                    //activityClassDTOS.add(t5);
                 }
                 if ((Integer)result[0] == 6) {
                     ActivityClass activityClassEntity = activityClassReponsitory.findById((Integer) result[1]).orElse(null);
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t6);
+                    //activityClassDTOS.add(t6);
                 }
                 if ((Integer)result[0] == 7) {
                     ActivityClass activityClassEntity = activityClassReponsitory.findById((Integer) result[1]).orElse(null);
                     if(activityClassEntity != null)
                         BeanUtils.copyProperties(activityClassEntity, t7);
+                    //activityClassDTOS.add(t7);
                 }
 
             }
+            List<ActivityClassDTO> activityClassDTOS = new ArrayList<>();
+            activityClassDTOS.add(t2);
+            activityClassDTOS.add(t3);
+            activityClassDTOS.add(t4);
+            activityClassDTOS.add(t5);
+            activityClassDTOS.add(t6);
+            activityClassDTOS.add(t7);
 
-            weekScheduleDTOS.add(new WeekScheduleDTO(t2,t3,t4,t5,t6,t7,slotService.findById(i)));
+            weekScheduleDTOS.add(new WeekScheduleDTO(activityClassDTOS,slotService.findById(i)));
 
         }
 
         return weekScheduleDTOS;
+    }
+
+    public <S extends ActivityClass> S save(S entity) {
+        return activityClassReponsitory.save(entity);
+    }
+
+    public ActivityClass findById(Integer integer) {
+        return activityClassReponsitory.findById(integer).orElseThrow();
     }
 }

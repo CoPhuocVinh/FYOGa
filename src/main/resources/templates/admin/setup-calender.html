@@ -58,26 +58,26 @@
         <div class="section-header-lich text-center wow zoomIn" data-wow-delay="0.1s">
             <h2>Lịch học</h2><br>
 
-            <div class="head-option">
-                <label >Kỳ</label>
-                <select >
-                    <option value="ngay">-- Chọn kỳ --</option>
-                    <option value="ngay">1/7/2023 - 31/8/2023</option>
-                    <option value="ngay">1/9/2023 - 31/10/2023</option>
-                    <option value="ngay">1/11/2023 - 31/12/2023</option>
-                </select>
-                <a href="addSemester.html" data-toggle="tooltip" title="Thêm kỳ mới"
-                   class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
-                <br><br>
-                <label >Tuần</label>
-                <select>
-                    <option value="ngay">-- Chọn tuần --</option>
-                    <option value="ngay">26/06/2023 - 01/07/2023</option>
-                    <option value="ngay">03/07/2023 - 08/07/2023</option>
-                    <option value="ngay">10/07/2023 - 17/07/2023</option>
-                    <option value="ngay">24/07/2023 - 29/07/2023</option>
-                </select>
-            </div>
+<!--            <div class="head-option">-->
+<!--                <label >Kỳ</label>-->
+<!--                <select >-->
+<!--                    <option value="ngay">&#45;&#45; Chọn kỳ &#45;&#45;</option>-->
+<!--                    <option value="ngay">1/7/2023 - 31/8/2023</option>-->
+<!--                    <option value="ngay">1/9/2023 - 31/10/2023</option>-->
+<!--                    <option value="ngay">1/11/2023 - 31/12/2023</option>-->
+<!--                </select>-->
+<!--                <a href="addSemester.html" data-toggle="tooltip" title="Thêm kỳ mới"-->
+<!--                   class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>-->
+<!--                <br><br>-->
+<!--                <label >Tuần</label>-->
+<!--                <select>-->
+<!--                    <option value="ngay">&#45;&#45; Chọn tuần &#45;&#45;</option>-->
+<!--                    <option value="ngay">26/06/2023 - 01/07/2023</option>-->
+<!--                    <option value="ngay">03/07/2023 - 08/07/2023</option>-->
+<!--                    <option value="ngay">10/07/2023 - 17/07/2023</option>-->
+<!--                    <option value="ngay">24/07/2023 - 29/07/2023</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
         </div>
         <div class="text-center-button">
@@ -117,102 +117,27 @@
                                             <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
                                         </td>
                                         <!-- t2 -->
-                                        <div th:if="*{t2.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.AClass.course.name}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                                <a th:href="@{/eventEdit(activityID=*{t2.activityID})}">edit</a>
-                                            </td>
-                                        </div>
-                                        <div th:unless="*{t2.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                                <a th:href="@{/eventEdit(activityID=*{t2.activityID})}">Create</a>
-                                            </td>
-                                        </div>
+                                        <div th:each="DAY : *{dayOfWeeks}">
 
-                                        <!-- t3 -->
+                                            <div  th:if="${DAY.AClass}">
+                                                <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
+                                                <td  class="color-1">
+                                                    <h6 th:text="${DAY.AClass.course.name}"></h6>
+                                                    <p th:text="${DAY.getAClass().className}" class="idcourse"></p>
+                                                    <p th:text="${DAY.getAClass().teacher.fullName}" class="idcourse"></p>
+                                                    <p th:text="${DAY.note}" class="idcourse"></p>
 
-                                        <div th:if="*{t3.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                            </td>
-                                        </div>
-                                        <div th:unless="*{t3.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                            </td>
-                                        </div>
+                                                    <a th:href="@{/FYoGa/Login/ADMIN/schedule/eventCreateOrEdit(activityID=${DAY.activityID}, day=${DAY.dayOfWeek}, slot = *{slotID.slotID})}">edit</a>
+                                                </td>
+                                            </div>
 
-                                        <!-- t4 -->
-
-                                        <div th:if="*{t4.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                            </td>
+                                            <div th:unless="${DAY.AClass}">
+                                                <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
+                                                <td class="color-1">
+                                                    <a th:href="@{/FYoGa/Login/ADMIN/schedule/eventCreateOrEdit(activityID=${DAY.activityID}, day=${DAY.dayOfWeek}, slot = *{slotID.slotID})}">Create</a>
+                                                </td>
+                                            </div>
                                         </div>
-                                        <div th:unless="*{t4.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                            </td>
-                                        </div>
-
-                                        <!-- t5 -->
-
-                                        <div th:if="*{t5.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                            </td>
-                                        </div>
-                                        <div th:unless="*{t5.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                            </td>
-                                        </div>
-
-                                        <!-- t6 -->
-
-                                        <div th:if="*{t6.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                            </td>
-                                        </div>
-                                        <div th:unless="*{t6.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                            </td>
-                                        </div>
-
-                                        <!-- t7 -->
-
-                                        <div th:if="*{t7.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
-                                            <td  class="color-1">
-                                                <h6 th:text="*{t2.getAClass().getCourse().getName()}"></h6>
-                                                <p th:text="*{t2.getAClass().className}" class="idcourse"></p>
-                                                <p th:text="*{t2.getAClass().teacher.fullName}" class="idcourse"></p>
-                                            </td>
-                                        </div>
-                                        <div th:unless="*{t7.AClass}">
-                                            <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
-                                            <td class="color-1">
-                                            </td>
-                                        </div>
-
 
 
                                     </tr><!-- END TR-->
