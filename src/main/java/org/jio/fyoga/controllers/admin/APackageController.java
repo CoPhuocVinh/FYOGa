@@ -53,11 +53,12 @@ public class APackageController {
                 packageDTO.setIsEdit(true);
                 packageDTO.setCourseID(packageEntity.getCourse().getCourseID());
                 packageDTO.setSlotOnMonth(packageEntity.getSlotOnMonth());
+                packageDTO.setPrice(packageEntity.getPrice());
             }
         }
 
         // Xử lý chức năng tạo mới
-        if (isEdit == 0) {
+        else if (isEdit == 0) {
 
             packageDTO.setIsEdit(false);
         }
@@ -91,7 +92,7 @@ public class APackageController {
             packageEntity.setStatus(1);
 
             packageService.save(packageEntity);
-        } else if (packageID >= 0) {
+        } else{
             // Xử lý chỉnh sửa
             Optional<Package> packageEntityOptional = packageService.findById(packageID);
             if (packageEntityOptional.isPresent()) {
@@ -108,7 +109,7 @@ public class APackageController {
                 String packageName = packageDTO.getSlotOnMonth() + " buổi";
                 packageEntity.setName(packageName);
                 packageEntity.setCourse(courseService.findById(packageDTO.getCourseID()).orElse(null));
-
+                packageEntity.setPrice(packageDTO.getPrice());
                 packageService.save(packageEntity);
             }
         }
