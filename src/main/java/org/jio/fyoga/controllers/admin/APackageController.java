@@ -73,49 +73,71 @@ public class APackageController {
                                @RequestParam(name = "PackageID", required = false, defaultValue = "-1") int packageID,
                                @ModelAttribute("PACKAGEDTO") PackageDTO packageDTO,
                                RedirectAttributes ra) {
+        Package packageEntity = new Package();
 
         if (!isEdit) {
             // Xử lý tạo mới
-            Package existingPackage = packageService.findPackageBySlotOnMonthAndCourse_CourseID(packageDTO.getSlotOnMonth(), packageDTO.getCourseID());
-            if (existingPackage != null) {
-                List<Course> courses = courseService.findAll();
-
-                ra.addFlashAttribute("MSG", "Course name and slot on month already exist");
+            Course course = courseService.findById(packageDTO.getCourseID()).orElse(null);
+            if (course == null) {
+                // Xử lý khi không tìm thấy khóa học với ID đã chọn
+                ra.addFlashAttribute("MSG", "Khong tim thay Course.");
                 return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=0";
             }
 
-            Package packageEntity = new Package();
+            if (packageDTO.getSlotOnMonth() == 0) {
+                ra.addFlashAttribute("MSG", "So buoi phai lon hon 0.");
+                return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=" + (isEdit ? "1&PackageID=" + packageID : "0");
+            }
+
+            if (packageDTO.getPrice() == 0) {
+                ra.addFlashAttribute("MSG", "Gia phai lon hon 0.");
+                return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=" + (isEdit ? "1&PackageID=" + packageID : "0");
+            }
+
+            // Kiểm tra xem gói học đã tồn tại hay chưa
+            Package existingPackage = packageService.findPackageBySlotOnMonthAndCourse_CourseID(packageDTO.getSlotOnMonth(), packageDTO.getCourseID());
+            if (existingPackage != null) {
+                ra.addFlashAttribute("MSG", "Goi hoc da ton tai.");
+                return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=0";
+            }
+
             BeanUtils.copyProperties(packageDTO, packageEntity);
             String packageName = packageDTO.getSlotOnMonth() + " buổi";
             packageEntity.setName(packageName);
-            packageEntity.setCourse(courseService.findById(packageDTO.getCourseID()).orElse(null));
+            packageEntity.setCourse(course);
             packageEntity.setStatus(1);
-
-            packageService.save(packageEntity);
-        } else{
+        } else {
             // Xử lý chỉnh sửa
             Optional<Package> packageEntityOptional = packageService.findById(packageID);
             if (packageEntityOptional.isPresent()) {
-                Package packageEntity = packageEntityOptional.get();
+                packageEntity = packageEntityOptional.get();
+                Course course = courseService.findById(packageDTO.getCourseID()).orElse(null);
+                if (course == null) {
+                    // Xử lý khi không tìm thấy khóa học với ID đã chọn
+                    ra.addFlashAttribute("MSG", "khong tim thay Course.");
+                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageID;
+                }
+
+                // Kiểm tra xem gói học đã tồn tại hay chưa
                 Package existingPackage = packageService.findPackageBySlotOnMonthAndCourse_CourseID(packageDTO.getSlotOnMonth(), packageDTO.getCourseID());
                 if (existingPackage != null && existingPackage.getPackageID() != packageEntity.getPackageID()) {
-                    List<Course> courses = courseService.findAll();
-
-                    ra.addAttribute("MSG", "Course name and slot on month already exist. Please choose a different one.");
-                    return "admin/add&editPackage";
+                    ra.addFlashAttribute("MSG", "Package da ton tai.");
+                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageID;
                 }
 
                 BeanUtils.copyProperties(packageDTO, packageEntity);
                 String packageName = packageDTO.getSlotOnMonth() + " buổi";
                 packageEntity.setName(packageName);
-                packageEntity.setCourse(courseService.findById(packageDTO.getCourseID()).orElse(null));
+                packageEntity.setCourse(course);
                 packageEntity.setPrice(packageDTO.getPrice());
-                packageService.save(packageEntity);
             }
         }
 
+        packageService.save(packageEntity);
+        ra.addFlashAttribute("MSG", "Save successfully!!!");
         return "redirect:/FYoGa/Login/ADMIN/Package";
     }
+
 
     @GetMapping("/remove")
     public String removeClass(@RequestParam int packageID) {

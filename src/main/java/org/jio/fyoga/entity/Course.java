@@ -47,4 +47,13 @@ public class Course {
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private Set<Class> classes;
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID=" + courseID +
+                ", name='" + name + '\'' +
+                // Thêm các trường khác vào đây nếu cần thiết
+                '}';
+    }
 }
