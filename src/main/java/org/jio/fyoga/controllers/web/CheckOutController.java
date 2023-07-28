@@ -20,6 +20,7 @@ import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -131,6 +132,16 @@ public class CheckOutController {
             registerEntity.setTypePaying(MyUtil.tran4Paying(registerDTO.getTypePaying()));
             //registerEntity.setPackages(packageEntiry.orElseThrow());
             registerEntity.setADiscount(discountEntity.orElseThrow());
+            // xu ly
+            Register register01 = registerService.findRegisterByStatusAndcourseID(1,registerEntity.getADiscount().getAPackage().getCourse().getCourseID());
+            if(register01 != null){
+                session.setAttribute("SUCCESS", "Bạn đăng kí khóa học Không thành công vì bạn chưa thanh toán gói của khóa này");
+                session.setAttribute("FAIL", "Bạn đã đăng kí và thanh toán khóa học thất bại");
+
+                return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID + "&typePaying=0";
+            }
+
+
 
             registerService.save(registerEntity);
         } else {
@@ -272,7 +283,36 @@ public class CheckOutController {
             registerEntity.setCustomer(account);
             registerEntity.setADiscount(discountEntity.orElseThrow());
             registerEntity.setTypePaying(MyUtil.tran4Paying(registerDTO.getTypePaying()));
+            int courseID = registerEntity.getADiscount().getAPackage().getCourse().getCourseID();
 
+
+            int noDateExpired = registerEntity.getTimeAvailable()*4*7;
+            Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+            Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            if (register03 != null){
+
+                if (register02 != null){
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register02.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }else {
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register03.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }
+            }else {
+                if (register02 != null){
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register02.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }else {
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }
+            }
+
+            registerEntity.setStatus(2);
             registerService.save(registerEntity);
             System.out.println("register thành công");
             session.setAttribute("SUCCESS", "Bạn đã đăng kí và thanh toán khóa học thành công");

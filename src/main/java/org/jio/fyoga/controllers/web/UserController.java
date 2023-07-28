@@ -35,7 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,9 +186,7 @@ public class UserController {
             BookingDTO bookingDTO = BookingDTO.builder().build();
             model.addAttribute("BOOKING",bookingDTO);
 
-
             List<WeekDTO> weekDTOS = scheduleServiceTest.WeekNow();
-
 
             model.addAttribute("EVENTS",weekDTOS);
             int noWeek = weekDTOS.get(1).getWeekOfYear();
@@ -221,6 +219,21 @@ public class UserController {
             bookingEntity.setStatus(1);
             bookingEntity.setCustomer(accountEntity);
             bookingEntity.setAClassBooking(classEntity);
+
+//            List<Register> registers = registerService.findByStatusOrStatus(2,3);
+//            if (registers.size()!=0){
+//                for(Register register : registers){
+//                    if (register.getStatus()==3){
+//                        int dayExpired = MyUtil.daysBetweenCurrent(register.getExpired());
+//                        Date dateExpired = MyUtil.expiredDateOnDate(dayExpired);
+//                        bookingEntity.setExpired(dateExpired);
+//
+//                    }
+//
+//                }
+//            }
+
+
             bookingService.save(bookingEntity);
             ra.addFlashAttribute("MSG", "Bạn đã đăng ký lớp thành công !!!");
         }
