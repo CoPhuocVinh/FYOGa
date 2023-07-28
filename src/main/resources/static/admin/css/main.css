@@ -1050,6 +1050,10 @@ header
     background-color: #eee;
 }
 
+.dash-tile-header h1{
+    font-size: 30px;
+}
+
 .dash-tile-options {
     float: right;
     height: 38px;
