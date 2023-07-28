@@ -21,4 +21,18 @@ public interface IRegisterService {
     List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status);
 
     List<MonthlyTotal> getMonthlyRegisterAmount();
+
+    List<Register> findByStatusOrStatus(int statusPayingDone, int statusPayingUsing);
+
+    Register findTopByStatusOrderByRegisteredDateDesc(int status);
+
+    Register findFirstByStatusOrderByRegisteredDateAsc(int status);
+
+    Register findByStatus(int status);
+
+    Register findRegisterByStatusAndcourseID(int status, int courseID);
+
+    Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID);
+
+    Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status);
 }

@@ -32,4 +32,35 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
             "GROUP BY MONTH(r.registeredDate)")
     List<Object[]> getMonthlyRegisterAmount();
 
+    List<Register> findByStatusOrStatus(int statusPayingDone, int statusPayingUsing);
+
+    Register findByStatus(int status);
+    @Query("SELECT r FROM Register r " +
+            "WHERE r.status = :status " +
+            "AND r.aDiscount.aPackage.course.courseID = :courseID")
+    Register findRegisterByStatusAndaDiscount_aPackage_course_courseID(int status, int courseID);
+
+    //tim mối nhất
+
+    Register findTopByStatusOrderByRegisteredDateDesc(int status);
+
+    @Query("SELECT r FROM Register r " +
+            "JOIN FETCH r.aDiscount a " +
+            "JOIN FETCH a.aPackage ap " +
+            "JOIN FETCH ap.course c " +
+            "WHERE r.status = :status " +
+            "AND c.courseID = :courseID " +
+            "ORDER BY r.registeredDate DESC")
+    List<Register> findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(int status, int courseID);
+   //tìm cũ nhất
+    Register findFirstByStatusOrderByRegisteredDateAsc(int status);
+    @Query("SELECT r FROM Register r " +
+            "JOIN FETCH r.aDiscount a " +
+            "JOIN FETCH a.aPackage ap " +
+            "JOIN FETCH ap.course c " +
+            "WHERE r.status = :status " +
+            "AND c.courseID = :courseID " +
+            "ORDER BY r.registeredDate ASC")
+    List<Register> findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(int status);
+
 }

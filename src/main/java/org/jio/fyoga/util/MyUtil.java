@@ -98,6 +98,37 @@ public class MyUtil {
         Date expiredDate = calendar.getTime();
         return expiredDate;
     }
+    public static Date expiredDateOnDate(Date inputDate, int noDate){
+
+        // Tạo đối tượng Calendar từ ngày đầu vào
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(inputDate);
+
+        // Thêm số ngày (noDate) vào ngày đầu vào
+        calendar.add(Calendar.DAY_OF_MONTH, noDate);
+
+        // Lấy ngày hết hạn (expiredDate) từ Calendar
+        Date expiredDate = calendar.getTime();
+        return expiredDate;
+    }
+
+    public static int daysBetweenCurrent(Date inputDate) {
+
+        Date date = new Date(System.currentTimeMillis());
+        // Tạo đối tượng Calendar từ ngày hiện tại
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(date);
+
+        // Tạo đối tượng Calendar từ ngày đầu vào
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(inputDate);
+
+        // Tính số ngày giữa hai ngày
+        long diffInMillis = calendar2.getTimeInMillis() - calendar1.getTimeInMillis();
+        int daysBetween = (int) (diffInMillis / (24 * 60 * 60 * 1000));
+
+        return daysBetween;
+    }
 
 
 
