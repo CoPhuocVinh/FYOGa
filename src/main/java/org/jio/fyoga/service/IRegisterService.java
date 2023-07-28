@@ -8,6 +8,8 @@ package org.jio.fyoga.service;/*  Welcome to Jio word
 */
 
 import org.jio.fyoga.entity.Register;
+import org.jio.fyoga.model.MonthlyTotal;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -17,4 +19,6 @@ public interface IRegisterService {
     List<Register> findAllByByCustomer_AccountID(int AccountID);
 
     List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status);
+
+    List<MonthlyTotal> getMonthlyRegisterAmount();
 }

@@ -50,11 +50,11 @@ public class RegisterController {
             return "web/register";
         }
 
-
+        Account accountExist;
 
         Account entity = new Account();
-        entity = accountService.findAccountByEmail(account.getEmail());
-        if (entity != null){
+        accountExist = accountService.findAccountByEmail(account.getEmail());
+        if (accountExist != null){
             ra.addFlashAttribute("MSG","Email is exist!!!");
             return "redirect:/FYoGa/registerFYoGa";
         }

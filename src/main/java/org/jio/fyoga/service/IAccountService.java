@@ -36,4 +36,6 @@ public interface IAccountService {
     void saveIMGAccount(MultipartFile file, Account account) throws IOException;
 
     byte[] getIMGById(int accountID);
+
+    boolean existsByEmail(String email);
 }

@@ -26,4 +26,10 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
 
     List<Register> findByCustomer_AccountIDAndStatus(int AccountID, int status);
 
+    @Query("SELECT MONTH(r.registeredDate) AS month, SUM(r.priceDiscount) AS totalAmount " +
+            "FROM Register r " +
+            //"WHERE r.status = 1 " +
+            "GROUP BY MONTH(r.registeredDate)")
+    List<Object[]> getMonthlyRegisterAmount();
+
 }

@@ -10,11 +10,17 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.entity.Role;
+import org.jio.fyoga.model.MonthlyTotal;
 import org.jio.fyoga.repository.CourseRepository;
 import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IAccountService;
+import org.jio.fyoga.service.IRegisterService;
+import org.jio.fyoga.service.IRoleService;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +38,11 @@ import java.util.Map;
 public class LoginCotroller {
     @Autowired
     IAccountService accountService;
+    @Autowired
+    IRegisterService registerService;
+    @Autowired
+    IRoleService roleService;
+
 
     @RequestMapping("")
     public String showLoginFYoGa(HttpSession session) {
@@ -114,10 +126,15 @@ public class LoginCotroller {
     }
 
     @GetMapping("/ADMIN")
-    public String showADMIN(HttpSession session) {
+    public String showADMIN(HttpSession session , Model model) {
         Account account = (Account) session.getAttribute("USER");
-        if (account != null && account.getRole().getRoleID() == 4)
+        if (account != null && account.getRole().getRoleID() == 4){
+            List<MonthlyTotal> monthlyTotalList = registerService.getMonthlyRegisterAmount();
+            model.addAttribute("monthlyTotals", monthlyTotalList);
             return "admin/admin";
+        }
+
+
         else
             return "redirect:/";
     }
@@ -131,7 +148,29 @@ public class LoginCotroller {
             return "redirect:/";
     }
 
+    @GetMapping("/LoginGoogle")
+    public String loginG(Model model, @AuthenticationPrincipal OAuth2User user, HttpSession session){
+        String name = user.getAttribute("name");
+        String email = user.getAttribute("email");
+        Role roleEntity = roleService.findRoleByRoleID(1);
 
+        Account accountGoogle = accountService.findAccountByEmail(email);
+        if (accountGoogle == null){
+            Date date = new Date(System.currentTimeMillis());
+            accountGoogle = Account.builder()
+                    .fullName(name)
+                    .email(email)
+                    .role(roleEntity)
+                    .acceptedDate(date)
+                    .status(1)
+                    .build();
+
+            accountService.save(accountGoogle);
+        }
+
+        session.setAttribute("USER", accountGoogle);
+        return "redirect:/FYoGa/Login/User";
+    }
 
 
 

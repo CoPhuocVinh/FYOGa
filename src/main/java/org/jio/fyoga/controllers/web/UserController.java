@@ -90,8 +90,11 @@ public class UserController {
             Account accountEntity = (Account) session.getAttribute("USER");
             AccountDTO accountDTO = new AccountDTO();
             BeanUtils.copyProperties(accountEntity, accountDTO);
-            accountDTO.setGender(accountDTO.getGender().trim());
-            accountDTO.setPhone(accountDTO.getPhone().trim());
+            if(accountDTO.getGender() != null && accountDTO.getPhone() != null){
+                accountDTO.setGender(accountDTO.getGender().trim());
+                accountDTO.setPhone(accountDTO.getPhone().trim());
+            }
+
             model.addAttribute("USER", accountDTO);
             return "web/user-editInfo";
         }
