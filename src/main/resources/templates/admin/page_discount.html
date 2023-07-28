@@ -78,7 +78,7 @@
             <td th:text="${package.price}"></td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a th:href="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1}" data-toggle="tooltip" title="Chỉnh sửa"
+                    <a th:href="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit(isEdit=1, PackageID=${package.packageID})}" data-toggle="tooltip" title="Chỉnh sửa"
                        class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
                     <a th:href="@{/FYoGa/Login/ADMIN/Package/remove(packageID=${package.packageID})}" data-toggle="tooltip" title="Xóa"
                        class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
