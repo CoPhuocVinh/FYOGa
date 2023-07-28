@@ -102,7 +102,7 @@ public class ACourseController {
 
         // xu ly img
         try {
-            courseService.saveIMGAccount(file, courseEntity);
+            courseService.saveIMG(file, courseEntity);
         } catch (IOException e) {
             // Xử lý lỗi nếu cần
         }

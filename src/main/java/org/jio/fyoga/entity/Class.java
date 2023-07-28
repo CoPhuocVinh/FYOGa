@@ -18,6 +18,7 @@ import java.util.Set;
 public class Class {
 
     @Id
+    @Column(name = "classID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int classID;
 

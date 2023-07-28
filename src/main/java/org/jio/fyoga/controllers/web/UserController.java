@@ -14,7 +14,11 @@ import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.model.BookingDTO;
 import org.jio.fyoga.model.ClassDTO;
+import org.jio.fyoga.model.Schedule.WeekDTO;
+import org.jio.fyoga.model.Schedule.WeekScheduleDTO;
 import org.jio.fyoga.service.*;
+import org.jio.fyoga.service.impl.ActivityClassServiceImpl;
+import org.jio.fyoga.service.impl.ScheduleServiceImpl;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +60,12 @@ public class UserController {
 
     @Autowired
     IBookingService bookingService;
+
+    @Autowired
+    ScheduleServiceImpl scheduleServiceTest;
+    @Autowired
+    ActivityClassServiceImpl activityClassServiceTest;
+
 
     public String GetStaff(Model model) {
         List<Account> accounts = accountService.findAccountByRole(3);
@@ -165,6 +175,9 @@ public class UserController {
     public String ScheduleClass(HttpSession session, Model model, @RequestParam int courseID) {
         if (MyUtil.checkAuthen(session)) {
             // xủ lý code trong đây
+
+            Account account = (Account) session.getAttribute("USER");
+
             Course course = courseService.findById(courseID).orElseThrow();
             model.addAttribute("COURSE",course);
             List<Class> classList = classService.findClassByCourse_CourseID(courseID);
@@ -172,11 +185,25 @@ public class UserController {
 
             BookingDTO bookingDTO = BookingDTO.builder().build();
             model.addAttribute("BOOKING",bookingDTO);
+
+
+            List<WeekDTO> weekDTOS = scheduleServiceTest.WeekNow();
+
+
+            model.addAttribute("EVENTS",weekDTOS);
+            int noWeek = weekDTOS.get(1).getWeekOfYear();
+            int noYear =  weekDTOS.get(1).getYear();
+            Schedule schedules = scheduleServiceTest.findScheduleByYearAndNoWeek(noYear,noWeek);
+            List<WeekScheduleDTO> weekScheduleDTOs = activityClassServiceTest.getActivityClassesFromMondayToSaturdayOnCourse(schedules.getScheduleID(),courseID,account.getAccountID());
+            System.out.printf("bibi");
+            model.addAttribute("ACTIVITYS",weekScheduleDTOs);
+
+
             return "web/scheduleDetail";
         }
         return "web/login";
     }
-    // /FYoGa/Login/User/ScheduleClass/Booking
+    // /FYoGa/Login/User/Booking
     @PostMapping("/Booking")
     public String booking (HttpSession session, @ModelAttribute("BOOKING") BookingDTO bookingDTO, RedirectAttributes ra){
         Account accountEntity = (Account) session.getAttribute("USER");

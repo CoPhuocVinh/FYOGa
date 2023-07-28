@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -40,8 +40,11 @@ public class Register{
     @Column(name = "slot_used")
     int slotUsed;
 
-    @Column(name = "week_used")
-    int weekUsed;
+    @Column(name = "type_paying")
+    String typePaying;
+
+    @Column(name = "expired")
+    Date expired;
 
     @ManyToOne
     @JoinColumn(name = "discountID")
@@ -50,5 +53,6 @@ public class Register{
     @ManyToOne
     @JoinColumn(name = "customerID")
     Account customer;
+
 
 }

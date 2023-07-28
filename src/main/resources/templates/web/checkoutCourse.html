@@ -39,7 +39,7 @@
             <div class="text-cover" th:object="${PAYING.get()}">
                 <h1 th:text="*{aPackage.course.name}"></h1>
 
-                <p class="price" th:text="''+*{aPackage.price} +' vnđ / '+*{aPackage.slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"> </p>
+                <p class="price" th:text="''+*{aPackage.slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"> </p>
             </div>
         </div>
         <div class="payment" th:object="${PAYING.get()}">
@@ -48,7 +48,7 @@
                 <table class="table-checkout">
                     <tr>
                         <td th:text="'' + *{aPackage.slotOnMonth * timeOnMonth}+' Buổi / '+*{timeOnMonth}+' Tháng'"></td>
-                        <td th:text="''+ *{aPackage.price} + 'vnđ'"></td>
+                        <td th:text="''+ *{aPackage.price * timeOnMonth} + 'vnđ'"></td>
                     </tr>
                     <tr>
                         <td>Khuyến mãi</td>
@@ -57,7 +57,7 @@
                     <tfoot>
                     <tr class="total">
                         <td>Tổng tiền</td>
-                        <td th:text="'' + *{aPackage.price * (100 -percentDiscount)/100} +' vnđ'"></td>
+                        <td th:text="'' + *{aPackage.price* timeOnMonth * (100 -percentDiscount)/100} +' vnđ'"></td>
                     </tr>
                     </tfoot>
                 </table>

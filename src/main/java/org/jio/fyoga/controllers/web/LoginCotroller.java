@@ -64,8 +64,9 @@ public class LoginCotroller {
 
             try {
                 int discountID = (int) session.getAttribute("CHECKOUTING");
+                int typePaying = (int) session.getAttribute("TYPEPAYING");
                 session.removeAttribute("CHECKOUTING");
-                return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID;
+                return "redirect:/FYoGa/Course/PackageCheckOut?discountID="+discountID+"&typePaying="+typePaying;
 
             }catch (Exception ex){
 

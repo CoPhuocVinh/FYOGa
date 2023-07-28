@@ -22,7 +22,7 @@ public interface ICourseService {
     Optional<Course> findById(Integer integer);
 
     // xu lu img
-    void saveIMGAccount(MultipartFile file, Course course) throws IOException;
+    void saveIMG(MultipartFile file, Course course) throws IOException;
 
     <S extends Course> S save(S entity);
 

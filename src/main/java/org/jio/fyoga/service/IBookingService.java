@@ -14,4 +14,6 @@ public interface IBookingService {
 
 
     Booking findByaClassBooking_ClassIDAndCustomer_AccountID(int classID, int userID);
+
+    int countByAClassBooking_ClassID(int classId);
 }
