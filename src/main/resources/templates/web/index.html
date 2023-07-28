@@ -125,8 +125,7 @@
                                         <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
                                         <td  class="color-1">
                                             <h6 th:text="${DAY.AClass.course.name}"></h6>
-                                            <p th:text="${DAY.getAClass().className}" class="idcourse"></p>
-                                            <p th:text="${DAY.getAClass().teacher.fullName}" class="idcourse"></p>
+                                            <p th:text="''+${''+DAY.getAClass().className+' - '+DAY.getAClass().teacher.fullName}" class="idcourse"></p>
                                             <p th:text="${DAY.note}" class="idcourse"></p>
 
 

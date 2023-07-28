@@ -62,5 +62,44 @@ public class MyUtil {
         return calendar.getTime();
     }
 
+    public static String tran4Paying(int paying){
+
+        String typePaying = "";
+        if (paying == 0)
+            typePaying = "tại quầy";
+        if (paying == 1)
+            typePaying = "VNPAY";
+
+        return typePaying;
+    }
+
+    public static Date currentDate(){
+
+        Date date = new Date(System.currentTimeMillis());
+        // Tạo đối tượng Calendar từ ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        date = calendar.getTime();
+        return date;
+    }
+
+    public static Date expiredDateOnDate(int noDate){
+
+        Date date = new Date(System.currentTimeMillis());
+        // Tạo đối tượng Calendar từ ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        // Thêm 5 ngày vào ngày hiện tại
+        calendar.add(Calendar.DAY_OF_MONTH, noDate);
+
+        // Lấy ngày hết hạn (expiredDate) từ Calendar
+        Date expiredDate = calendar.getTime();
+        return expiredDate;
+    }
+
+
+
 
 }

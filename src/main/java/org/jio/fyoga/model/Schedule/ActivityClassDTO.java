@@ -29,5 +29,8 @@ public class ActivityClassDTO {
     String note;
     Date dayOfMonth;
 
+    int noBooking;
+    boolean isBooking = false;
+
     boolean isEdit = false;
 }

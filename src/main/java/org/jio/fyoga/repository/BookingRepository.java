@@ -22,4 +22,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     Booking findByaClassBooking_ClassIDAndCustomer_AccountID(int classID, int userID);
 
+    int countByaClassBooking_ClassID(int classId);
+
 }

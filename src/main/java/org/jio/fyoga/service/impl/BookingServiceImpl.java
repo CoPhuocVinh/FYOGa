@@ -32,4 +32,8 @@ public class BookingServiceImpl implements IBookingService {
         return bookingRepository.findByaClassBooking_ClassIDAndCustomer_AccountID(classID, userID);
     }
 
+    @Override
+    public int countByAClassBooking_ClassID(int classId) {
+        return bookingRepository.countByaClassBooking_ClassID(classId);
+    }
 }

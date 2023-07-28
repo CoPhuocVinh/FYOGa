@@ -93,22 +93,7 @@ public class CourseController {
         return "web/pakageCourse";
     }
 
-    // qua han ko con su dung
 
-//    public List<PackageDTO> tranferDTO2Entity(List<Package> packagesEntitys){
-//        List<PackageDTO> packageDTOs = new ArrayList<>();
-//
-//        for (Package packageEntiry : packagesEntitys){
-//            PackageDTO packageDTO = new PackageDTO();
-//            BeanUtils.copyProperties(packageEntiry, packageDTO);
-//            float priceDiscount = packageDTO.getPrice() * (100 - packageDTO.getPercentDiscount())/100 ;
-//            packageDTO.setPriceDiscount(priceDiscount);
-//            packageDTOs.add(packageDTO);
-//
-//        }
-//
-//        return packageDTOs;
-//    }
 
     public List<DiscountDTO> tranferDTO2Entity(List<Discount> discountEntitys, Optional<Package> pkg ){
         List<DiscountDTO> DiscountDTOs = new ArrayList<>();
@@ -116,7 +101,7 @@ public class CourseController {
         for (Discount discountEntiry : discountEntitys){
             DiscountDTO discountDTO = new DiscountDTO();
             BeanUtils.copyProperties(discountEntiry, discountDTO);
-            float priceDiscount = discountEntiry.getAPackage().getPrice() * (100 - discountDTO.getPercentDiscount())/100 ;
+            float priceDiscount = discountEntiry.getAPackage().getPrice() * (100 - discountDTO.getPercentDiscount())/100 * discountEntiry.getTimeOnMonth();
             discountDTO.setPriceDiscount(priceDiscount);
             discountDTO.setSlotOnMonth(pkg.get().getSlotOnMonth());
             DiscountDTOs.add(discountDTO);

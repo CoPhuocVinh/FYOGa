@@ -63,6 +63,8 @@
             <form th:action="@{/FYoGa/Login/ADMIN/Course/CreateOrEdit}" th:object="${COURSEDTO}" method="post" class="form-box-content" enctype="multipart/form-data">
 
                 <input th:field="*{courseID}" type="hidden">
+                <input th:field="*{isEdit}" type="hidden">
+
                 <div class="form-group">
                     <label class="control-label col-md-3" >Tên khóa </label>
                     <input th:field="*{name}" type="text" placeholder="Tên khóa" required>
