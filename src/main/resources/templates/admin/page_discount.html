@@ -72,15 +72,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="package : ${PACKAGELIST}">
-            <td><a href="/admin/page_discount_detail.html" th:text="${package.name}"></a></td>
-            <td th:text="${package.course.name}"></td>
-            <td th:text="${package.price}"></td>
+        <tr th:each="package : ${PACKAGELIST}" th:object="${package}">
+            <td><a href="/admin/page_discount_detail.html" th:text="*{name}"></a></td>
+            <td th:text="*{course.name}"></td>
+            <td th:text="*{price}"></td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a th:href="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit(isEdit=1, PackageID=${package.packageID})}" data-toggle="tooltip" title="Chỉnh sửa"
+                    <a th:href="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit(isEdit=1, PackageID=*{packageID})}" data-toggle="tooltip" title="Chỉnh sửa"
                        class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
-                    <a th:href="@{/FYoGa/Login/ADMIN/Package/remove(packageID=${package.packageID})}" data-toggle="tooltip" title="Xóa"
+                    <a th:href="@{/FYoGa/Login/ADMIN/Package/remove(packageID=*{packageID})}" data-toggle="tooltip" title="Xóa"
                        class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                 </div>
             </td>
