@@ -14,14 +14,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     @Query("SELECT COUNT(b.bookingID) AS count FROM Booking b GROUP BY b.aClassBooking.classID")
     int countBookingIDsByClassID();
 
-    Booking findByaClassBooking_ClassIDAndCustomer_AccountID(int classID, int userID);
+    Booking findByaClassBooking_ClassIDAndCustomer_AccountIDAndStatus(int classID, int userID, int status);
 
     int countByaClassBooking_ClassID(int classId);
+
+    List<Booking> findAllByCustomer_AccountID(int id);
 
 }

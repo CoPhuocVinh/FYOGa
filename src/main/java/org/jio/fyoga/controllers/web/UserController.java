@@ -19,6 +19,7 @@ import org.jio.fyoga.model.Schedule.WeekScheduleDTO;
 import org.jio.fyoga.service.*;
 import org.jio.fyoga.service.impl.ActivityClassServiceImpl;
 import org.jio.fyoga.service.impl.ScheduleServiceImpl;
+import org.jio.fyoga.util.MyCheckExpired;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,6 +176,7 @@ public class UserController {
     public String ScheduleClass(HttpSession session, Model model, @RequestParam int courseID) {
         if (MyUtil.checkAuthen(session)) {
             // xủ lý code trong đây
+            checkExpiredOnUser(session, courseID);
 
             Account account = (Account) session.getAttribute("USER");
 
@@ -195,7 +197,7 @@ public class UserController {
             List<WeekScheduleDTO> weekScheduleDTOs = activityClassServiceTest.getActivityClassesFromMondayToSaturdayOnCourse(schedules.getScheduleID(),courseID,account.getAccountID());
             System.out.printf("bibi");
             model.addAttribute("ACTIVITYS",weekScheduleDTOs);
-
+            model.addAttribute("EXPIRED", weekScheduleDTOs.get(0).getDayOfWeeks().get(0).getExpired());
 
             return "web/scheduleDetail";
         }
@@ -220,18 +222,21 @@ public class UserController {
             bookingEntity.setCustomer(accountEntity);
             bookingEntity.setAClassBooking(classEntity);
 
-//            List<Register> registers = registerService.findByStatusOrStatus(2,3);
-//            if (registers.size()!=0){
-//                for(Register register : registers){
-//                    if (register.getStatus()==3){
-//                        int dayExpired = MyUtil.daysBetweenCurrent(register.getExpired());
-//                        Date dateExpired = MyUtil.expiredDateOnDate(dayExpired);
-//                        bookingEntity.setExpired(dateExpired);
-//
-//                    }
-//
-//                }
-//            }
+            int courseID = bookingEntity.getAClassBooking().getCourse().getCourseID();
+
+            Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+            Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            if(register02 != null){
+                bookingEntity.setExpired(register02.getExpired());
+            }else {
+                if (register03 != null){
+                    bookingEntity.setExpired(register03.getExpired());
+
+                }else {
+                    Date dateExpired = MyUtil.expiredDateOnDate(5);
+                    bookingEntity.setExpired(dateExpired);
+                }
+            }
 
 
             bookingService.save(bookingEntity);
@@ -255,6 +260,36 @@ public class UserController {
         }
         // Xử lý trường hợp tệp tin không tồn tại
         return ResponseEntity.notFound().build();
+    }
+
+    public void checkExpiredOnUser(HttpSession session, int courseID){
+        // check expired
+        Account account = (Account) session.getAttribute("USER");
+        List<Booking> bookings = bookingService.findAllByCustomer_AccountID(account.getAccountID());
+        bookings = MyCheckExpired.checkExpiredOnBooking(bookings);
+        bookingService.saveAll(bookings);
+
+        List<Register> registers = registerService.findAllByByCustomer_AccountID(account.getAccountID());
+        registers = MyCheckExpired.checkExpiredOnRegister(registers);
+        registerService.saveAll(registers);
+
+        Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+        Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+        for (Booking booking : bookings){
+            if(register02 != null){
+                booking.setExpired(register02.getExpired());
+            }else {
+                if (register03 != null){
+                    booking.setExpired(register03.getExpired());
+
+                }else {
+                    Date dateExpired = MyUtil.expiredDateOnDate(5);
+                    booking.setExpired(dateExpired);
+                }
+            }
+        }
+
+
     }
 }
 
