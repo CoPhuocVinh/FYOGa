@@ -878,7 +878,10 @@ a:focus {
     height: 100%;
     object-fit: cover;
 }
-
+.class-img-course-user{
+    width: 50%;
+    height: 50%;
+}
 .class .class-text {
     position: relative;
     padding: 30px 30px 25px 30px;
@@ -1307,6 +1310,7 @@ a:focus {
 .team .team-img img {
     position: relative;
     width: 100%;
+    height: 60%;
 }
 
 .team .team-social {
@@ -3413,7 +3417,7 @@ input[type=text] {
     font-size: 20px;
 }
 
-.input-user-file {
+.input-user-file-info{
     font-size: 50px !important;
 }
 

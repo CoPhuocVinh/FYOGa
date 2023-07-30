@@ -84,8 +84,8 @@
                 <div class="row class-container">
                     <div th:each="COUSE: ${COURSES}" th:object="${COUSE}"class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
                         <div class="class-wrap">
-                            <div class="class-img">
-                                <img class="input-user-file" th:src="@{/FYoGa/Login/ADMIN/Course/downloads-png(courseID=*{courseID})}" alt="">
+                            <div class="class-img class-img-course-user">
+                                <img class="input-user-file " th:src="@{/FYoGa/Login/ADMIN/Course/downloads-png(courseID=*{courseID})}" alt="">
 
                             </div>
                             <div class="class-text class-history">
