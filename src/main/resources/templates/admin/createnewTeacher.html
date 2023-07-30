@@ -81,7 +81,8 @@
                 <input type="text" th:field="*{fullName}" name="Name" required><br>
 
                 <label >Số điện thoại</label>
-                <input th:field="*{phone}"  type="tel" name="Number" required><br>
+                <input th:field="*{phone}"  type="tel" name="Number" class="checked-phone" required><br>
+                <span class="error-message" style="color: red; display: none;">Số điện thoại không hợp lệ.</span><br>
 
                 <label >Password</label>
                 <input th:field="*{password}"  type="text" name="Password" required><br>
@@ -112,6 +113,29 @@
             width: 40px;
         }
     </style>
+    <script>
+        // Get all elements with the class 'checked-phone'
+        const phoneInputs = document.querySelectorAll('.checked-phone');
+
+        // Add event listener to each phone input element
+        phoneInputs.forEach((input) => {
+            input.addEventListener('input', () => {
+                const phoneNumber = input.value.trim();
+                const regex = /^0[0-9]{9}$/; // Regular expression to match 10 digits starting with 0
+
+                if (regex.test(phoneNumber)) {
+                    // Valid phone number
+                    input.style.borderColor = ''; // Reset border color
+                    document.querySelector('.error-message').style.display = 'none'; // Hide error message
+                } else {
+                    // Invalid phone number
+                    input.style.borderColor = 'red'; // Set border color to red
+                    document.querySelector('.error-message').style.display = 'inline'; // Show error message
+                }
+            });
+        });
+
+    </script>
     <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
