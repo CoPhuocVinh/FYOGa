@@ -8,15 +8,15 @@ package org.jio.fyoga.controllers.web;/*  Welcome to Jio word
 */
 
 import jakarta.servlet.http.HttpSession;
-import org.jio.fyoga.entity.Account;
-import org.jio.fyoga.entity.Course;
-import org.jio.fyoga.entity.Role;
+import org.jio.fyoga.entity.*;
 import org.jio.fyoga.model.MonthlyTotal;
 import org.jio.fyoga.repository.CourseRepository;
 import org.jio.fyoga.repository.RegisterRepository;
 import org.jio.fyoga.service.IAccountService;
+import org.jio.fyoga.service.IBookingService;
 import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.service.IRoleService;
+import org.jio.fyoga.util.MyCheckExpired;
 import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -42,6 +42,9 @@ public class LoginCotroller {
     IRegisterService registerService;
     @Autowired
     IRoleService roleService;
+
+    @Autowired
+    IBookingService bookingService;
 
 
     @RequestMapping("")
@@ -111,6 +114,17 @@ public class LoginCotroller {
                 System.out.println(course.getCourseID());
             }
             model.addAttribute("COURSES",courses);
+            // check expired
+            List<Booking> bookings = bookingService.findAllByCustomer_AccountID(account.getAccountID());
+            bookings = MyCheckExpired.checkExpiredOnBooking(bookings);
+            bookingService.saveAll(bookings);
+
+            List<Register> registers = registerService.findAllByByCustomer_AccountID(account.getAccountID());
+            registers = MyCheckExpired.checkExpiredOnRegister(registers);
+            registerService.saveAll(registers);
+
+
+
             return "web/user";
         }
         else
