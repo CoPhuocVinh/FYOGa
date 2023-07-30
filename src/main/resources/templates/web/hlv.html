@@ -8,8 +8,7 @@
     <meta content="Free Website Template" name="keywords">
     <meta content="Free Website Template" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
@@ -24,69 +23,14 @@
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/web/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Top Bar Start -->
-    <div class="top-bar d-none d-md-block">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="top-bar-left">
-                        <div class="text">
-                            <i class="far fa-clock"></i>
-                            <h2>8:00 - 17:00 | </h2>
-                            <p>Thứ 2 - Thứ 7</p>
-                        </div>
-                        <div class="text">
-                            <i class="fa fa-phone-alt"></i>
-                            <h2>092 752 8888</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Top Bar End -->
-
-    <!-- Nav Bar Start -->
-    <div class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">FY<span>o</span>ga</a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav ml-auto">
-                    <a href="index.html" class="nav-item nav-link active">Trang Chủ</a>
-                    <a href="index.html" class="nav-item nav-link">Khóa học</a>
-                    <a href="index.html" class="nav-item nav-link">Lịch học</a>
-                    <a href="index.html" class="nav-item nav-link">Huấn luyện viên</a>
-                    <a href="index.html" class="nav-item nav-link">Blog</a>
-
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
-                        <div class="dropdown-menu">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog chi tiết</a>
-                        </div>
-                    </div> -->
-                    <a href="#footer" class="nav-item nav-link">Liên hệ</a>
-
-
-
-
-                </div>
-                <div class="nav-item nav-link-dk">
-                    <button href="index.html" class="a">Đăng Xuất</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Nav Bar End -->
+<!--    header start-->
+<div th:include="common/web/headerLogin"></div>
+<!--    header start-->
 
     <!-- Page Header Start -->
     <div class="page-header">
@@ -108,7 +52,7 @@
     <div class="user-detail">
         <div class="row user-display">
 
-            <img class="user-img" src="img/avatar-ga76e04ee0_1280.png" alt="">
+            <img class="user-img" src="/web/img/avatar-ga76e04ee0_1280.png" alt="">
 
             <div class="info">
                 <h2>Giáo viên: Đỗ Kim Hậu</h2>
@@ -132,7 +76,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
                         <div class="class-wrap">
                             <div class="class-img package-program ftco-animate">
-                                <img src="img/class-1.jpg" alt="img clas1">
+                                <img src="/web/img/class-1.jpg" alt="img clas1">
                             </div>
                             <div class="class-text">
                                 <a href="">Hatha Yoga</a><br>
@@ -144,7 +88,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 class-item filter-2 wow fadeInUp" data-wow-delay="0.2s">
                         <div class="class-wrap">
                             <div class="class-img package-program ftco-animate">
-                                <img src="img/class-2.jpg" alt="img class2">
+                                <img src="/web/img/class-2.jpg" alt="img class2">
                             </div>
                             <div class="class-text">
                                 <a href="">ASANAS Yoga</a><br>
@@ -155,7 +99,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 class-item filter-3 wow fadeInUp" data-wow-delay="0.4s">
                         <div class="class-wrap">
                             <div class="class-img package-program ftco-animate">
-                                <img src="img/class-3.jpg" alt="img class3">
+                                <img src="/web/img/class-3.jpg" alt="img class3">
                             </div>
                             <div class="class-text">
                                 <a href="">YOGA TRỊ LIỆU</a><br>
@@ -166,7 +110,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.6s">
                         <div class="class-wrap">
                             <div class="class-img package-program ftco-animate">
-                                <img src="img/class-4.jpg" alt="img class4">
+                                <img src="/web/img/class-4.jpg" alt="img class4">
                             </div>
                             <div class="class-text ">
                                 <a href="">YOGA NGHỆ THUẬT</a><br>
@@ -255,5 +199,5 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/functions.js"></script>
+    <script src="/web/js/main.js"></script>
+    <script src="/web/js/functions.js"></script>
