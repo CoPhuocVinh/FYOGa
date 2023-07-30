@@ -42,133 +42,124 @@
 <!-- <body class="fixed"> -->
 
 <body>
-    <!-- Page Container -->
-    <div th:replace="~{common/admin/Container :: page-container}"></div>
-    <!-- END Page Container -->
+<!-- Page Container -->
+<div th:replace="~{common/admin/Container :: page-container}"></div>
+<!-- END Page Container -->
 
-    <!-- Page Content -->
-    <div id="page-content">
-        <!-- Navigation info -->
-        <ul id="nav-info" class="clearfix">
-            <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
-            <li class="active"><a href="">Khóa học</a></li>
-        </ul>
-        <!-- END Navigation info -->
+<!-- Page Content -->
+<div id="page-content">
+    <!-- Navigation info -->
+    <ul id="nav-info" class="clearfix">
+        <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
+        <li class="active"><a href="">Khóa học</a></li>
+    </ul>
+    <!-- END Navigation info -->
 
-        <h3>Khóa học đang diễn ra
-            <a href="/FYoGa/Login/ADMIN/Course/CreateOrEdit?isEdit=0" data-toggle="tooltip" title="Thêm mới khoá học"
-               class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
-            <div class="card-header section-bnt">
-                <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active-bnt" href="" id="active-bnt" data-toggle="tab">Hoạt
-                                động</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link inactive-bnt" href="" id="inactive-btn"
-                               data-toggle="tab">Không hoạt động</a>
-                        </li>
-                    </ul>
-                </div>
-            </div><!-- /.card-header -->
-        </h3>
-        <!-- Tiles -->
-        <!-- Row 1 -->
-        <div class="dash-tiles row" id="active-list">
-            <!-- Column 1 of Row 1 -->
-            <div th:each="COURSE : ${COURSE_ON}" th:object="${COURSE}" class="col-sm-3">
-                <!-- Total Users Tile -->
-                <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
-                    <div class="dash-tile-header">
-                        <div class="dash-tile-options">
-                            <div class="btn-group">
-
-                                <a th:href="@{/FYoGa/Login/ADMIN/Course/delete(courseID=${COURSE.courseID})}" class="btn btn-default" data-toggle="tooltip" title="Đóng"><i class="fa fa-close"></i></a>
-
-
-                                <a th:href="@{/FYoGa/Login/ADMIN/Course/CreateOrEdit(isEdit = 1, CourseID = *{courseID})}" class="btn btn-default" data-toggle="tooltip"
-                                   title="Chỉnh sửa"><i class="fa fa-cog"></i></a>
-                            </div>
-                        </div></br>
-                        <h1 th:text="*{name}"></h1>
-                    </div>
-
-                    <div class="dash-tile-icon"><i class="fa fa-users"></i></div>
-<!--                    <div class="dash-tile-text">30</div>-->
-                </div>
-                <!-- END Total Users Tile -->
+    <h3>Khóa học đang diễn ra
+        <a href="/FYoGa/Login/ADMIN/Course/CreateOrEdit?isEdit=0" data-toggle="tooltip" title="Thêm mới khoá học"
+           class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
+        <div class="card-header section-bnt">
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active-bnt" href="" id="active-bnt" data-toggle="tab">Hoạt
+                            động</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link inactive-bnt" href="" id="inactive-btn"
+                           data-toggle="tab">Không hoạt động</a>
+                    </li>
+                </ul>
             </div>
-            <!-- END Column 1 of Row 1 -->
-
-        </div>
-
-        <div class="dash-tiles row " id="inactive-list">
-            <div th:each="COURSE : ${COURSE_OFF}" th:object="${COURSE}" class="col-sm-3">
-                <!-- Total Users Tile -->
-                <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
-                    <div class="dash-tile-header">
-                        <div class="dash-tile-options">
-                            <div class="btn-group">
-
-                                <a th:href="@{/FYoGa/Login/ADMIN/Course/resetstatus(courseID=${COURSE.courseID})}" data-toggle="tooltip" title="Hoàn tác"
-                                   class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
-
-                            </div>
+        </div><!-- /.card-header -->
+    </h3>
+    <!-- Tiles -->
+    <!-- Row 1 -->
+    <div class="dash-tiles row" id="active-list">
+        <!-- Column 1 of Row 1 -->
+        <div th:each="COURSE : ${COURSE_ON}" th:object="${COURSE}" class="col-sm-3">
+            <!-- Total Users Tile -->
+            <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
+                <div class="dash-tile-header">
+                    <div class="dash-tile-options">
+                        <div class="btn-group">
+                            <!-- Chuyển qua không hoạt động -->
+                            <a th:href="@{/FYoGa/Login/ADMIN/Course/delete(courseID=${COURSE.courseID})}"
+                               class="btn btn-default" data-toggle="tooltip" title="Đóng"><i class="fa fa-close"></i></a>
+                            <!-- Chỉnh sửa -->
+                            <a th:href="@{/FYoGa/Login/ADMIN/Course/CreateOrEdit(isEdit = 1, CourseID = *{courseID})}"
+                               class="btn btn-default" data-toggle="tooltip" title="Chỉnh sửa"><i class="fa fa-cog"></i></a>
                         </div>
-                        </br>
-                        <h1 th:text="*{name}"></h1>
-                    </div>
-
-                    <div class="dash-tile-icon"><i class="fa fa-users"></i></div>
-                    <!--                    <div class="dash-tile-text">30</div>-->
+                    </div></br>
+                    <h1 th:text="*{name}"></h1>
                 </div>
-                <!-- END Total Users Tile -->
+                <div class="dash-tile-icon"><i class="fa fa-users"></i></div>
             </div>
-
+            <!-- END Total Users Tile -->
+        </div>
+        <!-- END Column 1 of Row 1 -->
     </div>
-        <!-- END Form Validation -->
-        <!-- END Tiles -->
+
+    <div class="dash-tiles row " id="inactive-list">
+        <div th:each="COURSE : ${COURSE_OFF}" th:object="${COURSE}" class="col-sm-3">
+            <!-- Total Users Tile -->
+            <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
+                <div class="dash-tile-header">
+                    <div class="dash-tile-options">
+                        <div class="btn-group">
+                            <!-- Hoàn tác hoạt động -->
+                            <a th:href="@{/FYoGa/Login/ADMIN/Course/resetstatus(courseID=${COURSE.courseID})}" data-toggle="tooltip" title="Hoàn tác"
+                               class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                        </div>
+                    </div>
+                    </br>
+                    <h1 th:text="*{name}"></h1>
+                </div>
+                <div class="dash-tile-icon"><i class="fa fa-users"></i></div>
+            </div>
+            <!-- END Total Users Tile -->
+        </div>
     </div>
+    <!-- END Tiles -->
+</div>
 
-    <script>
+<script>
 
-        //xử lý nút bấm active và inactive
-        var activeBtn = document.getElementById('active-bnt');
-        var inactiveBtn = document.getElementById('inactive-btn');
-        var activeList = document.getElementById('active-list');
-        var inactiveList = document.getElementById('inactive-list');
+    //xử lý nút bấm active và inactive
+    var activeBtn = document.getElementById('active-bnt');
+    var inactiveBtn = document.getElementById('inactive-btn');
+    var activeList = document.getElementById('active-list');
+    var inactiveList = document.getElementById('inactive-list');
 
-        activeBtn.addEventListener('click', function () {
-            activeList.style.display = 'inline-table';
-            inactiveList.style.display = 'none';
-        });
-        inactiveBtn.addEventListener('click', function () {
-            activeList.style.display = 'none';
-            inactiveList.style.display = 'inline-table';
-        });
-    </script>
+    activeBtn.addEventListener('click', function () {
+        activeList.style.display = 'inline-table';
+        inactiveList.style.display = 'none';
+    });
+    inactiveBtn.addEventListener('click', function () {
+        activeList.style.display = 'none';
+        inactiveList.style.display = 'inline-table';
+    });
+</script>
 
-    <!-- END Page Content -->
+<!-- END Page Content -->
 
-    <!-- Scroll to top link, check main.js - scrollToTop() -->
-    <a href="javascript:void(0)" id="to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- Scroll to top link, check main.js - scrollToTop() -->
+<a href="javascript:void(0)" id="to-top"><i class="fa fa-chevron-up"></i></a>
 
 
-    <!-- Excanvas for canvas support on IE8 -->
-    <!--[if lte IE 8]><script src="/admin/js/helpers/excanvas.min.js"></script><![endif]-->
+<!-- Excanvas for canvas support on IE8 -->
+<!--[if lte IE 8]><script src="/admin/js/helpers/excanvas.min.js"></script><![endif]-->
 
-    <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
-    <!-- Bootstrap.js -->
-    <script src="/admin/js/vendor/bootstrap.min.js"></script>
+<!-- Bootstrap.js -->
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
 
-    <!-- Jquery plugins and custom javascript code -->
-    <script src="/admin/js/plugins.js"></script>
-    <script src="/admin/js/main.js"></script>
+<!-- Jquery plugins and custom javascript code -->
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
 
 </body>
-
 </html>

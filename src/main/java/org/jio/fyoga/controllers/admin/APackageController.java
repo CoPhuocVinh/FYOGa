@@ -51,7 +51,7 @@ public class APackageController {
         List<Course> courses = courseService.findAll();
         PackageDTO packageDTO = PackageDTO.builder().build();
 
-        // Xử lý chức năng chỉnh sửa
+        // Xử lý chỉnh sửa
         if (isEdit == 1 && packageID >= 0) {
             Optional<Package> packageEntityOptional = packageService.findById(packageID);
             if (packageEntityOptional.isPresent()) {
@@ -65,7 +65,7 @@ public class APackageController {
             }
         }
 
-        // Xử lý chức năng tạo mới
+        // Xử lý tạo mới
         else if (isEdit == 0) {
             packageDTO.setIsEdit(false);
         }
@@ -76,11 +76,9 @@ public class APackageController {
     }
 
     @PostMapping("/CreateOrEdit")
-    public String createOrEdit(@RequestParam boolean isEdit,
-                               @RequestParam(name = "PackageID", required = false, defaultValue = "-1") int packageID,
-                               @ModelAttribute("PACKAGEDTO") PackageDTO packageDTO,
+    public String createOrEdit(@ModelAttribute("PACKAGEDTO") PackageDTO packageDTO,
                                RedirectAttributes ra) {
-        if (!isEdit) {
+        if (!packageDTO.getIsEdit()) {
             // Xử lý tạo mới
             Course course = courseService.findById(packageDTO.getCourseID()).orElse(null);
             if (course == null) {
@@ -105,7 +103,7 @@ public class APackageController {
                 return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=0";
             }
 
-            // Create a new Package entity and save it
+            // tạo Package
             Package packageEntity = new Package();
             BeanUtils.copyProperties(packageDTO, packageEntity);
             String packageName = packageDTO.getSlotOnMonth() + " buổi";
@@ -115,28 +113,28 @@ public class APackageController {
             packageEntity.setStatus(1);
             packageService.save(packageEntity);
 
-            // Create a new Discount entity and save it
+            // Tạo Discount
             Discount discount = new Discount();
             discount.setTimeOnMonth(packageDTO.getSlotOnMonth());
             discount.setPercentDiscount(0);
             discount.setAPackage(packageEntity);
             discountService.save(discount);
-        } else if (isEdit && packageID > 0) {
+        } else if (packageDTO.getIsEdit()) {
             // Xử lý chỉnh sửa
-            Optional<Package> packageEntityOptional = packageService.findById(packageID);
+            Optional<Package> packageEntityOptional = packageService.findById(packageDTO.getPackageID());
             if (packageEntityOptional.isPresent()) {
                 Package packageEntity = packageEntityOptional.get();
                 Course course = courseService.findById(packageDTO.getCourseID()).orElse(null);
                 if (course == null) {
                     ra.addFlashAttribute("MSG", "Invalid Course ID. Please choose a valid Course.");
-                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageID;
+                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageDTO.getPackageID();
                 }
 
                 // Kiểm tra xem gói học đã tồn tại hay chưa
                 Package existingPackage = packageService.findPackageBySlotOnMonthAndCourse_CourseID(packageDTO.getSlotOnMonth(), packageDTO.getCourseID());
                 if (existingPackage != null && existingPackage.getPackageID() != packageEntity.getPackageID()) {
                     ra.addFlashAttribute("MSG", "Package with same Course and Slot on Month already exists. Please choose a different one.");
-                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageID;
+                    return "redirect:/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=1&PackageID=" + packageDTO.getPackageID();
                 }
 
                 String packageName = packageDTO.getSlotOnMonth() + " buổi";
