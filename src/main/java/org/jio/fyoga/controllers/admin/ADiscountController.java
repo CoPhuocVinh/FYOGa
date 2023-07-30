@@ -22,9 +22,8 @@ public class ADiscountController {
 
     @Autowired
     private IDiscountService discountService;
-
     @Autowired
-    private IPackageService packageService;
+    IPackageService packageService;
 
     @GetMapping("/{packageID}/Discount")
     public String getDiscountsForPackage(@PathVariable int packageID, Model model) {
@@ -41,7 +40,6 @@ public class ADiscountController {
                                      Model model) {
         int discountID = Integer.parseInt(R_DiscountID);
         int packageID = Integer.parseInt(R_packageID);
-
         // Xử lý chỉnh sửa
         DiscountDTO discountDTO = DiscountDTO.builder().build();
         Package packageEntity = packageService.findById(packageID).orElse(null);
@@ -53,13 +51,16 @@ public class ADiscountController {
                 BeanUtils.copyProperties(discountEntity, discountDTO);
 
                 discountDTO.setPackageID(discountEntity.getAPackage().getPackageID());
+
                 discountDTO.setIsEdit(true);
             }
         }
 
         // Xử lý tạo mới
         else if (isEdit == 0) {
+
             discountDTO.setPackageID(packageID);
+
             discountDTO.setIsEdit(false);
         }
 
@@ -75,26 +76,32 @@ public class ADiscountController {
                                  RedirectAttributes ra) {
         Package packageEntity = packageService.findById(discountDTO.getPackageID()).orElse(null);
 
+
         if (discountDTO.getIsEdit()) {
             // Xử lý chỉnh sửa
             Optional<Discount> discountEntityOptional = discountService.findById(discountDTO.getDiscountID());
             if (discountEntityOptional.isPresent()) {
                 Discount discountEntity = discountEntityOptional.get();
                 BeanUtils.copyProperties(discountDTO, discountEntity);
+
                 discountEntity.setAPackage(packageEntity);
                 discountEntity.setTimeOnMonth(discountDTO.getTimeOnMonth());
                 discountEntity.setPercentDiscount(discountEntity.getPercentDiscount());
+
                 discountService.save(discountEntity);
             }
         } else {
             // Xử lý tạo mới
             Discount discountEntity = new Discount();
             BeanUtils.copyProperties(discountDTO, discountEntity);
+
             discountEntity.setAPackage(packageEntity);
+
             discountService.save(discountEntity);
         }
 
         ra.addFlashAttribute("MSG", "Save successfully!!!");
+
         return "redirect:/FYoGa/Login/ADMIN/Discount/"+discountDTO.getPackageID()+"/Discount";
     }
 
@@ -103,6 +110,7 @@ public class ADiscountController {
         discountService.deleteById(discountID);
         return "redirect:/FYoGa/Login/ADMIN/Discount/" + packageID + "/Discount";
     }
+
 
 
 
