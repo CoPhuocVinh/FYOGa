@@ -98,5 +98,23 @@ public class RegisterServiceImpl implements IRegisterService {
         return registerRepository.saveAll(entities);
     }
 
+    @Override
+    public List<Register> findAllByStatusOrderByRegisteredDateDesc(int status) {
+        return registerRepository.findAllByStatusOrderByRegisteredDateDesc(status);
+    }
 
+    @Override
+    public List<Register> findAllByStatusOrStatusOrderByRegisteredDateDesc(int statusv1, int statusv2) {
+        return registerRepository.findAllByStatusOrStatusOrderByRegisteredDateDesc(statusv1, statusv2);
+    }
+
+    @Override
+    public Register findById(Integer integer) {
+        return registerRepository.findById(integer).orElse(null);
+    }
+
+    @Override
+    public List<Register> findAllByOrderByRegisteredDateDesc() {
+        return registerRepository.findAllByOrderByRegisteredDateDesc();
+    }
 }

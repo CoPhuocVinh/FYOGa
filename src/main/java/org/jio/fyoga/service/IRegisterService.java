@@ -37,4 +37,12 @@ public interface IRegisterService {
     Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status);
 
     <S extends Register> List<S> saveAll(Iterable<S> entities);
+
+    List<Register> findAllByStatusOrderByRegisteredDateDesc(int status);
+
+    List<Register> findAllByStatusOrStatusOrderByRegisteredDateDesc(int statusv1, int statusv2);
+
+    Register findById(Integer integer);
+
+    List<Register> findAllByOrderByRegisteredDateDesc();
 }

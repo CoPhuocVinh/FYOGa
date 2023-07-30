@@ -8,11 +8,15 @@ package org.jio.fyoga.controllers.admin;/*  Welcome to Jio word
 */
 
 import org.jio.fyoga.entity.Account;
-import org.jio.fyoga.entity.Class;
+import org.jio.fyoga.entity.Register;
 import org.jio.fyoga.entity.Role;
 import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.service.IAccountService;
+import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.service.IRoleService;
+import org.jio.fyoga.util.MyCheckExpired;
+import org.jio.fyoga.util.MyUtil;
+import org.jio.fyoga.util.MyUtilService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +39,11 @@ public class AUserController {
     @Autowired
     IRoleService roleService;
 
+    @Autowired
+    IRegisterService registerService;
+
+    @Autowired
+    MyUtilService myUtilService;
     @GetMapping("")
     public String showpageUser(@RequestParam int roleID, Model model) {
 
@@ -151,8 +160,33 @@ public class AUserController {
 
     // /FYoGa/Login/ADMIN/User/Confirm
     @GetMapping("/Confirm")
-    public String showConfirm(){
+    public String showConfirm(Model model){
+        List<Register> registerList = registerService.findAllByOrderByRegisteredDateDesc();
+        MyCheckExpired.checkExpiredOnRegister(registerList);
+        registerService.saveAll(registerList);
+        List<Register> registerListStatus0 = registerService.findAllByStatusOrderByRegisteredDateDesc(0);
+        List<Register> registerListStatus1 = registerService.findAllByStatusOrderByRegisteredDateDesc(1);
+        List<Register> registerListStatus2or3 = registerService.findAllByStatusOrStatusOrderByRegisteredDateDesc(2,3);
+
+
+        model.addAttribute("LISTEXPIRED",registerListStatus0);
+        model.addAttribute("LISTPAYING",registerListStatus1);
+        model.addAttribute("LISTPAYED", registerListStatus2or3);
+
         return "admin/page_list_confirm_register";
+    }
+
+
+    // /FYoGa/Login/ADMIN/User/Confirm
+    @PostMapping("/Confirm")
+    public String Confirm(@RequestParam int registerID){
+        Register registerEntity = registerService.findById(registerID);
+
+
+        myUtilService.Confirm(registerEntity);
+
+
+        return "redirect:/FYoGa/Login/ADMIN/User/Confirm";
     }
 
 
