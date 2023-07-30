@@ -233,20 +233,21 @@
     <!-- form xác nhận  -->
     <div th:if="${MSG}" class="modal-schedule-Checkout" >
         <div class="modal-container-schedule">
-            <span class="close" id="myButton"><a>&times;</a></span>
+<!--            <span class="close" id="myButton"><a>&times;</a></span>-->
             <header class="modal-header-register">
 <!--                <img src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">-->
             </header>
-
-            <form action="#">
-                <div class="modal-body-schedule">
+            <div style="transform: translateY(145px);">
+                <form action="#">
+                  <div class="modal-body-schedule">
                     <h3 class="mo" th:text="${MSG}"></h3>
-                </div>
-            </form>
+                  </div>
+                </form>
 
-            <a class="modal-login-button-re-hatha" th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = ${COURSE.courseID})}" type="submit">
-                Đóng
-            </a>
+                <a class="modal-login-button-re-hatha" th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = ${COURSE.courseID})}" type="submit">
+                  Đóng
+                </a>
+            </div>
         </div>
     </div>
 
