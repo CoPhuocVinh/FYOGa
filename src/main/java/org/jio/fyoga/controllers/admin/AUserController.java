@@ -68,7 +68,6 @@ public class AUserController {
         AccountDTO account = AccountDTO.builder().build();
 
 
-
         //xu ly update
         if(isEdit == 1 && AccountID >= 0){
             Account accountEntity = accountService.findById(AccountID);

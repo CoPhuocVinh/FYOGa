@@ -70,13 +70,10 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Slot> slots;
-
     @OneToMany(mappedBy = "customer")
     private Set<Attendance> attendances;
 
-    @OneToMany(mappedBy = "staff")
-    private Set<Attendance> attendancesByStaff;
+    @OneToMany(mappedBy = "teacher")
+    private Set<Class> classes;
 
 }

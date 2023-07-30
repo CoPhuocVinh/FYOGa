@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/FYoGa/Login/ADMIN/attendance")
+@RequestMapping("/FYoGa/Login/ADMIN/Attendance")
 public class AAttendance {
     @Autowired
     ScheduleServiceImpl scheduleServiceTest;
@@ -46,10 +46,10 @@ public class AAttendance {
         return "admin/attendance";
     }
 
-    @GetMapping("/check")
+    @GetMapping("/Check")
     public String showCheck(){
 
 
-        return "";
+        return "admin/checkattendance";
     }
 }

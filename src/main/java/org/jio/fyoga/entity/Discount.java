@@ -33,7 +33,7 @@ public class Discount implements Serializable {
     @Column(name = "percent_discount")
     float percentDiscount;
 
-    @OneToMany(mappedBy = "aDiscount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "aDiscount")
     List<Register> registers;
 
     @ManyToOne

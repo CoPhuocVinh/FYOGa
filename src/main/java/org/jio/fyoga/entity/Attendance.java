@@ -28,16 +28,16 @@ public class Attendance {
     @Column(name = "is_present")
     Boolean isPresent;
 
-    @ManyToOne
-    @JoinColumn(name = "classID")
-    Class aClassAttend;
+    @Column(name = "staffID")
+    int staff;
 
     @ManyToOne
     @JoinColumn(name = "customerID")
     Account customer;
 
+
     @ManyToOne
-    @JoinColumn(name = "staffID")
-    Account staff;
+    @JoinColumn(name = "activityID")
+    ActivityClass activityClass;
 
 }

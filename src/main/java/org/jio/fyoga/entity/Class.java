@@ -33,12 +33,13 @@ public class Class {
 
     @Column(name = "class_name", columnDefinition = "nvarchar(20)")
     String className;
-
+    @Column(name = "staffID")
+    int staff;
 
 //    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
 
-    @OneToMany(mappedBy = "aClassBooking",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "aClassBooking")
     Set<Booking> classBooking;
 
     @ManyToOne
@@ -46,14 +47,8 @@ public class Class {
     Account teacher;
 
     @ManyToOne
-    @JoinColumn(name = "staffID")
-    Account staff;
-
-    @ManyToOne
     @JoinColumn(name = "courseID")
     Course course;
 
-    @OneToMany(mappedBy = "aClassAttend",cascade = CascadeType.ALL)
-    Set<Attendance> attendancesClass;
 
 }

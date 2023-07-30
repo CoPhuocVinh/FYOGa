@@ -32,8 +32,7 @@ public class Slot {
 //    @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
 
-    @ManyToOne
-    @JoinColumn(name = "staffID")
-    Account staff;
+    @Column(name =  "staffID")
+    int staff;
 
 }
