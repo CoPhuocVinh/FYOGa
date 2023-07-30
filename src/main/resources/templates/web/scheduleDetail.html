@@ -55,13 +55,15 @@
         <div class="container schedule-detail">
             <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                 <h2>Lịch tập</h2>
-                    <!-- <h3>Từ 19/06 - 14/07/2023</h3> -->
+                <h3 th:text="'Hết hạn vào '+ ${EXPIRED}">Từ 19/06 - 14/07/2023</h3>
+                <p class="idcourse">vui lòng đăng ký thêm để gia hạn</p>
+
             </div>
             <div class="row">
                 <div class="col-md-12 ftco-animate">
                     <div class="sched-text">
-                        <h5>Nhấn vào từng lớp để xem thông tin chi tiết.</h5>
-<!--                        <button href="" id="openModalRequest">Đề Xuất Mở Lớp</button>-->
+<!--                        <h5>Nhấn vào từng lớp để xem thông tin chi tiết.</h5>-->
+<!--                        <button href="'" id="openModalRequest">Đề Xuất Mở Lớp</button>-->
                     </div>
                     <div class="sched-list-course">
                         <table class="table">
@@ -81,7 +83,7 @@
                                     <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
                                 </td>
                                 <!-- t2 -->
-                                <div th:each="DAY : *{dayOfWeeks}">
+                                <div th:each="DAY : *{dayOfWeeks}"> statu
 
                                     <div  th:if="${DAY.AClass}">
                                         <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
@@ -89,6 +91,7 @@
                                             <h6 th:text="${DAY.AClass.course.name}"></h6>
                                             <p th:text="''+${''+DAY.getAClass().className+' - '+DAY.getAClass().teacher.fullName}+' ('+${DAY.noBooking}+'/'+${DAY.AClass.quantityClass}+')'" class="idcourse"></p>
 <!--                                            <p th:text="'('+${DAY.noBooking}+'/'+${DAY.AClass.quantityClass}+')'" class="idcourse"></p>-->
+
                                             <p th:text="${DAY.note}" class="idcourse"></p>
                                             <div th:if="${DAY.noBooking} ==  ${DAY.AClass.quantityClass}">
                                                 <p class="idcourse"> đã Full</p>
@@ -96,7 +99,7 @@
 
                                             <form th:action="@{/FYoGa/Login/User/Booking}" method="post" th:object="${BOOKING} " th:if="${DAY.noBooking} <  ${DAY.AClass.quantityClass}">
                                                 <input type="hidden" name="classID" th:value="${DAY.AClass.classID}">
-                                                <button type="submit" th:unless="${DAY.booking}" class="idcourse"> Đăng ký</button>
+                                                <button type="submit" id="modal-login-button-re" th:unless="${DAY.booking}" class="idcourse"> Đăng ký</button>
 
                                             </form>
                                             <div th:if="${DAY.booking}" >
@@ -126,7 +129,7 @@
             </div>
         </div>
 
-        <button href="" class="a pp" id="openModalButtonRegister">Đăng Ký</button>
+<!--        <button href="" class="a pp" id="openModalButtonRegister">Đăng Ký</button>-->
     </section>
     <!-- schedule End -->
 
@@ -251,7 +254,7 @@
     <form method="post" action="">
         <div class="modal-schedule" id="successModal">
             <div class="modal-container-success">
-                <span class="close" <!--id="myButton" -->><a>&times;</a></span>
+                <span class="close"><a>&times;</a></span>
                 <header class="modal-header-register">
                     <img
                         src="img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">

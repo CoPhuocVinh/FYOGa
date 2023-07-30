@@ -93,7 +93,10 @@ public class RegisterServiceImpl implements IRegisterService {
         return registerRepository.findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(status).get(0);
     }
 
+    @Override
     public <S extends Register> List<S> saveAll(Iterable<S> entities) {
         return registerRepository.saveAll(entities);
     }
+
+
 }

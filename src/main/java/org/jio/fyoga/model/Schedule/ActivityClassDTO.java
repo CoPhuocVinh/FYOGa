@@ -30,6 +30,7 @@ public class ActivityClassDTO {
     Date dayOfMonth;
 
     int noBooking;
+    Date expired;
     boolean isBooking = false;
 
     boolean isEdit = false;
