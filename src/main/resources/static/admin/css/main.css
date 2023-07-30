@@ -3710,6 +3710,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .dash-tiles-inactive{
     width: 100%;
     display: none;
+<<<<<<< HEAD
 
 }
 
@@ -3717,5 +3718,4 @@ only screen and (min-device-pixel-ratio: 1.5) {
     max-width: 40%;
 
     margin-right: 30px;
-
 }
