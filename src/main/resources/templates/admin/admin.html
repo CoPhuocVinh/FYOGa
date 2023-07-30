@@ -55,43 +55,43 @@
         <ul class="nav-dash">
             <li>
                 <h6>Nhân viên</h6>
-                <a href="page_list_staff.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=3)}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-clipboard"></i><span class="badge badge-danger">3</span>
                 </a>
             </li>
             <li>
                 <h6>Huấn luyện viên</h6>
-                <a href="page_list_teacher.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=2)}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-file-o"></i> <span class="badge badge-success">4</span>
                 </a>
             </li>
             <li>
                 <h6>Khách hàng</h6>
-                <a href="page_list_customer.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-users"></i> <span class="badge badge-success">55</span>
                 </a>
             </li>
             <li>
                 <h6>Khóa học</h6>
-                <a href="pageCourseAdmin.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a href="/FYoGa/Login/ADMIN/Course" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-certificate"></i> <span class="badge badge-inverse">4</span>
                 </a>
             </li>
             <li>
                 <h6>Lớp học</h6>
-                <a href="page_list_class.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/class}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-file"></i><span class="badge badge-inverse">8</span>
                 </a>
             </li>
             <li>
                 <h6>Lịch học</h6>
-                <a href="page_calendar.html" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/schedule}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-calendar"></i>
                 </a>
             </li>
             <li>
                 <h6>Blog</h6>
-                <a href="javascript:void(0)" data-toggle="tooltip" class="animation-fadeIn">
+                <a th:href="@{/FYoGa/Login/ADMIN/post}" data-toggle="tooltip" class="animation-fadeIn">
                     <i class="fa fa-pencil"></i>
                 </a>
             </li>
@@ -109,11 +109,11 @@
                         <div class="btn-group">
                             <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
                                title="Đóng"><i class="fa fa-close"></i></a>
-                            <a href="page_list_teacher.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=2)}" class="btn btn-default" data-toggle="tooltip"
                                title="Huấn luyện viên"><i class="fa fa-file-o"></i></a>
-                            <a href="page_list_class.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/class}" class="btn btn-default" data-toggle="tooltip"
                                title="Lớp"><i class="fa fa-file"></i></a>
-                            <a href="page_list_customer.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}" class="btn btn-default" data-toggle="tooltip"
                                title="Khách hàng"><i class="fa fa-users"></i>
                             </a>
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Chỉnh sửa"
@@ -137,11 +137,11 @@
                         <div class="btn-group">
                             <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
                                title="Đóng"><i class="fa fa-close"></i></a>
-                            <a href="page_list_teacher.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=2)}" class="btn btn-default" data-toggle="tooltip"
                                title="Huấn luyện viên"><i class="fa fa-file-o"></i></a>
-                            <a href="page_list_class.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/class}" class="btn btn-default" data-toggle="tooltip"
                                title="Lớp"><i class="fa fa-file"></i></a>
-                            <a href="page_list_customer.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}" class="btn btn-default" data-toggle="tooltip"
                                title="Khách hàng"><i class="fa fa-users"></i>
                             </a>
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Chỉnh sửa"
@@ -165,11 +165,11 @@
                         <div class="btn-group">
                             <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
                                title="Đóng"><i class="fa fa-close"></i></a>
-                            <a href="page_list_teacher.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=2)}" class="btn btn-default" data-toggle="tooltip"
                                title="Huấn luyện viên"><i class="fa fa-file-o"></i></a>
-                            <a href="page_list_class.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/class}" class="btn btn-default" data-toggle="tooltip"
                                title="Lớp"><i class="fa fa-file"></i></a>
-                            <a href="page_list_customer.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}" class="btn btn-default" data-toggle="tooltip"
                                title="Khách hàng"><i class="fa fa-users"></i>
                             </a>
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Chỉnh sửa"
@@ -193,11 +193,11 @@
                         <div class="btn-group">
                             <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"
                                title="Đóng"><i class="fa fa-close"></i></a>
-                            <a href="page_list_teacher.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=2)}" class="btn btn-default" data-toggle="tooltip"
                                title="Huấn luyện viên"><i class="fa fa-file-o"></i></a>
-                            <a href="page_list_class.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/class}" class="btn btn-default" data-toggle="tooltip"
                                title="Lớp"><i class="fa fa-file"></i></a>
-                            <a href="page_list_customer.html" class="btn btn-default" data-toggle="tooltip"
+                            <a th:href="@{/FYoGa/Login/ADMIN/User(roleID=1)}" class="btn btn-default" data-toggle="tooltip"
                                title="Khách hàng"><i class="fa fa-users"></i>
                             </a>
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Chỉnh sửa"

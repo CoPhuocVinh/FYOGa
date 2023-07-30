@@ -14,9 +14,10 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class FeedbackDTO {
     int feedbackID;
-    String comment;
-    Integer name;
+    private String name;
+    private String email;
+    private String comment;
+
     Integer status;
-    String email;
     Date date;
 }

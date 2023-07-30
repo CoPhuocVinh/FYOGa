@@ -20,7 +20,7 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int feedbackID;
     @Column(name = "name")
-    Integer name;
+    String name;
     @Column(name = "comment", columnDefinition = "nvarchar(300)")
     String comment;
     @Column(name = "status")

@@ -3,17 +3,23 @@ package org.jio.fyoga.service;
 
 
 import org.jio.fyoga.entity.Feedback;
+import org.jio.fyoga.model.FeedbackDTO;
 
 import java.util.List;
 
 public interface IFeedbackService {
     <S extends Feedback> S save(S entity);
 
-    Feedback findById(Integer integer);
+
+    Feedback findById(int feedbackID);
 
     List<Feedback> findAll();
 
     void deleteAll();
+
+
+
+
     List<Feedback> findByStatus(int status);
 
 }

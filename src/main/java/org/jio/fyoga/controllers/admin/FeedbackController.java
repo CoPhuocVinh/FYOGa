@@ -35,24 +35,28 @@ public class FeedbackController {
             e.printStackTrace();
             // You can also add a custom error message to display on the UI
             model.addAttribute("errorMessage", "An error occurred while fetching feedback data.");
-            return "error_page";
+            return "common/error/404";
         }
     }
 
+    @GetMapping("/form")
+    public String showFeedbackForm() {
+        return "feedback_form"; // Return the name of the HTML template for the feedback form
+    }
+    @PostMapping("/submit")
+    public String submitFeedback(@ModelAttribute FeedbackDTO feedbackDTO) {
+        // Convert the FeedbackDTO to Feedback entity
+        Feedback feedback = new Feedback();
+        feedback.setName(feedbackDTO.getName());
+        feedback.setEmail(feedbackDTO.getEmail());
+        feedback.setComment(feedbackDTO.getComment());
+        feedback.setStatus(0); // Set the status to 0 (assuming 0 means "not processed")
+        feedback.setDate(new Date()); // Set the current date/time
 
+        // Save the feedback to the database
+        feedbackService.save(feedback);
 
-    @GetMapping("/remove")
-    public String removeFeedback(@RequestParam int fbID) {
-        Feedback feedback = feedbackService.findById(fbID);
-
-        // Check if the Feedback entry exists
-        if (feedback != null) {
-            // Set the status to inactive (0)
-            feedback.setStatus(0);
-            feedbackService.save(feedback);
-        }
-
-        return "redirect:/FYoGa/Login/ADMIN/feedback";
+        return "redirect:/?success"; // Redirect back to the home page with a success message
     }
 
     @GetMapping("/reStatus")
