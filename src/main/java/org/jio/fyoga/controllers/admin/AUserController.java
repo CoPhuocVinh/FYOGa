@@ -150,7 +150,7 @@ public class AUserController {
     }
 
     // /FYoGa/Login/ADMIN/User/Confirm
-    @GetMapping("/confirm")
+    @GetMapping("/Confirm")
     public String showConfirm(){
         return "admin/page_list_confirm_register";
     }
