@@ -3479,7 +3479,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .form-create-class {
     font-size: 20px;
     background: #e3e2e2;
-    height: fit-content;
+    height: 710px;
 }
 
 .form-create-customer {
