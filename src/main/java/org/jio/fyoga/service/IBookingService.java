@@ -10,6 +10,7 @@ package org.jio.fyoga.service;/*  Welcome to Jio word
 import org.jio.fyoga.entity.Booking;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IBookingService {
     <S extends Booking> S save(S entity);
@@ -22,4 +23,6 @@ public interface IBookingService {
     List<Booking> findAllByCustomer_AccountID(int id);
 
     <S extends Booking> List<S> saveAll(Iterable<S> entities);
+
+    List<Booking> findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(int courseID, int userID, int status);
 }

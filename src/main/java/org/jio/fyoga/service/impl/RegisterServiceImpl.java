@@ -81,7 +81,7 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
 
-    @Override
+    //@Override
     public Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID) {
         List<Register> registerList = registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID);
         return registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID).get(0);

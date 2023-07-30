@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingServiceImpl implements IBookingService {
@@ -47,5 +48,10 @@ public class BookingServiceImpl implements IBookingService {
     @Override
     public <S extends Booking> List<S> saveAll(Iterable<S> entities) {
         return bookingRepository.saveAll(entities);
+    }
+
+    @Override
+    public List<Booking> findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(int courseID, int userID, int status) {
+        return bookingRepository.findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(courseID, userID, status);
     }
 }

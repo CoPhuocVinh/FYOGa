@@ -149,5 +149,11 @@ public class AUserController {
         return "redirect:/FYoGa/Login/ADMIN/User?roleID="+account.getRole().getRoleID();
     }
 
+    // /FYoGa/Login/ADMIN/User/Confirm
+    @GetMapping("/confirm")
+    public String showConfirm(){
+        return "admin/page_list_confirm_register";
+    }
+
 
 }

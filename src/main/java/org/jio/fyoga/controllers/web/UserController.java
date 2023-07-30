@@ -196,7 +196,31 @@ public class UserController {
             List<WeekScheduleDTO> weekScheduleDTOs = activityClassServiceTest.getActivityClassesFromMondayToSaturdayOnCourse(schedules.getScheduleID(),courseID,account.getAccountID());
             System.out.printf("bibi");
             model.addAttribute("ACTIVITYS",weekScheduleDTOs);
-            model.addAttribute("EXPIRED", weekScheduleDTOs.get(0).getDayOfWeeks().get(0).getExpired());
+
+            Register register02 = null;
+            Register register03 = null;
+            try{
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            }catch (Exception ex){
+
+            }
+
+            Date expired = null;
+            if(register02 != null){
+                expired= register02.getExpired();
+            }else {
+                if (register03 != null){
+                    expired= register03.getExpired();
+
+                }else {
+                    Date dateExpired = MyUtil.expiredDateOnDate(5);
+                    expired = dateExpired;
+                }
+            }
+
+
+            model.addAttribute("EXPIRED", expired);
 
             return "web/scheduleDetail";
         }
@@ -223,8 +247,15 @@ public class UserController {
 
             int courseID = bookingEntity.getAClassBooking().getCourse().getCourseID();
 
-            Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-            Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            Register register02 = null;
+            Register register03 = null;
+            try{
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            }catch (Exception ex){
+
+            }
+
             if(register02 != null){
                 bookingEntity.setExpired(register02.getExpired());
             }else {
@@ -264,7 +295,7 @@ public class UserController {
     public void checkExpiredOnUser(HttpSession session, int courseID){
         // check expired
         Account account = (Account) session.getAttribute("USER");
-        List<Booking> bookings = bookingService.findAllByCustomer_AccountID(account.getAccountID());
+        List<Booking> bookings = bookingService.findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(courseID,account.getAccountID(),1);
         bookings = MyCheckExpired.checkExpiredOnBooking(bookings);
         bookingService.saveAll(bookings);
 
@@ -272,20 +303,42 @@ public class UserController {
         registers = MyCheckExpired.checkExpiredOnRegister(registers);
         registerService.saveAll(registers);
 
-        Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-        Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
-        for (Booking booking : bookings){
-            if(register02 != null){
-                booking.setExpired(register02.getExpired());
-            }else {
-                if (register03 != null){
-                    booking.setExpired(register03.getExpired());
+        Register register02 = null;
+        Register register03 = null;
+        try{
+            register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+            register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+        }catch (Exception ex){
 
-                }else {
-                    Date dateExpired = MyUtil.expiredDateOnDate(5);
-                    booking.setExpired(dateExpired);
-                }
+        }
+
+        Date expired = null;
+        if(register02 != null){
+            expired= register02.getExpired();
+        }else {
+            if (register03 != null){
+                expired= register03.getExpired();
+
+            }else {
+                Date dateExpired = MyUtil.expiredDateOnDate(5);
+                expired = dateExpired;
             }
+        }
+
+
+        for (Booking booking : bookings){
+//            if(register02 != null){
+//                booking.setExpired(register02.getExpired());
+//            }else {
+//                if (register03 != null){
+//                    booking.setExpired(register03.getExpired());
+//
+//                }else {
+//                    Date dateExpired = MyUtil.expiredDateOnDate(5);
+//                    booking.setExpired(dateExpired);
+//                }
+//            }
+            booking.setExpired(expired);
         }
 
 

@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
@@ -27,5 +28,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     int countByaClassBooking_ClassID(int classId);
 
     List<Booking> findAllByCustomer_AccountID(int id);
+
+    List<Booking> findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(int courseID, int userID, int status);
 
 }
