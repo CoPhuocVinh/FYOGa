@@ -38,6 +38,9 @@ public class Course {
     @Lob
     private byte[] img;
 
+    @Column(name = "status")
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "adminID")
     private Account admin;
@@ -53,7 +56,6 @@ public class Course {
         return "Course{" +
                 "courseID=" + courseID +
                 ", name='" + name + '\'' +
-                // Thêm các trường khác vào đây nếu cần thiết
                 '}';
     }
 }

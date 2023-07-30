@@ -53,6 +53,7 @@ public class CourseServiceImpl implements ICourseService {
         return courseRepository.findById(integer);
     }
 
+
     // xu lu img
     @Override
     public void saveIMGAccount(MultipartFile file, Course course) throws IOException {
@@ -90,5 +91,10 @@ public class CourseServiceImpl implements ICourseService {
             // Xử lý trường hợp không tìm thấy đối tượng Content với contentId tương ứng
             throw new RuntimeException("User not found for course: " + courseID);
         }
+    }
+
+    @Override
+    public List<Course> findByStatus(int status) {
+        return courseRepository.findByStatus(status);
     }
 }

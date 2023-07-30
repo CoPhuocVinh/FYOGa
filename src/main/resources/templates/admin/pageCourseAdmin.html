@@ -58,12 +58,26 @@
         <h3>Khóa học đang diễn ra
             <a href="/FYoGa/Login/ADMIN/Course/CreateOrEdit?isEdit=0" data-toggle="tooltip" title="Thêm mới khoá học"
                class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
+            <div class="card-header section-bnt">
+                <div class="card-tools">
+                    <ul class="nav nav-pills ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active-bnt" href="" id="active-bnt" data-toggle="tab">Hoạt
+                                động</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link inactive-bnt" href="" id="inactive-btn"
+                               data-toggle="tab">Không hoạt động</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.card-header -->
         </h3>
         <!-- Tiles -->
         <!-- Row 1 -->
-        <div class="dash-tiles row">
+        <div class="dash-tiles row" id="active-list">
             <!-- Column 1 of Row 1 -->
-            <div th:each="COURSE : ${COURSELIST}" th:object="${COURSE}" class="col-sm-3">
+            <div th:each="COURSE : ${COURSE_ON}" th:object="${COURSE}" class="col-sm-3">
                 <!-- Total Users Tile -->
                 <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
                     <div class="dash-tile-header">
@@ -75,7 +89,6 @@
 
                                 <a th:href="@{/FYoGa/Login/ADMIN/Course/CreateOrEdit(isEdit = 1, CourseID = *{courseID})}" class="btn btn-default" data-toggle="tooltip"
                                    title="Chỉnh sửa"><i class="fa fa-cog"></i></a>
-
                             </div>
                         </div></br>
                         <h1 th:text="*{name}"></h1>
@@ -90,41 +103,51 @@
 
         </div>
 
-        <div>
-<!--        <h3>Khóa học tạm đóng</h3>-->
+        <div class="dash-tiles row " id="inactive-list">
+            <div th:each="COURSE : ${COURSE_OFF}" th:object="${COURSE}" class="col-sm-3">
+                <!-- Total Users Tile -->
+                <div  class="dash-tile dash-tile-ocean clearfix animation-pullDown">
+                    <div class="dash-tile-header">
+                        <div class="dash-tile-options">
+                            <div class="btn-group">
 
-<!--        <div class="dash-tiles row">-->
-<!--            &lt;!&ndash; Column 1 of Row 1 &ndash;&gt;-->
-<!--            <div class="col-md-3 ">-->
-<!--                &lt;!&ndash; Total Users Tile &ndash;&gt;-->
-<!--                <div class="dash-tile dash-tile-ocean clearfix animation-pullDown">-->
-<!--                    <div class="dash-tile-header">-->
-<!--                        <div class="dash-tile-options">-->
-<!--                            <div class="btn-group">-->
-<!--                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"-->
-<!--                                   title="Mở"><i class="fa fa-check"></i></a>-->
+                                <a th:href="@{/FYoGa/Login/ADMIN/Course/resetstatus(courseID=${COURSE.courseID})}" data-toggle="tooltip" title="Hoàn tác"
+                                   class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
 
-<!--                                <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip"-->
-<!--                                   title="Chỉnh sửa"><i class="fa fa-cog"></i></a>-->
+                            </div>
+                        </div>
+                        </br>
+                        <h1 th:text="*{name}"></h1>
+                    </div>
 
-<!--                            </div>-->
-<!--                        </div></br>-->
-<!--                        Hatha Yoga-->
+                    <div class="dash-tile-icon"><i class="fa fa-users"></i></div>
+                    <!--                    <div class="dash-tile-text">30</div>-->
+                </div>
+                <!-- END Total Users Tile -->
+            </div>
 
-<!--                    </div>-->
-
-<!--                    <div class="dash-tile-icon"><i class="fa fa-users"></i></div>-->
-<!--                    <div class="dash-tile-text">30</div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; END Total Users Tile &ndash;&gt;-->
-<!--            </div>-->
-<!--            &lt;!&ndash; END Row 1 &ndash;&gt;-->
-<!--            &lt;!&ndash;Form Validation, Validation Initialization happens at the bottom of the page&ndash;&gt;-->
-<!--        </div>-->
     </div>
         <!-- END Form Validation -->
         <!-- END Tiles -->
     </div>
+
+    <script>
+
+        //xử lý nút bấm active và inactive
+        var activeBtn = document.getElementById('active-bnt');
+        var inactiveBtn = document.getElementById('inactive-btn');
+        var activeList = document.getElementById('active-list');
+        var inactiveList = document.getElementById('inactive-list');
+
+        activeBtn.addEventListener('click', function () {
+            activeList.style.display = 'inline-table';
+            inactiveList.style.display = 'none';
+        });
+        inactiveBtn.addEventListener('click', function () {
+            activeList.style.display = 'none';
+            inactiveList.style.display = 'inline-table';
+        });
+    </script>
 
     <!-- END Page Content -->
 

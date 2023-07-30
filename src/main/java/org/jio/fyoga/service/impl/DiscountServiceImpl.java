@@ -40,4 +40,17 @@ public class DiscountServiceImpl implements IDiscountService {
     public List<Discount> findAll() {
         return discountRepository.findAll();
     }
+
+    @Override
+    public void deleteById(int discountID) {
+        discountRepository.deleteById(discountID);
+    }
+
+
+    @Override
+    public void save(Discount discount) {
+        discountRepository.save(discount);
+    }
+
+
 }

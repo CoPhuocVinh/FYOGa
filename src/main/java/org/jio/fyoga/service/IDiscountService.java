@@ -17,6 +17,9 @@ public interface IDiscountService {
 
     Optional<Discount> findById(Integer integer);
 
-
+    void save(Discount discount);
     List<Discount> findAll();
+
+    void deleteById(int discountID);
+
 }

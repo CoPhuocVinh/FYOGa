@@ -50,23 +50,27 @@
     <ul id="nav-info" class="clearfix">
         <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
         <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
-        <li><a href="javascript:void(0)">Thêm mới gói học</a></li>
+        <!-- hiển thị "Chỉnh sửa gói học" -->
+        <li th:if="${PACKAGEDTO.isEdit}"><a href="javascript:void(0)">Chỉnh sửa gói học</a></li>
+        <!-- hiển thị "Thêm mới gói học" -->
+        <li th:unless="${PACKAGEDTO.isEdit}"><a href="javascript:void(0)">Thêm mới gói học</a></li>
     </ul>
     <!-- END Navigation info -->
 
     <!-- List Staff -->
     <div class="form-create-class">
+        <!-- hiển thị "Chỉnh sửa gói học" -->
+        <h2 class="create-header" th:if="${PACKAGEDTO.isEdit}">Chỉnh sửa gói học</h2>
+        <!-- hiển thị "Thêm mới gói học" -->
+        <h2 class="create-header" th:unless="${PACKAGEDTO.isEdit}">Thêm mới gói học</h2>
 
-        <h2 class="create-header">Thêm mới gói học</h2>
-
-
-        <form th:action="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit}" method="post" class="createClass-container" th:object="${PACKAGEDTO}">
+        <form th:action="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit}" method="post" class="createPackage-container" th:object="${PACKAGEDTO}">
             <input type="hidden" th:field="*{isEdit}">
-            <input type="hidden" th:field="*{packageID}">
+            <!-- hiển thị trường ẩn để lưu packageID -->
+            <input th:if="${PACKAGEDTO.isEdit}" type="hidden" th:field="*{packageID}">
 
             <label>Khoá học</label>
-            <select th:field="*{courseID}" name="courseName" id="courseName">
-<!--                <option value="">&#45;&#45; Chọn khoá học &#45;&#45;</option>-->
+            <select th:field="*{courseID}" name="courseID" id="courseID">
                 <option th:each="course : ${COURSES}" th:value="${course.courseID}"
                         th:text="${course.name}" th:selected="${PACKAGEDTO.courseID == course.courseID}">
                 </option>
@@ -78,14 +82,14 @@
             <label for="price">Giá gói</label>
             <input type="number" id="price" name="price" step="0.01" th:field="*{price}" required><br>
 
-            <button class="btn-footer" type="reset">Đặt lại</button>
-            <button class="btn-footer" type="submit">Tạo</button>
+            <!-- nút "Cập nhật" -->
+            <button class="btn-footer" th:if="${PACKAGEDTO.isEdit}" type="submit">Cập nhật</button>
+            <!-- nút "Tạo" -->
+            <button class="btn-footer" th:unless="${PACKAGEDTO.isEdit}" type="submit">Tạo</button>
         </form>
         <p style="color: red" th:text="${MSG}"></p>
-
     </div>
 </div>
-
 
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -110,108 +114,7 @@
         formContainer.style.display = "none";
     }
 
-    $(function () {
+    // ... (Các đoạn mã javascript khác nếu có)
 
-        /* For advanced usage and examples please check out
-         *  Jquery Validation   -> https://github.com/jzaefferer/jquery-validation
-         */
-
-        /* Initialize Form Validation */
-        $('#form-validation').validate({
-            errorClass: 'help-block',
-            errorElement: 'span',
-            errorPlacement: function (error, e) {
-                e.parents('.form-group > div').append(error);
-            },
-            highlight: function (e) {
-                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-                $(e).closest('.help-block').remove();
-            },
-            success: function (e) {
-                // You can use the following if you would like to highlight with green color the input after successful validation!
-                e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
-                e.closest('.help-block').remove();
-                e.closest('.help-inline').remove();
-            },
-            rules: {
-                val_username: {
-                    required: true,
-                    minlength: 2
-                },
-                val_password: {
-                    required: true,
-                    minlength: 5
-                },
-                val_confirm_password: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: '#val_password'
-                },
-                val_email: {
-                    required: true,
-                    email: true
-                },
-                val_website: {
-                    required: true,
-                    url: true
-                },
-                val_date: {
-                    required: true,
-                    date: true
-                },
-                val_range: {
-                    required: true,
-                    range: [1, 100]
-                },
-                val_number: {
-                    required: true,
-                    number: true
-                },
-                val_digits: {
-                    required: true,
-                    digits: true
-                },
-                val_skill: {
-                    required: true
-                },
-                val_credit_card: {
-                    required: true,
-                    creditcard: true
-                },
-                val_terms: {
-                    required: true
-                }
-            },
-            messages: {
-                val_username: {
-                    required: 'Please enter a username',
-                    minlength: 'Your username must consist of at least 2 characters'
-                },
-                val_password: {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long'
-                },
-                val_confirm_password: {
-                    required: 'Please provide a password',
-                    minlength: 'Your password must be at least 5 characters long',
-                    equalTo: 'Please enter the same password as above'
-                },
-                val_email: 'Please enter a valid email address',
-                val_website: 'Please enter your website!',
-                val_date: 'Please select a date!',
-                val_range: 'Please enter a number between 1 and 100!',
-                val_number: 'Please enter a number!',
-                val_digits: 'Please enter digits!',
-                val_credit_card: 'Please enter a valid credit card!',
-                val_skill: 'Please select a skill!',
-                val_terms: 'You must agree to the terms!'
-            }
-        });
-    });
 </script>
 
-<script src="/admin/js/vendor/modernizr-respond.min.js"></script>
-
-</body>
-
-</html>

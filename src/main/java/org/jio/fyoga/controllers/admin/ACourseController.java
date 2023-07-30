@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/FYoGa/Login/ADMIN/Course")
@@ -40,13 +41,12 @@ public class ACourseController {
     ICourseService courseService;
     @GetMapping("")
     public String getCourses(Model model) {
-//        List<Class> classListON = classService.findByStatus(1);
-//        model.addAttribute("CLASS_ON", classListON);
-//
-//        List<Class> classListOff = classService.findByStatus(0);
-//        model.addAttribute("CLASS_OFF", classListOff);
-        List<Course> courseList = courseService.findAll();
-        model.addAttribute("COURSELIST", courseList);
+        List<Course> courseListOn = courseService.findByStatus(1);
+        model.addAttribute("COURSE_ON", courseListOn);
+
+        List<Course> courseListOff = courseService.findByStatus(0);
+        model.addAttribute("COURSE_OFF", courseListOff);
+
         return "admin/pageCourseAdmin";
     }
 
@@ -133,11 +133,28 @@ public class ACourseController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/delete")
-    public String deleteCourse(@RequestParam int courseID) {
-        courseService.deleteById(courseID);
+    @GetMapping("/isdelete")
+    public String showdeleteCourse(@RequestParam int courseID, RedirectAttributes ra) {
+        ra.addAttribute("DELETE", courseID);
         return "redirect:/FYoGa/Login/ADMIN/Course";
     }
+
+    @GetMapping("/delete")
+    public String deleteCoure(@RequestParam int courseID){
+        Course course = courseService.findById(courseID).orElse(null);
+        course.setStatus(0);
+        courseService.save(course);
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
+    @GetMapping("/resetstatus")
+    public String reStatus (@RequestParam int courseID){
+        Course course = courseService.findById(courseID).orElse(null);
+        course.setStatus(1);
+        courseService.save(course);
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
 
 
 }

@@ -29,5 +29,7 @@ public class DiscountDTO {
     float priceDiscount;
 
     int slotOnMonth;
+    private Boolean isEdit = false;
+
 
 }

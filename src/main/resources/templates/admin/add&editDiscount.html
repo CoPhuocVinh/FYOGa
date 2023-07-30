@@ -44,35 +44,40 @@
 <body>
 <!-- Page Container -->
 <div th:replace="~{common/admin/Container :: page-container}"></div>
-<!-- END Page Container -->
 
-            <!-- Page Content -->
-            <div id="page-content">
-                <!-- Navigation info -->
-                <ul id="nav-info" class="clearfix">
-                    <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
-                    <li><a href="page_discount.html">Gói học</a></li>
-                    <li><a href="page_discount_detail.html">Khuyến mãi</a></li>
-                    <li><a href="javascript:void(0)">Thêm mới khuyến mãi</a></li>
-                </ul>
-                <!-- END Navigation info -->
+<div id="page-content">
+    <ul id="nav-info" class="clearfix">
+        <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
+        <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
+        <li th:if="${DISCOUNTDTO.isEdit}"><a href="javascript:void(0)">Chỉnh sửa khuyến mãi</a></li>
+    <li th:unless="${DISCOUNTDTO.isEdit}"><a href="javascript:void(0)">Thêm mới khuyến mãi</a></li>
+    </ul>
 
-                <!-- List Staff -->
-                <div class="form-create-class">
-                    <h2 class="create-header">Thêm mới khuyến mãi</h2>
 
-                    <div class="createClass-container">
-                        <label for="name">Số tháng</label>
-                        <input type="number" id="name" name="name" required><br>
+        <div class="createClass-container">
+            <h2 class="create-header" th:if="${DISCOUNTDTO.isEdit}">Chỉnh sửa khuyến mãi</h2>
+            <h2 class="create-header" th:unless="${DISCOUNTDTO.isEdit}">Thêm mới khuyến mãi</h2>
 
-                        <label for="name">% muốn giảm</label>
-                        <input type="number" id="price" name="price" required><br>
+            <form th:action="@{/FYoGa/Login/ADMIN/Discount/CreateOrEditDiscount}" th:object="${DISCOUNTDTO}" method="post" class="createClass-container">
+                <input th:if="${DISCOUNTDTO.isEdit}" type="hidden" th:field="*{discountID}">
+            <label for="timeOnMonth">Số tháng</label>
+            <input type="number" id="timeOnMonth" name="timeOnMonth" th:field="*{timeOnMonth}" required><br>
 
-                        <button class="btn-footer" type="reset">Đặt lại</button>
-                        <button class="btn-footer" type="submit">Tạo</button>
-                    </div>
-                </div>
-            </div>
+            <label for="percentDiscount">% muốn giảm</label>
+            <input type="number" id="percentDiscount" name="percentDiscount" th:field="*{percentDiscount}" required><br>
+
+            <button class="btn-footer" type="reset">Đặt lại</button>
+                <!-- nút "Cập nhật" -->
+                <button class="btn-footer" th:if="${DISCOUNTDTO.isEdit}" type="submit">Cập nhật</button>
+                <!-- nút "Tạo" -->
+                <button class="btn-footer" th:unless="${DISCOUNTDTO.isEdit}" type="submit">Tạo</button>
+            </form>
+            <p style="color: red" th:text="${MSG}"></p>
+
+        </div>
+    <!-- END Form -->
+
+</div>
 
 
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
@@ -89,6 +94,8 @@
                 <!-- Javascript code only for this page -->
                 <script>
 
+                    var formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
                     $(function () {
 
                         /* For advanced usage and examples please check out
@@ -190,4 +197,3 @@
                 </script>
 </body>
 
-</html>

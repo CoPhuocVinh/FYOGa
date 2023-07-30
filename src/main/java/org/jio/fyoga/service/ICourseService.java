@@ -34,4 +34,5 @@ public interface ICourseService {
     byte[] getIMGById(int courseID);
 
 
+    List<Course> findByStatus(int status);
 }
