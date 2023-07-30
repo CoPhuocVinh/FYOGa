@@ -55,4 +55,3 @@ registerLink.addEventListener("click", function (event) {
   loginModal.style.display = "none";
   registerModal.style.display = "flex";
 });
-

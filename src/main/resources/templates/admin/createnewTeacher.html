@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
+
+<html class="no-js lt-ie9">
+
 <html class="no-js"> <!--<![endif]-->
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -62,7 +63,7 @@
         <!-- END Navigation info -->
 
         <!-- List Staff -->
-        <div class="form-create-class">
+        <div class="form-create-class form-create-members">
             <h2 class="create-header" th:if="${ROLEID == 1}">Thêm mới Khách hàng</h2>
             <h2 class="create-header" th:if="${ROLEID == 2}">Thêm mới Huấn luyện viên</h2>
             <h2 class="create-header" th:if="${ROLEID == 3}">Thêm mới Nhân viên</h2>
@@ -108,9 +109,9 @@
     </div>
 
     <style>
-        input[type="radio"] {
-            margin: 0;
-            width: 40px;
+
+        .form-create-members{
+            height: 820px !important;
         }
     </style>
     <script>
