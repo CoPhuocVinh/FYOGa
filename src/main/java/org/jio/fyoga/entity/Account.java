@@ -61,22 +61,22 @@ public class Account implements Serializable {
     @JoinColumn(name = "roleID")
     private Role role;
 
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "admin")
     private Set<Course> courses;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Register> registers;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
 
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "staff")
     private Set<Slot> slots;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Attendance> attendances;
 
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "staff")
     private Set<Attendance> attendancesByStaff;
 
 }
