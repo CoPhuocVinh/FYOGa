@@ -275,7 +275,7 @@ header
     justify-content: right;
 }
 
-.text-center-button a {
+.text-center-button button {
     margin-right: 20px;
     margin-bottom: 30px;
     font-size: 19px;
@@ -286,10 +286,9 @@ header
     color: #fff;
 }
 
-.text-center-button a:hover {
+.text-center-button button:hover {
     text-decoration: none;
-    background-color: #fff;
-    color: #000;
+    background-color: #1f8d50;
 }
 
 .table .thead-primary .head-thu th {
