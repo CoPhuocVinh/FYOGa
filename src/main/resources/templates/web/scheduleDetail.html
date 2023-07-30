@@ -83,7 +83,7 @@
                                     <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
                                 </td>
                                 <!-- t2 -->
-                                <div th:each="DAY : *{dayOfWeeks}"> statu
+                                <div th:each="DAY : *{dayOfWeeks}">
 
                                     <div  th:if="${DAY.AClass}">
                                         <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
