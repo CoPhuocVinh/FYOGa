@@ -52,5 +52,8 @@ public class DiscountServiceImpl implements IDiscountService {
         discountRepository.save(discount);
     }
 
-
+    @Override
+    public List<Discount> findDiscountByaPackage_PackageID(int packageID) {
+        return discountRepository.findDiscountByaPackage_PackageID(packageID);
+    }
 }

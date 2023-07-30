@@ -150,9 +150,23 @@ public class APackageController {
         return "redirect:/FYoGa/Login/ADMIN/Package";
     }
 
+    //delete
+    private void deleteDiscountByPackageID(int packageID) {
+        List<Discount> discounts = discountService.findDiscountByaPackage_PackageID(packageID);
+        if (discounts != null && !discounts.isEmpty()) {
+            for (Discount discount : discounts) {
+                discountService.deleteById(discount.getDiscountID());
+            }
+        }
+    }
+
+
     @GetMapping("/remove")
-    public String removeClass(@RequestParam int packageID) {
+    public String removePackage(@RequestParam int packageID) {
+        deleteDiscountByPackageID(packageID);
         packageService.deleteById(packageID);
+
         return "redirect:/FYoGa/Login/ADMIN/Package";
     }
+
 }

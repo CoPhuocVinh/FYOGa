@@ -20,23 +20,30 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int postID;
 
-    @Column(name = "post_name")
-    String postName;
+    @Column(name = "title", columnDefinition = "nvarchar(30)")
+    String title;
 
-    @Column(name = "dessciption")
+    @Column(name = "dessciption", columnDefinition = "nvarchar(MAX)")
     String dessciption;
 
+    @Column(name = "img")
+    @Lob
+    private byte[] img;
 
+    @Column(name = "author")
+    @Lob
+    private byte[] author;
+
+    @Column(name = "status")
+    int status;
+
+    @Column(name = "create_day", columnDefinition = "datetime")
+    private Date createDay;
 
 
 //    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
 
-
-
-    @ManyToOne
-    @JoinColumn(name = "staffID")
-    Account staff;
 
 
 }
