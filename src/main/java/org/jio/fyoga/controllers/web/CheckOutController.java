@@ -287,8 +287,14 @@ public class CheckOutController {
 
 
             int noDateExpired = registerEntity.getTimeAvailable()*4*7;
-            Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-            Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            Register register02 = null;
+            Register register03 = null;
+            try{
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            }catch (Exception ex){
+
+            }
             if (register03 != null){
 
                 if (register02 != null){

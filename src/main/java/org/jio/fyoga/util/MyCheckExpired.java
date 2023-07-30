@@ -7,18 +7,20 @@ package org.jio.fyoga.util;/*  Welcome to Jio word
     Jio: I wish you always happy with coding <3
 */
 
+import lombok.NoArgsConstructor;
 import org.jio.fyoga.entity.Booking;
 import org.jio.fyoga.entity.Register;
 import org.jio.fyoga.service.IBookingService;
+import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.service.impl.BookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Date;
 import java.util.List;
-
+@Controller
+@NoArgsConstructor
 public class MyCheckExpired {
-
-
 
     public static List<Register> checkExpiredOnRegister(List<Register> registers){
         Date currentDate = MyUtil.currentDate();
@@ -27,6 +29,7 @@ public class MyCheckExpired {
                 register.setStatus(0);
             }
         }
+
         return registers;
     }
 

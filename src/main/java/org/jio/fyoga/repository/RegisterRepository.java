@@ -63,4 +63,9 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
             "ORDER BY r.registeredDate ASC")
     List<Register> findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(int status);
 
+    List<Register> findAllByStatusOrderByRegisteredDateDesc(int status);
+    List<Register> findAllByStatusOrStatusOrderByRegisteredDateDesc(int statusv1, int statusv2);
+
+    List<Register> findAllByOrderByRegisteredDateDesc();
+
 }
