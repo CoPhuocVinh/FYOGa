@@ -100,11 +100,11 @@
                                                         <p class="idcourse"> đã Full</p>
                                                     </div>
 
-                                                    <form th:action="@{/FYoGa/Login/User/Booking}" method="post" th:object="${BOOKING} " th:if="${DAY.noBooking} <  ${DAY.AClass.quantityClass}">
+                                                    <form th:action="@{/FYoGa/Login/ADMIN/attendance/check}" method="get">
                                                         <input type="hidden" name="classID" th:value="${DAY.AClass.classID}">
                                                         <button type="submit" id="modal-login-button-re"  class="idcourse">Điểm danh</button>
 
-
+                                                    </form>
                                                 </td>
                                             </div>
 

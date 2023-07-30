@@ -81,13 +81,12 @@ public class UserController {
 
         // xủ lý code trong đây
             // chưa thanh toán
-            List<Register> registers_paying = new ArrayList<>();
-            registers_paying = registerService.findByCustomer_AccountIDAndStatus(account.getAccountID(),2);
+            List<Register> registers_paying = registerService.findByCustomer_AccountIDAndStatus(account.getAccountID(),1);
             model.addAttribute(("REGISTER_PAYING"), registers_paying);
 
             // thanh toan xong
-            List<Register> registers_payed = new ArrayList<>();
-            registers_paying = registerService.findByCustomer_AccountIDAndStatus(account.getAccountID(),1);
+            List<Register> registers_payed =registerService.findByCustomer_AccountIDAndStatus(account.getAccountID(),2);
+
             model.addAttribute(("REGISTER_PAYED"), registers_payed);
             return "web/historyPay";
         }

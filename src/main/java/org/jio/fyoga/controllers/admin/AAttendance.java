@@ -45,4 +45,11 @@ public class AAttendance {
         // end xu ly schedule
         return "admin/attendance";
     }
+
+    @GetMapping("/check")
+    public String showCheck(){
+
+
+        return "";
+    }
 }
