@@ -13,9 +13,12 @@ public interface IFeedbackService {
 
     Feedback findById(int feedbackID);
 
+    Feedback save1(Feedback feedback);
+
     List<Feedback> findAll();
 
     void deleteAll();
+
 
 
 
