@@ -60,11 +60,15 @@
 
             <form th:action="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount}" method="post">
                 <input type="hidden" th:if="${DISCOUNTDTO.isEdit}" th:name="DiscountID" th:value="${DISCOUNTDTO.discountID}" />
-                <label>Time on Month</label>
-                <input type="number" th:name="timeOnMonth" th:value="${DISCOUNTDTO.timeOnMonth}" required />
+                <br>
 
-                <label>Percent Discount</label>
+                <label>Số tháng</label>
+                <input type="number" th:name="timeOnMonth" th:value="${DISCOUNTDTO.timeOnMonth}" required class="no-style"/>
+                <br>
+
+                <label>% khuyến mãi</label>
                 <input type="number" th:name="percentDiscount" th:value="${DISCOUNTDTO.percentDiscount}" required />
+                <br>
 
                 <!-- Add more form fields here based on your DiscountDTO attributes -->
 

@@ -3711,3 +3711,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     width: 100%;
     display: none;
 }
+
+.no-style{
+max-width: 40%;
+    margin-right: 30px;
+}
