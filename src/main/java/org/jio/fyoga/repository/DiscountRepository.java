@@ -19,4 +19,6 @@ import java.util.Optional;
 public interface DiscountRepository extends JpaRepository<Discount, Integer> {
 
     List<Discount> findAllByaPackage_PackageID(int PackageID);
+
+    List<Discount> findDiscountByaPackage_PackageID(int packageID);
 }
