@@ -865,8 +865,8 @@ a:focus {
 
 .class .class-wrap {
     position: relative;
-    width: 100%;
-    height: 90%;
+    width: 280px;
+    height: 100%;
 }
 
 .class .class-img {
@@ -880,7 +880,7 @@ a:focus {
     object-fit: cover;
 }
 .class-img-course-user{
-    width: 50%;
+    width: 100%;
     height: 166px;
 }
 .class .class-text {

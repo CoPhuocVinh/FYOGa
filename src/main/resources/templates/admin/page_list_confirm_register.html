@@ -286,13 +286,28 @@
             activedList.style.display = 'inline-table';
         });
 
+        /*
+        * xử lý confirm
+
+         const overlay = document.querySelectorAll('.overlay');
+        function openFormConfirm() {
+            // var overlay = document.getElementById("overlay");
+            overlay.style.display = "flex";
+        }
+        function closeFormConfirm() {
+            overlay.style.display = "none";
+        }
+
+        * */
+
+
         /* xử lý nút confirm*/
+
         function openFormConfirm() {
             var overlay = document.getElementById("overlay");
 
             overlay.style.display = "flex";
         }
-
         function closeFormConfirm() {
             var overlay = document.getElementById("overlay");
             overlay.style.display = "none";
