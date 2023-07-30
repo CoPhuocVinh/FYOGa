@@ -18,13 +18,12 @@ public class PackageDTO {
     int packageID;
     String name;
     int slotOnMonth;
- //   int TimeOnMonth;
-   // int defaultID;
     int status;
     float price;
-    //float percentDiscount;
     int courseID;
 
     float priceDiscount;
+    private Boolean isEdit = false;
+
 
 }

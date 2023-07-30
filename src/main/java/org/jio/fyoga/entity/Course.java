@@ -38,6 +38,9 @@ public class Course {
     @Lob
     private byte[] img;
 
+    @Column(name = "status")
+    private Integer status;
+
     @ManyToOne
     @JoinColumn(name = "adminID")
     private Account admin;
@@ -47,4 +50,12 @@ public class Course {
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private Set<Class> classes;
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID=" + courseID +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

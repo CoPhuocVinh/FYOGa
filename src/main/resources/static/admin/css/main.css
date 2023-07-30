@@ -3515,6 +3515,18 @@ only screen and (min-device-pixel-ratio: 1.5) {
     font-size: 20px;
 }
 
+.createPackage-container {
+    text-align: justify;
+    margin-top: 50px;
+    margin-left: 20%;
+}
+
+.createPackage-container label {
+    width: 30%;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
 .createCustomer-container {
     text-align: justify;
     margin-top: 50px;
@@ -3529,7 +3541,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 
 .createClass-container select {
     width: 40%;
-    margin-right: 30px;
+    margin-right: 40px;
     padding: 6px;
     text-align: center;
 }
@@ -3555,6 +3567,37 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 .createClass-container .btn-footer:hover {
+    background-color: rgb(184, 181, 181);
+}
+
+.createPackage-container select {
+    width: 40%;
+    margin-right: 301px;
+    padding: 6px;
+    text-align: center;
+}
+
+.createPackage-container input {
+    width: 40%;
+    margin-right: 30px;
+    padding: 6px;
+    text-align: center;
+}
+
+.createPackage-container button {
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 26px;
+}
+
+.createPackage-container .btn-footer {
+    transform: translate(320px, 50px);
+    padding: 10px 20px;
+    background: lightgrey;
+}
+
+.createPackage-container .btn-footer:hover {
     background-color: rgb(184, 181, 181);
 }
 

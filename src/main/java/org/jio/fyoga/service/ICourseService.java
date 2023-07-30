@@ -15,9 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICourseService {
+
+    void deleteById(Integer integer);
+
     List<Course> findAll();
 
     Course findCourseByCourse_name(String name);
+
+    Course findCourseByName(String course_name);
 
     Optional<Course> findById(Integer integer);
 
@@ -29,4 +34,5 @@ public interface ICourseService {
     byte[] getIMGById(int courseID);
 
 
+    List<Course> findByStatus(int status);
 }

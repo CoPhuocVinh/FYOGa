@@ -36,5 +36,21 @@ public class DiscountServiceImpl implements IDiscountService {
         return discountRepository.findById(integer);
     }
 
+    @Override
+    public List<Discount> findAll() {
+        return discountRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(int discountID) {
+        discountRepository.deleteById(discountID);
+    }
+
+
+    @Override
+    public void save(Discount discount) {
+        discountRepository.save(discount);
+    }
+
 
 }

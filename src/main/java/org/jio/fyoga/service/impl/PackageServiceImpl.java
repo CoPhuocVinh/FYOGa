@@ -22,17 +22,38 @@ public class PackageServiceImpl implements IPackageService {
     @Autowired
     PackageRepository packageRepository;
 
+    @Override
+    public Optional<Package> findById(Integer integer) {
+        return packageRepository.findById(integer);
+    }
+
+
     public PackageServiceImpl(PackageRepository packageRepository) {
         this.packageRepository = packageRepository;
     }
 
     @Override
-    public List<Package> findAllByCourse_CourseID( int CourseID) {
+    public List<Package> findAllByCourse_CourseID(int CourseID) {
         return packageRepository.findAllByCourse_CourseID(CourseID);
     }
 
     @Override
-    public Optional<Package> findById(Integer integer) {
-        return packageRepository.findById(integer);
+    public List<Package> findAll() {
+        return packageRepository.findAll();
+    }
+
+    @Override
+    public void save(Package aPackage) {
+        packageRepository.save(aPackage);
+    }
+
+    @Override
+    public void deleteById(Integer packageId) {
+        packageRepository.deleteById(packageId);
+    }
+
+    @Override
+    public Package findPackageBySlotOnMonthAndCourse_CourseID(int slotOnMonth, int courseID) {
+        return packageRepository.findPackageBySlotOnMonthAndCourse_CourseID(slotOnMonth, courseID);
     }
 }

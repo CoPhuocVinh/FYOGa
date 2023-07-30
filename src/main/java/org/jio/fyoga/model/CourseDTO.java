@@ -25,6 +25,7 @@ public class CourseDTO {
 
     private byte[] img;
     private int AdminID;
+    private Integer status;
 
     private Boolean isEdit = false;
 

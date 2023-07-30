@@ -13,8 +13,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IPackageService {
-
-    List<Package> findAllByCourse_CourseID( int CourseID);
-
     Optional<Package> findById(Integer integer);
+
+    List<Package> findAllByCourse_CourseID(int courseId);
+
+    List<Package> findAll();
+
+    void save(Package aPackage);
+
+    void deleteById(Integer packageId);
+
+    Package findPackageBySlotOnMonthAndCourse_CourseID(int slotOnMonth, int courseID);
 }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <title>Admin - FYoga</title>
+
+    <meta name="description">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.css">
+
+    <!-- Related styles of various javascript plugins -->
+    <link rel="stylesheet" href="/admin/css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="/admin/css/main.css">
+
+    <!-- Load a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="/admin/css/themes.css">
+    <!-- END Stylesheets -->
+
+    <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="/admin/js/vendor/modernizr-respond.min.js"></script>
+
+</head>
+
+<body>
+<!-- Page Container -->
+<div th:replace="~{common/admin/Container :: page-container}"></div>
+<!-- END Page Container -->
+
+<!-- Page Content -->
+<div id="page-content">
+    <!-- Navigation info -->
+    <ul id="nav-info" class="clearfix">
+        <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
+        <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
+        <!-- hiển thị "Chỉnh sửa gói học" -->
+        <li th:if="${PACKAGEDTO.isEdit}"><a href="javascript:void(0)">Chỉnh sửa gói học</a></li>
+        <!-- hiển thị "Thêm mới gói học" -->
+        <li th:unless="${PACKAGEDTO.isEdit}"><a href="javascript:void(0)">Thêm mới gói học</a></li>
+    </ul>
+    <!-- END Navigation info -->
+
+    <!-- List Staff -->
+    <div class="form-create-class">
+        <!-- hiển thị "Chỉnh sửa gói học" -->
+        <h2 class="create-header" th:if="${PACKAGEDTO.isEdit}">Chỉnh sửa gói học</h2>
+        <!-- hiển thị "Thêm mới gói học" -->
+        <h2 class="create-header" th:unless="${PACKAGEDTO.isEdit}">Thêm mới gói học</h2>
+
+        <form th:action="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit}" method="post" class="createPackage-container" th:object="${PACKAGEDTO}">
+            <input type="hidden" th:field="*{isEdit}">
+            <!-- hiển thị trường ẩn để lưu packageID -->
+            <input th:if="${PACKAGEDTO.isEdit}" type="hidden" th:field="*{packageID}">
+
+            <label>Khoá học</label>
+            <select th:field="*{courseID}" name="courseID" id="courseID">
+                <option th:each="course : ${COURSES}" th:value="${course.courseID}"
+                        th:text="${course.name}" th:selected="${PACKAGEDTO.courseID == course.courseID}">
+                </option>
+            </select>
+
+            <label for="slotOnMonth">Số buổi</label>
+            <input type="number" id="slotOnMonth" name="slotOnMonth" th:field="*{slotOnMonth}" required><br>
+
+            <label for="price">Giá gói</label>
+            <input type="number" id="price" name="price" step="0.01" th:field="*{price}" required><br>
+
+            <!-- nút "Cập nhật" -->
+            <button class="btn-footer" th:if="${PACKAGEDTO.isEdit}" type="submit">Cập nhật</button>
+            <!-- nút "Tạo" -->
+            <button class="btn-footer" th:unless="${PACKAGEDTO.isEdit}" type="submit">Tạo</button>
+        </form>
+        <p style="color: red" th:text="${MSG}"></p>
+    </div>
+</div>
+
+<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+<!-- Bootstrap.js -->
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
+
+<!-- Jquery plugins and custom javascript code -->
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
+
+<!-- Javascript code only for this page -->
+<script>
+    function showForm2() {
+        var formContainer = document.getElementById("formCourse");
+        formContainer.style.display = "block";
+    }
+
+    function hideForm() {
+        var formContainer = document.getElementById("formCourse");
+        formContainer.style.display = "none";
+    }
+
+    // ... (Các đoạn mã javascript khác nếu có)
+
+</script>
+

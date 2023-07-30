@@ -23,6 +23,11 @@ public class CourseServiceImpl implements ICourseService {
     @Autowired
     CourseRepository courseRepository;
 
+    @Override
+    public void deleteById(Integer integer) {
+        courseRepository.deleteById(integer);
+    }
+
     public CourseServiceImpl(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
@@ -37,10 +42,17 @@ public class CourseServiceImpl implements ICourseService {
         return courseRepository.findCourseByName(name);
     }
 
+
+    @Override
+    public Course findCourseByName(String course_name) {
+        return courseRepository.findCourseByName(course_name);
+    }
+
     @Override
     public Optional<Course> findById(Integer integer) {
         return courseRepository.findById(integer);
     }
+
 
     // xu lu img
     @Override
@@ -79,5 +91,10 @@ public class CourseServiceImpl implements ICourseService {
             // Xử lý trường hợp không tìm thấy đối tượng Content với contentId tương ứng
             throw new RuntimeException("User not found for course: " + courseID);
         }
+    }
+
+    @Override
+    public List<Course> findByStatus(int status) {
+        return courseRepository.findByStatus(status);
     }
 }

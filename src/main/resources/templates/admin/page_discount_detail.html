@@ -52,44 +52,73 @@
     <!-- Navigation info -->
     <ul id="nav-info" class="clearfix">
         <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
-        <li><a href="javascript:void(0)">Gói học</a></li>
+        <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
+        <li><a href="javascript:void(0)">Khuyến mãi</a></li>
     </ul>
     <!-- END Navigation info -->
 
     <!-- List Staff -->
-    <h3 class="page-header page-header-top">Gói học
-        <a href="/FYoGa/Login/ADMIN/Package/CreateOrEdit?isEdit=0" data-toggle="tooltip" title="Thêm mới gói học"
+    <h3 class="page-header page-header-top">Khuyến mãi
+        <a href="/FYoGa/Login/ADMIN/Discount/CreateOrEditDiscount?isEdit=0" data-toggle="tooltip" title="Thêm mới khuyến mãi"
            class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
     </h3>
 
     <table class="table">
+        <!-- Discount Table Header -->
         <thead class="discount-head">
         <tr style="background-color: #4CAF50;">
-            <th>Số buổi</th>
-            <th>Khóa học</th>
-            <th>Giá</th>
+            <th class="hidden-xs hidden-sm"><i class="fa "></i>Số tháng</th>
+            <th class="hidden-xs hidden-sm">% muốn giảm</th>
+            <th class="hidden-xs hidden-sm">Giá ban đầu</th>
+            <th class="hidden-xs hidden-sm">Tổng</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="package : ${PACKAGELIST}" th:object="${package}">
-            <td><a th:href="@{/FYoGa/Login/ADMIN/Discount/{packageID}/Discount(packageID=${package.packageID})}" th:text="*{name}"></a></td>
-            <td th:text="*{course.name}"></td>
-            <td th:text="*{price}"></td>
+        <!-- Loop through the discounts and display each row -->
+        <tr th:each="discount : ${DISCOUNTS}" class="table-content">
+            <td class="hidden-xs hidden-sm">
+                <!-- Display the timeOnMonth -->
+                <input type="text" th:value="${discount.timeOnMonth + ' tháng'}" readonly>
+            </td>
+            <td class="hidden-xs hidden-sm">
+                <!-- Display the percentDiscount -->
+                <input type="number" placeholder="0%" th:value="${discount.percentDiscount}" class="phan-tram-giam"
+                       oninput="calculateTotal(this)" readonly>
+            </td>
+            <td class="hidden-xs hidden-sm">
+                <!-- Display the original price from the package -->
+                <input class="gia-goc" oninput="calculateTotal(this)" th:value="${discount.aPackage.price*discount.timeOnMonth}"
+                       readonly>vnđ</input>
+            </td>
+            <td class="hidden-xs hidden-sm">
+                <!-- Calculate and display the discounted price -->
+                <input type="number" class="tong-giam"
+                       th:value="${discount.aPackage.price*discount.timeOnMonth - (discount.aPackage.price * discount.percentDiscount / 100)}"
+                       disabled>vnđ
+            </td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a th:href="@{/FYoGa/Login/ADMIN/Package/CreateOrEdit(isEdit=1, PackageID=*{packageID})}" data-toggle="tooltip" title="Chỉnh sửa"
-                       class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
-                    <a th:href="@{/FYoGa/Login/ADMIN/Package/remove(packageID=*{packageID})}" data-toggle="tooltip" title="Xóa"
-                       class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                    <a th:href="@{/FYoGa/Login/ADMIN/Discount/CreateOrEditDiscount(isEdit=1, DiscountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
+                       data-toggle="tooltip" title="Chỉnh sửa" class="btn btn-xs btn-success">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <a th:href="@{/FYoga/Login/ADMIN/Discount/delete(discountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
+                       data-toggle="tooltip" title="Xóa" class="btn btn-xs btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this discount?')">
+                        <i class="fa fa-times"></i>
+                    </a>
+
+
+
+
                 </div>
             </td>
         </tr>
-
         </tbody>
     </table>
     <!-- END List 1 -->
-
 </div>
 <!-- END Page Content -->
 
@@ -97,6 +126,7 @@
 <!-- END Inner Container -->
 </div>
 <!-- END Page Container -->
+
 
 <style>
     #formContainer,
@@ -150,6 +180,7 @@
     #save2 {
         display: flex;
         justify-content: center;
+
         align-items: center;
     }
 
@@ -164,43 +195,10 @@
 
     #closeButton,
     #closeButton2 {
-        transform: translateX(0%);
+        transform: translateX(00%);
     }
 </style>
 
-
-<script>
-
-    function showCreateClass() {
-        var formCreateContainer = document.getElementById("formCreateContainer");
-        formCreateContainer.style.display = "block";
-    }
-
-    //chạy option của tháng
-    var selectFields = document.querySelectorAll(".select-field");
-
-    selectFields.forEach(function (select) {
-        for (var i = 1; i <= 60; i++) {
-            var option = document.createElement("option");
-            option.value = "option" + i;
-            option.text = i + " tháng";
-            select.appendChild(option);
-        }
-    });
-
-    function calculateTotal(input) {
-        var row = input.parentNode.parentNode;
-        var giaGocInput = row.querySelector(".gia-goc");
-        var phanTramGiamInput = row.querySelector(".phan-tram-giam");
-        var tongGiamInput = row.querySelector(".tong-giam");
-
-        var giaGoc = giaGocInput.value;
-        var phanTramGiam = phanTramGiamInput.value;
-        var tongGiam = giaGoc - (giaGoc * phanTramGiam / 100);
-
-        tongGiamInput.value = tongGiam;
-    }
-</script>
 <!--END form edit class -->
 
 
@@ -208,8 +206,8 @@
 <a href="javascript:void(0)" id="to-top"><i class="fa fa-chevron-up"></i></a>
 
 <!-- Excanvas for canvas support on IE8 -->
-<!--[if lte IE 8]>
-<script src="/admin/js/helpers/excanvas.min.js"></script><![endif]-->
+<script src="/admin/js/helpers/excanvas.min.js"></script>
+<![endif]-->
 
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -221,7 +219,6 @@
 <!-- Jquery plugins and custom javascript code -->
 <script src="/admin/js/plugins.js"></script>
 <script src="/admin/js/main.js"></script>
-
 </body>
 
 </html>

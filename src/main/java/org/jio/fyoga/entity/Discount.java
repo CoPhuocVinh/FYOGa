@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Discount {
+@Table(name = "Discount")
+public class Discount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int discountID;

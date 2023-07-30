@@ -20,5 +20,5 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     Course findCourseByName(final String course_name);
 
-
+    List<Course> findByStatus(int status);
 }

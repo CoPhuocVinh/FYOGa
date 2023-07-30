@@ -11,11 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.entity.Package;
 import org.jio.fyoga.entity.Role;
 import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.model.ClassDTO;
 import org.jio.fyoga.model.CourseDTO;
+import org.jio.fyoga.service.IClassService;
 import org.jio.fyoga.service.ICourseService;
+import org.jio.fyoga.service.IPackageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -31,6 +34,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/FYoGa/Login/ADMIN/Course")
@@ -38,15 +43,20 @@ public class ACourseController {
 
     @Autowired
     ICourseService courseService;
+
+    @Autowired
+    IPackageService packageService;
+
+    @Autowired
+    IClassService classService;
     @GetMapping("")
     public String getCourses(Model model) {
-//        List<Class> classListON = classService.findByStatus(1);
-//        model.addAttribute("CLASS_ON", classListON);
-//
-//        List<Class> classListOff = classService.findByStatus(0);
-//        model.addAttribute("CLASS_OFF", classListOff);
-        List<Course> courseList = courseService.findAll();
-        model.addAttribute("COURSELIST", courseList);
+        List<Course> courseListOn = courseService.findByStatus(1);
+        model.addAttribute("COURSE_ON", courseListOn);
+
+        List<Course> courseListOff = courseService.findByStatus(0);
+        model.addAttribute("COURSE_OFF", courseListOff);
+
         return "admin/pageCourseAdmin";
     }
 
@@ -132,4 +142,43 @@ public class ACourseController {
         // Xử lý trường hợp tệp tin không tồn tại
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/isdelete")
+    public String showdeleteCourse(@RequestParam int courseID, RedirectAttributes ra) {
+        ra.addAttribute("DELETE", courseID);
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
+    @GetMapping("/delete")
+    public String deleteCoure(@RequestParam int courseID) {
+        Course course = courseService.findById(courseID).orElse(null);
+        course.setStatus(0);
+        courseService.save(course);
+
+        Set<Class> classes = course.getClasses();
+        for (Class aClass : classes) {
+            aClass.setStatus(0);
+            classService.save(aClass);
+        }
+
+        Set<Package> packages = course.getPackages();
+        for (Package aPackage : packages) {
+            aPackage.setStatus(0);
+            packageService.save(aPackage);
+        }
+
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
+
+    @GetMapping("/resetstatus")
+    public String reStatus (@RequestParam int courseID){
+        Course course = courseService.findById(courseID).orElse(null);
+        course.setStatus(1);
+        courseService.save(course);
+        return "redirect:/FYoGa/Login/ADMIN/Course";
+    }
+
+
+
 }
