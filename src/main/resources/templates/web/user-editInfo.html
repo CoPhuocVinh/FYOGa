@@ -55,7 +55,8 @@
 <!--                        <textarea th:field="*{fullName}" class="form-control" name="content" id="content"></textarea>-->
 
                         <label class="edit-content" >Số điện thoại</label>
-                        <input class="form-control" type="text" th:field="*{phone}">
+                        <input class="checked-phone form-control" type="text" th:field="*{phone}">
+                        <span class="error-message" style="color: red; display: none;">Số điện thoại không hợp lệ.</span>
 
                         <label class="edit-content" >Giới tính</label>
                         <select class="form-control" th:field="*{gender}">
