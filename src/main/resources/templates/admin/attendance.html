@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Admin - FYoga</title>
+
+    <meta name="description">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.css">
+
+    <!-- Related styles of various javascript plugins -->
+    <link rel="stylesheet" href="/admin/css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="/admin/css/main.css">
+
+    <!-- Load a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="/admin/css/themes.css">
+    <!-- END Stylesheets -->
+
+
+</head>
+
+<body>
+
+<!-- Page Container -->
+<div th:replace="~{common/admin/Container :: page-container}"></div>
+<!-- END Page Container -->
+<!-- Page Content -->
+<div id="page-content">
+    <!-- Navigation info -->
+    <ul id="nav-info" class="clearfix">
+        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+        <!-- <li><a href="javascript:void(0)">Components</a></li> -->
+        <li class="active"><a href="">Lịch học</a></li>
+
+    </ul>
+    <!-- END Navigation info -->
+
+
+
+    <div class="containerSchedule">
+        <div class="section-header-lich text-center wow zoomIn" data-wow-delay="0.1s">
+            <h2>Lịch học</h2><br>
+
+<!--            <div class="head-option">-->
+<!--                <label >Kỳ</label>-->
+<!--                <select >-->
+<!--                    <option value="ngay">&#45;&#45; Chọn kỳ &#45;&#45;</option>-->
+<!--                    <option value="ngay">1/7/2023 - 31/8/2023</option>-->
+<!--                    <option value="ngay">1/9/2023 - 31/10/2023</option>-->
+<!--                    <option value="ngay">1/11/2023 - 31/12/2023</option>-->
+<!--                </select>-->
+<!--                <a href="addSemester.html" data-toggle="tooltip" title="Thêm kỳ mới"-->
+<!--                   class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>-->
+<!--                <br><br>-->
+<!--                <label >Tuần</label>-->
+<!--                <select>-->
+<!--                    <option value="ngay">&#45;&#45; Chọn tuần &#45;&#45;</option>-->
+<!--                    <option value="ngay">26/06/2023 - 01/07/2023</option>-->
+<!--                    <option value="ngay">03/07/2023 - 08/07/2023</option>-->
+<!--                    <option value="ngay">10/07/2023 - 17/07/2023</option>-->
+<!--                    <option value="ngay">24/07/2023 - 29/07/2023</option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+        </div>
+        <div class="text-center-button">
+<!--            <input type="submit" value="Đăng lịch" id="Create" onclick="showUpSchedule()">-->
+<!--            <input type="submit" value="Lưu" id="save3">-->
+            <a href="/FYoGa/Login/ADMIN/schedule?week=-1">trước </a>
+            <a href="/FYoGa/Login/ADMIN/schedule?week=1">sau</a>
+            <a href="/FYoGa/Login/ADMIN/schedule">today</a>
+        </div>
+
+
+
+
+        <div id="service" class="service">
+            <section class="ftco-section">
+                <div class="container1">
+
+                    <div class="row">
+                        <div class=" ftco-animate">
+                            <div class="sched-list">
+                                <table class="table" id="myTable">
+                                    <thead class="thead-primary">
+                                    <tr class="text-center head-day">
+                                        <th>&nbsp;</th>
+                                        <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}"  th:text="*{dayOfMonth}"></th>
+
+                                    </tr>
+                                    <tr  class="text-center head-thu">
+                                        <th>&nbsp;</th>
+                                        <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}" th:text="'Thứ ' + *{dayOfWeek}">Thứ 2</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="ACTIVITY : ${ACTIVITYS}" th:object="${ACTIVITY}" class="text-center">
+                                        <td class="color">
+                                            <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
+                                        </td>
+                                        <!-- t2 -->
+                                        <div th:each="DAY : *{dayOfWeeks}">
+
+                                            <div  th:if="${DAY.AClass}">
+                                                <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
+                                                <td  class="color-1">
+                                                    <h6 th:text="${DAY.AClass.course.name}"></h6>
+                                                    <p th:text="${DAY.getAClass().className}" class="idcourse"></p>
+                                                    <p th:text="${DAY.getAClass().teacher.fullName}" class="idcourse"></p>
+                                                    <p th:text="${DAY.note}" class="idcourse"></p>
+
+                                                    <a th:href="@{/FYoGa/Login/ADMIN/schedule/eventCreateOrEdit(activityID=${DAY.activityID}, day=${DAY.dayOfWeek}, slot = *{slotID.slotID})}">edit</a>
+                                                </td>
+                                            </div>
+
+                                            <div th:unless="${DAY.AClass}">
+                                                <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
+                                                <td class="color-1">
+                                                    <a th:href="@{/FYoGa/Login/ADMIN/schedule/eventCreateOrEdit(activityID=${DAY.activityID}, day=${DAY.dayOfWeek}, slot = *{slotID.slotID})}">Create</a>
+                                                </td>
+                                            </div>
+                                        </div>
+
+
+                                    </tr><!-- END TR-->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Schedule End -->
+    </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-10">
+    <div id="example-fullcalendar2"></div>
+</div>
+</div>
+<!-- END FullCalendar (Drop Events) -->
+</div>
+<!-- END Page Content -->
+
+
+<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+<!-- Bootstrap.js -->
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
+
+<!-- Jquery plugins and custom javascript code -->
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
+
+
+<!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+<script src="/admin/js/vendor/modernizr-respond.min.js"></script>
+</body>
+
+</html>
