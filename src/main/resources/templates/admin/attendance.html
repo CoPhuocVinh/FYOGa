@@ -45,9 +45,9 @@
 <div id="page-content">
     <!-- Navigation info -->
     <ul id="nav-info" class="clearfix">
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+        <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
         <!-- <li><a href="javascript:void(0)">Components</a></li> -->
-        <li class="active"><a href="">Lịch học</a></li>
+        <li class="active"><a href="">Điểm danh</a></li>
 
     </ul>
     <!-- END Navigation info -->
@@ -56,7 +56,7 @@
 
     <div class="containerSchedule">
         <div class="section-header-lich text-center wow zoomIn" data-wow-delay="0.1s">
-            <h2>Lịch học</h2><br>
+            <h2>Điểm danh</h2><br>
 
         </div>
 
@@ -100,7 +100,7 @@
                                                         <p class="idcourse"> đã Full</p>
                                                     </div>
 
-                                                    <form th:action="@{/FYoGa/Login/ADMIN/attendance/check}" method="get">
+                                                    <form th:action="@{/FYoGa/Login/ADMIN/Attendance/Check}" method="get">
                                                         <input type="hidden" name="classID" th:value="${DAY.AClass.classID}">
                                                         <button type="submit" id="modal-login-button-re"  class="idcourse">Điểm danh</button>
 

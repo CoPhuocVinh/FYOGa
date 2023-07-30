@@ -97,7 +97,7 @@ public class ClassController {
             String name = "yoga " + classService.findFirstByOrderByClassIDDesc().getClassID();
             aClassEntity.setClassName(name);
             Account account = (Account) session.getAttribute("USER");
-            aClassEntity.setStaff(account);
+            aClassEntity.setStaff(account.getAccountID());
 
         }
 

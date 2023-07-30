@@ -31,6 +31,6 @@ public class Role implements Serializable {
     private String roleName;
 
     //create relationShip
-    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role")
     private Set<Account> accounts;
 }

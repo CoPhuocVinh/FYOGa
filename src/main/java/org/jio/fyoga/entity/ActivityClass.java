@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -50,4 +51,9 @@ public class ActivityClass {
     @ManyToOne
     @JoinColumn(name = "staffID")
     Account staff;
+
+    @OneToMany(mappedBy = "activityClass")
+    List<Attendance> attendances;
+
+
 }

@@ -45,10 +45,10 @@ public class Course {
     @JoinColumn(name = "adminID")
     private Account admin;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course")
     private Set<Package> packages;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course")
     private Set<Class> classes;
 
     @Override
