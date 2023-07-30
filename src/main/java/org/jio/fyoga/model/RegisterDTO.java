@@ -3,7 +3,7 @@ package org.jio.fyoga.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +20,7 @@ public class RegisterDTO {
     float priceOriginal;
     float priceDiscount;
     int slotUsed;
-    int weekUsed;
+    Date expired;
     int customerID;
     int aDiscountID;
     int typePaying;

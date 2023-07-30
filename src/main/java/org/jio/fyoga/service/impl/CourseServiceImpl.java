@@ -44,7 +44,7 @@ public class CourseServiceImpl implements ICourseService {
 
     // xu lu img
     @Override
-    public void saveIMGAccount(MultipartFile file, Course course) throws IOException {
+    public void saveIMG(MultipartFile file, Course course) throws IOException {
         // Kiểm tra xem tệp có tồn tại không
         if (!file.isEmpty()) {
             // Lưu tệp vào trường data của đối tượng Content

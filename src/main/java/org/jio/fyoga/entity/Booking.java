@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import java.sql.Timestamp;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -27,6 +27,8 @@ public class Booking {
 
     @Column(name = "status")
     int status;
+    @Column(name = "expired")
+    Date expired;
 
     @ManyToOne
     @JoinColumn(name = "customerID")

@@ -54,4 +54,46 @@ public class RegisterServiceImpl implements IRegisterService {
         }
         return monthlyTotalList;
     }
+
+    @Override
+    public List<Register> findByStatusOrStatus(int statusPayingDone, int statusPayingUsing) {
+        return registerRepository.findByStatusOrStatus(statusPayingDone, statusPayingUsing);
+    }
+
+    @Override
+    public Register findTopByStatusOrderByRegisteredDateDesc(int status) {
+        return registerRepository.findTopByStatusOrderByRegisteredDateDesc(status);
+    }
+
+    @Override
+    public Register findFirstByStatusOrderByRegisteredDateAsc(int status) {
+        return registerRepository.findFirstByStatusOrderByRegisteredDateAsc(status);
+    }
+
+    @Override
+    public Register findByStatus(int status) {
+        return registerRepository.findByStatus(status);
+    }
+
+    @Override
+    public Register findRegisterByStatusAndcourseID(int status, int courseID) {
+        return registerRepository.findRegisterByStatusAndaDiscount_aPackage_course_courseID(status, courseID);
+    }
+
+
+    @Override
+    public Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID) {
+        List<Register> registerList = registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID);
+        return registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID).get(0);
+    }
+
+
+    @Override
+    public Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status) {
+        return registerRepository.findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(status).get(0);
+    }
+
+    public <S extends Register> List<S> saveAll(Iterable<S> entities) {
+        return registerRepository.saveAll(entities);
+    }
 }

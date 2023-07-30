@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.sql.Date;
 import java.util.Set;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,6 +18,7 @@ import java.util.Set;
 public class Class {
 
     @Id
+    @Column(name = "classID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int classID;
 

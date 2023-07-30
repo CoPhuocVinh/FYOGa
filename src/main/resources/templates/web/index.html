@@ -97,237 +97,50 @@
         <div class="container">
             <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                 <h2>Lịch học</h2> <br>
-                <label>Năm</label>
-                <select class="calendar-day">
-                    <option value="ngay">-- Chọn năm --</option>
-                    <option value="ngay">2020</option>
-                    <option value="ngay">2021</option>
-                    <option value="ngay">2022</option>
-                    <option value="ngay">2023</option>
-                </select>
-                <br><br>
-                <label>Tuần</label>
-                <select class="calendar-day">
-                    <option value="ngay">-- Chọn tuần --</option>
-                    <option value="ngay">26/06/2023 - 01/07/2023</option>
-                    <option value="ngay">03/07/2023 - 08/07/2023</option>
-                    <option value="ngay">10/07/2023 - 17/07/2023</option>
-                    <option value="ngay">24/07/2023 - 29/07/2023</option>
-                </select>
+
             </div>
             <div class="row">
                 <div class=" ftco-animate">
                     <div class="sched-list">
                         <table class="table">
                             <thead class="thead-primary">
-                            <tr class="text-center head-day">
+                            <tr  class="text-center head-day">
                                 <th>&nbsp;</th>
-                                <th>26/6</th>
-                                <th>27/6</th>
-                                <th>28/6</th>
-                                <th>29/6</th>
-                                <th>30/6</th>
-                                <th>1/7</th>
+                                <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}"  th:text="*{dayOfMonth}"></th>
                             </tr>
                             <tr class="text-center head-thu">
                                 <th>&nbsp;</th>
-                                <th>Thứ 2</th>
-                                <th>Thứ 3</th>
-                                <th>Thứ 4</th>
-                                <th>Thứ 5</th>
-                                <th>Thứ 6</th>
-                                <th>Thứ 7</th>
+                                <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}" th:text="'Thứ ' + *{dayOfWeek}">Thứ</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="text-center">
+                            <tr th:each="ACTIVITY : ${ACTIVITYS}" th:object="${ACTIVITY}" class="text-center">
                                 <td class="color">
-                                    <p class="time">7:00 - 8:00</p>
+                                    <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
                                 </td>
+                                <!-- t2 -->
+                                <div th:each="DAY : *{dayOfWeeks}">
 
-                                <td class="color-1">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T2-S1</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
+                                    <div  th:if="${DAY.AClass}">
+                                        <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
+                                        <td  class="color-1">
+                                            <h6 th:text="${DAY.AClass.course.name}"></h6>
+                                            <p th:text="''+${''+DAY.getAClass().className+' - '+DAY.getAClass().teacher.fullName}" class="idcourse"></p>
+                                            <p th:text="${DAY.note}" class="idcourse"></p>
 
-                                <td class="color-1">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T3-S1</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
 
-                                <td class="color-1">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T4-S1</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
+                                        </td>
+                                    </div>
 
-                                <td class="color-1">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T5-S1</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
+                                    <div th:unless="${DAY.AClass}">
+                                        <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
+                                        <td class="color-1">
 
-                                <td class="color-1">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T6-S1</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
+                                        </td>
+                                    </div>
+                                </div>
 
-                                <td class="color-1">
-                                </td>
-                            </tr><!-- END TR-->
 
-                            <tr class="text-center">
-                                <td class="color">
-                                    <p class="time">8:30 - 9:30</p>
-                                </td>
-
-                                <td class="color-2">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T2-S2</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
-
-                                <td class="color-2">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T3-S2</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
-
-                                <td class="color-2">
-                                </td>
-
-                                <td class="color-2">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T5-S2</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
-
-                                <td class="color-2">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T6-S2</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
-
-                                <td class="color-2">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T7-S2</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                                <td class="color">
-                                    <p class="time">10:00 - 11:00</p>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T2-S3</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T3-S3</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T4-S3</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T5-S3</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T6-S3</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
-
-                                <td class="color-3">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T7-S3</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
-                            </tr><!-- END TR-->
-                            <tr class="text-center">
-                                <td class="color">
-                                    <p class="time">18:00 - 19:00</p>
-                                </td>
-
-                                <td class="color-4">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T2-S4</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
-
-                                <td class="color-4">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T3-S4</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
-
-                                <td class="color-4">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T4-S4</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
-
-                                <td class="color-4">
-                                    <h6>HATHA YOGA</h6>
-                                    <p class="idcourse">Hatha-T5-S4</p>
-                                    <span class="trainer">Giáo viên A</span>
-                                </td>
-
-                                <td class="color-4">
-                                    <h6>YOGA NGHỆ THUẬT</h6>
-                                    <p class="idcourse">Hatha-T6-S4</p>
-                                    <span class="trainer">Giáo viên C</span>
-                                </td>
-
-                                <td class="color-4">
-                                </td>
-                            </tr><!-- END TR-->
-                            <tr class="text-center">
-                                <td class="color">
-                                    <p class="time">19:30 - 20:30</p>
-                                </td>
-
-                                <td class="color-5">
-                                </td>
-
-                                <td class="color-5">
-                                </td>
-
-                                <td class="color-5">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T4-S5</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
-
-                                <td class="color-5">
-                                    <h6>ASANAS YOGA</h6>
-                                    <p class="idcourse">Hatha-T5-S5</p>
-                                    <span class="trainer">Giáo viên D</span>
-                                </td>
-
-                                <td class="color-5">
-                                    <h6>YOGA TRỊ LIỆU</h6>
-                                    <p class="idcourse">Hatha-T6-S5</p>
-                                    <span class="trainer">Giáo viên B</span>
-                                </td>
-
-                                <td class="color-5">
-                                </td>
                             </tr><!-- END TR-->
 
                             </tbody>

@@ -12,10 +12,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Account;
 import org.jio.fyoga.entity.Course;
+import org.jio.fyoga.entity.Schedule;
 import org.jio.fyoga.model.AccountDTO;
+import org.jio.fyoga.model.Schedule.WeekDTO;
+import org.jio.fyoga.model.Schedule.WeekScheduleDTO;
 import org.jio.fyoga.service.IAccountService;
 import org.jio.fyoga.service.ICourseService;
 import org.jio.fyoga.service.IGmailService;
+import org.jio.fyoga.service.IScheduleService;
+import org.jio.fyoga.service.impl.ActivityClassServiceImpl;
+import org.jio.fyoga.service.impl.ScheduleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -39,6 +45,13 @@ public class HomepageController {
     @Autowired
     IGmailService gmailService;
 
+    @Autowired
+    IScheduleService scheduleService;
+    @Autowired
+    ScheduleServiceImpl scheduleServiceTest;
+    @Autowired
+    ActivityClassServiceImpl activityClassServiceTest;
+
     @RequestMapping(value = {"", "/",})
     public String showHomepage(){
         return "redirect:/FYoGa";
@@ -50,6 +63,16 @@ public class HomepageController {
             model.addAttribute("COURSES", courseService.findAll());
             model.addAttribute("STAFFS", accountService.findAccountByRole(2));
 
+            List<WeekDTO> weekDTOS = scheduleServiceTest.WeekNow();
+
+
+            model.addAttribute("EVENTS",weekDTOS);
+            int noWeek = weekDTOS.get(1).getWeekOfYear();
+            int noYear =  weekDTOS.get(1).getYear();
+            Schedule schedules = scheduleServiceTest.findScheduleByYearAndNoWeek(noYear,noWeek);
+            List<WeekScheduleDTO> weekScheduleDTOs = activityClassServiceTest.getActivityClassesFromMondayToSaturday(schedules.getScheduleID());
+            System.out.printf("bibi");
+            model.addAttribute("ACTIVITYS",weekScheduleDTOs);
         return "web/index";
     }
 

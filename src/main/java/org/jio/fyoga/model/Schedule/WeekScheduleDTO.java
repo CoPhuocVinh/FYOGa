@@ -12,6 +12,9 @@ import lombok.experimental.FieldDefaults;
 import org.jio.fyoga.entity.ActivityClass;
 import org.jio.fyoga.entity.Slot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,11 +22,12 @@ import org.jio.fyoga.entity.Slot;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WeekScheduleDTO {
-    ActivityClassDTO t2;
-    ActivityClassDTO t3;
-    ActivityClassDTO t4;
-    ActivityClassDTO t5;
-    ActivityClassDTO t6;
-    ActivityClassDTO t7;
+    List<ActivityClassDTO> dayOfWeeks;
+//    ActivityClassDTO t2;
+//    ActivityClassDTO t3;
+//    ActivityClassDTO t4;
+//    ActivityClassDTO t5;
+//    ActivityClassDTO t6;
+//    ActivityClassDTO t7;
     Slot slotID;
 }

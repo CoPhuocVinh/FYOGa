@@ -11,6 +11,9 @@ import lombok.*;
 import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Schedule;
 import org.jio.fyoga.entity.Slot;
+
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,4 +26,11 @@ public class ActivityClassDTO {
     Slot slot;
     Class aClass;
     int status;
+    String note;
+    Date dayOfMonth;
+
+    int noBooking;
+    boolean isBooking = false;
+
+    boolean isEdit = false;
 }

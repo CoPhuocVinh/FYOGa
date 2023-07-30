@@ -17,8 +17,10 @@ import org.jio.fyoga.model.RegisterDTO;
 import org.jio.fyoga.service.IDiscountService;
 import org.jio.fyoga.service.IPackageService;
 import org.jio.fyoga.service.IRegisterService;
+import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -46,40 +48,46 @@ public class CheckOutController {
     @GetMapping("")
     public String ShowCheckOut(HttpSession session
             , @RequestParam int discountID, Model model
-            , @RequestParam int typePaying){
+            , @RequestParam int typePaying) {
 
         String url = "web/checkoutCourse";
         Account account = (Account) session.getAttribute("USER");
         RegisterDTO registerDTO = RegisterDTO.builder().build();
-        if(account == null){
+        if (account == null) {
             //System.out.println(packageID);
             session.setAttribute("CHECKOUTING", discountID);
+            if (typePaying == 0) {
+                session.setAttribute("TYPEPAYING", 0);
+            } else {
+                session.setAttribute("TYPEPAYING", 1);
+            }
+
             url = "redirect:/FYoGa/Login";
         }
         Optional<Discount> discountEntity = discountService.findById(discountID);
-        if(typePaying == 0 ){
+        if (typePaying == 0) {
             registerDTO.setTypePaying(0);
             model.addAttribute("TYPEPAYING", "Thanh toán tại quầy");
 
 
-        }else {
+        } else {
             registerDTO.setTypePaying(1);
             model.addAttribute("TYPEPAYING", "Thanh toán VNPAY");
         }
 
-        model.addAttribute("PAYING",discountEntity);
-        model.addAttribute("REGISTER",registerDTO);
+        model.addAttribute("PAYING", discountEntity);
+        model.addAttribute("REGISTER", registerDTO);
 
         // xu ly register thanh cong
         String SUCCESS = (String) session.getAttribute("SUCCESS");
         String FAIL = (String) session.getAttribute("FAIL");
 
-        if (SUCCESS != null){
-            model.addAttribute("SUCCESS",SUCCESS);
+        if (SUCCESS != null) {
+            model.addAttribute("SUCCESS", SUCCESS);
             session.removeAttribute("SUCCESS");
         }
-        if (FAIL != null){
-            model.addAttribute("FAIL",FAIL);
+        if (FAIL != null) {
+            model.addAttribute("FAIL", FAIL);
             session.removeAttribute("FAIL");
         }
         return url;
@@ -87,39 +95,56 @@ public class CheckOutController {
 
     @PostMapping("/Checkout")
     public String Checkout(HttpSession session, @RequestParam int discountID
-            ,@ModelAttribute("REGISTER") RegisterDTO registerDTO, Model model){
+            , @ModelAttribute("REGISTER") RegisterDTO registerDTO, Model model) {
 
         Account account = (Account) session.getAttribute("USER");
         //Optional<Package> packageEntiry = packageService.findById(packageID);
         Optional<Discount> discountEntity = discountService.findById(discountID);
 
-        float price_discount = discountEntity.get().getAPackage().getPrice() * (100 - discountEntity.get().getPercentDiscount())/100;
-        int slotAvailable = discountEntity.get().getAPackage().getSlotOnMonth()*discountEntity.get().getTimeOnMonth();
+        float price_discount = discountEntity.get().getAPackage().getPrice() * (100 - discountEntity.get().getPercentDiscount()) / 100
+                * discountEntity.get().getTimeOnMonth();
+        int slotAvailable = discountEntity.get().getAPackage().getSlotOnMonth() * discountEntity.get().getTimeOnMonth();
         int timeAvailable = discountEntity.get().getTimeOnMonth();
 
-        if (registerDTO.getTypePaying() == 0){
-            Date date = new Date(System.currentTimeMillis());
-             registerDTO = RegisterDTO.builder()
+
+        if (registerDTO.getTypePaying() == 0) {
+            Date currentDate = MyUtil.currentDate();
+
+            Date expiredDate = MyUtil.expiredDateOnDate(5);
+
+            registerDTO = RegisterDTO.builder()
                     .customerID(account.getAccountID())
                     .aDiscountID(discountID)
-                    .status(2)
+                    .status(1)
                     .priceOriginal(discountEntity.get().getAPackage().getPrice())
                     .priceDiscount(price_discount)
                     .slotAvailable(slotAvailable)
                     .timeAvailable(timeAvailable)
                     .slotUsed(slotAvailable)
-                    .registeredDate(date)
-                    .weekUsed(timeAvailable*4)
+                    .registeredDate(currentDate)
+                    //.weekUsed(timeAvailable*4)
+                    .expired(expiredDate)
                     .build();
 
             Register registerEntity = new Register();
-            BeanUtils.copyProperties(registerDTO,registerEntity);
+            BeanUtils.copyProperties(registerDTO, registerEntity);
             registerEntity.setCustomer(account);
+            registerEntity.setTypePaying(MyUtil.tran4Paying(registerDTO.getTypePaying()));
             //registerEntity.setPackages(packageEntiry.orElseThrow());
             registerEntity.setADiscount(discountEntity.orElseThrow());
+            // xu ly
+            Register register01 = registerService.findRegisterByStatusAndcourseID(1,registerEntity.getADiscount().getAPackage().getCourse().getCourseID());
+            if(register01 != null){
+                session.setAttribute("SUCCESS", "Bạn đăng kí khóa học Không thành công vì bạn chưa thanh toán gói của khóa này");
+                session.setAttribute("FAIL", "Bạn đã đăng kí và thanh toán khóa học thất bại");
+
+                return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID + "&typePaying=0";
+            }
+
+
 
             registerService.save(registerEntity);
-        }else {
+        } else {
             registerDTO = RegisterDTO.builder()
                     .aDiscountID(discountID)
                     .priceOriginal(discountEntity.get().getAPackage().getPrice())
@@ -127,17 +152,17 @@ public class CheckOutController {
                     .slotAvailable(slotAvailable)
                     .timeAvailable(timeAvailable)
                     .slotUsed(slotAvailable)
-                    .weekUsed(timeAvailable*4)
+                    //.weekUsed(timeAvailable*4)
                     .typePaying(1)
                     .build();
-            session.setAttribute("REGISTER",registerDTO);
+            session.setAttribute("REGISTER", registerDTO);
             return "redirect:/FYoGa/Course/PackageCheckOut/create_payment?discountID=" + discountID;
 
         }
 
         System.out.println("register thành công");
-        session.setAttribute("SUCCESS","Bạn đã đăng kí khóa học thành công");
-        return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID+"&typePaying=0";
+        session.setAttribute("SUCCESS", "Bạn đã đăng kí khóa học thành công");
+        return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID + "&typePaying=0";
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +178,7 @@ public class CheckOutController {
 //        long amount = Integer.parseInt(req.getParameter("amount"))*100;
 //        String bankCode = req.getParameter("bankCode");
 
-        float price_discount = discountEntity.get().getAPackage().getPrice() * (100 - discountEntity.get().getPercentDiscount());
+        float price_discount = discountEntity.get().getAPackage().getPrice() * (100 - discountEntity.get().getPercentDiscount()) * discountEntity.get().getTimeOnMonth();
 
         long amount = (long) price_discount;
 
@@ -249,23 +274,54 @@ public class CheckOutController {
         Optional<Discount> discountEntity = discountService.findById(registerDTO.getADiscountID());
 
         if (responseCode.equals("00")) {
-            Date date = new Date(System.currentTimeMillis());
-            registerDTO.setRegisteredDate(date);
+            Date currentDate = MyUtil.currentDate();
+            registerDTO.setRegisteredDate(currentDate);
             Register registerEntity = new Register();
 
 
-            BeanUtils.copyProperties(registerDTO,registerEntity);
+            BeanUtils.copyProperties(registerDTO, registerEntity);
             registerEntity.setCustomer(account);
             registerEntity.setADiscount(discountEntity.orElseThrow());
+            registerEntity.setTypePaying(MyUtil.tran4Paying(registerDTO.getTypePaying()));
+            int courseID = registerEntity.getADiscount().getAPackage().getCourse().getCourseID();
+
+
+            int noDateExpired = registerEntity.getTimeAvailable()*4*7;
+            Register register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
+            Register register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            if (register03 != null){
+
+                if (register02 != null){
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register02.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }else {
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register03.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }
+            }else {
+                if (register02 != null){
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(register02.getExpired(),noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }else {
+
+                    Date dateExpired = MyUtil.expiredDateOnDate(noDateExpired);
+                    registerEntity.setExpired(dateExpired);
+                }
+            }
+
+            registerEntity.setStatus(2);
             registerService.save(registerEntity);
             System.out.println("register thành công");
-            session.setAttribute("SUCCESS","Bạn đã đăng kí và thanh toán khóa học thành công");
-            return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID()+"&typePaying=1";
+            session.setAttribute("SUCCESS", "Bạn đã đăng kí và thanh toán khóa học thành công");
+            return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID() + "&typePaying=1";
 
-        }else {
-            session.setAttribute("SUCCESS","Bạn đã đăng kí và thanh toán khóa học thất bại");
-            session.setAttribute("FAIL","Bạn đã đăng kí và thanh toán khóa học thất bại");
-            return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID()+"&typePaying=1";
+        } else {
+            session.setAttribute("SUCCESS", "Bạn đã đăng kí và thanh toán khóa học thất bại");
+            session.setAttribute("FAIL", "Bạn đã đăng kí và thanh toán khóa học thất bại");
+            return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + registerDTO.getADiscountID() + "&typePaying=1";
 
         }
 
@@ -275,4 +331,5 @@ public class CheckOutController {
 
 
 
-    }
+
+}
