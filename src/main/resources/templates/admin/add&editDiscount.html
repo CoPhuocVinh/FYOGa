@@ -58,21 +58,25 @@
             <h2 class="create-header" th:if="${DISCOUNTDTO.isEdit}">Chỉnh sửa khuyến mãi</h2>
             <h2 class="create-header" th:unless="${DISCOUNTDTO.isEdit}">Thêm mới khuyến mãi</h2>
 
-            <form th:action="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount}" method="post">
-                <input type="hidden" th:if="${DISCOUNTDTO.isEdit}" th:name="DiscountID" th:value="${DISCOUNTDTO.discountID}" />
+            <form th:action="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount}" method="post" th:object="${DISCOUNTDTO}">
+                <input type="hidden" th:field="*{isEdit}"/>
                 <br>
+                <input type="hidden" th:field="*{packageID}"/>
+                <input type="hidden" th:field="*{discountID}"/>
+
 
                 <label>Số tháng</label>
-                <input type="number" th:name="timeOnMonth" th:value="${DISCOUNTDTO.timeOnMonth}" required class="no-style"/>
-                <br>
+                <input th:if="${DISCOUNTDTO.timeOnMonth == 1}" type="number" th:field="*{timeOnMonth}" readonly class="no-style"/>
+                <input th:unless="${DISCOUNTDTO.timeOnMonth == 1}" type="number" min="1"  th:field="*{timeOnMonth}" required class="no-style"/>
 
+                <br>
                 <label>% khuyến mãi</label>
-                <input type="number" th:name="percentDiscount" th:value="${DISCOUNTDTO.percentDiscount}" required />
+                <input type="number" th:field="*{percentDiscount}" required />
                 <br>
 
                 <!-- Add more form fields here based on your DiscountDTO attributes -->
 
-                <button type="submit" th:text="${DISCOUNTDTO.isEdit ? 'Update' : 'Create'}"></button>
+                <button type="submit" >Save</button>
             </form>
             <p style="color: red" th:text="${MSG}"></p>
 
