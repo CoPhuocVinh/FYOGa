@@ -47,8 +47,11 @@
                         <input type="hidden" th:field="*{roleID}">
                         <input type="hidden" th:field="*{status}">
 
-                        <label class="edit-content" >Ảnh</label>
-                        <input type="file" name="file">
+                        <label >Ảnh</label>
+                        <div id="preview" class="circle-frame">
+                            <img class="input-user-file" th:src="@{/FYoGa/Login/User/downloads-png(accountID=*{accountID})}" alt="">
+                        </div>
+                        <input type="file" name="file" id="fileInputAvatar">
 
                         <label class="edit-content" >Tên học viên</label>
                         <input class="form-control" type="text" th:field="*{fullName}">
@@ -74,7 +77,7 @@
     </div>
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
+    <script src="/web/js/validationPhoneAndAvt.js"></script>
     <script src="/web/js/functions.js"></script>
     <Script src="/web/js/main.js"></Script>
     <script src="/web/js/tinymce/tinymce.min.js"></script>

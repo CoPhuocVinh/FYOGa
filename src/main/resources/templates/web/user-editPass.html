@@ -40,25 +40,26 @@
             <header class="modal-header">
                 Đổi mật khẩu
             </header>
-            <p style="color: red" th:text="${MSG}"></p>
+<!--            <p style="color: red" th:text="${MSG}"></p>-->
 
             <div class="modal-body">
                 <form th:action="@{/FYoGa/Login/User/ChangePass}" method="post" id="myForm">
                     <div class="modal-edit-user" th:object="${USER}">
-                        <label class="edit-content" >Email</label>
+                        <label class="edit-content" >Email &emsp;&emsp;&emsp;&emsp;  <span style="color: red" class="help-block">Bạn không thể thay đổi email!</span></label>
                         <input class="form-control" type="text" th:field="*{email}" readonly>
-                        <span style="color: red" class="help-block">Bạn không thể thay đổi email!</span>
+
                         <br>
                         <label class="edit-content" >Mật khẩu</label>
                         <input th:field="*{password}" class="form-control" type="password" required>
-                        <span class="help-block">Vui lòng nhập mật khẩu cũ!</span>
+<!--                        <span class="help-block">Vui lòng nhập mật khẩu cũ!</span>-->
                         <p style="color: red" th:text="${MSG}"></p>
 
                         <label class="edit-content" >Mật khẩu mới</label>
-                        <input th:field="*{newPassword}" class="form-control" type="password" required>
+                        <input th:field="*{newPassword}" class="form-control  new-password" type="password" required>
 
                         <label class="edit-content" >Xác nhận mật khẩu</label>
-                        <input class="form-control" type="password" required>
+                        <input class="form-control confirm-password" type="password" required>
+                        <span class="error-message" style="color: red; display: none;">Mật khẩu không khớp.</span>
 
 <!--                        <input class="form-control" type="password" required>-->
                     </div>
@@ -73,7 +74,7 @@
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-
+    <script src="/web/js/validationPassword.js"></script>
     <script src="/web/js/functions.js"></script>
     <Script src="/web/js/main.js"></Script>
 </body>
