@@ -275,7 +275,7 @@ header
     justify-content: right;
 }
 
-.text-center-button input {
+.text-center-button a {
     margin-right: 20px;
     margin-bottom: 30px;
     font-size: 19px;
@@ -286,8 +286,8 @@ header
     color: #fff;
 }
 
-.text-center-button input:hover {
-    border: 1px solid mediumseagreen;
+.text-center-button a:hover {
+    text-decoration: none;
     background-color: #fff;
     color: #000;
 }
