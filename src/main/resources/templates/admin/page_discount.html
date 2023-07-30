@@ -73,7 +73,8 @@
         </thead>
         <tbody>
         <tr th:each="package : ${PACKAGELIST}" th:object="${package}">
-            <td><a th:href="@{/FYoGa/Login/ADMIN/Discount/{packageID}/Discount(packageID=${package.packageID})}" th:text="*{name}"></a></td>
+            <td><a th:href="@{/FYoGa/Login/ADMIN/Discount/{packageID}/Discount(packageID=${package.packageID})}" th:text="${package.name}"></a>
+            </td>
             <td th:text="*{course.name}"></td>
             <td th:text="*{price}"></td>
             <td class="text-center">

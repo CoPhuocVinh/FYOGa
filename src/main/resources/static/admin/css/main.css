@@ -3387,7 +3387,7 @@ a:focus {
 
 /* Put your high resolution backgrounds here */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
-/*only screen and (-moz-min-device-pixel-ratio: 1.5),*/
+    /*only screen and (-moz-min-device-pixel-ratio: 1.5),*/
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
 
@@ -3557,7 +3557,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid grey;
-    margin: 10px 30%;
+    margin-right: 26px;
 }
 
 .createClass-container .btn-footer {
@@ -3703,4 +3703,16 @@ only screen and (min-device-pixel-ratio: 1.5) {
     /* Đảm bảo hình ảnh không bị méo khi thu nhỏ */
 }
 
+.dash-tiles{
+    width: 100%;
+}
 
+.dash-tiles-inactive{
+    width: 100%;
+    display: none;
+}
+
+.no-style{
+    max-width: 40%;
+    margin-right: 30px;
+}

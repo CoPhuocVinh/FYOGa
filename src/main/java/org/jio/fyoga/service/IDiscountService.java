@@ -22,4 +22,5 @@ public interface IDiscountService {
 
     void deleteById(int discountID);
 
+    List<Discount> findDiscountByaPackage_PackageID(int packageID);
 }
