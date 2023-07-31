@@ -75,7 +75,7 @@ public class AAttendanceController {
         List<Attendance> attendances = attendanceService.findAllByActivityClass_ActivityID(activityID);
         if (attendances.size() > 0){
             List<Attendance> attendancesON = attendanceService.findAllByActivityClass_ActivityIDAndIsPresent(activityID,true);
-            model.addAttribute("ATTENON",attendancesON);
+                model.addAttribute("ATTENON",attendancesON);
         }else {
             List<Booking> bookings = bookingService.findAllByAClassBooking_ClassIDAndStatus(classID,1);
             attendances = new ArrayList<>();

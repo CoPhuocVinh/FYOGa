@@ -147,6 +147,14 @@ public class AScheleduController {
         return "redirect:/FYoGa/Login/ADMIN/schedule";
     }
 
+    @GetMapping("/remove")
+    public String remove(@RequestParam int activityID){
+        ActivityClass activityClass = activityClassServiceTest.findById(activityID);
+        activityClass.setStatus(0);
+        activityClassServiceTest.save(activityClass);
+        return "redirect:/FYoGa/Login/ADMIN/schedule";
+    }
+
 
 
 

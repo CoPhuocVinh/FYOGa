@@ -15,18 +15,6 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="/admin/img/favicon.ico">
-    <link rel="apple-touch-icon" href="/admin/img/icon57.png" sizes="57x57">
-    <link rel="apple-touch-icon" href="/admin/img/icon72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="/admin/img/icon76.png" sizes="76x76">
-    <link rel="apple-touch-icon" href="/admin/img/icon114.png" sizes="114x114">
-    <link rel="apple-touch-icon" href="/admin/img/icon120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="/admin/img/icon144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="/admin/img/icon152.png" sizes="152x152">
-    <!-- END Icons -->
-
     <!-- Stylesheets -->
     <!-- Bootstrap is included in its original form, unaltered -->
     <link rel="stylesheet" href="/admin/css/bootstrap.css">
@@ -104,15 +92,14 @@
                 <tr th:each="CLASS, iterStat : ${CLASS_ON}" th:object="${CLASS}">
                     <!-- <td class="text-center"><input type="checkbox" id="check1-td1" name="check1-td1"></td> -->
                     <td class="text-center" th:text="${iterStat.count}">1</td>
-                    <td><a href="page_attendence.html" th:text="*{className}"></a></td><!--tên lớp-->
+                    <td><a href="" th:text="*{className}"></a></td><!--tên lớp-->
                     <td class="hidden-xs hidden-sm" th:text="*{course.name}">Hatha Yoga</td><!--tên khóa-->
                     <td class="hidden-xs hidden-sm" th:text="*{teacher.fullName}">Millie Harper</td><!--tên giáo viên-->
 
                     <td class="text-center">
                         <div class="btn-group">
                             <!--nút sửa-->
-                            <a href="checkattendance.html" data-toggle="tooltip" title="Điểm danh"
-                               class="btn btn-xs btn-check"><i class="gi gi-check"></i></a>
+
                             <a th:href="@{/FYoGa/Login/ADMIN/class/CreateOrUpdate(isEdit = 1,ClassID=*{classID})}"
                                data-toggle="tooltip" title="Chỉnh sửa"
                                class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
@@ -152,7 +139,7 @@
             <tr th:each="CLASS, iterStat : ${CLASS_OFF}" th:object="${CLASS}">
                 <!-- <td class="text-center"><input type="checkbox" id="check2-td4" name="check1-td4"></td> -->
                 <td class="text-center" th:text="${iterStat.count}"></td>
-                <td><a href="page_attendence.html" th:text="*{className}"></a></td><!--tên lớp-->
+                <td><a href="" th:text="*{className}"></a></td><!--tên lớp-->
                 <td class="hidden-xs hidden-sm" th:text="*{course.name}"></td><!--tên khóa-->
                 <td class="hidden-xs hidden-sm" th:text="*{teacher.fullName}"></td><!--tên giáo viên-->
 
