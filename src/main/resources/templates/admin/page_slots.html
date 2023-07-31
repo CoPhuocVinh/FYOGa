@@ -76,18 +76,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="CLASS, iterStat : ${SLOT}" th:object="${CLASS}">
+                        <tr th:each="slot, iterStat : ${SLOT}" th:object="${slot}">
                             <td th:text="${iterStat.count}"><a href="javascript:void(0)"></a></td>
-                            <!-- <td><a href="javascript:void(0)">001</a></td>tên lớp -->
-                            <td th:text="*{startTime}" class="hidden-xs hidden-sm"></td>
-                            <td th:text="*{endTime}" class="hidden-xs hidden-sm"></td>
+                            <td th:text="${#dates.format(slot.startTime, 'HH:mm')}" class="hidden-xs hidden-sm"></td>
+                            <td th:text="${#dates.format(slot.endTime, 'HH:mm')}" class="hidden-xs hidden-sm"></td>
 
 
                             <td class="text-center">
                                 <div class="btn-group">
                                     <!--nút sửa-->
 
-                                    <a th:href="@{/FYoGa/Login/ADMIN/slot/edit/{slotID}(slotID=${CLASS.slotID})}"
+                                    <a th:href="@{/FYoGa/Login/ADMIN/slot/edit/{slotID}(slotID=${slot.slotID})}"
                                        data-toggle="tooltip" title="Chỉnh sửa"
                                        class="btn btn-xs btn-success">
                                         <i class="fa fa-pencil"></i>

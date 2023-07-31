@@ -3,6 +3,8 @@ package org.jio.fyoga.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Time;
 
 import java.util.Set;
@@ -23,11 +25,11 @@ public class Slot {
     @Column(name = "slot_name", columnDefinition = "nvarchar(10)")
     String slotName;
 
-    @Column(name = "start_time")
-    Time startTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private Time startTime;
 
-    @Column(name = "end_time")
-    Time endTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private Time endTime;
 
 //    @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
