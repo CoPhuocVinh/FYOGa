@@ -9,6 +9,11 @@ package org.jio.fyoga.service;/*  Welcome to Jio word
 
 import org.jio.fyoga.entity.Slot;
 
+import java.util.List;
+
 public interface ISlotService {
     Slot findById(Integer integer);
+
+    <S extends Slot> S save(S entity);
+    List<Slot> findAll();
 }

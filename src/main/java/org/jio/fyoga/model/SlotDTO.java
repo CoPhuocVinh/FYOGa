@@ -15,6 +15,6 @@ public class SlotDTO {
     String slotName;
     Time startTime;
     Time endTime;
-    String staff;
+    int staff;
 
 }
