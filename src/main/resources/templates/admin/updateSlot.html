@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Admin - FYoga</title>
+
+  <meta name="description">
+  <meta name="author" content="pixelcave">
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Stylesheets -->
+  <!-- Bootstrap is included in its original form, unaltered -->
+  <link rel="stylesheet" href="/admin/css/bootstrap.css">
+
+  <!-- Related styles of various javascript plugins -->
+  <link rel="stylesheet" href="/admin/css/plugins.css">
+
+  <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+  <link rel="stylesheet" href="/admin/css/main.css">
+
+  <!-- Load a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+  <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+  <link rel="stylesheet" href="/admin/css/themes.css">
+  <!-- END Stylesheets -->
+
+  <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+  <script src="/admin/js/vendor/modernizr-respond.min.js"></script>
+  <!--    <script type="text/javascript" src="web/ckeditor/ckeditor.js"></script>-->
+  <!--    <script type="text/javascript" src="web/ckfinder/ckfinder.js"></script>-->
+</head>
+
+<!-- Add the class .fixed to <body> for a fixed layout on large resolutions (min: 1200px) -->
+<!-- <body class="fixed"> -->
+
+<body>
+<!-- Page Container -->
+<div th:replace="~{common/admin/Container :: page-container}"></div>
+<!-- END Page Container -->
+<!-- Page Content -->
+<div id="page-content">
+  <!-- Navigation info -->
+  <ul id="nav-info" class="clearfix">
+    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+    <li><a href="page_slots.html">Danh sách slot học</a></li>
+    <li><a href="javascript:void(0)">Thêm slot mới</a></li>
+  </ul>
+  <!-- END Navigation info -->
+
+  <!-- List Staff -->
+  <div class="form-create-class">
+    <h2 class="create-header">Chỉnh sửa slot</h2>
+
+    <form class="createClass-container" th:object="${slotDTO}" th:action="@{/FYoGa/Login/ADMIN/slot/update}" method="post">
+      <!-- Form fields for slot data -->
+
+      <label>Tên Slot:</label>
+      <input type="text" th:field="*{slotName}">
+      <br>
+      <label>Thời gian bắt đầu:</label>
+      <input type="time" class="form-control" th:field="${slotDTO.startTime}" required="required" />
+
+      <br>
+      <label>Thời gian kết thúc:</label>
+      <input type="time" class="form-control" th:field="${slotDTO.endTime}" required="required" />
+
+      <br>
+      <button type="submit">Cập nhật</button>
+    </form>
+
+
+</div>
+<script src="/web/js/tinymce/tinymce.min.js"></script>
+
+<script type="text/javascript">
+  tinymce.init({
+    selector: '#content'
+  });
+</script>
+<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+<!-- Bootstrap.js -->
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
+<!-- Jquery plugins and custom javascript code -->
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
+
+</body>
+
+</html>

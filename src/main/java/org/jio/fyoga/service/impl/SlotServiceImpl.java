@@ -13,6 +13,8 @@ import org.jio.fyoga.service.ISlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SlotServiceImpl implements ISlotService {
     @Autowired
@@ -25,5 +27,15 @@ public class SlotServiceImpl implements ISlotService {
     @Override
     public Slot findById(Integer integer) {
         return slotRepository.findById(integer).orElseThrow();
+    }
+
+    @Override
+    public <S extends Slot> S save(S entity) {
+        return slotRepository.save(entity);
+    }
+
+    @Override
+    public List<Slot> findAll() {
+        return slotRepository.findAll();
     }
 }
