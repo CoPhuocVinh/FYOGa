@@ -31,8 +31,7 @@ public class Post {
     private byte[] img;
 
     @Column(name = "author")
-    @Lob
-    private byte[] author;
+    String author;
 
     @Column(name = "status")
     int status;

@@ -2,6 +2,8 @@ package org.jio.fyoga.model;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -9,7 +11,10 @@ import lombok.*;
 @Builder
 public class PostDTO {
     int postID;
-    String postName;
+    String title;
     String dessciption;
-    int staffID;
+    int status;
+    private byte[] img;
+    String author;
+    Date createDay;
 }
