@@ -1713,6 +1713,7 @@ a:focus {
     padding: 15px;
     background: none;
     border-radius: 0;
+    color: white;
 }
 
 .footer .contact-form .btn {
