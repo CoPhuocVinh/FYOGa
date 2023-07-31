@@ -41,49 +41,146 @@
 <body>
 <div th:replace="~{common/admin/Container :: page-container}"></div>
 <!-- Page Content -->
+<!-- Page Content -->
 <div id="page-content">
+    <!-- Navigation info -->
+    <ul id="nav-info" class="clearfix">
+        <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
+        <li><a href="javascript:void(0)">Danh sách blog</a></li>
+    </ul>
+    <!-- END Navigation info -->
 
-    <h1>Blog List</h1>
+    <!-- List Staff -->
+    <h3 class="page-header page-header-top">Danh sách blog <a href="/FYoGa/Login/ADMIN/class/CreateOrUpdate?isEdit=0"
+                                                              data-toggle="tooltip" title="Thêm mới lớp học" class="btn btn-xs btn-success"><i
+            class="fa fa-plus"></i></a>
 
-        <a href="/FYoGa/Login/ADMIN/post/add" data-toggle="tooltip" title="Thêm mới blog"
-           class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
-    <table class="table">
+        <div class="card-header section-bnt">
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active-bnt" href="#active" id="active-bnt" data-toggle="tab">Hoạt
+                            động</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link inactive-bnt" href="#inactive" id="inactive-btn"
+                           data-toggle="tab">Không hoạt động</a>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.card-header -->
+    </h3>
+
+    <table class="table active-list" id="active-list">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Hình</th>
+        <tr style="background-color: #4CAF50;" class="list-teacherHeader">
+            <!-- <th class="cell-small text-center" data-toggle="tooltip" title="Toggle all!"><input
+                    type="checkbox" id="check1-all" name="check1-all"></th> -->
+            <th class="text-center">ID</th>
+            <th>Hình ảnh</th>
+            <th class="hidden-xs hidden-sm"><i class="fa "></i>Tiêu đề</th>
 
-            <th>Tiêu đề</th>
-
-            <th>Tùy chọn</th>
+            <!-- <th class="text-center"><i class="fa fa-bolt"></i>Actions</th> -->
+            <th class="hidden-xs hidden-sm">Tùy chọn</th>
         </tr>
         </thead>
-        <tbody>
-        <!-- Use Thymeleaf iteration to populate the table with data -->
-        <tr th:each="post : ${posts}">
-            <td th:text="${post.postID}">1</td>
-            <!-- Assuming the "img" field is a byte array containing the thumbnail image -->
-            <td th:text="${post.getImg()}"></td>
+        <tbody class="list-teacherBody">
+        <!--dòng lớp-->
+        <tr th:each="blogPost,iter : ${BLOG_ON}">
+            <td class="text-center" th:text="${iter.count}">1</td>
+            <td th:text="${blogPost.img}">Blog Post Image</td>
+            <td th:text="${blogPost.title}">Blog Post Title</td>
 
-            <td th:text="${post.getTitle()}"></td>
-            <td>
-                <!-- Add edit and delete buttons with links to corresponding actions -->
-                <a th:href="@{/FYoga/Login/ADMIN/post/edit/' + ${post.postID}}">Edit</a> |
-                <a th:href="@{'/FYoga/Login/ADMIN/post/delete/' + ${post.postID}}">Delete</a>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a th:href="@{/FYoGa/Login/ADMIN/post/edit/{postID}(postID=${blogPost.postID})}"
+                       data-toggle="tooltip" title="Chỉnh sửa"
+                       class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                    <a th:href="@{/FYoGa/Login/ADMIN/post/delete(postID=${blogPost.postID})}" data-toggle="tooltip" title="Xóa"
+                       class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                </div>
+            </td>
+
+
+        </tr>
+
+        </tbody>
+
+
+    </table>
+    <!-- END List Staff -->
+
+    <!--                ////////// not actice-->
+    <table class="table inactive-list" id="inactive-list" style="display: none;">
+        <thead>
+        <tr style="background-color: aqua;" class="list-teacherHeader">
+            <!-- <th class="cell-small text-center" data-toggle="tooltip" title="Toggle all!"><input
+                    type="checkbox" id="check2-all" name="check1-all"></th> -->
+            <th class="text-center">ID</th>
+            <th>Hình ảnh</th>
+            <th class="hidden-xs hidden-sm"><i class="fa "></i>Tiêu đề</th>
+
+            <!-- <th class="text-center"><i class="fa fa-bolt"></i>Actions</th> -->
+            <th class="hidden-xs hidden-sm">Tùy chọn</th>
+
+        </tr>
+        </thead>
+
+
+        <tbody class="list-teacherBody">
+        <!-- dòng lớp -->
+        <tr th:each="blogPost,iter : ${BLOG_OFF}">
+            <td class="text-center" th:text="${iter.count}">1</td>
+            <td th:text="${blogPost.img}">Blog Post Image</td>
+            <td th:text="${blogPost.title}">Blog Post Title</td>
+
+            <td class="text-center">
+                <div class="btn-group">
+                    <!-- ... Other action buttons ... -->
+                    <a th:href="@{/FYoGa/Login/ADMIN/post/reStatus(postID=${blogPost.postID})}" data-toggle="tooltip" title="Hoàn tác"
+                       class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                </div>
             </td>
         </tr>
+
         </tbody>
     </table>
-
+    <!-- END List Staff -->
 </div>
+<!-- END Page Content -->
+
+
+
+
+<script>
+
+    //xử lý nút bấm active và inactive
+    var activeBtn = document.getElementById('active-bnt');
+    var inactiveBtn = document.getElementById('inactive-btn');
+    var activeList = document.getElementById('active-list');
+    var inactiveList = document.getElementById('inactive-list');
+
+    activeBtn.addEventListener('click', function () {
+        activeList.style.display = 'inline-table';
+        inactiveList.style.display = 'none';
+    });
+    inactiveBtn.addEventListener('click', function () {
+        activeList.style.display = 'none';
+        inactiveList.style.display = 'inline-table';
+    });
+
+
+
+</script>
+<!--END form chỉnh sửa class -->
 
 <!-- Scroll to top link, check main.js - scrollToTop() -->
 <a href="javascript:void(0)" id="to-top"><i class="fa fa-chevron-up"></i></a>
 
 
+
 <!-- Excanvas for canvas support on IE8 -->
-<!--[if lte IE 8]>
-<script src="/admin/js/helpers/excanvas.min.js"></script><![endif]-->
+<!--[if lte IE 8]><script src="/admin/js/helpers/excanvas.min.js"></script><![endif]-->
 
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -95,13 +192,6 @@
 <!-- Jquery plugins and custom javascript code -->
 <script src="/admin/js/plugins.js"></script>
 <script src="/admin/js/main.js"></script>
-
-<script src="/web/js/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
-    tinymce.init({
-        selector: '#content'
-    });
-</script>
 </body>
 
 </html>
