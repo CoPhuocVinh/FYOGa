@@ -7,6 +7,10 @@ package org.jio.fyoga.service;/*  Welcome to Jio word
     Jio: I wish you always happy with coding <3
 */
 
+import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.Booking;
+import org.jio.fyoga.entity.Register;
+
 public interface IGmailService {
     // Hàm tạo verify code ngẫu nhiên và thời gian hết hạn 30 phút
     String generateVerifyCode();
@@ -19,4 +23,8 @@ public interface IGmailService {
 
     // Hàm kiểm tra mã verify code có hiệu lực hay không
     boolean verifyCodeIsValid(String verifyCode);
+
+    void sendMailConfirmBookClass( Account account, Booking booking);
+
+    void sendMailConfirmRegister( Account account, Register register);
 }
