@@ -102,6 +102,7 @@
 
                                                     <form th:action="@{/FYoGa/Login/ADMIN/Attendance/Check}" method="get">
                                                         <input type="hidden" name="classID" th:value="${DAY.AClass.classID}">
+                                                        <input type="hidden" name="activityID" th:value="${DAY.activityID}">
                                                         <button type="submit" id="modal-login-button-re"  class="idcourse">Điểm danh</button>
 
                                                     </form>

@@ -31,4 +31,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 
     List<Booking> findAllByaClassBooking_Course_CourseIDAndCustomer_AccountIDAndStatus(int courseID, int userID, int status);
 
+    List<Booking> findAllByaClassBooking_ClassIDAndStatus(int classID, int status);
+
 }

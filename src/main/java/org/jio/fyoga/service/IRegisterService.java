@@ -30,11 +30,11 @@ public interface IRegisterService {
 
     Register findByStatus(int status);
 
-    Register findRegisterByStatusAndcourseID(int status, int courseID);
+    Register findRegisterByStatusAndcourseID(int status, int courseID, int accoutID);
 
-    Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID);
+    Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID,int accountID);
 
-    Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status);
+    Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status,int courseID, int accountID);
 
     <S extends Register> List<S> saveAll(Iterable<S> entities);
 

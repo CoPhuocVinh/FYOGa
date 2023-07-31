@@ -39,7 +39,7 @@ public class Class {
 //    @OneToMany(mappedBy = "aClass",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    Set<ScheduleClass> scheduleClasses;
 
-    @OneToMany(mappedBy = "aClassBooking")
+    @OneToMany(mappedBy = "aClassBooking",fetch = FetchType.EAGER)
     Set<Booking> classBooking;
 
     @ManyToOne

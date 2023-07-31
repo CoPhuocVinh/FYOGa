@@ -76,21 +76,21 @@ public class RegisterServiceImpl implements IRegisterService {
     }
 
     @Override
-    public Register findRegisterByStatusAndcourseID(int status, int courseID) {
-        return registerRepository.findRegisterByStatusAndaDiscount_aPackage_course_courseID(status, courseID);
+    public Register findRegisterByStatusAndcourseID(int status, int courseID, int accoutID) {
+        return registerRepository.findRegisterByStatusAndaDiscount_aPackage_course_courseID(status, courseID, accoutID);
     }
 
 
     //@Override
-    public Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID) {
-        List<Register> registerList = registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID);
-        return registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID).get(0);
+    public Register findTopByStatusAndCourseIDOrderByRegisteredDateDesc(int status, int courseID, int accountID) {
+        List<Register> registerList = registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID,accountID);
+        return registerRepository.findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(status, courseID,accountID).get(0);
     }
 
 
     @Override
-    public Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status) {
-        return registerRepository.findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(status).get(0);
+    public Register findFirstByStatusAndCourseIDOrderByRegisteredDateAsc(int status, int courseID, int accountID) {
+        return registerRepository.findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(status,courseID, accountID).get(0);
     }
 
     @Override

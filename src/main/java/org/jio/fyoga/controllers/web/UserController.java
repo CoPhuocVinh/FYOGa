@@ -200,8 +200,8 @@ public class UserController {
             Register register02 = null;
             Register register03 = null;
             try{
-                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID, account.getAccountID());
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID,account.getAccountID());
             }catch (Exception ex){
 
             }
@@ -250,8 +250,8 @@ public class UserController {
             Register register02 = null;
             Register register03 = null;
             try{
-                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID,accountEntity.getAccountID());
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID,accountEntity.getAccountID());
             }catch (Exception ex){
 
             }
@@ -306,8 +306,8 @@ public class UserController {
         Register register02 = null;
         Register register03 = null;
         try{
-            register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-            register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+            register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID, account.getAccountID());
+            register03 = registerService.findRegisterByStatusAndcourseID(3,courseID, account.getAccountID());
         }catch (Exception ex){
 
         }
