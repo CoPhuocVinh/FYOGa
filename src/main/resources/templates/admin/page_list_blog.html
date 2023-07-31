@@ -68,8 +68,8 @@
             <td th:text="${post.getTitle()}"></td>
             <td>
                 <!-- Add edit and delete buttons with links to corresponding actions -->
-                <a th:href="@{/FYoga/Login/ADMIN/post/edit/ + ${post.postID}}">Edit</a> |
-                <a th:href="@{/FYoga/Login/ADMIN/post/delete(postID=${post.postID})}">Delete</a>
+                <a th:href="@{/FYoga/Login/ADMIN/post/edit/' + ${post.postID}}">Edit</a> |
+                <a th:href="@{'/FYoga/Login/ADMIN/post/delete/' + ${post.postID}}">Delete</a>
             </td>
         </tr>
         </tbody>
