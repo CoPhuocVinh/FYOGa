@@ -4,6 +4,7 @@ import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Feedback;
 import org.jio.fyoga.model.FeedbackDTO;
 import org.jio.fyoga.service.IFeedbackService;
+import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,11 +42,11 @@ public class FeedbackController {
         feedback.setEmail(email);
         feedback.setComment(comment);
         feedback.setStatus(0); // Assuming 0 means "not processed"
-        feedback.setDate(new Date()); // Assuming you want to set the current date/time
+        feedback.setDate(MyUtil.currentDate()); // Assuming you want to set the current date/time
 
         feedbackService.save(feedback);
 
-        return "redirect:/?success"; // Redirect back to the home page with a success message
+        return "redirect:/"; // Redirect back to the home page with a success message
     }
 
     @GetMapping("/reStatus")

@@ -3445,3 +3445,22 @@ input[type=text] {
     object-fit: cover;
     /* Đảm bảo hình ảnh không bị méo khi thu nhỏ */
 }
+
+#contactForm {
+    text-align: center;
+    padding: 0px 26%;
+}
+
+#contactForm button {
+    background: #f4b84f;
+    padding: 8px 24px;
+}
+
+#contactForm button:hover{
+    background: #cd9738;
+}
+
+.contact-title-text{
+    padding-bottom: 40px ;
+    transform: translateY(38px);
+}
