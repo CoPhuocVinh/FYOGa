@@ -17,9 +17,9 @@ import java.util.List;
 
 @Repository
 public interface ActivityClassReponsitory extends JpaRepository<ActivityClass, Integer> {
-    @Query("SELECT ac.dayOfWeek, ac.activityID FROM ActivityClass ac WHERE ac.slot.slotID = ?1 AND ac.schedule.scheduleID = ?2")
+    @Query("SELECT ac.dayOfWeek, ac.activityID FROM ActivityClass ac WHERE ac.slot.slotID = ?1 AND ac.schedule.scheduleID = ?2 AND ac.status = 1")
     List<Object[]> findActivityClassesFromMondayToSaturday(int slotId , int scheduleID);
 
-    @Query("SELECT ac.dayOfWeek, ac.activityID FROM ActivityClass ac WHERE ac.slot.slotID = ?1 AND ac.schedule.scheduleID = ?2 AND ac.aClass.course.courseID = ?3")
+    @Query("SELECT ac.dayOfWeek, ac.activityID FROM ActivityClass ac WHERE ac.slot.slotID = ?1 AND ac.schedule.scheduleID = ?2 AND ac.aClass.course.courseID = ?3 AND ac.status = 1")
     List<Object[]> findActivityClassesFromMondayToSaturdayOnCourse(int slotId , int scheduleID, int courseID);
 }
