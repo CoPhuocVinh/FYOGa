@@ -25,13 +25,13 @@ public class Course {
     @Column(name = "courseID")
     private int courseID;
 
-    @Column(name = "summary", columnDefinition = "nvarchar(100) not null")
+    @Column(name = "summary")
     private String summary;
 
-    @Column(name = "description", columnDefinition = "nvarchar(MAX) not null")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "course_name", columnDefinition = "nvarchar(50) not null")
+    @Column(name = "course_name")
     private String name;
 
     @Column(name = "img")

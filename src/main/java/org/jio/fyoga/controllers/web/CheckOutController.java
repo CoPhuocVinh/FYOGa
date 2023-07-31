@@ -15,6 +15,7 @@ import org.jio.fyoga.entity.Package;
 import org.jio.fyoga.entity.Register;
 import org.jio.fyoga.model.RegisterDTO;
 import org.jio.fyoga.service.IDiscountService;
+import org.jio.fyoga.service.IGmailService;
 import org.jio.fyoga.service.IPackageService;
 import org.jio.fyoga.service.IRegisterService;
 import org.jio.fyoga.util.MyUtil;
@@ -44,6 +45,8 @@ public class CheckOutController {
 
     @Autowired
     IDiscountService discountService;
+    @Autowired
+    IGmailService gmailService;
 
     @GetMapping("")
     public String ShowCheckOut(HttpSession session
@@ -142,7 +145,7 @@ public class CheckOutController {
             }
 
 
-
+            gmailService.sendMailConfirmRegister(account,registerEntity);
             registerService.save(registerEntity);
         } else {
             registerDTO = RegisterDTO.builder()
@@ -162,6 +165,7 @@ public class CheckOutController {
 
         System.out.println("register thành công");
         session.setAttribute("SUCCESS", "Bạn đã đăng kí khóa học thành công");
+
         return "redirect:/FYoGa/Course/PackageCheckOut?discountID=" + discountID + "&typePaying=0";
     }
 
@@ -319,6 +323,8 @@ public class CheckOutController {
             }
 
             registerEntity.setStatus(2);
+            gmailService.sendMailConfirmRegister(account,registerEntity);
+
             registerService.save(registerEntity);
             System.out.println("register thành công");
             session.setAttribute("SUCCESS", "Bạn đã đăng kí và thanh toán khóa học thành công");

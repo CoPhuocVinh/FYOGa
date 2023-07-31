@@ -99,7 +99,7 @@ public class ACourseController {
             courseEntity.setName(courseDTO.getName());
             courseEntity.setDescription(courseDTO.getDescription());
             courseEntity.setSummary(courseDTO.getSummary());
-
+            courseEntity.setStatus(1);
 
 
         }else {
@@ -108,6 +108,7 @@ public class ACourseController {
             Account account = (Account) session.getAttribute("USER");
             courseEntity.setAdmin(account);
             BeanUtils.copyProperties(courseDTO, courseEntity);
+            courseEntity.setStatus(1);
         }
 
         // xu ly img

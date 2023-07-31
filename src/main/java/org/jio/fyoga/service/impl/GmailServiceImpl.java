@@ -9,7 +9,11 @@ package org.jio.fyoga.service.impl;/*  Welcome to Jio word
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.Booking;
+import org.jio.fyoga.entity.Register;
 import org.jio.fyoga.service.IGmailService;
+import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -99,4 +103,73 @@ public class GmailServiceImpl implements IGmailService {
         // Mã hợp lệ
         return true;
     }
+
+    @Override
+    public void sendMailConfirmBookClass( Account account, Booking booking) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+
+            // Tạo nội dung email
+            String emailContent = "Dear " + account.getFullName() + ".\n"
+                    + "Cảm ơn bạn đã tin tưởng và đồng hành cùng FYoGa chúng tôi!\n"
+                    + "FYoGa xin gửi thông tin về lớp bạn đăng ký:\n"
+                    + "Khóa: " + booking.getAClassBooking().getCourse().getName() + ".\n"
+                    + "Lớp: " + booking.getAClassBooking().getClassName() + ".\n"
+                    + "Huấn Luyện Viên: " + booking.getAClassBooking().getTeacher().getFullName() + ".\n"
+                    + "FYoGa chúc bạn 1 ngày tốt lành.\n"
+                    + MyUtil.currentDate() + "\n"
+                    + "Thân ái\n"
+                    + "FYoGa.";
+
+            // gui meo
+            helper.setTo(account.getEmail());
+            helper.setSubject("Đăng ký lớp FYoGa - Gửi lại");
+            helper.setText(emailContent);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendMailConfirmRegister( Account account, Register register) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            String emailContent = "Dear " + account.getFullName() + ".\n"
+                    + "Cảm ơn bạn đã tin tưởng và đồng hành cùng FYoGa chúng tôi!\n"
+                    + "FYoGa xin gửi thông tin về gói bạn đăng ký:\n"
+                    + "Khóa: " + register.getADiscount().getAPackage().getCourse().getName() + ".\n"
+                    + "Giá: " + register.getPriceDiscount() + " vnđ.\n"
+                    + "Loại thanh toán: " + register.getTypePaying() + ".\n";
+
+            if (register.getStatus() > 1) {
+                emailContent += "Số Buổi học: " + register.getSlotAvailable() + ".\n"
+                        + "thời hạn đến ngày: " + register.getExpired() + ".\n";
+            } else {
+                emailContent += "Vì thời hạn thanh toán là 5 ngày.\n"
+                        + "Bạn vui lòng đến trung tâm chúng tôi trong 5 ngày để hoàn tắc thủ tục thanh toán.\n";
+            }
+
+            emailContent += "FYoGa chúc bạn 1 ngày tốt lành.\n"
+                    + MyUtil.currentDate() + "\n"
+                    + "Thân ái\n"
+                    + "FYoGa.";
+
+            // gui meo
+            helper.setTo(account.getEmail());
+            helper.setSubject("Đăng ký Gói FYoGa - Gửi lại");
+            helper.setText(emailContent);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
