@@ -50,14 +50,13 @@
         <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
         <li><a href="/FYoGa/Login/ADMIN/Package">Gói học</a></li>
         <li th:if="${DISCOUNTDTO.isEdit}"><a href="javascript:void(0)">Chỉnh sửa khuyến mãi</a></li>
-    <li th:unless="${DISCOUNTDTO.isEdit}"><a href="javascript:void(0)">Thêm mới khuyến mãi</a></li>
+        <li th:unless="${DISCOUNTDTO.isEdit}"><a href="javascript:void(0)">Thêm mới khuyến mãi</a></li>
     </ul>
 
 
-        <div class="createClass-container">
-            <h2 class="create-header" th:if="${DISCOUNTDTO.isEdit}">Chỉnh sửa khuyến mãi</h2>
-            <h2 class="create-header" th:unless="${DISCOUNTDTO.isEdit}">Thêm mới khuyến mãi</h2>
-
+    <div class="createClass-container">
+        <h2 class="create-header" th:if="${DISCOUNTDTO.isEdit}">Chỉnh sửa khuyến mãi</h2>
+        <h2 class="create-header" th:unless="${DISCOUNTDTO.isEdit}">Thêm mới khuyến mãi</h2>
             <form th:action="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount}" method="post" th:object="${DISCOUNTDTO}">
                 <input type="hidden" th:field="*{isEdit}"/>
                 <br>
@@ -82,126 +81,125 @@
             </form>
             <p style="color: red" th:text="${MSG}"></p>
 
-        </div>
+    </div>
     <!-- END Form -->
 
 </div>
 
 
 <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
-                <!-- Bootstrap.js -->
-                <script src="/admin/js/vendor/bootstrap.min.js"></script>
+<!-- Bootstrap.js -->
+<script src="/admin/js/vendor/bootstrap.min.js"></script>
 
-                <!-- Jquery plugins and custom javascript code -->
-                <script src="/admin/js/plugins.js"></script>
-                <script src="/admin/js/main.js"></script>
+<!-- Jquery plugins and custom javascript code -->
+<script src="/admin/js/plugins.js"></script>
+<script src="/admin/js/main.js"></script>
 
-                <!-- Javascript code only for this page -->
-                <script>
+<!-- Javascript code only for this page -->
+<script>
 
-                    var formData = new FormData();
-                    formData.append('file', fileInput.files[0]);
-                    $(function () {
+    var formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    $(function () {
 
-                        /* For advanced usage and examples please check out
-                         *  Jquery Validation   -> https://github.com/jzaefferer/jquery-validation
-                         */
+        /* For advanced usage and examples please check out
+         *  Jquery Validation   -> https://github.com/jzaefferer/jquery-validation
+         */
 
-                        /* Initialize Form Validation */
-                        $('#form-validation').validate({
-                            errorClass: 'help-block',
-                            errorElement: 'span',
-                            errorPlacement: function (error, e) {
-                                e.parents('.form-group > div').append(error);
-                            },
-                            highlight: function (e) {
-                                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-                                $(e).closest('.help-block').remove();
-                            },
-                            success: function (e) {
-                                // You can use the following if you would like to highlight with green color the input after successful validation!
-                                e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
-                                e.closest('.help-block').remove();
-                                e.closest('.help-inline').remove();
-                            },
-                            rules: {
-                                val_username: {
-                                    required: true,
-                                    minlength: 2
-                                },
-                                val_password: {
-                                    required: true,
-                                    minlength: 5
-                                },
-                                val_confirm_password: {
-                                    required: true,
-                                    minlength: 5,
-                                    equalTo: '#val_password'
-                                },
-                                val_email: {
-                                    required: true,
-                                    email: true
-                                },
-                                val_website: {
-                                    required: true,
-                                    url: true
-                                },
-                                val_date: {
-                                    required: true,
-                                    date: true
-                                },
-                                val_range: {
-                                    required: true,
-                                    range: [1, 100]
-                                },
-                                val_number: {
-                                    required: true,
-                                    number: true
-                                },
-                                val_digits: {
-                                    required: true,
-                                    digits: true
-                                },
-                                val_skill: {
-                                    required: true
-                                },
-                                val_credit_card: {
-                                    required: true,
-                                    creditcard: true
-                                },
-                                val_terms: {
-                                    required: true
-                                }
-                            },
-                            messages: {
-                                val_username: {
-                                    required: 'Please enter a username',
-                                    minlength: 'Your username must consist of at least 2 characters'
-                                },
-                                val_password: {
-                                    required: 'Please provide a password',
-                                    minlength: 'Your password must be at least 5 characters long'
-                                },
-                                val_confirm_password: {
-                                    required: 'Please provide a password',
-                                    minlength: 'Your password must be at least 5 characters long',
-                                    equalTo: 'Please enter the same password as above'
-                                },
-                                val_email: 'Please enter a valid email address',
-                                val_website: 'Please enter your website!',
-                                val_date: 'Please select a date!',
-                                val_range: 'Please enter a number between 1 and 100!',
-                                val_number: 'Please enter a number!',
-                                val_digits: 'Please enter digits!',
-                                val_credit_card: 'Please enter a valid credit card!',
-                                val_skill: 'Please select a skill!',
-                                val_terms: 'You must agree to the terms!'
-                            }
-                        });
-                    });
-                </script>
+        /* Initialize Form Validation */
+        $('#form-validation').validate({
+            errorClass: 'help-block',
+            errorElement: 'span',
+            errorPlacement: function (error, e) {
+                e.parents('.form-group > div').append(error);
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                $(e).closest('.help-block').remove();
+            },
+            success: function (e) {
+                // You can use the following if you would like to highlight with green color the input after successful validation!
+                e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+                e.closest('.help-block').remove();
+                e.closest('.help-inline').remove();
+            },
+            rules: {
+                val_username: {
+                    required: true,
+                    minlength: 2
+                },
+                val_password: {
+                    required: true,
+                    minlength: 5
+                },
+                val_confirm_password: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: '#val_password'
+                },
+                val_email: {
+                    required: true,
+                    email: true
+                },
+                val_website: {
+                    required: true,
+                    url: true
+                },
+                val_date: {
+                    required: true,
+                    date: true
+                },
+                val_range: {
+                    required: true,
+                    range: [1, 100]
+                },
+                val_number: {
+                    required: true,
+                    number: true
+                },
+                val_digits: {
+                    required: true,
+                    digits: true
+                },
+                val_skill: {
+                    required: true
+                },
+                val_credit_card: {
+                    required: true,
+                    creditcard: true
+                },
+                val_terms: {
+                    required: true
+                }
+            },
+            messages: {
+                val_username: {
+                    required: 'Please enter a username',
+                    minlength: 'Your username must consist of at least 2 characters'
+                },
+                val_password: {
+                    required: 'Please provide a password',
+                    minlength: 'Your password must be at least 5 characters long'
+                },
+                val_confirm_password: {
+                    required: 'Please provide a password',
+                    minlength: 'Your password must be at least 5 characters long',
+                    equalTo: 'Please enter the same password as above'
+                },
+                val_email: 'Please enter a valid email address',
+                val_website: 'Please enter your website!',
+                val_date: 'Please select a date!',
+                val_range: 'Please enter a number between 1 and 100!',
+                val_number: 'Please enter a number!',
+                val_digits: 'Please enter digits!',
+                val_credit_card: 'Please enter a valid credit card!',
+                val_skill: 'Please select a skill!',
+                val_terms: 'You must agree to the terms!'
+            }
+        });
+    });
+</script>
 </body>
-

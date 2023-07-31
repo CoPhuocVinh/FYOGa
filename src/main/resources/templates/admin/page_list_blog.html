@@ -51,16 +51,18 @@
     <!-- END Navigation info -->
 
 
+
     <h1>Blog List</h1>
         <a href="/FYoGa/Login/ADMIN/post/add" data-toggle="tooltip" title="Thêm mới blog"
            class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
-    <table class="table">
+
 
     <!-- List Staff -->
 
 
     <h3 class="page-header page-header-top">Danh sách blog <a href="/FYoGa/Login/ADMIN/post/add"
                                                               data-toggle="tooltip" title="Thêm mới bài viết" class="btn btn-xs btn-success"><i
+
 
             class="fa fa-plus"></i></a>
 
@@ -96,6 +98,7 @@
         </thead>
         <tbody class="list-teacherBody">
         <!--dòng lớp-->
+
             <tr th:each="blogPost,iter : ${BLOG_ON}">
                 <td class="text-center" th:text="${iter.count}">1</td>
                 <td th:text="${blogPost.img}">Blog Post Image</td>

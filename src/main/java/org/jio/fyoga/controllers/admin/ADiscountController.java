@@ -40,6 +40,7 @@ public class ADiscountController {
                                      Model model) {
         int discountID = Integer.parseInt(R_DiscountID);
         int packageID = Integer.parseInt(R_packageID);
+
         // Xử lý chỉnh sửa
         DiscountDTO discountDTO = DiscountDTO.builder().build();
         Package packageEntity = packageService.findById(packageID).orElse(null);
@@ -51,7 +52,6 @@ public class ADiscountController {
                 BeanUtils.copyProperties(discountEntity, discountDTO);
 
                 discountDTO.setPackageID(discountEntity.getAPackage().getPackageID());
-
                 discountDTO.setIsEdit(true);
             }
         }
@@ -94,7 +94,9 @@ public class ADiscountController {
             Discount discountEntity = new Discount();
             BeanUtils.copyProperties(discountDTO, discountEntity);
 
+
             discountEntity.setAPackage(packageEntity);
+
 
             discountService.save(discountEntity);
         }
@@ -109,9 +111,6 @@ public class ADiscountController {
         discountService.deleteById(discountID);
         return "redirect:/FYoGa/Login/ADMIN/Discount/" + packageID + "/Discount";
     }
-
-
-
 
 
 }
