@@ -69,7 +69,6 @@ public class ADiscountController {
         return "admin/add&editDiscount";
     }
 
-    // /FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount
     @PostMapping("/CreateOrUpdateDiscount")
     public String createOrUpdate(@ModelAttribute("DISCOUNTDTO") DiscountDTO discountDTO,
                                  RedirectAttributes ra) {
