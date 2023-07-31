@@ -119,156 +119,52 @@
             </div>
             <div class="row">
                 <div class="col-md-12 ftco-animate">
-                    <div class="sched-text-course">
-                        <!-- <h5>Nhấn vào từng lớp để xem thông tin chi tiết.</h5> -->
-                        <button id="openModalRequest">Đề Xuất Mở Lớp</button>
-                    </div>
+
                     <div class="sched-list-course">
                         <table class="table">
                             <thead class="thead-primary">
-                                <tr class="text-center head-thu">
-                                    <th>&nbsp;</th>
-                                    <th>Thứ 2</th>
-                                    <th>Thứ 3</th>
-                                    <th>Thứ 4</th>
-                                    <th>Thứ 5</th>
-                                    <th>Thứ 6</th>
-                                    <th>Thứ 7</th>
-
-                                </tr>
+                            <tr  class="text-center head-day">
+                                <th>&nbsp;</th>
+                                <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}"  th:text="*{dayOfMonth}"></th>
+                            </tr>
+                            <tr class="text-center head-thu">
+                                <th>&nbsp;</th>
+                                <th th:each="EVENT : ${EVENTS}" th:object="${EVENT}" th:text="'Thứ ' + *{dayOfWeek}">Thứ</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td class="color-sche">
-                                        <p class="time-sche">7:00 - 8:00</p>
-                                    </td>
-                                    <td class="color-2">
-                                        <h6 style="font-size: 18px;">Hatha-T2-S1</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-2">
-                                        
-                                    </td>
-                                    <td class="color-2">
-                                        
-                                    </td>
-                                    <td class="color-2">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T5-S1</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-2">
-                                        
-                                    </td>
-                                    <td class="color-2">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T7-S1</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                </tr><!-- END TR-->
+                            <tr th:each="ACTIVITY : ${ACTIVITYS}" th:object="${ACTIVITY}" class="text-center">
+                                <td class="color">
+                                    <p class="time" th:text="''+*{slotID.getStartTime()}+' - '+*{slotID.getEndTime()}">7:00 - 8:00</p>
+                                </td>
+                                <!-- t2 -->
+                                <div th:each="DAY : *{dayOfWeeks}">
 
-                                <tr class="text-center">
-                                    <td class="color-sche">
-                                        <p class="time-sche">8:30 - 9:30</p>
-                                    </td>
-                                    <td class="color-3">
-                                        
-                                    </td>
-                                    <td class="color-3">
-                                        
-                                    </td>
-                                    <td class="color-3">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T4-S2</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-3">
-                                        
-                                    </td>
-                                    <td class="color-3">
-                                        
-                                    </td>
-                                    <td class="color-3">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T7-S2</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                </tr><!-- END TR-->
+                                    <div  th:if="${DAY.AClass}">
+                                        <!-- Nội dung trong div này sẽ hiển thị nếu t2 không phải là null -->
+                                        <td  class="color-1">
+                                            <h6 th:text="${DAY.AClass.course.name}"></h6>
+                                            <p th:text="''+${''+DAY.getAClass().className+' - '+DAY.getAClass().teacher.fullName}+' ('+${DAY.noBooking}+'/'+${DAY.AClass.quantityClass}+')'" class="idcourse"></p>
+                                            <!--                                            <p th:text="'('+${DAY.noBooking}+'/'+${DAY.AClass.quantityClass}+')'" class="idcourse"></p>-->
 
-                                <tr class="text-center">
-                                    <td class="color-sche">
-                                        <p class="time-sche">10:00 - 11:00</p>
-                                    </td>
-                                    <td class="color-4">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T2-S3</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-4">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T3-S3</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-4">
+                                            <p th:text="${DAY.note}" class="idcourse"></p>
+                                            <div th:if="${DAY.noBooking} ==  ${DAY.AClass.quantityClass}">
+                                                <p class="idcourse"> đã Full</p>
+                                            </div>
 
-                                    </td>
-                                    <td class="color-4">
-                                        
-                                    </td>
-                                    <td class="color-4">
+                                        </td>
+                                    </div>
 
-                                    </td>
-                                    <td class="color-4">
-                                        
-                                    </td>
+                                    <div th:unless="${DAY.AClass}">
+                                        <!-- Nội dung trong div này sẽ hiển thị nếu t2 là null -->
+                                        <td class="color-1">
 
-                                </tr><!-- END TR-->
-                                <tr class="text-center">
-                                    <td class="color-sche">
-                                        <p class="time-sche">18:00 - 19:00</p>
-                                    </td>
-                                    <td class="color-5">
-                                        
-                                    </td>
-                                    <td class="color-5">
-                                        
-                                    </td>
-                                    <td class="color-5">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T4-S4</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-5">
-                                        
-                                    </td>
-                                    <td class="color-5">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T6-S4</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-5">
-                                        
-                                    </td>
-                                </tr><!-- END TR-->
-                                <tr class="text-center">
-                                    <td class="color-sche">
-                                        <p class="time-sche">19:30 - 20:30</p>
-                                    </td>
-                                    <td class="color-1">
-                                        
-                                    </td>
+                                        </td>
+                                    </div>
+                                </div>
 
-                                    <td class="color-1">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T3-S5</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-1">
-                                        
-                                    </td>
-                                    <td class="color-1">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T5-S5</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-1">
-                                        <h6 style="font-size: 18px;" href="feedback.html" >Hatha-T6-S5</h6> 
-                                        <p class="trainer">Giáo viên A</p>
-                                    </td>
-                                    <td class="color-1">
 
-                                    </td>
-                                </tr><!-- END TR-->
+                            </tr><!-- END TR-->
 
                             </tbody>
                         </table>

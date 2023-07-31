@@ -11,11 +11,16 @@ import jakarta.servlet.http.HttpSession;
 import org.jio.fyoga.entity.Course;
 import org.jio.fyoga.entity.Discount;
 import org.jio.fyoga.entity.Package;
+import org.jio.fyoga.entity.Schedule;
 import org.jio.fyoga.model.DiscountDTO;
 import org.jio.fyoga.model.PackageDTO;
+import org.jio.fyoga.model.Schedule.WeekDTO;
+import org.jio.fyoga.model.Schedule.WeekScheduleDTO;
 import org.jio.fyoga.service.ICourseService;
 import org.jio.fyoga.service.IDiscountService;
 import org.jio.fyoga.service.IPackageService;
+import org.jio.fyoga.service.impl.ActivityClassServiceImpl;
+import org.jio.fyoga.service.impl.ScheduleServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +44,13 @@ public class CourseController {
     @Autowired
     IDiscountService discountService;
 
+    @Autowired
+    ScheduleServiceImpl scheduleServiceTest;
+    @Autowired
+    ActivityClassServiceImpl activityClassServiceTest;
+
+
+
     // xu ly course trong
     @GetMapping("")
     public String showCourse(@RequestParam String name, HttpSession session, Model model) {
@@ -52,6 +64,19 @@ public class CourseController {
             List<Package> packages = packageService.findAllByCourse_CourseID(course.getCourseID());
             //List<PackageDTO> packageDTOs = tranferDTO2Entity(packages);
 
+            // xu ly lich
+            List<WeekDTO> weekDTOS = scheduleServiceTest.WeekNow();
+
+            model.addAttribute("EVENTS",weekDTOS);
+            int noWeek = weekDTOS.get(1).getWeekOfYear();
+            int noYear =  weekDTOS.get(1).getYear();
+            Schedule schedules = scheduleServiceTest.findScheduleByYearAndNoWeek(noYear,noWeek);
+            List<WeekScheduleDTO> weekScheduleDTOs = activityClassServiceTest.getActivityClassesFromMondayToSaturdayOnCourse(schedules.getScheduleID(),course.getCourseID());
+            System.out.printf("bibi");
+            model.addAttribute("ACTIVITYS",weekScheduleDTOs);
+
+
+            // end lich
             if (packages != null && packages.size() != 0){
                 model.addAttribute("PACKAGES", packages);
             }

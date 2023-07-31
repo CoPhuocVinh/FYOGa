@@ -9,6 +9,7 @@ import org.jio.fyoga.model.ClassDTO;
 import org.jio.fyoga.service.IAccountService;
 import org.jio.fyoga.service.IClassService;
 import org.jio.fyoga.service.ICourseService;
+import org.jio.fyoga.util.MyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,78 +35,89 @@ public class ClassController {
 
 // /FYoGa/Login/ADMIN/class
     @GetMapping("")
-    public String getClass(Model model) {
-        List<Class> classListON = classService.findByStatus(1);
-        model.addAttribute("CLASS_ON", classListON);
+    public String getClass(HttpSession session,Model model) {
+        if (MyUtil.checkAuthen(session)) {
+            List<Class> classListON = classService.findByStatus(1);
+            model.addAttribute("CLASS_ON", classListON);
 
-        List<Class> classListOff = classService.findByStatus(0);
-        model.addAttribute("CLASS_OFF", classListOff);
+            List<Class> classListOff = classService.findByStatus(0);
+            model.addAttribute("CLASS_OFF", classListOff);
 
-        return "admin/page_list_class";
+            return "admin/page_list_class";
+        }
+        return "web/login";
+
     }
 // /FYoGa/Login/ADMIN/class/CreateOrUpdate
     @GetMapping("/CreateOrUpdate")
-    public String ShowCreateOrUpdate(@RequestParam int isEdit,
+    public String ShowCreateOrUpdate(@RequestParam int isEdit, HttpSession session,
                                      @RequestParam(name = "ClassID",required = false, defaultValue = "-1") String R_ClassID,
                                      Model model){
-        int ClassID = Integer.parseInt(R_ClassID);
 
-        List<Course> courses = courseService.findAll();
-        List<Account> accounts = accountService.findAccountByRole(2);
-        ClassDTO classDTO = ClassDTO.builder().build();
-        // xu ly edit
-        if(isEdit == 1 && ClassID >= 0){
-            Class classEntity = classService.findById(ClassID);
-            BeanUtils.copyProperties(classEntity, classDTO);
-            classDTO.setIsEdit(true);
-            classDTO.setTeacherID(classEntity.getTeacher().getAccountID());
-            classDTO.setCourseID(classEntity.getCourse().getCourseID());
+        if (MyUtil.checkAuthen(session)) {
+            int ClassID = Integer.parseInt(R_ClassID);
+
+            List<Course> courses = courseService.findAll();
+            List<Account> accounts = accountService.findAccountByRole(2);
+            ClassDTO classDTO = ClassDTO.builder().build();
+            // xu ly edit
+            if(isEdit == 1 && ClassID >= 0){
+                Class classEntity = classService.findById(ClassID);
+                BeanUtils.copyProperties(classEntity, classDTO);
+                classDTO.setIsEdit(true);
+                classDTO.setTeacherID(classEntity.getTeacher().getAccountID());
+                classDTO.setCourseID(classEntity.getCourse().getCourseID());
+            }
+
+            //xu ly CREATE
+            if(isEdit == 0){
+                classDTO.setIsEdit(false);
+            }
+            model.addAttribute("CLASSDTO", classDTO);
+            model.addAttribute("COURSES", courses);
+            model.addAttribute("ACCOUNTS", accounts);
+
+            return "admin/createnewclass";
         }
+        return "web/login";
 
-        //xu ly CREATE
-        if(isEdit == 0){
-            classDTO.setIsEdit(false);
-        }
-        model.addAttribute("CLASSDTO", classDTO);
-        model.addAttribute("COURSES", courses);
-        model.addAttribute("ACCOUNTS", accounts);
-
-        return "admin/createnewclass";
     }
 
     @PostMapping("/CreateOrUpdate")
     public String CreateOrUpdate(HttpSession session, @ModelAttribute("CLASSDTO")ClassDTO classDTO
             , RedirectAttributes ra){
+        if (MyUtil.checkAuthen(session)) {
+            Class aClassEntity = new Class();
+            if (classDTO.getIsEdit()){
+                aClassEntity = classService.findById(classDTO.getClassID());
+                aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
+                aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
+                aClassEntity.setQuantityClass(classDTO.getQuantityClass());
+            }else {
+                //        xử lý tạo mới
+                // copy tu model sang entity
+                BeanUtils.copyProperties(classDTO, aClassEntity);
+                Date date = new Date(System.currentTimeMillis());
+                aClassEntity.setCreateDay(date);
+                aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
+                aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
+                aClassEntity.setStatus(1);
+                aClassEntity.setClassName("yoga");
+                classService.save(aClassEntity);
+                String name = "yoga " + classService.findFirstByOrderByClassIDDesc().getClassID();
+                aClassEntity.setClassName(name);
+                Account account = (Account) session.getAttribute("USER");
+                aClassEntity.setStaff(account.getAccountID());
 
-        Class aClassEntity = new Class();
-        if (classDTO.getIsEdit()){
-            aClassEntity = classService.findById(classDTO.getClassID());
-            aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
-            aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
-            aClassEntity.setQuantityClass(classDTO.getQuantityClass());
-        }else {
-            //        xử lý tạo mới
-            // copy tu model sang entity
-            BeanUtils.copyProperties(classDTO, aClassEntity);
-            Date date = new Date(System.currentTimeMillis());
-            aClassEntity.setCreateDay(date);
-            aClassEntity.setTeacher(accountService.findById(classDTO.getTeacherID()));
-            aClassEntity.setCourse(courseService.findById(classDTO.getCourseID()).orElseThrow());
-            aClassEntity.setStatus(1);
-            aClassEntity.setClassName("yoga");
+            }
+
             classService.save(aClassEntity);
-            String name = "yoga " + classService.findFirstByOrderByClassIDDesc().getClassID();
-            aClassEntity.setClassName(name);
-            Account account = (Account) session.getAttribute("USER");
-            aClassEntity.setStaff(account.getAccountID());
 
+            ra.addFlashAttribute("MSG","Save successfully!!!");
+
+            return "redirect:/FYoGa/Login/ADMIN/class";
         }
-
-        classService.save(aClassEntity);
-
-        ra.addFlashAttribute("MSG","Save successfully!!!");
-
-        return "redirect:/FYoGa/Login/ADMIN/class";
+        return "web/login";
     }
 
     @GetMapping("/isremove")

@@ -44,8 +44,8 @@
         <div id="page-content">
             <!-- Navigation info -->
             <ul id="nav-info" class="clearfix">
-                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-                <li><a href="page_calendar.html">Lịch học</a></li>
+                <li><a href="/FYoGa/Login"><i class="fa fa-home"></i></a></li>
+                <li><a href="/FYoGa/Login/ADMIN/schedule">Lịch học</a></li>
                 <li><a href="javascript:void(0)">Chỉnh sửa và thêm mới lịch học</a></li>
             </ul>
             <!-- END Navigation info -->
@@ -83,7 +83,7 @@
                     <input type="text" th:field="*{note}">
                     <br>
                     <button class="btn-footer" type="submit">Lưu</button>
-                    <button class="btn-footer" type="reset">Xoá</button>
+                    <button th:if="*{isEdit()}" class="btn-footer" >Xoá</button>
                 </form>
             </div>
         </div>

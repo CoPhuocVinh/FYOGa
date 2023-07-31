@@ -88,8 +88,10 @@
 
 <!-- form xác nhận  -->
 <div th:if="${SUCCESS}" class="modal-schedule-Checkout" id="registerModal" >
-    <div class="modal-container-schedule" >
-<!--        <span class="close" id="myButton"><a>&times;</a></span>-->
+
+    <div class="modal-container-schedule-checkout">
+        <span class="close" id="myButton"><a>&times;</a></span>
+
         <header class="modal-header-register">
 <!--            <img src="/web/img/kisspng-check-mark-tick-clip-art-green-tick-mark-5aa8e457000d23.5682297315210179430002.png">-->
         </header>
@@ -103,7 +105,7 @@
             </div>
         </form>
 
-        <a th:unless="${FAIL}" th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = ${PAYING.get().getAPackage().getCourse().getCourseID()})}" id="modal-login-button-re-hatha" type="submit">
+        <a th:unless="${FAIL}" th:href="@{/FYoGa/Login/User/ScheduleClass(courseID = ${PAYING.get().getAPackage().getCourse().getCourseID()})}" id="modal-checkout-button" type="submit">
             Đặt lịch
         </a>
 
