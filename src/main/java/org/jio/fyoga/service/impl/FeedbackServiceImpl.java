@@ -1,13 +1,11 @@
 package org.jio.fyoga.service.impl;
 
 import org.jio.fyoga.entity.Feedback;
-import org.jio.fyoga.model.FeedbackDTO;
 import org.jio.fyoga.repository.FeedbackRepository;
 import org.jio.fyoga.service.IFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +25,10 @@ public class FeedbackServiceImpl implements IFeedbackService {
          return feedbackRepository.findById(feedbackID).orElseThrow();
     }
 
-
+    @Override
+    public Feedback save1(Feedback feedback) {
+        return feedbackRepository.save(feedback);
+    }
 
 
     @Override
