@@ -28,8 +28,8 @@ public class MyUtilService {
             Register register02 = null;
             Register register03 = null;
             try{
-                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID,registerEntity.getCustomer().getAccountID());
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID,registerEntity.getCustomer().getAccountID());
             }catch (Exception ex){
 
             }

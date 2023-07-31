@@ -17,4 +17,5 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
 
     List<Class> findClassByCourse_CourseID(int courseID);
 
+
 }

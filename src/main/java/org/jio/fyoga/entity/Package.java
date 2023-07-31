@@ -42,7 +42,7 @@ public class Package {
     @JoinColumn(name = "courseID")
     Course course;
 
-    @OneToMany(mappedBy = "aPackage", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "aPackage",fetch = FetchType.EAGER)
     List<Discount> discounts;
 
 

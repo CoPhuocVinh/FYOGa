@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -21,9 +21,6 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendanceID")
     int attendanceID;
-
-    @Column(name = "attendance_date")
-    Date attendanceDate;
 
     @Column(name = "is_present")
     Boolean isPresent;

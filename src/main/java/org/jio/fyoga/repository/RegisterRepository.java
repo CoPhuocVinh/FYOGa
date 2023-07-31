@@ -37,8 +37,9 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
     Register findByStatus(int status);
     @Query("SELECT r FROM Register r " +
             "WHERE r.status = :status " +
+            "AND r.customer.accountID = :accoutID " +
             "AND r.aDiscount.aPackage.course.courseID = :courseID")
-    Register findRegisterByStatusAndaDiscount_aPackage_course_courseID(int status, int courseID);
+    Register findRegisterByStatusAndaDiscount_aPackage_course_courseID(int status, int courseID, int accoutID);
 
     //tim mối nhất
 
@@ -50,8 +51,9 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
             "JOIN FETCH ap.course c " +
             "WHERE r.status = :status " +
             "AND c.courseID = :courseID " +
+            "AND r.customer.accountID = :accoutID " +
             "ORDER BY r.registeredDate DESC")
-    List<Register> findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(int status, int courseID);
+    List<Register> findTopByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateDesc(int status, int courseID, int accoutID);
    //tìm cũ nhất
     Register findFirstByStatusOrderByRegisteredDateAsc(int status);
     @Query("SELECT r FROM Register r " +
@@ -60,8 +62,9 @@ public interface RegisterRepository  extends JpaRepository<Register, Integer> {
             "JOIN FETCH ap.course c " +
             "WHERE r.status = :status " +
             "AND c.courseID = :courseID " +
+            "AND r.customer.accountID = :accoutID " +
             "ORDER BY r.registeredDate ASC")
-    List<Register> findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(int status);
+    List<Register> findFirstByStatusAndADiscount_APackage_Course_CourseIDOrderByRegisteredDateAsc(int status, int courseID, int accoutID);
 
     List<Register> findAllByStatusOrderByRegisteredDateDesc(int status);
     List<Register> findAllByStatusOrStatusOrderByRegisteredDateDesc(int statusv1, int statusv2);

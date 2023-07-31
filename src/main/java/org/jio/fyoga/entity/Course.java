@@ -45,10 +45,10 @@ public class Course {
     @JoinColumn(name = "adminID")
     private Account admin;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
     private Set<Package> packages;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
     private Set<Class> classes;
 
     @Override

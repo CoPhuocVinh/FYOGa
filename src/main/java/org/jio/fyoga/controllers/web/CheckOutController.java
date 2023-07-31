@@ -133,7 +133,7 @@ public class CheckOutController {
             //registerEntity.setPackages(packageEntiry.orElseThrow());
             registerEntity.setADiscount(discountEntity.orElseThrow());
             // xu ly
-            Register register01 = registerService.findRegisterByStatusAndcourseID(1,registerEntity.getADiscount().getAPackage().getCourse().getCourseID());
+            Register register01 = registerService.findRegisterByStatusAndcourseID(1,registerEntity.getADiscount().getAPackage().getCourse().getCourseID(),account.getAccountID());
             if(register01 != null){
                 session.setAttribute("SUCCESS", "Bạn đăng kí khóa học Không thành công vì bạn chưa thanh toán gói của khóa này");
                 session.setAttribute("FAIL", "Bạn đã đăng kí và thanh toán khóa học thất bại");
@@ -290,8 +290,8 @@ public class CheckOutController {
             Register register02 = null;
             Register register03 = null;
             try{
-                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID);
-                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID);
+                register02 = registerService.findTopByStatusAndCourseIDOrderByRegisteredDateDesc(2,courseID,account.getAccountID());
+                register03 = registerService.findRegisterByStatusAndcourseID(3,courseID,account.getAccountID());
             }catch (Exception ex){
 
             }

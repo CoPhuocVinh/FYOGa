@@ -78,6 +78,8 @@
         </div><!-- /.card-header -->
     </h3>
 
+    <h3 th:if="${MSG}" th:text="${MSG}"></h3>
+
     <!-- list user active-->
     <table class="table active-list" id="active-list">
         <thead>
@@ -85,31 +87,26 @@
                 <!-- <th class="cell-small text-center" data-toggle="tooltip" title="Toggle all!"><input
                         type="checkbox" id="check1-all" name="check1-all"></th> -->
                 <!-- <th class="text-center">#</th> -->
-                <th>ID Tài khoản</th>
-                <th class="hidden-xs hidden-sm"><i class="fa "></i>Họ và tên</th>
-                <th class="hidden-xs hidden-sm">Email</th>
+                <th>#</th>
+                <th class="hidden-xs hidden-sm">Tên</th>
                 <th class="hidden-xs hidden-sm"></th>
                 <!-- <th class="text-center"><i class="fa fa-bolt"></i> </th> -->
             </tr>
         </thead>
         <tbody class="list-teacherBody">
-            <tr th:each="USER, iterStat : ${LISTACCOUNTS_ON}" th:object="${USER}">
+            <tr th:each="ATTEN, iterStat : ${ATTENOFF}" th:object="${ATTEN}">
                 <!-- <td class="text-center"><input type="checkbox" id="check1-td1" name="check1-td1"></td> -->
                 <td><a href="javascript:void(0)" th:text="${iterStat.count}"></a></td>
                 <!-- <td><a href="javascript:void(0)">001</a></td>tên lớp -->
-                <td class="hidden-xs hidden-sm" th:text="*{fullName}">Đặn Ngũy Hoài Pon</td><!--tên khóa-->
-                <td class="hidden-xs hidden-sm" th:text="*{email}">pon@gmail.com</td><!--tên giáo viên-->
+                <td class="hidden-xs hidden-sm" th:text="*{customer.fullName}">Đặn Ngũy Hoài Pon</td><!--tên khóa-->
 
                 <td class="text-center">
                     <div class="btn-group">
                         <!--nút sửa-->
-                        <a th:href="@{/FYoGa/Login/ADMIN/User/CreateOrUpdate(roleID = ${ROLEID}, isEdit = 1,AccountID = *{accountID})}" data-toggle="tooltip" title="sửa"
+                        <a th:href="@{/FYoGa/Login/ADMIN/Attendance/Check/True(AttendanceID = *{attendanceID})}" data-toggle="tooltip" title="điểm danh"
                            class="btn btn-xs btn-success" onclick="showForm()">
                             <i class="fa fa-pencil"></i></a>
 
-                        <a th:href="@{/FYoGa/Login/ADMIN/User/remove(accountID=*{accountID})}" data-toggle="tooltip" title="xóa"
-                           class="btn btn-xs btn-danger" onclick="showCreateClass()"><i
-                                class="fa fa-times"></i></a>
                     </div>
                 </td>
             </tr>
@@ -132,17 +129,16 @@
         </thead>
 
         <tbody class="list-teacherBody">
-            <tr th:each="USER, iterStat : ${LISTACCOUNTS_OFF}" th:object="${USER}">
+            <tr th:each="USER, iterStat : ${ATTENON}" th:object="${USER}">
 
                 <td><a href="javascript:void(0)" th:text="${iterStat.count}"></a></td>
-
-                <td class="hidden-xs hidden-sm" th:text="*{fullName}">Đặn Ngũy Hoài Pon</td>
-                <td class="hidden-xs hidden-sm" th:text="*{email}">pon@gmail.com</td>
+                <!-- <td><a href="javascript:void(0)">001</a></td>tên lớp -->
+                <td class="hidden-xs hidden-sm" th:text="*{customer.fullName}">Đặn Ngũy Hoài Pon</td><!--tên khóa-->
 
                 <td class="text-center">
                     <div class="btn-group">
                         <!--nút Hoàn tác-->
-                        <a th:href="@{/FYoGa/Login/ADMIN/User/reStatus(accountID=*{accountID})}" data-toggle="tooltip" title="Hoàn tác"
+                        <a href="" data-toggle="tooltip" title="đã điểm danh"
                            class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                     </div>
                 </td>

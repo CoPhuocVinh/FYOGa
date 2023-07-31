@@ -13,9 +13,11 @@ import java.sql.Date;
 public class AttendanceDTO {
     int attendanceID;
     Date attendanceDate;
+
+    int acctivityID;
+
+    int staff;
+    BookingDTO bookingDTO;
     Boolean isPresent;
-    String aClassAttend;
-    String customer;
-    String staff;
 
 }
