@@ -59,7 +59,9 @@
 
     <!-- List Staff -->
     <h3 class="page-header page-header-top">Khuyến mãi
-        <a href="/FYoGa/Login/ADMIN/Discount/CreateOrEditDiscount?isEdit=0" data-toggle="tooltip" title="Thêm mới khuyến mãi"
+
+        <a th:href="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount(packageID=${PACKAGEID},isEdit=0)}" data-toggle="tooltip" title="Thêm mới khuyến mãi"
+
            class="btn btn-xs btn-success"><i class="fa fa-plus"></i></a>
     </h3>
 
@@ -99,14 +101,16 @@
             </td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a th:href="@{/FYoGa/Login/ADMIN/Discount/CreateOrEditDiscount(isEdit=1, DiscountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
+                    <a th:href="@{/FYoGa/Login/ADMIN/Discount/CreateOrUpdateDiscount(isEdit=1, DiscountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
                        data-toggle="tooltip" title="Chỉnh sửa" class="btn btn-xs btn-success">
                         <i class="fa fa-pencil"></i>
                     </a>
 
-                    <a th:href="@{/FYoga/Login/ADMIN/Discount/delete(discountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
+
+                    <a th:href="@{/FYoga/Login/ADMIN/Discount/removeDiscount(DiscountID=${discount.discountID}, packageID=${discount.aPackage.packageID})}"
+
                        data-toggle="tooltip" title="Xóa" class="btn btn-xs btn-danger"
-                       onclick="return confirm('Are you sure you want to delete this discount?')">
+                       onclick="return confirm('Are you sure to delete this discount?')">
                         <i class="fa fa-times"></i>
                     </a>
 
