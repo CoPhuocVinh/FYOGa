@@ -14,6 +14,7 @@ import java.util.List;
 public interface ISlotService {
     Slot findById(Integer integer);
 
+
     <S extends Slot> S save(S entity);
     List<Slot> findAll();
 }

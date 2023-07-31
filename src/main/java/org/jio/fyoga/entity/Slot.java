@@ -25,14 +25,11 @@ public class Slot {
     @Column(name = "slot_name", columnDefinition = "nvarchar(10)")
     String slotName;
 
-    @DateTimeFormat(pattern = "HH:mm")
-    private Time startTime;
+    @Column(name = "start_time")
+    Time startTime;
 
-    @DateTimeFormat(pattern = "HH:mm")
-    private Time endTime;
-
-//    @OneToMany(mappedBy = "slot",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    Set<ScheduleClass> scheduleClasses;
+    @Column(name = "end_time")
+    Time endTime;
 
     @ManyToOne
     @JoinColumn(name = "staffID")

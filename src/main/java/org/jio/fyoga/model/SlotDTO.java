@@ -2,6 +2,8 @@ package org.jio.fyoga.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Time;
 
 @AllArgsConstructor
@@ -16,5 +18,4 @@ public class SlotDTO {
     Time startTime;
     Time endTime;
     int staff;
-
 }

@@ -55,25 +55,23 @@
   <!-- END Navigation info -->
 
   <!-- List Staff -->
-  <div class="form-create-class">
-    <h2 class="create-header">Chỉnh sửa slot</h2>
-
-    <form class="createClass-container" th:object="${slotDTO}" th:action="@{/FYoGa/Login/ADMIN/slot/update}" method="post">
-      <!-- Form fields for slot data -->
-
-      <label>Tên Slot:</label>
-      <input type="text" th:field="*{slotName}">
+  <div class="container">
+    <h1>Update Slot</h1>
+    <form th:action="@{/FYoGa/Login/ADMIN/slot/updateSlot}" th:object="${slotDTO}" method="post">
+      <input type="hidden" th:field="*{slotID}" />
+      <label for="slotName">Slot Name:</label>
+      <input type="text" id="slotName" th:field="*{slotName}" />
       <br>
-      <label>Thời gian bắt đầu:</label>
-      <input type="time" class="form-control" th:field="${slotDTO.startTime}" required="required" />
-
+      <label for="startTime">Start Time:</label>
+      <input type="time" id="startTime" th:field="*{startTime}" />
       <br>
-      <label>Thời gian kết thúc:</label>
-      <input type="time" class="form-control" th:field="${slotDTO.endTime}" required="required" />
-
+      <label for="endTime">End Time:</label>
+      <input type="time" id="endTime" th:field="*{endTime}" />
       <br>
-      <button type="submit">Cập nhật</button>
+      <!-- Include other fields to update if needed -->
+      <button type="submit">Update</button>
     </form>
+  </div>
 
 
 </div>

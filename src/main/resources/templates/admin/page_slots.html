@@ -68,6 +68,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th class="text-center">SlotID</th>
                             <th class="text-center">Tên slot</th>
                             <th class="text-center hidden-xs hidden-sm"><i class="fa "></i>Thời gian bắt đầu</th>
                             <th class="text-center hidden-xs hidden-sm">Thời gian kết thúc</th>
@@ -76,27 +77,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="slot, iterStat : ${SLOT}" th:object="${slot}">
-                            <td th:text="${iterStat.count}"><a href="javascript:void(0)"></a></td>
-                            <td th:text="${#dates.format(slot.startTime, 'HH:mm')}" class="hidden-xs hidden-sm"></td>
-                            <td th:text="${#dates.format(slot.endTime, 'HH:mm')}" class="hidden-xs hidden-sm"></td>
-
-
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <!--nút sửa-->
-
-                                    <a th:href="@{/FYoGa/Login/ADMIN/slot/edit/{slotID}(slotID=${slot.slotID})}"
-                                       data-toggle="tooltip" title="Chỉnh sửa"
-                                       class="btn btn-xs btn-success">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-
-
-                                </div>
-                            </td>
-                        </tr>
-
+                    <tr th:each="slot : ${SLOT}">
+                        <td th:text="${slot.slotID}">1</td>
+                        <td th:text="${slot.slotName}">1</td>
+                        <td th:text="${slot.startTime}" class="hidden-xs hidden-sm"></td>
+                        <td th:text="${slot.endTime}" class="hidden-xs hidden-sm"></td>
+                        <td>
+                            <a th:href="@{/FYoGa/Login/ADMIN/slot/update/{slotID}(slotID=${slot.slotID})}"
+                               class="btn btn-xs btn-success" data-toggle="tooltip" title="Chỉnh sửa">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <!-- END List Staff -->
