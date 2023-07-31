@@ -40,6 +40,11 @@ postRepository.deleteAll();
     }
 
     @Override
+    public List<Post> findByStatus(int status) {
+        return postRepository.findByStatus(status);
+    }
+
+    @Override
     public void deleteById(Integer integer) {
         postRepository.deleteById(integer);
     }

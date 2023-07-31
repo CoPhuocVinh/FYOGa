@@ -1,9 +1,11 @@
 package org.jio.fyoga.controllers.admin;
 
+import org.jio.fyoga.entity.Class;
 import org.jio.fyoga.entity.Post;
 import org.jio.fyoga.model.PostDTO;
 import org.jio.fyoga.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,18 +22,21 @@ import java.util.stream.Collectors;
 @RequestMapping("/FYoGa/Login/ADMIN/post")
 @Controller
 public class PostController {
+
     @Autowired
     private IPostService postService;
 
     @GetMapping("")
-    public String getAllPosts(Model model) {
-        List<Post> posts = postService.findAll();
-        List<PostDTO> postDTOs = posts.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-        model.addAttribute("posts", postDTOs);
+    public String getBlogPosts(Model model) {
+        List<Post> blogListON = postService.findByStatus(1);
+        model.addAttribute("BLOG_ON", blogListON);
+
+        List<Post> blogListOff = postService.findByStatus(0);
+        model.addAttribute("BLOG_OFF", blogListOff);
+
         return "admin/page_list_blog";
     }
+
 
     private PostDTO convertToDTO(Post post) {
         PostDTO postDTO = new PostDTO();
@@ -91,7 +96,7 @@ public class PostController {
 
         PostDTO postDTO = convertToDTO(post);
         model.addAttribute("postDTO", postDTO);
-        return "admin/page_blog";
+        return "admin/page_blog"; // Assuming you have a template named "page_blog_edit" for editing a blog post
     }
 
     @PostMapping("/update")
@@ -111,16 +116,24 @@ public class PostController {
         return "redirect:/FYoga/Login/ADMIN/post";
     }
 
+    @GetMapping("/reStatus")
+    public String hoanTac(@RequestParam int postID) {
+        Post blog = postService.findById(postID);
+        if (blog != null) {
+            blog.setStatus(1); // Set status to active (1)
+            postService.save(blog);
+        }
+        return "redirect:/FYoGa/Login/ADMIN/post"; // Redirect back to the blog page
+    }
+
     @GetMapping("/delete")
     public String deleteBlogPost(@RequestParam int postID) {
-        Post post= postService.findById(postID);
-        if(post!= null){
-            post.setStatus(0);
-            postService.save(post);
+        Post blog = postService.findById(postID);
+        if (blog != null) {
+            blog.setStatus(0); // Set status to inactive (0)
+            postService.save(blog);
         }
-
-
-        return "redirect:/FYoga/Login/ADMIN/post";
+        return "redirect:/FYoGa/Login/ADMIN/post"; // Redirect back to the blog page
     }
 
     @GetMapping("/deactivate/{postID}")
