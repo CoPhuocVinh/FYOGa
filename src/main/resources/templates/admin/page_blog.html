@@ -43,7 +43,7 @@
             <!-- Page Content -->
             <div id="page-content">
                 <!-- Navigation info -->
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="post" th:action="@{/FYoGa/Login/ADMIN/post/create}" enctype="multipart/form-data" th:object="${postDTO}">
                     <div class="row" style="margin-top: 8%;">
                         <div class="p-4">
                             <h4 class="text-center">Thêm Bài Viết</h4>
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div id="preview" class="circle-frame">
-                                            <img class="input-user-file" th:src="@{/FYoGa/Login/ADMIN/post/downloads-png(courseID=*{courseID})}" alt="">
+                                            <img class="input-user-file" th:src="@{/FYoGa/Login/ADMIN/post/downloads-png(postID=*{postID})}" alt="">
                                         </div>
                                         <input type="file" name="file" id="fileInputAvatar" ><br>
 
@@ -88,13 +88,15 @@
 
                         </div>
                     </div>
+                    <a href="/FYoGa/Login/ADMIN/post">
+                        <button class="bnt-back-blog">Trở lại</button>
+                    </a>
+                    <a th:href="@{/FYoGa/Login/ADMIN/post/create}">
+                        <button type="submit" class="bnt-save-blog">Lưu</button>
+                    </a>
                 </form>
-                <a href="/FYoGa/Login/ADMIN/post">
-                    <button class="bnt-back-blog">Trở lại</button>
-                </a>
-                <a href="">
-                    <button class="bnt-save-blog">Lưu</button>
-                </a>
+
+
                 <!-- END Advanced Form Wizard -->
             </div>
             <!-- END Page Content -->

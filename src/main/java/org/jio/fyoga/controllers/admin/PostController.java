@@ -80,23 +80,23 @@ public class PostController {
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=image.png")
                     .contentType(MediaType.IMAGE_PNG)
-                    .body( resource);
+                    .body(resource);
         }
         // Xử lý trường hợp tệp tin không tồn tại
         return ResponseEntity.notFound().build();
     }
 
+
     @GetMapping("/edit/{postID}")
     public String showEditBlogPostForm(@PathVariable int postID, Model model) {
         Post post = postService.findById(postID);
         if (post == null) {
-            // Handle the case where the post with the given ID doesn't exist
             return "redirect:/FYoga/Login/ADMIN/post";
         }
 
         PostDTO postDTO = convertToDTO(post);
         model.addAttribute("postDTO", postDTO);
-        return "admin/page_blog"; // Assuming you have a template named "page_blog_edit" for editing a blog post
+        return "admin/page_blog";
     }
 
     @PostMapping("/update")
@@ -120,20 +120,20 @@ public class PostController {
     public String hoanTac(@RequestParam int postID) {
         Post blog = postService.findById(postID);
         if (blog != null) {
-            blog.setStatus(1); // Set status to active (1)
+            blog.setStatus(1);
             postService.save(blog);
         }
-        return "redirect:/FYoGa/Login/ADMIN/post"; // Redirect back to the blog page
+        return "redirect:/FYoGa/Login/ADMIN/post";
     }
 
     @GetMapping("/delete")
     public String deleteBlogPost(@RequestParam int postID) {
         Post blog = postService.findById(postID);
         if (blog != null) {
-            blog.setStatus(0); // Set status to inactive (0)
+            blog.setStatus(0);
             postService.save(blog);
         }
-        return "redirect:/FYoGa/Login/ADMIN/post"; // Redirect back to the blog page
+        return "redirect:/FYoGa/Login/ADMIN/post";
     }
 
     @GetMapping("/deactivate/{postID}")

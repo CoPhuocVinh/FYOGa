@@ -74,11 +74,11 @@ postRepository.deleteAll();
                 return post.getImg();
             } else {
                 // Xử lý trường hợp không có dữ liệu hình PNG
-                throw new RuntimeException("No PNG data found for course: " + postID);
+                throw new RuntimeException("No PNG data found for blog: " + postID);
             }
         } else {
             // Xử lý trường hợp không tìm thấy đối tượng Content với contentId tương ứng
-            throw new RuntimeException("User not found for course: " + postID);
+            throw new RuntimeException("User not found for blog: " + postID);
         }
     }
 
