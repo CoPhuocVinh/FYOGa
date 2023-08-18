@@ -70,7 +70,7 @@
             <input th:if="${PACKAGEDTO.isEdit}" type="hidden" th:field="*{packageID}">
 
             <label>Khoá học</label>
-            <select th:field="*{courseID}" name="courseID" id="courseID" style="  transform: translateX(-97px);">
+            <select th:field="*{courseID}" name="courseID" id="courseID" style="  transform: translateX(-1px); !important;">
                 <option th:each="course : ${COURSES}" th:value="${course.courseID}"
                         th:text="${course.name}" th:selected="${PACKAGEDTO.courseID == course.courseID}">
                 </option>

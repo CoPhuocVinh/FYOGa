@@ -32,6 +32,8 @@ public class Discount implements Serializable {
 
     @Column(name = "percent_discount")
     float percentDiscount;
+    @Column(name = "status")
+    int status;
 
     @OneToMany(mappedBy = "aDiscount")
     List<Register> registers;

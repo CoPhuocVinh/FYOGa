@@ -21,4 +21,6 @@ public interface DiscountRepository extends JpaRepository<Discount, Integer> {
     List<Discount> findAllByaPackage_PackageID(int PackageID);
 
     List<Discount> findDiscountByaPackage_PackageID(int packageID);
+
+    List<Discount> findDiscountByaPackage_PackageIDAndStatus(int packageID, int status);
 }
