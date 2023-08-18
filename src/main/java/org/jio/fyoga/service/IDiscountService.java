@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface IDiscountService {
     List<Discount> findAllByAPackage_PackageID(int PackageID);
 
+    List<Discount> findAllByAPackage_PackageID(int PackageID, int status);
+
     Optional<Discount> findById(Integer integer);
 
     void save(Discount discount);

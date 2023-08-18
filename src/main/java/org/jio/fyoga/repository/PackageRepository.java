@@ -15,4 +15,6 @@ public interface PackageRepository extends JpaRepository<Package, Integer> {
 
     Package findPackageBySlotOnMonthAndCourse_CourseID(int slotOnMonth, int courseID);
 
+    List<Package> findAllByStatus(int status);
+
 }

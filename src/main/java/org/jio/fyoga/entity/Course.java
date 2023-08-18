@@ -39,7 +39,7 @@ public class Course {
     private byte[] img;
 
     @Column(name = "status")
-    private Integer status;
+    private int status;
 
     @ManyToOne
     @JoinColumn(name = "adminID")

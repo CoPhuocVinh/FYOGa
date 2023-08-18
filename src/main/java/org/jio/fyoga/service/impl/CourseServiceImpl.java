@@ -34,7 +34,7 @@ public class CourseServiceImpl implements ICourseService {
 
     @Override
     public List<Course> findAll() {
-        return courseRepository.findAllByStatus(1);
+        return courseRepository.findByStatus(1);
     }
 
     @Override
