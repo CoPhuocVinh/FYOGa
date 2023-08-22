@@ -39,7 +39,7 @@ public class PackageServiceImpl implements IPackageService {
 
     @Override
     public List<Package> findAll() {
-        return packageRepository.findAll();
+        return packageRepository.findAllByStatus(1);
     }
 
     @Override

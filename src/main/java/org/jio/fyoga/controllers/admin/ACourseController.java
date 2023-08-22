@@ -8,16 +8,15 @@ package org.jio.fyoga.controllers.admin;/*  Welcome to Jio word
 */
 
 import jakarta.servlet.http.HttpSession;
-import org.jio.fyoga.entity.Account;
+import org.jio.fyoga.entity.*;
 import org.jio.fyoga.entity.Class;
-import org.jio.fyoga.entity.Course;
 import org.jio.fyoga.entity.Package;
-import org.jio.fyoga.entity.Role;
 import org.jio.fyoga.model.AccountDTO;
 import org.jio.fyoga.model.ClassDTO;
 import org.jio.fyoga.model.CourseDTO;
 import org.jio.fyoga.service.IClassService;
 import org.jio.fyoga.service.ICourseService;
+import org.jio.fyoga.service.IDiscountService;
 import org.jio.fyoga.service.IPackageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +48,8 @@ public class ACourseController {
 
     @Autowired
     IClassService classService;
+    @Autowired
+    IDiscountService discountService;
     @GetMapping("")
     public String getCourses(Model model) {
         List<Course> courseListOn = courseService.findByStatus(1);
@@ -99,7 +100,7 @@ public class ACourseController {
             courseEntity.setName(courseDTO.getName());
             courseEntity.setDescription(courseDTO.getDescription());
             courseEntity.setSummary(courseDTO.getSummary());
-
+            courseEntity.setStatus(1);
 
 
         }else {
@@ -108,6 +109,7 @@ public class ACourseController {
             Account account = (Account) session.getAttribute("USER");
             courseEntity.setAdmin(account);
             BeanUtils.copyProperties(courseDTO, courseEntity);
+            courseEntity.setStatus(1);
         }
 
         // xu ly img
@@ -148,22 +150,27 @@ public class ACourseController {
         ra.addAttribute("DELETE", courseID);
         return "redirect:/FYoGa/Login/ADMIN/Course";
     }
-
     @GetMapping("/delete")
     public String deleteCoure(@RequestParam int courseID) {
         Course course = courseService.findById(courseID).orElse(null);
         course.setStatus(0);
         courseService.save(course);
 
-        Set<Class> classes = course.getClasses();
+        List<Class> classes = classService.findClassByCourse_CourseID(courseID);
+
         for (Class aClass : classes) {
             aClass.setStatus(0);
             classService.save(aClass);
         }
 
-        Set<Package> packages = course.getPackages();
+        List<Package> packages = packageService.findAllByCourse_CourseID(courseID);
         for (Package aPackage : packages) {
             aPackage.setStatus(0);
+            List<Discount> discountsn = discountService.findAllByAPackage_PackageID(aPackage.getPackageID());
+            for (Discount discount : discountsn){
+                discount.setStatus(0);
+                discountService.save(discount);
+            }
             packageService.save(aPackage);
         }
 
@@ -175,6 +182,23 @@ public class ACourseController {
     public String reStatus (@RequestParam int courseID){
         Course course = courseService.findById(courseID).orElse(null);
         course.setStatus(1);
+        List<Class> classes = classService.findClassByCourse_CourseID(courseID);
+
+        for (Class aClass : classes) {
+            aClass.setStatus(1);
+            classService.save(aClass);
+        }
+
+        List<Package> packages = packageService.findAllByCourse_CourseID(courseID);
+        for (Package aPackage : packages) {
+            aPackage.setStatus(1);
+            List<Discount> discountsn = discountService.findAllByAPackage_PackageID(aPackage.getPackageID(), 0);
+            for (Discount discount : discountsn){
+                discount.setStatus(1);
+                discountService.save(discount);
+            }
+            packageService.save(aPackage);
+        }
         courseService.save(course);
         return "redirect:/FYoGa/Login/ADMIN/Course";
     }

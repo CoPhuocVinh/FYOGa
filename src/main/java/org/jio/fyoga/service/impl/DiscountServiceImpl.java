@@ -28,7 +28,12 @@ public class DiscountServiceImpl implements IDiscountService {
 
     @Override
     public List<Discount> findAllByAPackage_PackageID(int PackageID) {
-        return discountRepository.findAllByaPackage_PackageID(PackageID);
+        return discountRepository.findDiscountByaPackage_PackageIDAndStatus(PackageID,1);
+    }
+
+    @Override
+    public List<Discount> findAllByAPackage_PackageID(int PackageID, int status) {
+        return discountRepository.findDiscountByaPackage_PackageIDAndStatus(PackageID,status);
     }
 
     @Override

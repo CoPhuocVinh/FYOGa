@@ -99,7 +99,7 @@
 
 
         <form action="#">
-            <div class="modal-body-schedule">
+            <div class="modal-body-schedule" style="transform: translateY(-90px);">
                 <h3 th:text="${SUCCESS}" class="mo">Bạn đã đăng kí khóa học thành công</h3>
                 <h5 class="mo">Vui lòng xem lịch học để đăng ký lớp</h5>
             </div>
@@ -109,7 +109,7 @@
             Đặt lịch
         </a>
 
-        <footer class="modal-footer-schedule" style="transform: translateY(40px);">
+        <footer class="modal-footer-schedule" style="transform: translateY(-80px);">
             <a th:href="@{/FYoGa/Course(name=${PAYING.get().getAPackage().getCourse().getName()})}">Hủy</a>
         </footer>
 </div>

@@ -173,7 +173,7 @@ public class LoginCotroller {
         if (accountGoogle == null){
             Date date = new Date(System.currentTimeMillis());
             accountGoogle = Account.builder()
-                    .fullName(name)
+                    .fullName(email)
                     .email(email)
                     .role(roleEntity)
                     .acceptedDate(date)

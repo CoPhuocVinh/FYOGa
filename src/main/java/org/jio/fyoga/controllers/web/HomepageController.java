@@ -114,10 +114,10 @@ public class HomepageController {
 
     @PostMapping("/forgotPassword")
     public String InputEmail(@RequestParam String email4got, HttpSession session, RedirectAttributes ra) {
-//        if(!accountService.existsByEmail(email4got)){
-//            ra.addFlashAttribute("MSG", "Email doesn't exist. Please register new account!");
-//            return "redirect:/FYoGa/forgotPass";
-//        }
+        if(!accountService.existsByEmail(email4got)){
+            ra.addFlashAttribute("MSG", "Email doesn't exist. Please register new account!");
+            return "redirect:/FYoGa/forgotPass";
+        }
         session.setAttribute("EMAILVERIFY", email4got);
         gmailService.sendVerificationEmail(email4got);
         //return "redirect:/FYoGa/forgotPass";

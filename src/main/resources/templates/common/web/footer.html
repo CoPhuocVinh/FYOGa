@@ -1,17 +1,23 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <!-- Footer Start -->
-<div id="footer" class="footer wow fadeIn" data-wow-delay="0.3s">
+<div th:fragment="footer" id="footer" class="footer wow fadeIn" data-wow-delay="0.3s">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
                 <div class="contact-form">
                     <div id="success"></div>
-                    <form th:action="@{/FYoGa/Login/ADMIN/feedback/submit}" method="post">
+                    <form  th:action="@{/FYoGa/Login/ADMIN/feedback/submit}">
+
+
+
                         <div class="control-group">
                             <input name="name" type="text" class="form-control"  placeholder="Tên của bạn"
                                    required="required" data-validation-required-message="Vui lòng nhập tên của bạn" />
                             <p class="help-block text-danger"></p>
                         </div>
+
                         <div class="control-group">
                             <input name="email" type="email" class="form-control"  placeholder="Email"
                                    required="required" data-validation-required-message="Vui lòng nhập email" />

@@ -27,6 +27,7 @@ public class DiscountDTO {
     int packageID;
 
     float priceDiscount;
+    int status;
 
     int slotOnMonth;
     private Boolean isEdit = false;

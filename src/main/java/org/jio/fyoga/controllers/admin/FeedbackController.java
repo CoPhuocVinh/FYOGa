@@ -33,7 +33,7 @@ public class FeedbackController {
     }
 
 
-    @PostMapping("/submit")
+    @GetMapping("/submit")
     public String submitFeedback(@RequestParam("name") String name,
                                  @RequestParam("email") String email,
                                  @RequestParam("comment") String comment) {
